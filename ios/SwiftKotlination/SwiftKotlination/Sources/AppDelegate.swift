@@ -4,17 +4,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var coordinator: Coordinator!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        guard let window = self.window else {
-            return false
-        }
+        coordinator = Coordinator(window: window!)
+        coordinator.start()
         
-        let viewController = UIViewController()
-        window.rootViewController = viewController
-        window.isHidden = false
         return true
     }
 }
