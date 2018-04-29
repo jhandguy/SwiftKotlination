@@ -10,8 +10,6 @@
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
-		0FCE5CEA208A85C2001C8FFC /* SwiftKotlinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CE9208A85C2001C8FFC /* SwiftKotlinationTests.swift */; };
-		0FCE5CF5208A85C3001C8FFC /* SwiftKotlinationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CF4208A85C3001C8FFC /* SwiftKotlinationUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +36,8 @@
 		0FCE5CDE208A85C2001C8FFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0FCE5CE0208A85C2001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FCE5CE5208A85C2001C8FFC /* SwiftKotlinationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftKotlinationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FCE5CE9208A85C2001C8FFC /* SwiftKotlinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftKotlinationTests.swift; sourceTree = "<group>"; };
 		0FCE5CEB208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FCE5CF0208A85C3001C8FFC /* SwiftKotlinationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftKotlinationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FCE5CF4208A85C3001C8FFC /* SwiftKotlinationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftKotlinationUITests.swift; sourceTree = "<group>"; };
 		0FCE5CF6208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +66,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0FC64A382095D44600339755 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
+				0FCE5D02208A8650001C8FFC /* Features */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		0FC64A392095D44F00339755 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */,
+				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		0FCE5CC8208A85C1001C8FFC = {
 			isa = PBXGroup;
 			children = (
@@ -93,11 +107,9 @@
 		0FCE5CD3208A85C1001C8FFC /* SwiftKotlination */ = {
 			isa = PBXGroup;
 			children = (
-				0FCE5D02208A8650001C8FFC /* Features */,
-				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
-				0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */,
-				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
 				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
+				0FC64A392095D44F00339755 /* Resources */,
+				0FC64A382095D44600339755 /* Sources */,
 			);
 			path = SwiftKotlination;
 			sourceTree = "<group>";
@@ -105,7 +117,6 @@
 		0FCE5CE8208A85C2001C8FFC /* SwiftKotlinationTests */ = {
 			isa = PBXGroup;
 			children = (
-				0FCE5CE9208A85C2001C8FFC /* SwiftKotlinationTests.swift */,
 				0FCE5CEB208A85C3001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlinationTests;
@@ -114,7 +125,6 @@
 		0FCE5CF3208A85C3001C8FFC /* SwiftKotlinationUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0FCE5CF4208A85C3001C8FFC /* SwiftKotlinationUITests.swift */,
 				0FCE5CF6208A85C3001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlinationUITests;
@@ -273,7 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FCE5CEA208A85C2001C8FFC /* SwiftKotlinationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +290,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FCE5CF5208A85C3001C8FFC /* SwiftKotlinationUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
