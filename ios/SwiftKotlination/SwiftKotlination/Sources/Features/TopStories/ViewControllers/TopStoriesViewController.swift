@@ -1,8 +1,9 @@
 import UIKit
+import SnapKit
 
 final class TopStoriesViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    lazy var tableView = UITableView()
     
     weak var coordinator: CoordinatorProtocol?
     private(set) var viewModel: TopStoriesViewModel! {
@@ -24,6 +25,13 @@ extension TopStoriesViewController: TopStoriesViewModelDelegate {
         super.viewDidLoad()
         
         title = viewModel.title
+        
         view.backgroundColor = viewModel.backgroundColor
+        view.addSubview(tableView)
+        
+        tableView.backgroundColor = viewModel.backgroundColor
+        tableView.snp.makeConstraints { make in
+            make.width.height.equalTo(self.view)
+        }
     }
 }
