@@ -1,4 +1,5 @@
 import UIKit
+import RxSwift
 
 protocol TopStoriesViewModelDelegate: class {
     
@@ -22,7 +23,7 @@ extension TopStoriesViewModel {
         return .black
     }
     
-    var stories: [Story] {
+    var stories: Observable<[Story]> {
         return repository.stories
     }
 }
