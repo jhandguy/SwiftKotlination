@@ -3,17 +3,13 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-final class TopStoriesViewController: UIViewController, UITableViewDelegate {
-    
-    lazy var tableView = UITableView()
-    let disposeBag = DisposeBag()
+final class TopStoriesViewController: UIViewController {
     
     weak var coordinator: CoordinatorProtocol?
-    private(set) var viewModel: TopStoriesViewModel! {
-        didSet {
-            viewModel.delegate = self
-        }
-    }
+    private(set) var viewModel: TopStoriesViewModel!
+    
+    private lazy var tableView = UITableView()
+    private let disposeBag = DisposeBag()
     
     class func create(_ viewModel: TopStoriesViewModel) -> TopStoriesViewController {
         let viewController = TopStoriesViewController()
@@ -34,19 +30,16 @@ final class TopStoriesViewController: UIViewController, UITableViewDelegate {
         tableView.snp.makeConstraints { make in
             make.width.height.equalTo(self.view)
         }
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(StoryTableViewCell.self, forCellReuseIdentifier: "Cell")
         
         viewModel
             .stories
             .bind(to: tableView
                 .rx
-                .items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { row, story, cell in
-                    print(story)
+                .items(cellIdentifier: "Cell", cellType: StoryTableViewCell.self)) { row, story, cell in
+                    cell.titleLabel.text = story.title
+                    cell.bylineLabel.text = story.byline
                 }
             .disposed(by: disposeBag)
     }
-}
-
-extension TopStoriesViewController: TopStoriesViewModelDelegate {
-    
 }

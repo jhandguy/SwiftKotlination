@@ -1,17 +1,8 @@
 import UIKit
 import RxSwift
 
-protocol TopStoriesViewModelDelegate: class {
-    
-}
-
-final class TopStoriesViewModel {
-    weak var delegate: TopStoriesViewModelDelegate?
+struct TopStoriesViewModel {
     var repository: TopStoriesRepositoryProtocol
-    
-    init(_ repository: TopStoriesRepositoryProtocol) {
-        self.repository = repository
-    }
 }
 
 extension TopStoriesViewModel {
