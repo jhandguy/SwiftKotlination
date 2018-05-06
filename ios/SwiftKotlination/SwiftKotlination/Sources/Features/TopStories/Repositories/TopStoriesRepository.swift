@@ -1,15 +1,24 @@
+import RxAlamofire
 import RxSwift
+import ObjectMapper
 
 protocol TopStoriesRepositoryProtocol {
     var stories: Observable<[Story]> { get }
 }
 
 struct TopStoriesRepository: TopStoriesRepositoryProtocol {
+    
     var stories: Observable<[Story]> {
-        return Observable<[Story]>.just(
-            [
-                Story(section: "World", subsection: "Asia Pacific", title: "Kim Prepared to Cede Nuclear Weapons if U.S. Pledges Not to Invade", abstract: "South Korean officials said the North Korean leader, Kim Jong-un, had told them he would abandon his nuclear weapons if Washington ended the Korean War and promised nonaggression.", url: "https://www.nytimes.com/2018/04/29/world/asia/north-korea-trump-nuclear.html", byline: "By CHOE SANG-HUN")
-            ]
-        )
+        return
+            requestJSON(.get, "https://api.nytimes.com/svc/topstories/v2/world.json?api-key=de87f25eb97b4f038d8360e0de22e1dd")
+                .flatMap { response -> Observable<[Story]> in
+                    guard
+                        let (_, json) = response as? (HTTPURLResponse, [String: Any]),
+                        let array = Mapper<Story>().mapArray(JSONObject: json["results"]) else {
+                        return Observable.just([])
+                    }
+                    
+                    return Observable.just(array)
+                }
     }
 }
