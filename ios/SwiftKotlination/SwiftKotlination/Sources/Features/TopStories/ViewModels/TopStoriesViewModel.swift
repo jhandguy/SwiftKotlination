@@ -2,7 +2,7 @@ import UIKit
 import RxSwift
 
 struct TopStoriesViewModel {
-    var repository: TopStoriesRepositoryProtocol
+    private(set) var repository: TopStoriesRepositoryProtocol
 }
 
 extension TopStoriesViewModel {

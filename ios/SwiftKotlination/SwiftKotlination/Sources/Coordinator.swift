@@ -17,9 +17,8 @@ final class Coordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let repository = TopStoriesRepository()
-        let viewModel = TopStoriesViewModel(repository: repository)
-        let viewController = TopStoriesViewController.create(viewModel)
+        let viewController = TopStoriesViewController()
+        viewController.viewModel = TopStoriesViewModel(repository: TopStoriesRepository())
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

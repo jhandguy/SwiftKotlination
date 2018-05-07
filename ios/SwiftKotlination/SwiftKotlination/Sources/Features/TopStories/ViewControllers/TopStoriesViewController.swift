@@ -6,17 +6,10 @@ import RxCocoa
 final class TopStoriesViewController: UIViewController {
     
     weak var coordinator: CoordinatorProtocol?
-    private(set) var viewModel: TopStoriesViewModel!
+    var viewModel: TopStoriesViewModel!
     
     private lazy var tableView = UITableView()
     private let disposeBag = DisposeBag()
-    
-    class func create(_ viewModel: TopStoriesViewModel) -> TopStoriesViewController {
-        let viewController = TopStoriesViewController()
-        viewController.viewModel = viewModel
-        
-        return viewController
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
