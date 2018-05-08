@@ -2,4 +2,3 @@ github "SnapKit/SnapKit" ~> 4.0.0
 github "ReactiveX/RxSwift" ~> 4.0
 github "Alamofire/Alamofire" ~> 4.7
 github "RxSwiftCommunity/RxAlamofire" "master"
-github "Hearst-DD/ObjectMapper" ~> 3.1

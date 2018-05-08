@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0FBB65A0209F121F0090B77F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBB659F209F121F0090B77F /* Alamofire.framework */; };
 		0FBB65A2209F12290090B77F /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBB65A1209F12290090B77F /* RxAlamofire.framework */; };
-		0FBB65A6209F178D0090B77F /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBB65A5209F178D0090B77F /* ObjectMapper.framework */; };
+		0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65B820A23FF80090B77F /* TopStories.swift */; };
 		0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC64AB2209C756300339755 /* SnapKit.framework */; };
 		0FBE92A7209CF6F500A32D01 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92A6209CF6F500A32D01 /* RxSwift.framework */; };
 		0FBE92AB209CFF6D00A32D01 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */; };
@@ -46,6 +46,7 @@
 		0FBB65A1209F12290090B77F /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
 		0FBB65A3209F17860090B77F /* ObjectMapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ObjectMapper.framework.dSYM; path = Carthage/Build/iOS/ObjectMapper.framework.dSYM; sourceTree = "<group>"; };
 		0FBB65A5209F178D0090B77F /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		0FBB65B820A23FF80090B77F /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
 		0FBE92A6209CF6F500A32D01 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		0FBE92A8209CFF5F00A32D01 /* RxCocoa.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RxCocoa.framework.dSYM; path = Carthage/Build/iOS/RxCocoa.framework.dSYM; sourceTree = "<group>"; };
 		0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 				0FBB65A2209F12290090B77F /* RxAlamofire.framework in Frameworks */,
 				0FBE92A7209CF6F500A32D01 /* RxSwift.framework in Frameworks */,
 				0FBE92AB209CFF6D00A32D01 /* RxCocoa.framework in Frameworks */,
-				0FBB65A6209F178D0090B77F /* ObjectMapper.framework in Frameworks */,
 				0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				0FC64A462096543D00339755 /* Story.swift */,
+				0FBB65B820A23FF80090B77F /* TopStories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -377,7 +378,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxAlamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 			);
 			outputPaths = (
 			);
@@ -399,6 +399,7 @@
 				0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */,
 				0FC64A472096543D00339755 /* Story.swift in Sources */,
 				0FBE92AE209D901C00A32D01 /* StoryTableViewCell.swift in Sources */,
+				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,13 +23,13 @@ final class TopStoriesViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.width.height.equalTo(self.view)
         }
-        tableView.register(StoryTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.identifier)
         
         viewModel
             .stories
             .bind(to: tableView
                 .rx
-                .items(cellIdentifier: "Cell", cellType: StoryTableViewCell.self)) { row, story, cell in
+                .items(cellIdentifier: StoryTableViewCell.identifier, cellType: StoryTableViewCell.self)) { row, story, cell in
                     cell.titleLabel.text = story.title
                     cell.bylineLabel.text = story.byline
                 }

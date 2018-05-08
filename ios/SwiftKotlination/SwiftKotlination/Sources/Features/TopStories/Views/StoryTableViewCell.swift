@@ -3,6 +3,8 @@ import SnapKit
 
 class StoryTableViewCell: UITableViewCell {
     
+    static let identifier = NSStringFromClass(StoryTableViewCell.self)
+    
     var titleLabel = UILabel()
     var bylineLabel = UILabel()
     

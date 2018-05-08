@@ -1,6 +1,5 @@
 import RxAlamofire
 import RxSwift
-import ObjectMapper
 
 protocol TopStoriesRepositoryProtocol {
     var stories: Observable<[Story]> { get }
@@ -13,16 +12,13 @@ struct TopStoriesRepository: TopStoriesRepositoryProtocol {
     
     var stories: Observable<[Story]> {
         return
-            json(.get, url, parameters: [api.key: api.value])
-                .flatMap { json -> Observable<[Story]> in
-                    guard
-                        let object = json as? [String: Any],
-                        let array = Mapper<Story>().mapArray(JSONObject: object["results"]) else {
-                            
-                            return Observable.just([])
+            data(.get, url, parameters: [api.key: api.value])
+                .flatMap { data -> Observable<[Story]> in
+                    guard let topStories = try? JSONDecoder().decode(TopStories.self, from: data) else {
+                        return Observable.just([])
                     }
                     
-                    return Observable.just(array)
+                    return Observable.just(topStories.results)
                 }
     }
 }
