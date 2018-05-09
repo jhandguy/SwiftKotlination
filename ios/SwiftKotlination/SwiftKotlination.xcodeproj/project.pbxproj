@@ -159,9 +159,9 @@
 		0FC64A382095D44600339755 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				0FBB65C620A3A6300090B77F /* Extension */,
 				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
 				0FC64A3A2095EAB700339755 /* Coordinator.swift */,
+				0FBB65C620A3A6300090B77F /* Extension */,
 				0FCE5D02208A8650001C8FFC /* Feature */,
 			);
 			path = Source;
