@@ -2,6 +2,7 @@ import UIKit
 
 protocol CoordinatorProtocol: class {
     func start()
+    func open(_ story: Story)
 }
 
 final class Coordinator: CoordinatorProtocol {
@@ -19,6 +20,13 @@ final class Coordinator: CoordinatorProtocol {
     func start() {
         let viewController = TopStoriesViewController()
         viewController.viewModel = TopStoriesViewModel(repository: TopStoriesRepository())
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func open(_ story: Story) {
+        let viewController = StoryViewController()
+        viewController.viewModel = StoryViewModel(repository: StoryRepository(story))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

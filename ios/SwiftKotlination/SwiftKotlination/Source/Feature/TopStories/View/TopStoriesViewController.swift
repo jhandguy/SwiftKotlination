@@ -32,6 +32,9 @@ final class TopStoriesViewController: UIViewController {
                 .items(cellIdentifier: StoryTableViewCell.identifier, cellType: StoryTableViewCell.self)) { row, story, cell in
                     cell.titleLabel.text = story.title
                     cell.bylineLabel.text = story.byline
+                    cell.seeButton.on(.touchUpInside) {
+                        self.coordinator?.open(story)
+                    }
                 }
             .disposed(by: disposeBag)
     }

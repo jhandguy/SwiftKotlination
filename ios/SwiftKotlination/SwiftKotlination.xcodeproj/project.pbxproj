@@ -10,6 +10,10 @@
 		0FBB65A0209F121F0090B77F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBB659F209F121F0090B77F /* Alamofire.framework */; };
 		0FBB65A2209F12290090B77F /* RxAlamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBB65A1209F12290090B77F /* RxAlamofire.framework */; };
 		0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65B820A23FF80090B77F /* TopStories.swift */; };
+		0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C020A393920090B77F /* StoryViewController.swift */; };
+		0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C220A393C20090B77F /* StoryViewModel.swift */; };
+		0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C420A394E10090B77F /* StoryRepository.swift */; };
+		0FBB65C820A3A6500090B77F /* UIControl+Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C720A3A6500090B77F /* UIControl+Target.swift */; };
 		0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC64AB2209C756300339755 /* SnapKit.framework */; };
 		0FBE92A7209CF6F500A32D01 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92A6209CF6F500A32D01 /* RxSwift.framework */; };
 		0FBE92AB209CFF6D00A32D01 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */; };
@@ -44,9 +48,11 @@
 /* Begin PBXFileReference section */
 		0FBB659F209F121F0090B77F /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		0FBB65A1209F12290090B77F /* RxAlamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxAlamofire.framework; path = Carthage/Build/iOS/RxAlamofire.framework; sourceTree = "<group>"; };
-		0FBB65A3209F17860090B77F /* ObjectMapper.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = ObjectMapper.framework.dSYM; path = Carthage/Build/iOS/ObjectMapper.framework.dSYM; sourceTree = "<group>"; };
-		0FBB65A5209F178D0090B77F /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		0FBB65B820A23FF80090B77F /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
+		0FBB65C020A393920090B77F /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
+		0FBB65C220A393C20090B77F /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
+		0FBB65C420A394E10090B77F /* StoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryRepository.swift; sourceTree = "<group>"; };
+		0FBB65C720A3A6500090B77F /* UIControl+Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Target.swift"; sourceTree = "<group>"; };
 		0FBE92A6209CF6F500A32D01 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		0FBE92A8209CFF5F00A32D01 /* RxCocoa.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RxCocoa.framework.dSYM; path = Carthage/Build/iOS/RxCocoa.framework.dSYM; sourceTree = "<group>"; };
 		0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -98,71 +104,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0FBE92AC209D8FFD00A32D01 /* Views */ = {
+		0FBB65BC20A392EE0090B77F /* Story */ = {
 			isa = PBXGroup;
 			children = (
+				0FBB65BF20A393060090B77F /* Model */,
+				0FBB65BD20A392F60090B77F /* View */,
+				0FBB65BE20A392FE0090B77F /* ViewModel */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
+		0FBB65BD20A392F60090B77F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FBB65C020A393920090B77F /* StoryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0FBB65BE20A392FE0090B77F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0FBB65C220A393C20090B77F /* StoryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0FBB65BF20A393060090B77F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0FC64A462096543D00339755 /* Story.swift */,
+				0FBB65C420A394E10090B77F /* StoryRepository.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0FBB65C620A3A6300090B77F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0FBB65C720A3A6500090B77F /* UIControl+Target.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		0FBE92AC209D8FFD00A32D01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0FC64A3C2095EC5000339755 /* TopStoriesViewController.swift */,
 				0FBE92AD209D901C00A32D01 /* StoryTableViewCell.swift */,
 			);
-			path = Views;
+			path = View;
 			sourceTree = "<group>";
 		};
-		0FC64A382095D44600339755 /* Sources */ = {
+		0FC64A382095D44600339755 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				0FBB65C620A3A6300090B77F /* Extension */,
 				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
 				0FC64A3A2095EAB700339755 /* Coordinator.swift */,
-				0FCE5D02208A8650001C8FFC /* Features */,
+				0FCE5D02208A8650001C8FFC /* Feature */,
 			);
-			path = Sources;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		0FC64A392095D44F00339755 /* Resources */ = {
+		0FC64A392095D44F00339755 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */,
 				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
 			);
-			path = Resources;
+			path = Resource;
 			sourceTree = "<group>";
 		};
-		0FC64A422096539F00339755 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				0FC64A3C2095EC5000339755 /* TopStoriesViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		0FC64A43209653A700339755 /* ViewModels */ = {
+		0FC64A43209653A700339755 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				0FC64A3E2095F5E400339755 /* TopStoriesViewModel.swift */,
 			);
-			path = ViewModels;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		0FC64A44209653B000339755 /* Repositories */ = {
+		0FC64A452096542D00339755 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0FBB65B820A23FF80090B77F /* TopStories.swift */,
 				0FC64A40209623B200339755 /* TopStoriesRepository.swift */,
 			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
-		0FC64A452096542D00339755 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				0FC64A462096543D00339755 /* Story.swift */,
-				0FBB65B820A23FF80090B77F /* TopStories.swift */,
-			);
-			path = Models;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		0FC64AB1209C756300339755 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0FBB65A5209F178D0090B77F /* ObjectMapper.framework */,
-				0FBB65A3209F17860090B77F /* ObjectMapper.framework.dSYM */,
 				0FBB65A1209F12290090B77F /* RxAlamofire.framework */,
 				0FBB659F209F121F0090B77F /* Alamofire.framework */,
 				0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */,
@@ -198,8 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
-				0FC64A392095D44F00339755 /* Resources */,
-				0FC64A382095D44600339755 /* Sources */,
+				0FC64A392095D44F00339755 /* Resource */,
+				0FC64A382095D44600339755 /* Source */,
 			);
 			path = SwiftKotlination;
 			sourceTree = "<group>";
@@ -220,22 +253,21 @@
 			path = SwiftKotlinationUITests;
 			sourceTree = "<group>";
 		};
-		0FCE5D02208A8650001C8FFC /* Features */ = {
+		0FCE5D02208A8650001C8FFC /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				0FBB65BC20A392EE0090B77F /* Story */,
 				0FCE5D03208A8658001C8FFC /* TopStories */,
 			);
-			path = Features;
+			path = Feature;
 			sourceTree = "<group>";
 		};
 		0FCE5D03208A8658001C8FFC /* TopStories */ = {
 			isa = PBXGroup;
 			children = (
-				0FBE92AC209D8FFD00A32D01 /* Views */,
-				0FC64A422096539F00339755 /* ViewControllers */,
-				0FC64A43209653A700339755 /* ViewModels */,
-				0FC64A44209653B000339755 /* Repositories */,
-				0FC64A452096542D00339755 /* Models */,
+				0FC64A452096542D00339755 /* Model */,
+				0FBE92AC209D8FFD00A32D01 /* View */,
+				0FC64A43209653A700339755 /* ViewModel */,
 			);
 			path = TopStories;
 			sourceTree = "<group>";
@@ -393,12 +425,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FC64A41209623B200339755 /* TopStoriesRepository.swift in Sources */,
+				0FBB65C820A3A6500090B77F /* UIControl+Target.swift in Sources */,
 				0FC64A3B2095EAB700339755 /* Coordinator.swift in Sources */,
 				0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */,
+				0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */,
+				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesViewController.swift in Sources */,
 				0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */,
 				0FC64A472096543D00339755 /* Story.swift in Sources */,
 				0FBE92AE209D901C00A32D01 /* StoryTableViewCell.swift in Sources */,
+				0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
