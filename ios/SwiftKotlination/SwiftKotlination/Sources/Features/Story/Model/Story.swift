@@ -1,4 +1,4 @@
-struct Story: Codable {
+struct Story: Codable, Equatable {
     let section: String
     let subsection: String
     let title: String

@@ -6,14 +6,6 @@ struct TopStoriesViewModel {
 }
 
 extension TopStoriesViewModel {
-    var title: String {
-        return "Top Stories"
-    }
-    
-    var backgroundColor: UIColor {
-        return .black
-    }
-    
     var stories: Observable<[Story]> {
         return repository.stories
     }

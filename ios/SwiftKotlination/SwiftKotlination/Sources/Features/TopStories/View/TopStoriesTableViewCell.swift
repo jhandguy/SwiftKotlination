@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
 
-class StoryTableViewCell: UITableViewCell {
+class TopStoriesTableViewCell: UITableViewCell {
     
-    static let identifier = NSStringFromClass(StoryTableViewCell.self)
+    static let identifier = NSStringFromClass(TopStoriesTableViewCell.self)
     
-    var titleLabel = UILabel()
-    var bylineLabel = UILabel()
-    var seeButton = UIButton()
+    internal let titleLabel = UILabel()
+    internal let bylineLabel = UILabel()
+    internal let seeButton = UIButton()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -26,22 +26,20 @@ class StoryTableViewCell: UITableViewCell {
         contentView.addSubview(seeButton)
         
         titleLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(16)
-            make.trailing.equalTo(seeButton.snp.leading).offset(-16)
+            make.left.equalTo(contentView).inset(16)
+            make.right.equalTo(seeButton.snp.left).offset(-16)
             make.top.equalTo(contentView).inset(8)
             make.bottom.equalTo(bylineLabel.snp.top).offset(-8)
         }
-        titleLabel.backgroundColor = .clear
         titleLabel.textColor = .white
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         
         bylineLabel.snp.makeConstraints { make in
-            make.leading.equalTo(contentView).inset(16)
-            make.trailing.equalTo(seeButton.snp.leading).offset(-16)
+            make.left.equalTo(contentView).inset(16)
+            make.right.equalTo(seeButton.snp.left).offset(-16)
             make.bottom.equalTo(contentView).inset(8)
         }
-        bylineLabel.backgroundColor = .clear
         bylineLabel.textColor = .white
         bylineLabel.numberOfLines = 1
         bylineLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
@@ -51,7 +49,7 @@ class StoryTableViewCell: UITableViewCell {
         
         seeButton.snp.makeConstraints { make in
             make.width.equalTo(40)
-            make.trailing.equalTo(contentView).inset(16)
+            make.right.equalTo(contentView).inset(16)
             make.centerY.equalTo(contentView)
         }
     }

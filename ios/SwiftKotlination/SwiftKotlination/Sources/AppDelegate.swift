@@ -4,14 +4,15 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private var coordinator: Coordinator!
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+    internal var coordinator: CoordinatorProtocol!
+    
+    override init() {
         window = UIWindow(frame: UIScreen.main.bounds)
         coordinator = Coordinator(window: window!)
+    }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         coordinator.start()
-        
         return true
     }
 }

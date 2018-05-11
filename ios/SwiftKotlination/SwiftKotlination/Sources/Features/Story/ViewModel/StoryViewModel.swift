@@ -6,10 +6,6 @@ struct StoryViewModel {
 }
 
 extension StoryViewModel {
-    var backgroundColor: UIColor {
-        return .black
-    }
-    
     var story: Observable<Story> {
         return repository.story
     }

@@ -8,23 +8,23 @@ final class TopStoriesViewController: UIViewController {
     weak var coordinator: CoordinatorProtocol?
     var viewModel: TopStoriesViewModel!
     
-    private lazy var tableView = UITableView()
+    internal let tableView = UITableView()
     
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = viewModel.title
+        title = "Top Stories"
         
-        view.backgroundColor = viewModel.backgroundColor
+        view.backgroundColor = .black
         view.addSubview(tableView)
         
-        tableView.backgroundColor = viewModel.backgroundColor
+        tableView.backgroundColor = .black
         tableView.snp.makeConstraints { make in
             make.width.height.equalTo(view)
         }
-        tableView.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.identifier)
+        tableView.register(TopStoriesTableViewCell.self, forCellReuseIdentifier: TopStoriesTableViewCell.identifier)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +34,7 @@ final class TopStoriesViewController: UIViewController {
             .stories
             .bind(to: tableView
                 .rx
-                .items(cellIdentifier: StoryTableViewCell.identifier, cellType: StoryTableViewCell.self)) { row, story, cell in
+                .items(cellIdentifier: TopStoriesTableViewCell.identifier, cellType: TopStoriesTableViewCell.self)) { row, story, cell in
                     cell.titleLabel.text = story.title
                     cell.bylineLabel.text = story.byline
                     cell.seeButton.on(.touchUpInside) {

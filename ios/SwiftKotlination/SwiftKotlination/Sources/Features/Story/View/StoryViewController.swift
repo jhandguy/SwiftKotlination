@@ -6,29 +6,25 @@ final class StoryViewController: UIViewController {
     weak var coordinator: CoordinatorProtocol?
     var viewModel: StoryViewModel!
     
-    private lazy var titleLabel = UILabel()
-    private lazy var abstractLabel = UILabel()
-    private lazy var urlButton = UIButton()
-    private lazy var byLineLabel = UILabel()
+    internal let titleLabel = UILabel()
+    internal let abstractLabel = UILabel()
+    internal let byLineLabel = UILabel()
+    internal let urlButton = UIButton()
     
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = viewModel.backgroundColor
+        view.backgroundColor = .black
         view.addSubview(titleLabel)
         view.addSubview(abstractLabel)
         view.addSubview(byLineLabel)
         view.addSubview(urlButton)
         
         titleLabel.snp.makeConstraints { make in
-            if #available(iOS 11, *) {
-                make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(32)
-            } else {
-                make.top.equalTo(view).offset(32)
-            }
-            make.trailing.leading.equalTo(view).inset(16)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(32)
+            make.right.left.equalTo(view).inset(16)
         }
         titleLabel.textAlignment = .center
         titleLabel.textColor = .white
@@ -37,7 +33,7 @@ final class StoryViewController: UIViewController {
         
         abstractLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.trailing.leading.equalTo(view).inset(16)
+            make.right.left.equalTo(view).inset(16)
         }
         abstractLabel.textAlignment = .justified
         abstractLabel.textColor = .white
@@ -46,7 +42,7 @@ final class StoryViewController: UIViewController {
         
         byLineLabel.snp.makeConstraints { make in
             make.top.equalTo(abstractLabel.snp.bottom).offset(16)
-            make.trailing.leading.equalTo(view).inset(16)
+            make.right.left.equalTo(view).inset(16)
         }
         byLineLabel.textAlignment = .justified
         byLineLabel.textColor = .white
@@ -55,7 +51,7 @@ final class StoryViewController: UIViewController {
         
         urlButton.snp.makeConstraints { make in
             make.top.equalTo(byLineLabel.snp.bottom).offset(16)
-            make.trailing.leading.equalTo(view).inset(16)
+            make.right.left.equalTo(view).inset(16)
         }
         urlButton.contentHorizontalAlignment = .center
         urlButton.setTitleColor(.red, for: .normal)

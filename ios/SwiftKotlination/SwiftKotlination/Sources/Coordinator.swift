@@ -8,7 +8,7 @@ protocol CoordinatorProtocol: class {
 final class Coordinator: CoordinatorProtocol {
     
     private var window: UIWindow!
-    private let navigationController: UINavigationController
+    internal let navigationController: UINavigationController
     
     init(window: UIWindow) {
         navigationController = UINavigationController()
@@ -19,7 +19,7 @@ final class Coordinator: CoordinatorProtocol {
     
     func start() {
         let viewController = TopStoriesViewController()
-        viewController.viewModel = TopStoriesViewModel(repository: TopStoriesRepository())
+        viewController.viewModel = TopStoriesViewModel(repository: TopStoriesRepository(apiClient: APIClient()))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
