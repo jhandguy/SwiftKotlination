@@ -9,6 +9,7 @@ final class TopStoriesViewController: UIViewController {
     var viewModel: TopStoriesViewModel!
     
     private lazy var tableView = UITableView()
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -21,9 +22,13 @@ final class TopStoriesViewController: UIViewController {
         
         tableView.backgroundColor = viewModel.backgroundColor
         tableView.snp.makeConstraints { make in
-            make.width.height.equalTo(self.view)
+            make.width.height.equalTo(view)
         }
         tableView.register(StoryTableViewCell.self, forCellReuseIdentifier: StoryTableViewCell.identifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         viewModel
             .stories
@@ -35,7 +40,7 @@ final class TopStoriesViewController: UIViewController {
                     cell.seeButton.on(.touchUpInside) {
                         self.coordinator?.open(story)
                     }
-                }
+            }
             .disposed(by: disposeBag)
     }
 }

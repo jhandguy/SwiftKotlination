@@ -3,6 +3,6 @@ struct Story: Codable {
     let subsection: String
     let title: String
     let abstract: String
-    let url: String
     let byline: String
+    let url: String
 }
