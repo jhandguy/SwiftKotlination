@@ -7,7 +7,7 @@ protocol StoryRepositoryProtocol {
 struct StoryRepository: StoryRepositoryProtocol {
     var story: Observable<Story>
     
-    init(_ story: Story) {
+    init(story: Story) {
         self.story = Observable.just(story)
     }
 }

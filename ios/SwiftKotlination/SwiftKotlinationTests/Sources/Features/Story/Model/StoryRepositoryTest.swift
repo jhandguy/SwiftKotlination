@@ -8,7 +8,7 @@ final class StoryRepositoryTest: XCTestCase {
     
     func testStoryRepositoryStory() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        sut = StoryRepository(story)
+        sut = StoryRepository(story: story)
         sut
             .story
             .subscribe(
