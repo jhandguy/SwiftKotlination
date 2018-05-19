@@ -1,4 +1,4 @@
-package fr.jhandguy.swiftkotlination.features.topstories.models
+package fr.jhandguy.swiftkotlination.features.topstories.model
 
 data class Story(
         var section: String,

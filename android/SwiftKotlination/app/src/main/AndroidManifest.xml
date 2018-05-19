@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity">
+            android:name="fr.jhandguy.swiftkotlination.features.main.view.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".features.topstories.activities.TopStoriesActivity"/>
+            android:name=".features.topstories.view.TopStoriesActivity"/>
 
     </application>
 

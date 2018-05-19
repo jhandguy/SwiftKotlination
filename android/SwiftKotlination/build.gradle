@@ -5,6 +5,8 @@ buildscript {
     ext.anko_version = '0.10.5'
     ext.rxandroid_version = '2.0.2'
     ext.rxjava2_version = '2.1.10'
+    ext.dagger2_version = '2.15'
+
     repositories {
         google()
         jcenter()
