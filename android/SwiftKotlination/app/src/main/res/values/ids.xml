@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="top_stories_item_title" type="id">1</item>
+    <item name="top_stories_item_byline" type="id">2</item>
+</resources>

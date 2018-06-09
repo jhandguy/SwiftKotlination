@@ -1,6 +1,5 @@
 package fr.jhandguy.swiftkotlination.features.topstories.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import dagger.Module
@@ -8,9 +7,8 @@ import dagger.Provides
 import dagger.android.AndroidInjection
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.navigation.Coordinator
-import org.jetbrains.anko.textColor
-import org.jetbrains.anko.textView
-import org.jetbrains.anko.verticalLayout
+import fr.jhandguy.swiftkotlination.navigation.Navigator
+import org.jetbrains.anko.setContentView
 import javax.inject.Inject
 
 @Module
@@ -23,7 +21,12 @@ object TopStoriesActivityModule {
 class TopStoriesActivity: AppCompatActivity() {
 
     @Inject
+    lateinit var navigator: Navigator
+
+    @Inject
     lateinit var viewModel: TopStoriesViewModel
+
+    private var adapter = TopStoriesAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -31,13 +34,21 @@ class TopStoriesActivity: AppCompatActivity() {
 
         title = "Top Stories"
 
-        verticalLayout {
-            textView("Title") {
-                textColor = Color.WHITE
-            }
-            textView("Description") {
-                textColor = Color.WHITE
-            }
-        }
+        navigator.activity = this
+
+        TopStoriesView(adapter).setContentView(this)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel
+                .topStories
+                .subscribe({
+                    adapter.topStories = it
+                    adapter.notifyDataSetChanged()
+                }, {
+                    print("Ooops")
+                })
     }
 }
