@@ -3,23 +3,26 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 
 ## Frameworks
 
-### iOS
+### iOS (Swift)
 
 - SnapKit
 - RxSwift
 - Alamofire
 - RxAlamofire
 
-### Android
+### Android (Kotlin)
 
 - Anko
+- Dagger
+- RxJava
 - RxAndroid
+- Retrofit
 
 ## Architecture
 
 - MVVM
 
-## Patterns
+## Design Patterns
 
 - Coordinator
 - Dependency Injection
