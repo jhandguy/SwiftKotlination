@@ -8,8 +8,9 @@ import dagger.Component
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.support.AndroidSupportInjectionModule
-import fr.jhandguy.swiftkotlination.di.ActivityModule
-import fr.jhandguy.swiftkotlination.di.NavigationModule
+import fr.jhandguy.swiftkotlination.features.main.MainModule
+import fr.jhandguy.swiftkotlination.features.topstories.TopStoriesModule
+import fr.jhandguy.swiftkotlination.navigation.NavigationModule
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,8 +30,9 @@ open class App: Application(), HasActivityInjector {
     @Singleton
     @Component(modules = [
         AndroidSupportInjectionModule::class,
-        ActivityModule::class,
-        NavigationModule::class
+        NavigationModule::class,
+        MainModule::class,
+        TopStoriesModule::class
     ])
     interface AppComponent {
         fun inject(app: App)

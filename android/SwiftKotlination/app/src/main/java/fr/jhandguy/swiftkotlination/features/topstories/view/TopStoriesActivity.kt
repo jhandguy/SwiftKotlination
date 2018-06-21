@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjection
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepositoryImpl
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.navigation.Coordinator
 import fr.jhandguy.swiftkotlination.navigation.Navigator
@@ -15,7 +17,11 @@ import javax.inject.Inject
 object TopStoriesActivityModule {
     @Provides
     @JvmStatic
-    fun provideViewModel(coordinator: Coordinator) = TopStoriesViewModel(coordinator)
+    fun provideRepository(): TopStoriesRepository = TopStoriesRepositoryImpl()
+
+    @Provides
+    @JvmStatic
+    fun provideViewModel(coordinator: Coordinator, repository: TopStoriesRepository) = TopStoriesViewModel(coordinator, repository)
 }
 
 class TopStoriesActivity: AppCompatActivity() {

@@ -1,4 +1,4 @@
-package fr.jhandguy.swiftkotlination.di
+package fr.jhandguy.swiftkotlination
 
 import javax.inject.Scope
 
