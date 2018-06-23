@@ -32,8 +32,7 @@ dependencies {
     implementation "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
     implementation "org.jetbrains.anko:anko-constraint-layout:$anko_version"
 
-    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava2_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 
     implementation "com.google.dagger:dagger-android:$dagger2_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger2_version"

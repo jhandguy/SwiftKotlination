@@ -55,11 +55,9 @@ class TopStoriesActivity: AppCompatActivity() {
 
         viewModel
                 .topStories
-                .subscribe({
+                .subscribe {
                     adapter.topStories = it
                     adapter.notifyDataSetChanged()
-                }, {
-                    print(it.message)
-                })
+                }
     }
 }
