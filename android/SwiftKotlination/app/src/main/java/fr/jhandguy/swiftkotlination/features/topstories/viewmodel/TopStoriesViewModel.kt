@@ -1,14 +1,15 @@
 package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
-import dagger.Module
-import dagger.Provides
 import fr.jhandguy.swiftkotlination.features.topstories.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepositoryImpl
 import fr.jhandguy.swiftkotlination.navigation.Coordinator
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class TopStoriesViewModel @Inject constructor(val coordinator: Coordinator, repository: TopStoriesRepository) {
     var topStories: Observable<MutableList<Story>> = repository.topStories
+
+    fun open(story: Story) {
+        coordinator.open(story)
+    }
 }

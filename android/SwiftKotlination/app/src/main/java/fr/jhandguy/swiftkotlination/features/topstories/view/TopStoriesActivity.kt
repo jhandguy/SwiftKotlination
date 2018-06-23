@@ -22,6 +22,10 @@ object TopStoriesActivityModule {
     @Provides
     @JvmStatic
     fun provideViewModel(coordinator: Coordinator, repository: TopStoriesRepository) = TopStoriesViewModel(coordinator, repository)
+
+    @Provides
+    @JvmStatic
+    fun provideAdapter(viewModel: TopStoriesViewModel) = TopStoriesAdapter(onClickCallback = { viewModel.open(it) })
 }
 
 class TopStoriesActivity: AppCompatActivity() {
@@ -32,7 +36,8 @@ class TopStoriesActivity: AppCompatActivity() {
     @Inject
     lateinit var viewModel: TopStoriesViewModel
 
-    private var adapter = TopStoriesAdapter()
+    @Inject
+    lateinit var adapter: TopStoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -40,13 +45,13 @@ class TopStoriesActivity: AppCompatActivity() {
 
         title = "Top Stories"
 
-        navigator.activity = this
-
         TopStoriesView(adapter).setContentView(this)
     }
 
     override fun onStart() {
         super.onStart()
+
+        navigator.activity = this
 
         viewModel
                 .topStories
@@ -54,7 +59,7 @@ class TopStoriesActivity: AppCompatActivity() {
                     adapter.topStories = it
                     adapter.notifyDataSetChanged()
                 }, {
-                    print("Ooops")
+                    print(it.message)
                 })
     }
 }

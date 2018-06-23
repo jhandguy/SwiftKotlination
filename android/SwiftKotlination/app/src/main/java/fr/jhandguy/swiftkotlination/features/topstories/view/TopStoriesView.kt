@@ -10,7 +10,7 @@ class TopStoriesView constructor(private val topStoriesAdapter: TopStoriesAdapte
 
     override fun createView(ui: AnkoContext<TopStoriesActivity>): View = with(ui) {
         relativeLayout {
-            padding = dip(16)
+            padding = dip(12)
             backgroundColor = Color.BLACK
             recyclerView {
                 lparams(width = matchParent, height = matchParent)

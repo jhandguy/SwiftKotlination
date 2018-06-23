@@ -23,6 +23,9 @@
         <activity
             android:name=".features.topstories.view.TopStoriesActivity"/>
 
+        <activity
+            android:name=".features.story.view.StoryActivity"/>
+
     </application>
 
 </manifest>
