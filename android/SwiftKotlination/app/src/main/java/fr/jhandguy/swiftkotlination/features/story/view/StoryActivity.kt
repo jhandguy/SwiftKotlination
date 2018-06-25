@@ -75,7 +75,7 @@ class StoryActivity: AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        coordinator.cancel()
+        coordinator.finish()
         return true
     }
 }

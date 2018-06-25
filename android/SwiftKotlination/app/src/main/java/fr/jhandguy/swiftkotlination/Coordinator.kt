@@ -12,7 +12,7 @@ interface Coordinator {
     fun start()
     fun open(story: Story)
     fun open(url: String)
-    fun cancel()
+    fun finish()
 }
 
 class CoordinatorImpl @Inject constructor(val activity: Activity): Coordinator {
@@ -34,7 +34,7 @@ class CoordinatorImpl @Inject constructor(val activity: Activity): Coordinator {
         activity.startActivity(intent)
     }
 
-    override fun cancel() {
+    override fun finish() {
         activity.finish()
     }
 }
