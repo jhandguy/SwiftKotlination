@@ -15,7 +15,9 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 - Anko
 - Dagger
 - RxKotlin
+- RxAndroid
 - Retrofit
+- Moshi
 
 ## Architecture
 
