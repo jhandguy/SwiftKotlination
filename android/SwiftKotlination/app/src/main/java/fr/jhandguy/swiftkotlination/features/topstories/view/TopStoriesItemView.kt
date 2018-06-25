@@ -13,11 +13,11 @@ class TopStoriesItemView : AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return constraintLayout {
-            padding = dip(4)
+            padding = dip(8)
             lparams(width = matchParent, height = wrapContent)
 
             textView {
-                textColorResource = R.color.colorPrimary
+                textColorResource = R.color.colorAccent
                 textSize = sp(6).toFloat()
                 typeface = DEFAULT_BOLD
                 id = R.id.top_stories_item_title
@@ -28,7 +28,7 @@ class TopStoriesItemView : AnkoComponent<Context> {
             }
 
             textView {
-                textColorResource = R.color.colorPrimaryDark
+                textColorResource = R.color.colorAccent
                 textSize = sp(5).toFloat()
                 lines = 1
                 id = R.id.top_stories_item_byline
@@ -37,7 +37,7 @@ class TopStoriesItemView : AnkoComponent<Context> {
                 topToBottom = R.id.top_stories_item_title
                 bottomToBottom = PARENT_ID
                 rightToLeft = R.id.top_stories_item_button
-                topMargin = dip(8)
+                topMargin = dip(6)
             }
 
             button {

@@ -3,7 +3,7 @@ package fr.jhandguy.swiftkotlination.navigation
 import android.app.Activity
 import android.content.Intent
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
-import fr.jhandguy.swiftkotlination.features.topstories.model.Story
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
 import javax.inject.Singleton
 

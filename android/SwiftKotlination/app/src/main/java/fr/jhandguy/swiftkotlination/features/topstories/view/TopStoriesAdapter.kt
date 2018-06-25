@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import fr.jhandguy.swiftkotlination.R
-import fr.jhandguy.swiftkotlination.features.topstories.model.Story
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick

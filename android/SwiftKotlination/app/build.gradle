@@ -33,12 +33,19 @@ dependencies {
     implementation "org.jetbrains.anko:anko-constraint-layout:$anko_version"
 
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
     implementation "com.google.dagger:dagger-android:$dagger2_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger2_version"
 
     implementation "com.google.dagger:dagger-android-support:$dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
+
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit2_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit2_version"
 
     kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger2_version"
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger2_version"

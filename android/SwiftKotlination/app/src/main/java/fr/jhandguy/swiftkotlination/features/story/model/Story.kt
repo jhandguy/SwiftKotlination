@@ -1,4 +1,4 @@
-package fr.jhandguy.swiftkotlination.features.topstories.model
+package fr.jhandguy.swiftkotlination.features.story.model
 
 import java.io.Serializable
 

@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.navigation
 
-import fr.jhandguy.swiftkotlination.features.topstories.model.Story
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 import javax.inject.Inject
 import javax.inject.Singleton
 

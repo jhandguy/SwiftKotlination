@@ -2,7 +2,7 @@ package fr.jhandguy.swiftkotlination.features.story.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import fr.jhandguy.swiftkotlination.features.topstories.model.Story
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 
 class StoryActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
