@@ -2,6 +2,7 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.Typeface.DEFAULT_BOLD
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
@@ -44,7 +45,8 @@ class TopStoriesItemView : AnkoComponent<Context> {
                 textColor = Color.RED
                 textSize = sp(6).toFloat()
                 backgroundColor = Color.BLACK
-                textResource = R.string.button_title
+                textResource = R.string.top_stories_button_title
+                typeface = Typeface.DEFAULT
                 id = R.id.top_stories_item_button
             }.lparams(width = wrapContent, height = wrapContent) {
                 rightToRight = PARENT_ID

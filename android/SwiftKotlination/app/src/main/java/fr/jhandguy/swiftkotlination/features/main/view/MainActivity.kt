@@ -5,35 +5,29 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjection
-import fr.jhandguy.swiftkotlination.features.main.viewmodel.MainViewModel
-import fr.jhandguy.swiftkotlination.navigation.Coordinator
-import fr.jhandguy.swiftkotlination.navigation.Navigator
+import fr.jhandguy.swiftkotlination.Coordinator
+import fr.jhandguy.swiftkotlination.CoordinatorImpl
 import javax.inject.Inject
 
 @Module
 object MainActivityModule {
     @Provides
     @JvmStatic
-    fun provideViewModel(coordinator: Coordinator) = MainViewModel(coordinator)
+    fun provideCoordinator(activity: MainActivity): Coordinator = CoordinatorImpl(activity)
 }
 
 class MainActivity: AppCompatActivity() {
 
     @Inject
-    lateinit var navigator: Navigator
-
-    @Inject
-    lateinit var viewModel: MainViewModel
+    lateinit var coordinator: Coordinator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
-
-        navigator.activity = this
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.start()
+        coordinator.start()
     }
 }

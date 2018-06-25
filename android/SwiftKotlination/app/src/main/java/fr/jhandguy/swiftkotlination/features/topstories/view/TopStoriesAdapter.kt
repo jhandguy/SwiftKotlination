@@ -7,20 +7,21 @@ import android.widget.Button
 import android.widget.TextView
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.Coordinator
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import javax.inject.Inject
 
-class TopStoriesAdapter @Inject constructor(var topStories: List<Story> = ArrayList(), private val onClickCallback: (Story) -> Unit): RecyclerView.Adapter<TopStoriesAdapter.ViewHolder>() {
+class TopStoriesAdapter @Inject constructor(val coordinator: Coordinator, var topStories: List<Story> = ArrayList()): RecyclerView.Adapter<TopStoriesAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(TopStoriesItemView().createView(AnkoContext.create(parent.context)), onClickCallback)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(TopStoriesItemView().createView(AnkoContext.create(parent.context)), coordinator)
 
     override fun getItemCount() = topStories.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(topStories[position])
 
-    class ViewHolder(itemView: View, private val onClickCallback: (Story) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View, val coordinator: Coordinator) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.find(R.id.top_stories_item_title)
         val byline: TextView = itemView.find(R.id.top_stories_item_byline)
         val button: Button = itemView.find(R.id.top_stories_item_button)
@@ -31,7 +32,7 @@ class TopStoriesAdapter @Inject constructor(var topStories: List<Story> = ArrayL
             button.isEnabled = true
             button.onClick {
                 button.isEnabled = false
-                onClickCallback(story)
+                coordinator.open(story)
             }
         }
     }

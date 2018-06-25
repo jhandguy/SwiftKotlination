@@ -5,12 +5,12 @@ import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjection
+import fr.jhandguy.swiftkotlination.Coordinator
+import fr.jhandguy.swiftkotlination.CoordinatorImpl
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepositoryImpl
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesService
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.navigation.Coordinator
-import fr.jhandguy.swiftkotlination.navigation.Navigator
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -22,6 +22,10 @@ import javax.inject.Inject
 
 @Module
 object TopStoriesActivityModule {
+    @Provides
+    @JvmStatic
+    fun provideCoordinator(activity: TopStoriesActivity): Coordinator = CoordinatorImpl(activity)
+
     @Provides
     @JvmStatic
     fun provideService(): TopStoriesService = Retrofit
@@ -38,23 +42,24 @@ object TopStoriesActivityModule {
 
     @Provides
     @JvmStatic
-    fun provideViewModel(coordinator: Coordinator, repository: TopStoriesRepository) = TopStoriesViewModel(coordinator, repository)
+    fun provideViewModel(repository: TopStoriesRepository) = TopStoriesViewModel(repository)
 
     @Provides
     @JvmStatic
-    fun provideAdapter(viewModel: TopStoriesViewModel) = TopStoriesAdapter(onClickCallback = { viewModel.open(it) })
+    fun provideAdapter(coordinator: Coordinator) = TopStoriesAdapter(coordinator)
+
+    @Provides
+    @JvmStatic
+    fun provideView(adapter: TopStoriesAdapter) = TopStoriesView(adapter)
 }
 
 class TopStoriesActivity: AppCompatActivity() {
 
     @Inject
-    lateinit var navigator: Navigator
-
-    @Inject
     lateinit var viewModel: TopStoriesViewModel
 
     @Inject
-    lateinit var adapter: TopStoriesAdapter
+    lateinit var view: TopStoriesView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -62,13 +67,11 @@ class TopStoriesActivity: AppCompatActivity() {
 
         title = "Top Stories"
 
-        TopStoriesView(adapter).setContentView(this)
+        view.setContentView(this)
     }
 
     override fun onStart() {
         super.onStart()
-
-        navigator.activity = this
 
         viewModel
                 .topStories
@@ -76,8 +79,8 @@ class TopStoriesActivity: AppCompatActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                     onNext = {
-                        adapter.topStories = it
-                        adapter.notifyDataSetChanged()
+                        view.adapter.topStories = it
+                        view.adapter.notifyDataSetChanged()
                     },
                     onError = {
                         print(it.message)

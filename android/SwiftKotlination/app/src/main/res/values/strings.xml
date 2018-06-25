@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SwiftKotlination</string>
-    <string name="button_title">SEE</string>
+    <string name="top_stories_button_title">See</string>
+    <string name="story_button_title">See More</string>
 </resources>
