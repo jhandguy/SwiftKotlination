@@ -67,7 +67,7 @@ class StoryView @Inject constructor(var story: Story, var coordinator: Coordinat
                 onClick {
                     coordinator.open(story.url)
                 }
-            }.lparams(width = matchParent, height = wrapContent) {
+            }.lparams(width = wrapContent, height = wrapContent) {
                 topToBottom = R.id.story_byline
                 leftToLeft = PARENT_ID
                 rightToRight = PARENT_ID
