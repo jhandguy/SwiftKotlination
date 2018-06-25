@@ -36,5 +36,12 @@ final class TopStoriesUITest: XCTestCase {
         XCTAssertTrue(app.staticTexts[topStories.results.first!.byline].isHittable)
         XCTAssertTrue(app.staticTexts[topStories.results.last!.title].isHittable)
         XCTAssertTrue(app.staticTexts[topStories.results.last!.byline].isHittable)
+        
+        for index in 0...topStories.results.count - 1 {
+            app.tables.firstMatch.cells.element(boundBy: index).buttons.firstMatch.tap()
+            XCTAssertTrue(app.navigationBars["\(topStories.results[index].section) - \(topStories.results[index].subsection)"].isHittable)
+            app.buttons["Top Stories"].tap()
+            XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
+        }
     }
 }
