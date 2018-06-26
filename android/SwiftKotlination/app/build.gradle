@@ -51,7 +51,6 @@ dependencies {
     kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
 
     testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito:mockito-core:$mockito_version"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
