@@ -18,6 +18,7 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 - RxAndroid
 - Retrofit
 - Moshi
+- MockitoKotlin
 
 ## Architecture
 
