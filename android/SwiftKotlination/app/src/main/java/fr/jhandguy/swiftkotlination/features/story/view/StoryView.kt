@@ -11,7 +11,7 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class StoryView(var story: Story, var coordinator: Coordinator): AnkoComponent<StoryActivity> {
+class StoryView(var story: Story = Story(), var coordinator: Coordinator): AnkoComponent<StoryActivity> {
     override fun createView(ui: AnkoContext<StoryActivity>): View = with(ui) {
         return constraintLayout {
             padding = dip(10)

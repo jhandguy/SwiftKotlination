@@ -1,8 +1,6 @@
 package fr.jhandguy.swiftkotlination
 
-import android.app.Activity
 import android.app.Application
-import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl
 import fr.jhandguy.swiftkotlination.features.story.view.StoryView
@@ -47,17 +45,9 @@ open class App: Application() {
 
     private val storyModule: Module = applicationContext {
         context("story") {
-            factory {
-                val activity: Activity = it["activity"]
-                activity.
-                        intent
-                        .extras
-                        .getSerializable(Story::class.java.simpleName)
-                        as? Story ?: Story()
-            }
-            factory { StoryRepositoryImpl(get{ it.values }) as StoryRepository }
+            factory { StoryRepositoryImpl(it["story"]) as StoryRepository }
             factory { StoryViewModel(get{ it.values }) }
-            factory { StoryView(get{ it.values }, get{ it.values }) }
+            factory { StoryView(coordinator = get{ it.values }) }
         }
     }
 

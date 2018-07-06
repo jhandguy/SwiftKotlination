@@ -3,6 +3,7 @@ package fr.jhandguy.swiftkotlination.features.story.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.Coordinator
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +15,7 @@ class StoryActivity: AppCompatActivity() {
 
     val coordinator: Coordinator by inject { mapOf("activity" to this) }
 
-    val viewModel: StoryViewModel by inject { mapOf("activity" to this) }
+    val viewModel: StoryViewModel by inject { mapOf("story" to intent.extras.getSerializable(Story::class.java.simpleName)) }
 
     val view: StoryView by inject { mapOf("activity" to this) }
 
@@ -23,8 +24,6 @@ class StoryActivity: AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        view.setContentView(this)
     }
 
     override fun onStart() {
@@ -38,6 +37,8 @@ class StoryActivity: AppCompatActivity() {
                     title = arrayOf(it.section, it.subsection)
                             .filter { it.isNotEmpty() }
                             .joinToString(separator = " - ")
+                    view.story = it
+                    view.setContentView(this)
                 }
     }
 
