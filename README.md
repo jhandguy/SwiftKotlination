@@ -13,7 +13,7 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 ### Android (Kotlin)
 
 - Anko
-- Dagger
+- Koin
 - RxKotlin
 - RxAndroid
 - Retrofit
