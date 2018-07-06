@@ -6,7 +6,6 @@ import android.net.Uri
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
-import javax.inject.Inject
 
 interface Coordinator {
     fun start()
@@ -15,7 +14,7 @@ interface Coordinator {
     fun finish()
 }
 
-class CoordinatorImpl @Inject constructor(val activity: Activity): Coordinator {
+class CoordinatorImpl(val activity: Activity): Coordinator {
 
     override fun start() {
         val intent = Intent(activity, TopStoriesActivity::class.java)

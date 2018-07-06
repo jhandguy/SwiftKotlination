@@ -2,46 +2,67 @@ package fr.jhandguy.swiftkotlination
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
-import dagger.BindsInstance
-import dagger.Component
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.support.AndroidSupportInjectionModule
-import fr.jhandguy.swiftkotlination.features.main.MainModule
-import fr.jhandguy.swiftkotlination.features.story.StoryModule
-import fr.jhandguy.swiftkotlination.features.topstories.TopStoriesModule
-import javax.inject.Inject
-import javax.inject.Singleton
+import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
+import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl
+import fr.jhandguy.swiftkotlination.features.story.view.StoryView
+import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepositoryImpl
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesService
+import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesAdapter
+import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesView
+import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
+import org.koin.android.ext.android.startKoin
+import org.koin.dsl.module.Module
+import org.koin.dsl.module.applicationContext
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
-open class App: Application(), HasActivityInjector {
-    @Inject
-    protected lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
-    override fun activityInjector() = dispatchingAndroidInjector
+open class App: Application() {
+
+    private val navigationModule: Module = applicationContext {
+        factory { CoordinatorImpl(it["activity"]) as Coordinator }
+    }
+
+    private val topStoriesModule: Module = applicationContext {
+        context("top-stories") {
+            bean {
+                Retrofit
+                        .Builder()
+                        .baseUrl("https://api.nytimes.com")
+                        .addConverterFactory(MoshiConverterFactory.create())
+                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                        .build()
+                        .create(TopStoriesService::class.java)
+                        as TopStoriesService
+            }
+            factory { TopStoriesRepositoryImpl(get()) as TopStoriesRepository }
+            factory { TopStoriesViewModel(get()) }
+            factory { TopStoriesAdapter(get { it.values }) }
+            factory { TopStoriesView(get{ it.values }) }
+        }
+    }
+
+    private val storyModule: Module = applicationContext {
+        context("story") {
+            factory {
+                val activity: Activity = it["activity"]
+                activity.
+                        intent
+                        .extras
+                        .getSerializable(Story::class.java.simpleName)
+                        as? Story ?: Story()
+            }
+            factory { StoryRepositoryImpl(get{ it.values }) as StoryRepository }
+            factory { StoryViewModel(get{ it.values }) }
+            factory { StoryView(get{ it.values }, get{ it.values }) }
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
-        DaggerApp_AppComponent.builder()
-                .app(this)
-                .build()
-                .inject(this)
-    }
-
-    @Singleton
-    @Component(modules = [
-        AndroidSupportInjectionModule::class,
-        MainModule::class,
-        TopStoriesModule::class,
-        StoryModule::class
-    ])
-    interface AppComponent {
-        fun inject(app: App)
-
-        @Component.Builder
-        interface Builder {
-            fun build(): AppComponent
-            @BindsInstance
-            fun app(app: Context): Builder
-        }
+        startKoin(this, listOf(navigationModule, topStoriesModule, storyModule))
     }
 }

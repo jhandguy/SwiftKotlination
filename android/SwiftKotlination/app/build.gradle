@@ -35,11 +35,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
-    implementation "com.google.dagger:dagger-android:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-
-    implementation "com.google.dagger:dagger-android-support:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "org.koin:koin-android-architecture:$koin_version"
 
     implementation "com.squareup.moshi:moshi:$moshi_version"
 
@@ -47,11 +43,10 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
-    kaptAndroidTest "com.google.dagger:dagger-android-processor:$dagger_version"
-
     testImplementation "junit:junit:$junit_version"
     testImplementation "com.nhaarman:mockito-kotlin-kt1.1:$mockito_kotlin_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 }

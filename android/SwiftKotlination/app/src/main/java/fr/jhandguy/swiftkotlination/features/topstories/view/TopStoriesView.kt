@@ -5,9 +5,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import javax.inject.Inject
 
-class TopStoriesView @Inject constructor(var adapter: TopStoriesAdapter): AnkoComponent<TopStoriesActivity> {
+class TopStoriesView(var adapter: TopStoriesAdapter): AnkoComponent<TopStoriesActivity> {
 
     override fun createView(ui: AnkoContext<TopStoriesActivity>): View = with(ui) {
         relativeLayout {
