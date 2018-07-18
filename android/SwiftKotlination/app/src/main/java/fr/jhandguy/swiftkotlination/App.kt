@@ -1,6 +1,8 @@
 package fr.jhandguy.swiftkotlination
 
+import android.app.Activity
 import android.app.Application
+import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl
 import fr.jhandguy.swiftkotlination.features.story.view.StoryView
@@ -13,42 +15,38 @@ import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesView
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 open class App: Application() {
 
-    private val navigationModule: Module = applicationContext {
-        factory { CoordinatorImpl(it["activity"]) as Coordinator }
+    private val navigationModule: Module = module {
+        factory { (activity: Activity) -> CoordinatorImpl(activity) as Coordinator }
     }
 
-    private val topStoriesModule: Module = applicationContext {
-        context("top-stories") {
-            bean {
-                Retrofit
-                        .Builder()
-                        .baseUrl("https://api.nytimes.com")
-                        .addConverterFactory(MoshiConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build()
-                        .create(TopStoriesService::class.java)
-                        as TopStoriesService
-            }
-            factory { TopStoriesRepositoryImpl(get()) as TopStoriesRepository }
-            factory { TopStoriesViewModel(get()) }
-            factory { TopStoriesAdapter(get { it.values }) }
-            factory { TopStoriesView(get{ it.values }) }
+    private val topStoriesModule: Module = module("top-stories") {
+        single {
+            Retrofit
+                    .Builder()
+                    .baseUrl("https://api.nytimes.com")
+                    .addConverterFactory(MoshiConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build()
+                    .create(TopStoriesService::class.java)
+                    as TopStoriesService
         }
+        factory { TopStoriesRepositoryImpl(get()) as TopStoriesRepository }
+        factory { TopStoriesViewModel(get()) }
+        factory { TopStoriesAdapter(get { it } ) }
+        factory { TopStoriesView(get { it } ) }
     }
 
-    private val storyModule: Module = applicationContext {
-        context("story") {
-            factory { StoryRepositoryImpl(it["story"]) as StoryRepository }
-            factory { StoryViewModel(get{ it.values }) }
-            factory { StoryView(coordinator = get{ it.values }) }
-        }
+    private val storyModule: Module = module("story") {
+        factory { (story: Story) -> StoryRepositoryImpl(story) as StoryRepository }
+        factory { StoryViewModel(get { it } ) }
+        factory { StoryView(get { it } ) }
     }
 
     override fun onCreate() {

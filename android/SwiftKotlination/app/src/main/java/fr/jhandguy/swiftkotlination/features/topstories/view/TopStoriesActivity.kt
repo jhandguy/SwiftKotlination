@@ -8,13 +8,14 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
-import org.koin.android.ext.android.releaseContext
+import org.koin.android.ext.android.release
+import org.koin.core.parameter.parametersOf
 
 class TopStoriesActivity: AppCompatActivity() {
 
     val viewModel: TopStoriesViewModel by inject()
 
-    val view: TopStoriesView by inject { mapOf("activity" to this) }
+    val view: TopStoriesView by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +46,6 @@ class TopStoriesActivity: AppCompatActivity() {
     override fun onStop() {
         super.onStop()
 
-        releaseContext("top-stories")
+        release("top-stories")
     }
 }
