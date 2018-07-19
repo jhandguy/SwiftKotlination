@@ -5,10 +5,9 @@ import RxCocoa
 
 final class TopStoriesViewController: UIViewController {
     
-    weak var coordinator: CoordinatorProtocol?
-    var viewModel: TopStoriesViewModel!
-    
-    internal let tableView = UITableView()
+    internal weak var coordinator: CoordinatorProtocol?
+    internal var viewModel: TopStoriesViewModel!
+    internal var topStoriesView = TopStoriesView()
     
     private let disposeBag = DisposeBag()
     
@@ -16,15 +15,7 @@ final class TopStoriesViewController: UIViewController {
         super.viewDidLoad()
         
         title = "Top Stories"
-        
-        view.backgroundColor = .black
-        view.addSubview(tableView)
-        
-        tableView.backgroundColor = .black
-        tableView.snp.makeConstraints { make in
-            make.width.height.equalTo(view)
-        }
-        tableView.register(TopStoriesTableViewCell.self, forCellReuseIdentifier: TopStoriesTableViewCell.identifier)
+        view = topStoriesView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,7 +23,8 @@ final class TopStoriesViewController: UIViewController {
         
         viewModel
             .stories
-            .bind(to: tableView
+            .bind(to: topStoriesView
+                .tableView
                 .rx
                 .items(cellIdentifier: TopStoriesTableViewCell.identifier, cellType: TopStoriesTableViewCell.self)) { row, story, cell in
                     cell.titleLabel.text = story.title

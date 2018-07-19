@@ -13,10 +13,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         sut.viewDidLoad()
         
         XCTAssertEqual(sut.title, "Top Stories")
-        XCTAssertEqual(sut.view.backgroundColor, .black)
-        XCTAssertTrue(sut.view.subviews.contains(sut.tableView))
-        
-        XCTAssertEqual(sut.tableView.backgroundColor, .black)
+        XCTAssertEqual(sut.view, sut.topStoriesView)
     }
     
     func testTopStoriesViewControllerViewWillAppear() {
@@ -27,10 +24,10 @@ final class TopStoriesViewControllerTest: XCTestCase {
         _ = sut.view
         sut.viewWillAppear(true)
         
-        XCTAssertEqual(sut.tableView.visibleCells.count, 1)
+        XCTAssertEqual(sut.topStoriesView.tableView.visibleCells.count, 1)
         
-        guard let cell = sut.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TopStoriesTableViewCell else {
-            XCTFail()
+        guard let cell = sut.topStoriesView.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TopStoriesTableViewCell else {
+            XCTFail("Cell should be of type \(TopStoriesTableViewCell.self)")
             return
         }
         

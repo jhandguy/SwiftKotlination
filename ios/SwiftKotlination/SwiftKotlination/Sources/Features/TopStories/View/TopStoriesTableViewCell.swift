@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class TopStoriesTableViewCell: UITableViewCell {
+final class TopStoriesTableViewCell: UITableViewCell {
     
     static let identifier = NSStringFromClass(TopStoriesTableViewCell.self)
     

@@ -52,6 +52,10 @@
 		0FBE92A7209CF6F500A32D01 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92A6209CF6F500A32D01 /* RxSwift.framework */; };
 		0FBE92AB209CFF6D00A32D01 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */; };
 		0FBE92AE209D901C00A32D01 /* TopStoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBE92AD209D901C00A32D01 /* TopStoriesTableViewCell.swift */; };
+		0FBFEAAD20FF92850030CC22 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFEAAC20FF92850030CC22 /* StoryView.swift */; };
+		0FBFEAB22100E1DC0030CC22 /* TopStoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFEAB12100E1DC0030CC22 /* TopStoriesView.swift */; };
+		0FBFEAB421012DF40030CC22 /* StoryViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFEAB321012DF40030CC22 /* StoryViewTest.swift */; };
+		0FBFEAB621012ED30030CC22 /* TopStoriesViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFEAB521012ED30030CC22 /* TopStoriesViewTest.swift */; };
 		0FC64A3B2095EAB700339755 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3A2095EAB700339755 /* Coordinator.swift */; };
 		0FC64A3D2095EC5000339755 /* TopStoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3C2095EC5000339755 /* TopStoriesViewController.swift */; };
 		0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3E2095F5E400339755 /* TopStoriesViewModel.swift */; };
@@ -113,6 +117,10 @@
 		0FBE92A8209CFF5F00A32D01 /* RxCocoa.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = RxCocoa.framework.dSYM; path = Carthage/Build/iOS/RxCocoa.framework.dSYM; sourceTree = "<group>"; };
 		0FBE92AA209CFF6D00A32D01 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		0FBE92AD209D901C00A32D01 /* TopStoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCell.swift; sourceTree = "<group>"; };
+		0FBFEAAC20FF92850030CC22 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		0FBFEAB12100E1DC0030CC22 /* TopStoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesView.swift; sourceTree = "<group>"; };
+		0FBFEAB321012DF40030CC22 /* StoryViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewTest.swift; sourceTree = "<group>"; };
+		0FBFEAB521012ED30030CC22 /* TopStoriesViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesViewTest.swift; sourceTree = "<group>"; };
 		0FC64A3A2095EAB700339755 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		0FC64A3C2095EC5000339755 /* TopStoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesViewController.swift; sourceTree = "<group>"; };
 		0FC64A3E2095F5E400339755 /* TopStoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesViewModel.swift; sourceTree = "<group>"; };
@@ -206,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA5F77D20A5D239009C30B4 /* StoryViewControllerTest.swift */,
+				0FBFEAB321012DF40030CC22 /* StoryViewTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,6 +240,7 @@
 			children = (
 				0FA5F79220A5F3AB009C30B4 /* TopStoriesViewControllerTest.swift */,
 				0FA5F79420A5F640009C30B4 /* TopStoriesTableViewCellTest.swift */,
+				0FBFEAB521012ED30030CC22 /* TopStoriesViewTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				0FBB65C020A393920090B77F /* StoryViewController.swift */,
+				0FBFEAAC20FF92850030CC22 /* StoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +417,7 @@
 			children = (
 				0FC64A3C2095EC5000339755 /* TopStoriesViewController.swift */,
 				0FBE92AD209D901C00A32D01 /* TopStoriesTableViewCell.swift */,
+				0FBFEAB12100E1DC0030CC22 /* TopStoriesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -714,11 +726,13 @@
 				0FA5F7BA20A98B28009C30B4 /* Request.swift in Sources */,
 				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesViewController.swift in Sources */,
+				0FBFEAAD20FF92850030CC22 /* StoryView.swift in Sources */,
 				0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */,
 				0FC64A472096543D00339755 /* Story.swift in Sources */,
 				0FA5F78D20A5E996009C30B4 /* APIClient.swift in Sources */,
 				0FBE92AE209D901C00A32D01 /* TopStoriesTableViewCell.swift in Sources */,
 				0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */,
+				0FBFEAB22100E1DC0030CC22 /* TopStoriesView.swift in Sources */,
 				0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */,
 				0FA5F7A220A877CE009C30B4 /* Decodable+JSONString.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
@@ -738,6 +752,8 @@
 				0FA5F78B20A5E7CA009C30B4 /* TopStoriesRepositoryTest.swift in Sources */,
 				0FA5F77920A5BB5F009C30B4 /* CoordinatorMock.swift in Sources */,
 				0FA5F78420A5D2F7009C30B4 /* StoryRepositoryMock.swift in Sources */,
+				0FBFEAB421012DF40030CC22 /* StoryViewTest.swift in Sources */,
+				0FBFEAB621012ED30030CC22 /* TopStoriesViewTest.swift in Sources */,
 				0FA5F79520A5F640009C30B4 /* TopStoriesTableViewCellTest.swift in Sources */,
 				0FA5F78920A5E71A009C30B4 /* TopStoriesRepositoryMock.swift in Sources */,
 				0FA5F78F20A5EE5C009C30B4 /* APIClientMock.swift in Sources */,
