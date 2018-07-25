@@ -41,7 +41,8 @@ class TopStoriesRepositoryUnitTest: KoinTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
 
-        whenever(service.getObservable(any())).thenReturn(Observable.just(topStories))
+        whenever(service.getObservable(any()))
+                .thenReturn(Observable.just(topStories))
 
         repository
                 .topStories
@@ -54,7 +55,8 @@ class TopStoriesRepositoryUnitTest: KoinTest {
     fun `error is thrown correctly`() {
         val error = Error("error message")
 
-        whenever(service.getObservable(any())).thenReturn(Observable.error(error))
+        whenever(service.getObservable(any()))
+                .thenReturn(Observable.error(error))
 
         repository
                 .topStories

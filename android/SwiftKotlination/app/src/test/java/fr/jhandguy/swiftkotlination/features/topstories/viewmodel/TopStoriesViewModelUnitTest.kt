@@ -41,7 +41,8 @@ class TopStoriesViewModelUnitTest: KoinTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         )
 
-        whenever(repository.topStories).thenReturn(Observable.just(stories))
+        whenever(repository.topStories)
+                .thenReturn(Observable.just(stories))
 
         viewModel
                 .topStories
@@ -54,7 +55,8 @@ class TopStoriesViewModelUnitTest: KoinTest {
     fun `error is thrown correctly`() {
         val error = Error("error message")
 
-        whenever(repository.topStories).thenReturn(Observable.error(error))
+        whenever(repository.topStories)
+                .thenReturn(Observable.error(error))
 
         viewModel
                 .topStories
