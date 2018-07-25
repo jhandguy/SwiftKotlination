@@ -18,7 +18,6 @@ class StoryRepositoryUnitTest: KoinTest {
 
     @Before
     fun before() {
-
         startKoin(listOf(
                 module {
                     factory { StoryRepositoryImpl(story) as StoryRepository }
@@ -28,7 +27,6 @@ class StoryRepositoryUnitTest: KoinTest {
 
     @Test
     fun `story is injected correctly`() {
-
         repository
                 .story
                 .subscribe {
@@ -38,7 +36,6 @@ class StoryRepositoryUnitTest: KoinTest {
 
     @After
     fun after() {
-
         closeKoin()
     }
 }

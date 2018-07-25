@@ -37,7 +37,6 @@ class StoryViewModelUnitTest: KoinTest {
 
     @Test
     fun `story is fetched correctly`() {
-
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
         whenever(repository.story).thenReturn(Observable.just(story))
@@ -51,7 +50,6 @@ class StoryViewModelUnitTest: KoinTest {
 
     @Test
     fun `error is thrown correctly`() {
-
         val error = Error("error message")
 
         whenever(repository.story).thenReturn(Observable.error(error))

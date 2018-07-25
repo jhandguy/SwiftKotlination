@@ -27,7 +27,6 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @Before
     fun before() {
-
         startKoin(listOf(
                 module {
                     factory { TopStoriesViewModel(repository) }
@@ -37,7 +36,6 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @Test
     fun `top stories are fetched correctly`() {
-
         val stories = listOf(
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
@@ -54,7 +52,6 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @Test
     fun `error is thrown correctly`() {
-
         val error = Error("error message")
 
         whenever(repository.topStories).thenReturn(Observable.error(error))
@@ -68,7 +65,6 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @After
     fun after() {
-
         closeKoin()
     }
 }
