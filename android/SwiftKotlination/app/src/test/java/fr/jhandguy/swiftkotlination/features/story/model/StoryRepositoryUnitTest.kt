@@ -9,28 +9,25 @@ import org.koin.standalone.StandAloneContext.closeKoin
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
-import org.koin.test.declare
 
 class StoryRepositoryUnitTest: KoinTest {
+
+    val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
     val repository: StoryRepository by inject()
 
     @Before
-    fun before(){
+    fun before() {
+
         startKoin(listOf(
                 module {
-                    factory { StoryRepositoryImpl(get()) as StoryRepository }
+                    factory { StoryRepositoryImpl(story) as StoryRepository }
                 }
         ))
     }
 
     @Test
     fun `story is injected correctly`() {
-        val story = Story("section", "subsection", "title", "abstract", "url", "byline")
-
-        declare {
-            factory { story }
-        }
 
         repository
                 .story
@@ -40,7 +37,8 @@ class StoryRepositoryUnitTest: KoinTest {
     }
 
     @After
-    fun after(){
+    fun after() {
+
         closeKoin()
     }
 }
