@@ -1,9 +1,8 @@
-package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
+package fr.jhandguy.swiftkotlination.features.topstories.model
 
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.koin.dsl.module.module
@@ -13,15 +12,15 @@ import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.koin.test.declare
 
-class TopStoriesViewModelUnitTest: KoinTest {
+class TopStoriesRepositoryUnitTest: KoinTest {
 
-    val viewModel: TopStoriesViewModel by inject()
+    val repository: TopStoriesRepository by inject()
 
     @Before
     fun before(){
         startKoin(listOf(
                 module {
-                    factory { TopStoriesViewModel(get()) }
+                    factory { TopStoriesRepositoryImpl(get()) as TopStoriesRepository }
                 }
         ))
     }
@@ -29,19 +28,19 @@ class TopStoriesViewModelUnitTest: KoinTest {
     @Test
     fun `top stories are fetched correctly`() {
 
-        val stories = listOf(
+        val topStories = TopStories(listOf(
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
-        )
+        ))
 
         declare {
-            factory { TopStoriesRepositoryMock(stories) as TopStoriesRepository }
+            single { TopStoriesServiceMock(topStories) as TopStoriesService }
         }
 
-        viewModel
+        repository
                 .topStories
                 .subscribe {
-                    assertEquals(it, stories)
+                    Assert.assertEquals(it, topStories.results)
                 }
     }
 
@@ -51,13 +50,13 @@ class TopStoriesViewModelUnitTest: KoinTest {
         val error = Error("error message")
 
         declare {
-            factory { TopStoriesRepositoryMock(error = error) as TopStoriesRepository }
+            factory { TopStoriesServiceMock(error = error) as TopStoriesService }
         }
 
-        viewModel
+        repository
                 .topStories
                 .doOnError {
-                    assertEquals(it, error)
+                    Assert.assertEquals(it, error)
                 }
     }
 
