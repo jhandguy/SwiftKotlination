@@ -1,5 +1,6 @@
 package fr.jhandguy.swiftkotlination.features.story.view
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
@@ -11,8 +12,8 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoComponent<StoryActivity> {
-    override fun createView(ui: AnkoContext<StoryActivity>): View = with(ui) {
+class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoComponent<Context> {
+    override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return constraintLayout {
             padding = dip(10)
             lparams(width = matchParent, height = matchParent)
