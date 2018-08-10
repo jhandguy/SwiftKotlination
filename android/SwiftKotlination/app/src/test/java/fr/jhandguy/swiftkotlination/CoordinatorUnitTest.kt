@@ -5,7 +5,7 @@ import android.content.Intent
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

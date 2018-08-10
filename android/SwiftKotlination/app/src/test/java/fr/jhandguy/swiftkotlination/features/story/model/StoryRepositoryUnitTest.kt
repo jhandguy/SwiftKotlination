@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

@@ -9,7 +9,7 @@ import com.nhaarman.mockito_kotlin.verify
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import junit.framework.Assert
+import org.junit.Assert
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.find
@@ -52,7 +52,7 @@ class TopStoriesViewUnitTest {
             with(find<RecyclerView>(R.id.top_stories_list)) {
                 Assert.assertNotNull(this)
                 layout(0,0,100,1000)
-                Assert.assertEquals(childCount, 2)
+                Assert.assertEquals(childCount, topStories.size)
             }
         }
     }

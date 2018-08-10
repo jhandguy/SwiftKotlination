@@ -5,7 +5,9 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import io.reactivex.Observable
-import junit.framework.Assert
+import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -44,9 +46,14 @@ class StoryViewModelUnitTest: KoinTest {
 
         viewModel
                 .story
-                .subscribe {
-                    Assert.assertEquals(it, story)
-                }
+                .subscribe(
+                        {
+                            Assert.assertEquals(it, story)
+                        },
+                        {
+                            fail(it.message)
+                        }
+                )
     }
 
     @Test
@@ -58,9 +65,14 @@ class StoryViewModelUnitTest: KoinTest {
 
         viewModel
                 .story
-                .subscribe {
-                    Assert.assertEquals(it, error)
-                }
+                .subscribe(
+                        {
+                            fail("Observable should throw error")
+                        },
+                        {
+                            assertEquals(it, error)
+                        }
+                )
     }
 
     @After

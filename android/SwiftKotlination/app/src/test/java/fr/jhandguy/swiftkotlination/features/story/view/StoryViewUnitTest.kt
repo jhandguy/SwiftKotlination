@@ -9,8 +9,8 @@ import com.nhaarman.mockito_kotlin.verify
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import junit.framework.Assert
-import junit.framework.Assert.assertEquals
+import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.jetbrains.anko.AnkoContext.Companion.create
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.find
