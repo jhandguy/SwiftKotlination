@@ -6,6 +6,7 @@ import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
@@ -34,13 +35,18 @@ class StoryActivity: AppCompatActivity() {
                 .story
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    title = arrayOf(it.section, it.subsection)
-                            .filter { it.isNotEmpty() }
-                            .joinToString(separator = " - ")
-                    view.story = it
-                    view.setContentView(this)
-                }
+                .subscribeBy(
+                        onNext = { story ->
+                            title = arrayOf(story.section, story.subsection)
+                                    .filter { it.isNotEmpty() }
+                                    .joinToString(separator = " - ")
+                            view.story = story
+                            view.setContentView(this)
+                        },
+                        onError = {
+                            print(it.message)
+                        }
+                )
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -49,7 +55,7 @@ class StoryActivity: AppCompatActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
         release("story")
+        super.onStop()
     }
 }

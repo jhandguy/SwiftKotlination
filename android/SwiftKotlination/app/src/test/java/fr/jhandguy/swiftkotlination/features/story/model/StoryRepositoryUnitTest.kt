@@ -1,7 +1,9 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import org.junit.Assert.assertEquals
+import io.reactivex.rxkotlin.subscribeBy
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.koin.dsl.module.module
@@ -29,9 +31,14 @@ class StoryRepositoryUnitTest: KoinTest {
     fun `story is injected correctly`() {
         repository
                 .story
-                .subscribe {
-                    assertEquals(it, story)
-                }
+                .subscribeBy(
+                        onNext = {
+                            assertEquals(it, story)
+                        },
+                        onError = {
+                            fail(it.message)
+                        }
+                )
     }
 
     @After

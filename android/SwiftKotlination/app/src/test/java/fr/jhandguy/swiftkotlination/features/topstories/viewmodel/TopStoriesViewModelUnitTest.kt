@@ -4,8 +4,10 @@ import com.nhaarman.mockito_kotlin.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
 import io.reactivex.Observable
+import io.reactivex.rxkotlin.subscribeBy
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,9 +48,14 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
         viewModel
                 .topStories
-                .subscribe {
-                    assertEquals(it, stories)
-                }
+                .subscribeBy(
+                        onNext = {
+                            assertEquals(it, stories)
+                        },
+                        onError = {
+                            fail(it.message)
+                        }
+                )
     }
 
     @Test

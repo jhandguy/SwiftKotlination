@@ -33,19 +33,18 @@ class TopStoriesActivity: AppCompatActivity() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
-                    onNext = {
-                        view.adapter.topStories = it
-                        view.adapter.notifyDataSetChanged()
-                    },
-                    onError = {
-                        print(it.message)
-                    }
+                        onNext = {
+                            view.adapter.topStories = it
+                            view.adapter.notifyDataSetChanged()
+                        },
+                        onError = {
+                            print(it.message)
+                        }
                 )
     }
 
     override fun onStop() {
-        super.onStop()
-
         release("top-stories")
+        super.onStop()
     }
 }

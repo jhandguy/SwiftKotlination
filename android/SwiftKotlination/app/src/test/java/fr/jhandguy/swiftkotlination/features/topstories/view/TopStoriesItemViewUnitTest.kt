@@ -6,27 +6,28 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import fr.jhandguy.swiftkotlination.R
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.jetbrains.anko.AnkoContext.Companion.create
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.find
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.standalone.StandAloneContext.closeKoin
-import org.robolectric.Robolectric.setupActivity
+import org.koin.test.KoinTest
+import org.robolectric.Robolectric.buildActivity
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class TopStoriesItemViewUnitTest {
+class TopStoriesItemViewUnitTest: KoinTest {
 
     lateinit var view: View
 
     @Before
     fun before() {
-        view = TopStoriesItemView().createView(create(setupActivity(Activity::class.java)))
+        view = TopStoriesItemView().createView(create(buildActivity(Activity::class.java).get()))
     }
 
     @Test

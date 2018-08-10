@@ -9,23 +9,24 @@ import com.nhaarman.mockito_kotlin.verify
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import org.junit.Assert
-import org.junit.Assert.assertEquals
 import org.jetbrains.anko.AnkoContext.Companion.create
 import org.jetbrains.anko.childrenSequence
 import org.jetbrains.anko.find
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
-import org.robolectric.Robolectric.setupActivity
+import org.robolectric.Robolectric.buildActivity
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class StoryViewUnitTest {
+class StoryViewUnitTest: KoinTest {
 
     lateinit var view: View
 
@@ -38,7 +39,7 @@ class StoryViewUnitTest {
     fun before() {
         initMocks(this)
         view = StoryView(coordinator, story)
-                .createView(create(setupActivity(Activity::class.java)))
+                .createView(create(buildActivity(Activity::class.java).get()))
     }
 
     @Test
@@ -48,22 +49,22 @@ class StoryViewUnitTest {
             assertEquals(childrenSequence().count(), 4)
 
             with(find<TextView>(R.id.story_title)) {
-                Assert.assertNotNull(this)
+                assertNotNull(this)
                 assertEquals(text, story.title)
             }
 
             with(find<TextView>(R.id.story_abstract)) {
-                Assert.assertNotNull(this)
+                assertNotNull(this)
                 assertEquals(text, story.abstract)
             }
 
             with(find<TextView>(R.id.story_byline)) {
-                Assert.assertNotNull(this)
+                assertNotNull(this)
                 assertEquals(text, story.byline)
             }
 
             with(find<Button>(R.id.story_button)) {
-                Assert.assertNotNull(this)
+                assertNotNull(this)
                 assertEquals(text, resources.getString(R.string.story_button_title))
                 assert(callOnClick())
             }

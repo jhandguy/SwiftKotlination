@@ -14,13 +14,14 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
-import org.robolectric.Robolectric.setupActivity
+import org.robolectric.Robolectric.buildActivity
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class TopStoriesAdapterUnitTest {
+class TopStoriesAdapterUnitTest: KoinTest {
 
     lateinit var adapter: TopStoriesAdapter
 
@@ -38,7 +39,7 @@ class TopStoriesAdapterUnitTest {
     fun before() {
         initMocks(this)
         adapter = TopStoriesAdapter(coordinator, topStories)
-        viewHolder = TopStoriesAdapter.ViewHolder(TopStoriesItemView().createView(create(setupActivity(Activity::class.java))), coordinator)
+        viewHolder = TopStoriesAdapter.ViewHolder(TopStoriesItemView().createView(create(buildActivity(Activity::class.java).get())), coordinator)
     }
 
     @Test

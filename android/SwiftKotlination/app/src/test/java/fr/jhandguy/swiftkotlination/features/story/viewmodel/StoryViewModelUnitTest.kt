@@ -5,10 +5,10 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import io.reactivex.Observable
-import org.junit.Assert
+import io.reactivex.rxkotlin.subscribeBy
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,11 +46,11 @@ class StoryViewModelUnitTest: KoinTest {
 
         viewModel
                 .story
-                .subscribe(
-                        {
-                            Assert.assertEquals(it, story)
+                .subscribeBy(
+                        onNext = {
+                            assertEquals(it, story)
                         },
-                        {
+                        onError = {
                             fail(it.message)
                         }
                 )
@@ -65,11 +65,11 @@ class StoryViewModelUnitTest: KoinTest {
 
         viewModel
                 .story
-                .subscribe(
-                        {
+                .subscribeBy(
+                        onNext = {
                             fail("Observable should throw error")
                         },
-                        {
+                        onError = {
                             assertEquals(it, error)
                         }
                 )
