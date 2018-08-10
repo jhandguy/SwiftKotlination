@@ -9,13 +9,16 @@ import com.nhaarman.mockito_kotlin.verify
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import junit.framework.Assert
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertNotNull
 import org.jetbrains.anko.AnkoContext.Companion.create
 import org.jetbrains.anko.childrenSequence
+import org.jetbrains.anko.find
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.standalone.StandAloneContext.closeKoin
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations.initMocks
 import org.robolectric.Robolectric.setupActivity
@@ -43,35 +46,41 @@ class StoryViewUnitTest {
         with(view) {
             assert(this is ConstraintLayout)
             assertEquals(childrenSequence().count(), 4)
-        }
 
-        with(view.findViewById<TextView>(R.id.story_title)) {
-            assertNotNull(this)
-            assertEquals(text, story.title)
-        }
+            with(find<TextView>(R.id.story_title)) {
+                Assert.assertNotNull(this)
+                assertEquals(text, story.title)
+            }
 
-        with(view.findViewById<TextView>(R.id.story_abstract)) {
-            assertNotNull(this)
-            assertEquals(text, story.abstract)
-        }
+            with(find<TextView>(R.id.story_abstract)) {
+                Assert.assertNotNull(this)
+                assertEquals(text, story.abstract)
+            }
 
-        with(view.findViewById<TextView>(R.id.story_byline)) {
-            assertNotNull(this)
-            assertEquals(text, story.byline)
-        }
+            with(find<TextView>(R.id.story_byline)) {
+                Assert.assertNotNull(this)
+                assertEquals(text, story.byline)
+            }
 
-        with(view.findViewById<Button>(R.id.story_button)) {
-            assertNotNull(this)
-            assertEquals(text, resources.getString(R.string.story_button_title))
-            assert(callOnClick())
+            with(find<Button>(R.id.story_button)) {
+                Assert.assertNotNull(this)
+                assertEquals(text, resources.getString(R.string.story_button_title))
+                assert(callOnClick())
+            }
         }
     }
 
+    @Test
     fun `coordinator opens story url`() {
-        with(view.findViewById<Button>(R.id.story_button)) {
+        with(view.find<Button>(R.id.story_button)) {
             assert(callOnClick())
         }
 
         verify(coordinator).open(story.url)
+    }
+
+    @After
+    fun after() {
+        closeKoin()
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import fr.jhandguy.swiftkotlination.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
@@ -17,6 +18,7 @@ class TopStoriesView(var adapter: TopStoriesAdapter): AnkoComponent<Context> {
                 lparams(width = matchParent, height = matchParent)
                 layoutManager = LinearLayoutManager(ctx)
                 adapter = this@TopStoriesView.adapter
+                id = R.id.top_stories_list
             }
         }
     }
