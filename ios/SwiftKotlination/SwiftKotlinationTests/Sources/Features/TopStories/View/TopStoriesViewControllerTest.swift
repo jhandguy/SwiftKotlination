@@ -7,22 +7,29 @@ final class TopStoriesViewControllerTest: XCTestCase {
     
     func testTopStoriesViewControllerViewDidLoad() {
         sut = TopStoriesViewController()
-        sut.viewModel = TopStoriesViewModel(repository: TopStoriesRepositoryMock())
+        sut.viewModel = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .failure(.unknown)))
         
         _ = sut.view
         sut.viewDidLoad()
         
         XCTAssertEqual(sut.title, "Top Stories")
         XCTAssertEqual(sut.view, sut.topStoriesView)
+        XCTAssertEqual(sut.view.backgroundColor, .black)
     }
     
     func testTopStoriesViewControllerViewWillAppear() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
         sut = TopStoriesViewController()
-        sut.viewModel = TopStoriesViewModel(repository: TopStoriesRepositoryMock(storiesStub: .success([story])))
+        sut.viewModel = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .success([story])))
         
         _ = sut.view
-        sut.viewWillAppear(true)
+        
+        let viewDidLoad = expectation(description: "viewDidLoad")
+        DispatchQueue.main.async {
+            self.sut.viewDidLoad()
+            viewDidLoad.fulfill()
+        }
+        wait(for: [viewDidLoad], timeout: 1)
         
         XCTAssertEqual(sut.topStoriesView.tableView.visibleCells.count, 1)
         
@@ -31,6 +38,8 @@ final class TopStoriesViewControllerTest: XCTestCase {
             return
         }
         
+        XCTAssertEqual(cell.selectedBackgroundView?.backgroundColor, .darkGray)
+        XCTAssertEqual(cell.contentView.backgroundColor, .black)
         XCTAssertEqual(cell.titleLabel.text, story.title)
         XCTAssertEqual(cell.bylineLabel.text, story.byline)
     }

@@ -1,5 +1,4 @@
 import XCTest
-import RxSwift
 @testable import SwiftKotlination
 
 final class TopStoriesRepositoryTest: XCTestCase {
@@ -15,15 +14,18 @@ final class TopStoriesRepositoryTest: XCTestCase {
             byline: "By CHRIS STANFORD",
             url: "https://www.nytimes.com/2018/05/11/briefing/kirstjen-nielsen-spotify-cannes-film-festival.html"
         )
-        sut = TopStoriesRepository(apiClient: APIClientMock(dataStub: .success("top_stories")))
+        let apiClient = APIClientMock(result: .success(File(name: "top_stories", extension: .json)))
+        sut = TopStoriesRepository(apiClient: apiClient)
         sut
-            .stories
-            .subscribe(
-                onNext: {
-                    XCTAssertEqual($0.count, 1)
-                    XCTAssertEqual($0.first, story)
-            },
-                onError: { XCTFail("Story should succeed, found error \($0)") })
-            .dispose()
+            .stories { result in
+                switch result {
+                case .success(let stories):
+                    XCTAssertEqual(stories.count, 1)
+                    XCTAssertEqual(stories.first, story)
+                    
+                case .failure(let error):
+                    XCTFail("Story should succeed, found error \(error)")
+                }
+            }
     }
 }

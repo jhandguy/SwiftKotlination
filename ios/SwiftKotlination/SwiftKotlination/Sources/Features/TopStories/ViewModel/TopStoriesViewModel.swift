@@ -1,12 +1,28 @@
-import UIKit
-import RxSwift
-
-struct TopStoriesViewModel {
-    private(set) var repository: TopStoriesRepositoryProtocol
+final class TopStoriesViewModel {
+    private let repository: TopStoriesRepositoryProtocol
+    private(set) var stories: [Story]
+    
+    init(repository: TopStoriesRepositoryProtocol) {
+        self.repository = repository
+        self.stories = []
+    }
 }
 
 extension TopStoriesViewModel {
-    var stories: Observable<[Story]> {
-        return repository.stories
+    func stories(_ closure: @escaping (Result<[Story]>) -> Void) {
+        repository.stories { [weak self] result in
+            switch result {
+            case .success(let stories):
+                self?.stories = stories
+                
+            case .failure(let error):
+                print(error)
+            }
+            closure(result)
+        }
+    }
+    
+    func reload() {
+        repository.fetchStories()
     }
 }

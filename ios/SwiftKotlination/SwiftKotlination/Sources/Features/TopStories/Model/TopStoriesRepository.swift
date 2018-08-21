@@ -1,23 +1,30 @@
-import RxAlamofire
-import RxSwift
+import Foundation
 
 protocol TopStoriesRepositoryProtocol {
-    var stories: Observable<[Story]> { get }
+    func stories(_ closure: @escaping (Result<[Story]>) -> Void)
+    func fetchStories()
 }
 
 struct TopStoriesRepository: TopStoriesRepositoryProtocol {
-    var apiClient: APIClientProtocol
+    let apiClient: APIClientProtocol
     
-    var stories: Observable<[Story]> {
-        return
-            apiClient
-                .data(.get, "topstories/v2/home.json")
-                .flatMap { data -> Observable<[Story]> in
+    func stories(_ closure: @escaping (Result<[Story]>) -> Void) {
+        apiClient
+            .subscribe(to: .fetchTopStories) { result in
+                switch result {
+                case .success(let data):
                     guard let topStories = try? JSONDecoder().decode(TopStories.self, from: data) else {
-                        return Observable.just([])
+                        return closure(.success([]))
                     }
+                    return closure(.success(topStories.results))
                     
-                    return Observable.just(topStories.results)
+                case .failure(let error):
+                    return closure(.failure(error))
                 }
+        }
+    }
+    
+    func fetchStories() {
+        apiClient.execute(request: .fetchTopStories)
     }
 }

@@ -22,9 +22,13 @@ final class TopStoriesUITest: XCTestCase {
                     url: "url2")
             ])
         
+        guard let data = topStories.encodedJSONData else {
+            XCTFail("Could not encode topStories \(topStories)")
+            return
+        }
         let apiClientMock = APIClientMock(
             responses: [
-                Request(.get, "topstories/v2/home.json"): topStories.encodedJSONData
+                .fetchTopStories: [.success(data)]
             ]
         )
         

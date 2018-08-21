@@ -1,13 +1,16 @@
 import UIKit
-import RxSwift
+import SafariServices
 
 final class StoryViewController: UIViewController {
-    
     internal weak var coordinator: CoordinatorProtocol?
     internal var viewModel: StoryViewModel!
-    internal var storyView = StoryView()
     
-    private let disposeBag = DisposeBag()
+    private(set) lazy var storyView: StoryView = {
+        let view = StoryView()
+        view.backgroundColor = .black
+        
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,22 +22,26 @@ final class StoryViewController: UIViewController {
         super.viewWillAppear(animated)
         
         viewModel
-            .story
-            .subscribe(onNext: { story in
-                self.title = [story.section, story.subsection]
-                    .filter { !$0.isEmpty }
-                    .joined(separator: " - ")
-                
-                self.storyView.titleLabel.text = story.title
-                self.storyView.abstractLabel.text = story.abstract
-                self.storyView.byLineLabel.text = story.byline
-                self.storyView.urlButton.on(.touchUpInside) {
-                    guard let url = URL(string: story.url) else {
-                        return
+            .story { [weak self] result in
+                switch result {
+                case .success(let story):
+                    self?.title = [story.section, story.subsection]
+                        .filter { !$0.isEmpty }
+                        .joined(separator: " - ")
+                    
+                    self?.storyView.titleLabel.text = story.title
+                    self?.storyView.abstractLabel.text = story.abstract
+                    self?.storyView.byLineLabel.text = story.byline
+                    self?.storyView.urlButton.on(.touchUpInside) { [weak self] in
+                        guard let url = URL(string: story.url) else {
+                            return
+                        }
+                        self?.present(SFSafariViewController(url: url), animated: true)
                     }
-                    UIApplication.shared.open(url)
+                    
+                case .failure(let error):
+                    print(error)
                 }
-            })
-            .disposed(by: disposeBag)
+            }
     }
 }

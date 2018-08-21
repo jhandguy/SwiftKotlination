@@ -1,11 +1,11 @@
-enum CoordinatorStub {
-    static let key = "CoordinatorStub"
+enum CoordinatorMock {
+    static let key = "CoordinatorMock"
     
     case start
     case open(Story)
 }
 
-extension CoordinatorStub: Codable {
+extension CoordinatorMock: Codable {
     enum CodingKeys: String, CodingKey { case startTopStories, openStory }
     
     init(from decoder: Decoder) throws {
@@ -25,7 +25,7 @@ extension CoordinatorStub: Codable {
         switch self {
         case .start:
             break
-        case let .open(story):
+        case .open(let story):
             try container.encode(story, forKey: .openStory)
         }
     }

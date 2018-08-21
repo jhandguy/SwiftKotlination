@@ -8,7 +8,10 @@ final class StoryViewTest: XCTestCase {
     func testSubviews() {
         sut = StoryView(frame: CGRect())
         
-        XCTAssertEqual(sut.backgroundColor, .black)
+        _ = sut.titleLabel
+        _ = sut.abstractLabel
+        _ = sut.byLineLabel
+        _ = sut.urlButton
         
         XCTAssertTrue(sut.subviews.contains(sut.titleLabel))
         XCTAssertTrue(sut.subviews.contains(sut.abstractLabel))

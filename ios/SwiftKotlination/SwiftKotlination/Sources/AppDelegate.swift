@@ -13,24 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if
             let encodedAPIClientMock = ProcessInfo.processInfo.environment[APIClientMock.key],
             let apiClientMock = APIClientMock.decode(from: encodedAPIClientMock) {
-            
+
                 coordinator = Coordinator(window: window!, apiClient: apiClientMock)
         } else {
             coordinator = Coordinator(window: window!, apiClient: APIClient())
         }
         
         guard
-            let encodedCoordinatorStub = ProcessInfo.processInfo.environment[CoordinatorStub.key],
-            let coordinatorStub = CoordinatorStub.decode(from: encodedCoordinatorStub) else {
+            let encodedCoordinatorMock = ProcessInfo.processInfo.environment[CoordinatorMock.key],
+            let coordinatorMock = CoordinatorMock.decode(from: encodedCoordinatorMock) else {
                 coordinator.start()
                 return true
         }
         
         
-        switch coordinatorStub {
+        switch coordinatorMock {
         case .start:
             coordinator.start()
-        case let .open(story):
+        case .open(let story):
             coordinator.open(story)
         }
         

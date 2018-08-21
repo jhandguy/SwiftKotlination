@@ -1,13 +1,15 @@
-import RxSwift
-
 protocol StoryRepositoryProtocol {
-    var story: Observable<Story> { get }
+    func story(_ closure: @escaping (Result<Story>) -> Void)
 }
 
 struct StoryRepository: StoryRepositoryProtocol {
-    var story: Observable<Story>
+    private let story: Story
     
     init(story: Story) {
-        self.story = Observable.just(story)
+        self.story = story
+    }
+    
+    func story(_ closure: @escaping (Result<Story>) -> Void) {
+        closure(.success(story))
     }
 }

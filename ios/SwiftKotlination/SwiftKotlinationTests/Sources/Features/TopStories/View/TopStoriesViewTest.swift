@@ -8,8 +8,8 @@ final class TopStoriesViewTest: XCTestCase {
     func testSubviews() {
         sut = TopStoriesView(frame: CGRect())
         
+        _ = sut.tableView
         XCTAssertTrue(sut.subviews.contains(sut.tableView))
-        XCTAssertEqual(sut.backgroundColor, .black)
         XCTAssertEqual(sut.tableView.backgroundColor, .black)
     }
 }

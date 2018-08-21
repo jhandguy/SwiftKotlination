@@ -7,18 +7,19 @@ final class StoryViewControllerTest: XCTestCase {
     
     func testStoryViewControllerViewDidLoad() {
         sut = StoryViewController()
-        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock())
+        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock(result: .failure(.unknown)))
         
         _ = sut.view
         sut.viewDidLoad()
         
         XCTAssertEqual(sut.view, sut.storyView)
+        XCTAssertEqual(sut.view.backgroundColor, .black)
     }
     
     func testStoryViewControllerViewWillAppear() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
         sut = StoryViewController()
-        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock(storyStub: .success(story)))
+        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock(result: .success(story)))
         
         _ = sut.view
         sut.viewWillAppear(true)

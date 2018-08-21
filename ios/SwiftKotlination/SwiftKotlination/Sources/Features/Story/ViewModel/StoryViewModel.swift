@@ -1,12 +1,13 @@
-import UIKit
-import RxSwift
-
 struct StoryViewModel {
-    private(set) var repository: StoryRepositoryProtocol
+    private let repository: StoryRepositoryProtocol
+    
+    init(repository: StoryRepositoryProtocol) {
+        self.repository = repository
+    }
 }
 
 extension StoryViewModel {
-    var story: Observable<Story> {
-        return repository.story
+    func story(_ closure: @escaping (Result<Story>) -> Void) {
+        return repository.story(closure)
     }
 }

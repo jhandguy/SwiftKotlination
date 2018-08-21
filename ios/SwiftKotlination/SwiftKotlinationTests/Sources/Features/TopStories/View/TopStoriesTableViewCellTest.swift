@@ -8,8 +8,9 @@ final class TopStoriesTableViewCellTest: XCTestCase {
     func testTopStoriesTableViewCell() {
         sut = TopStoriesTableViewCell(style: .default, reuseIdentifier: TopStoriesTableViewCell.identifier)
         
-        XCTAssertEqual(sut.selectedBackgroundView?.backgroundColor, .darkGray)
-        XCTAssertEqual(sut.contentView.backgroundColor, .black)
+        _ = sut.titleLabel
+        _ = sut.bylineLabel
+        _ = sut.seeButton
         
         XCTAssertTrue(sut.contentView.subviews.contains(sut.titleLabel))
         XCTAssertTrue(sut.contentView.subviews.contains(sut.bylineLabel))
