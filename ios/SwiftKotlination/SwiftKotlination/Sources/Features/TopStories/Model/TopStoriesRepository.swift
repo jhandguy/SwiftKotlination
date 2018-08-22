@@ -13,10 +13,12 @@ struct TopStoriesRepository: TopStoriesRepositoryProtocol {
             .subscribe(to: .fetchTopStories) { result in
                 switch result {
                 case .success(let data):
-                    guard let topStories = try? JSONDecoder().decode(TopStories.self, from: data) else {
-                        return closure(.success([]))
+                    do {
+                        let topStories = try JSONDecoder().decode(TopStories.self, from: data)
+                        return closure(.success(topStories.results))
+                    } catch {
+                        return closure(.failure(error))
                     }
-                    return closure(.success(topStories.results))
                     
                 case .failure(let error):
                     return closure(.failure(error))

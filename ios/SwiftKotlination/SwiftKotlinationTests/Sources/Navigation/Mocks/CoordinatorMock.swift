@@ -14,6 +14,7 @@ final class CoordinatorMock: CoordinatorProtocol {
     enum ExpectedMethod: String {
         case start
         case openStory
+        case openUrl
     }
     
     func start() {
@@ -28,4 +29,9 @@ final class CoordinatorMock: CoordinatorProtocol {
         }
     }
     
+    func open(_ url: URL) {
+        if expectedMethods.contains(.openUrl) {
+            expectation.fulfill()
+        }
+    }
 }

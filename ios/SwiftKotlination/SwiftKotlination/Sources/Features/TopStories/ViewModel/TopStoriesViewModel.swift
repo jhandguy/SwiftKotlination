@@ -1,5 +1,5 @@
 final class TopStoriesViewModel {
-    private let repository: TopStoriesRepositoryProtocol
+    internal let repository: TopStoriesRepositoryProtocol
     private(set) var stories: [Story]
     
     init(repository: TopStoriesRepositoryProtocol) {

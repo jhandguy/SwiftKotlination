@@ -10,28 +10,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
+        var apiClient = APIClient()
         if
-            let encodedAPIClientMock = ProcessInfo.processInfo.environment[APIClientMock.key],
-            let apiClientMock = APIClientMock.decode(from: encodedAPIClientMock) {
+            let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
+            let sessionMock = URLSessionMock.decode(from: encodedSessionMock) {
 
-                coordinator = Coordinator(window: window!, apiClient: apiClientMock)
-        } else {
-            coordinator = Coordinator(window: window!, apiClient: APIClient())
+                apiClient = APIClient(session: sessionMock)
         }
         
+        coordinator = Coordinator(window: window!, apiClient: apiClient)
+        
         guard
-            let encodedCoordinatorMock = ProcessInfo.processInfo.environment[CoordinatorMock.key],
-            let coordinatorMock = CoordinatorMock.decode(from: encodedCoordinatorMock) else {
+            let encodedCoordinatorStub = ProcessInfo.processInfo.environment[CoordinatorStub.identifier],
+            let coordinatorStub = CoordinatorStub.decode(from: encodedCoordinatorStub) else {
                 coordinator.start()
                 return true
         }
         
         
-        switch coordinatorMock {
+        switch coordinatorStub {
         case .start:
             coordinator.start()
-        case .open(let story):
+        case .openStory(let story):
             coordinator.open(story)
+        case .openUrl(let url):
+            coordinator.open(url)
         }
         
         return true

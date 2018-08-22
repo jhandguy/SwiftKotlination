@@ -1,10 +1,9 @@
 import XCTest
 
 extension XCUIApplication {
-    
-    func launch(_ coordinatorMock: CoordinatorMock, with apiClientMock: APIClientMock = APIClientMock(responses: [:])) {
-        launchEnvironment[CoordinatorMock.key] = coordinatorMock.encodedJSONString
-        launchEnvironment[APIClientMock.key] = apiClientMock.encodedJSONString
+    func launch(_ coordinatorStub: CoordinatorStub, with sessionMock: URLSessionMock = URLSessionMock()) {
+        launchEnvironment[CoordinatorStub.identifier] = coordinatorStub.json
+        launchEnvironment[URLSessionMock.identifier] = sessionMock.json
         launch()
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-enum Request: String, Codable {
+enum Request: String {
     case fetchTopStories
     
     var url: String {

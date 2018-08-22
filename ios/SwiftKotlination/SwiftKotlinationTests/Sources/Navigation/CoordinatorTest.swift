@@ -1,4 +1,5 @@
 import XCTest
+import SafariServices
 @testable import SwiftKotlination
 
 final class CoordinatorTest: XCTestCase {
@@ -18,5 +19,16 @@ final class CoordinatorTest: XCTestCase {
         sut.open(story)
         XCTAssertEqual(sut.navigationController.viewControllers.count, 1)
         XCTAssertTrue(sut.navigationController.viewControllers.first is StoryViewController)
+    }
+    
+    func testCoordinatorOpensUrlWithSafariViewController() {
+        guard let url = URL(string: "https://test.com") else {
+            XCTFail("Invalid URL")
+            return
+        }
+        sut = Coordinator(window: UIWindow(), apiClient: APIClient())
+        sut.open(url)
+        XCTAssertEqual(sut.navigationController.viewControllers.count, 1)
+        XCTAssertTrue(sut.navigationController.viewControllers.first is SFSafariViewController)
     }
 }

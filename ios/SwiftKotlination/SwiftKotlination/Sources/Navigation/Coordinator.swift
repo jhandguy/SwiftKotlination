@@ -1,14 +1,15 @@
 import UIKit
+import SafariServices
 
 protocol CoordinatorProtocol: class {
     func start()
     func open(_ story: Story)
+    func open(_ url: URL)
 }
 
 final class Coordinator: CoordinatorProtocol {
-    
     private var window: UIWindow
-    private var apiClient: APIClientProtocol
+    private let apiClient: APIClientProtocol
     internal let navigationController = UINavigationController()
     
     init(window: UIWindow, apiClient: APIClientProtocol) {
@@ -29,6 +30,14 @@ final class Coordinator: CoordinatorProtocol {
         let viewController = StoryViewController()
         viewController.viewModel = StoryViewModel(repository: StoryRepository(story: story))
         viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func open(_ url: URL) {
+        guard UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        let viewController = SFSafariViewController(url: url)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

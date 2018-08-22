@@ -23,7 +23,7 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
     
     func testTopStoriesViewModelStoriesFailure() {
-        sut = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .failure(.unknown)))
+        sut = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .failure(ResultError.unknown)))
         
         sut
             .stories { result in
@@ -32,6 +32,10 @@ final class TopStoriesViewModelTest: XCTestCase {
                     XCTFail("Get Stories should fail, found stories \(stories)")
                     
                 case .failure(let error):
+                    guard let error = error as? ResultError else {
+                        XCTFail("Invalid error")
+                        return
+                    }
                     XCTAssertEqual(error, .unknown)
                 }
             }

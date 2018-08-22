@@ -21,7 +21,7 @@ final class StoryViewModelTest: XCTestCase {
     }
     
     func testStoryViewModelStoryFailure() {
-        sut = StoryViewModel(repository: StoryRepositoryMock(result: .failure(.unknown)))
+        sut = StoryViewModel(repository: StoryRepositoryMock(result: .failure(ResultError.unknown)))
         
         sut
             .story { result in
@@ -30,6 +30,10 @@ final class StoryViewModelTest: XCTestCase {
                     XCTFail("Get Story should fail, found story \(story)")
                     
                 case .failure(let error):
+                    guard let error = error as? ResultError else {
+                        XCTFail("Invalid error")
+                        return
+                    }
                     XCTAssertEqual(error, .unknown)
                 }
             }

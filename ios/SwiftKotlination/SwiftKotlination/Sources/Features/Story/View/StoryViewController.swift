@@ -1,5 +1,4 @@
 import UIKit
-import SafariServices
 
 final class StoryViewController: UIViewController {
     internal weak var coordinator: CoordinatorProtocol?
@@ -36,7 +35,7 @@ final class StoryViewController: UIViewController {
                         guard let url = URL(string: story.url) else {
                             return
                         }
-                        self?.present(SFSafariViewController(url: url), animated: true)
+                        self?.coordinator?.open(url)
                     }
                     
                 case .failure(let error):

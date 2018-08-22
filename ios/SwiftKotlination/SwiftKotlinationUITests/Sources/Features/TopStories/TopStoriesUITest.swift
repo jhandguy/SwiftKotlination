@@ -1,4 +1,5 @@
 import XCTest
+@testable import SwiftKotlination
 
 final class TopStoriesUITest: XCTestCase {
     private lazy var app: XCUIApplication = XCUIApplication()
@@ -21,18 +22,14 @@ final class TopStoriesUITest: XCTestCase {
                     byline: "byline2",
                     url: "url2")
             ])
-        
-        guard let data = topStories.encodedJSONData else {
-            XCTFail("Could not encode topStories \(topStories)")
-            return
-        }
-        let apiClientMock = APIClientMock(
+
+        let sessionMock = URLSessionMock(
             responses: [
-                .fetchTopStories: [.success(data)]
+                (json: topStories.json, error: nil, dataTask: URLSessionDataTaskMock())
             ]
         )
         
-        app.launch(.start, with: apiClientMock)
+        app.launch(.start, with: sessionMock)
         
         XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
         XCTAssertEqual(app.tables.firstMatch.cells.count, 2)
