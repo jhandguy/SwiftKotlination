@@ -44,6 +44,7 @@ final class APIClient {
         }
         
         var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.method.name
         
         switch request.parameters {
         case .body(let data):
