@@ -7,8 +7,8 @@ final class APIClientTest: XCTestCase {
     
     func testSubscribeToRequest() {
         let session = URLSessionMock(
-            responses: [
-                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            results: [
+                .success("{}")
             ]
         )
         sut = APIClient(session: session)
@@ -28,9 +28,9 @@ final class APIClientTest: XCTestCase {
     
     func testExecuteRequest() {
         let session = URLSessionMock(
-            responses: [
-                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock()),
-                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            results: [
+                .success("{}"),
+                .success("{}")
             ]
         )
         sut = APIClient(session: session)
@@ -52,10 +52,10 @@ final class APIClientTest: XCTestCase {
     
     func testSubscribeToRequestSeveralTimesAndExecute() {
         let session = URLSessionMock(
-            responses: [
-                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock()),
-                (json: nil, error: URLSessionError.unknown, dataTask: URLSessionDataTaskMock()),
-                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            results: [
+                .success("{}"),
+                .failure(.unknown),
+                .success("{}")
             ]
         )
         sut = APIClient(session: session)

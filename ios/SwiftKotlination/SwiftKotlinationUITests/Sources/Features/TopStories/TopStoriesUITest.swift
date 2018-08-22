@@ -24,8 +24,8 @@ final class TopStoriesUITest: XCTestCase {
             ])
 
         let sessionMock = URLSessionMock(
-            responses: [
-                (json: topStories.json, error: nil, dataTask: URLSessionDataTaskMock())
+            results: [
+                .success(topStories.json)
             ]
         )
         
