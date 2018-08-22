@@ -6,9 +6,11 @@ final class APIClientTest: XCTestCase {
     var sut: APIClient!
     
     func testSubscribeToRequest() {
-        let session = URLSessionMock(responses: [
-            (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
-        ])
+        let session = URLSessionMock(
+            responses: [
+                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            ]
+        )
         sut = APIClient(session: session)
         
         let notifyClosure = expectation(description: "Closure is notified")
@@ -25,10 +27,12 @@ final class APIClientTest: XCTestCase {
     }
     
     func testExecuteRequest() {
-        let session = URLSessionMock(responses: [
-            (json: "{}", error: nil, dataTask: URLSessionDataTaskMock()),
-            (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
-        ])
+        let session = URLSessionMock(
+            responses: [
+                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock()),
+                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            ]
+        )
         sut = APIClient(session: session)
         
         let notifyClosure = expectation(description: "Closure is notified")
@@ -39,6 +43,39 @@ final class APIClientTest: XCTestCase {
                 notifyClosure.fulfill()
             case .failure:
                 break
+            }
+        }
+        sut.execute(request: .fetchTopStories)
+        wait(for: [notifyClosure], timeout: 1)
+        session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
+    }
+    
+    func testSubscribeToRequestSeveralTimesAndExecute() {
+        let session = URLSessionMock(
+            responses: [
+                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock()),
+                (json: nil, error: URLSessionError.unknown, dataTask: URLSessionDataTaskMock()),
+                (json: "{}", error: nil, dataTask: URLSessionDataTaskMock())
+            ]
+        )
+        sut = APIClient(session: session)
+        
+        let notifyClosure = expectation(description: "Closure is notified")
+        notifyClosure.expectedFulfillmentCount = 4
+        sut.subscribe(to: .fetchTopStories) { result in
+            switch result {
+            case .success:
+                notifyClosure.fulfill()
+            case .failure:
+                break
+            }
+        }
+        sut.subscribe(to: .fetchTopStories) { result in
+            switch result {
+            case .success:
+                notifyClosure.fulfill()
+            case .failure:
+                notifyClosure.fulfill()
             }
         }
         sut.execute(request: .fetchTopStories)
