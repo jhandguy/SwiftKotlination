@@ -1,14 +1,14 @@
 import Foundation
 
 protocol TopStoriesRepositoryProtocol {
-    func stories(_ closure: @escaping (Result<[Story]>) -> Void)
+    func stories(_ closure: @escaping Observable<[Story]>)
     func fetchStories()
 }
 
 struct TopStoriesRepository: TopStoriesRepositoryProtocol {
     let apiClient: APIClientProtocol
     
-    func stories(_ closure: @escaping (Result<[Story]>) -> Void) {
+    func stories(_ closure: @escaping Observable<[Story]>) {
         apiClient
             .subscribe(to: .fetchTopStories) { result in
                 switch result {

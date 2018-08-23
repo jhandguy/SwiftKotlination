@@ -8,7 +8,7 @@ final class StoryRepositoryMock: StoryRepositoryProtocol {
         self.result = result
     }
     
-    func story(_ closure: @escaping (Result<Story>) -> Void) {
+    func story(_ closure: @escaping Observable<Story>) {
         closure(result)
     }
 }

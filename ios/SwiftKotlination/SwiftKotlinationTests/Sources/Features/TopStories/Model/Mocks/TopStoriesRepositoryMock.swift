@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftKotlination
 
 final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
-    private var closure: (Result<[Story]>) -> Void
+    private var closure: Observable<[Story]>
     internal var result: Result<[Story]>
     
     init(result: Result<[Story]>) {
@@ -10,7 +10,7 @@ final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
         self.closure = { _ in }
     }
     
-    func stories(_ closure: @escaping (Result<[Story]>) -> Void) {
+    func stories(_ closure: @escaping Observable<[Story]>) {
         self.closure = closure
         closure(result)
     }

@@ -2,14 +2,14 @@ import Foundation
 @testable import SwiftKotlination
 
 final class APIClientMock: APIClientProtocol {
-    private var closures: [(Result<Data>) -> Void] = []
+    private var closures: [Observable<Data>] = []
     private let result: Result<String?>
     
     init(result: Result<String?>) {
         self.result = result
     }
     
-    func subscribe(to request: Request, _ closure: @escaping (Result<Data>) -> Void) {
+    func subscribe(to request: Request, _ closure: @escaping Observable<Data>) {
         closures.append(closure)
         execute(request: request)
     }
@@ -21,7 +21,7 @@ final class APIClientMock: APIClientProtocol {
                 let json = json,
                 let data = json.data(using: .utf8) else {
                     
-                closures.forEach { $0(.failure(ResultError.unknown)) }
+                closures.forEach { $0(.failure(NetworkError.invalidResponse)) }
                 return
             }
             

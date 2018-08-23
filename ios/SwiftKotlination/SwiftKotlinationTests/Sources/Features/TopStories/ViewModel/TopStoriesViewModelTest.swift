@@ -23,7 +23,7 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
     
     func testTopStoriesViewModelStoriesFailure() {
-        sut = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .failure(ResultError.unknown)))
+        sut = TopStoriesViewModel(repository: TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse)))
         
         sut
             .stories { result in
@@ -32,11 +32,11 @@ final class TopStoriesViewModelTest: XCTestCase {
                     XCTFail("Get Stories should fail, found stories \(stories)")
                     
                 case .failure(let error):
-                    guard let error = error as? ResultError else {
+                    guard let error = error as? NetworkError else {
                         XCTFail("Invalid error")
                         return
                     }
-                    XCTAssertEqual(error, .unknown)
+                    XCTAssertEqual(error, .invalidResponse)
                 }
             }
     }

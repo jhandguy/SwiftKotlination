@@ -9,14 +9,14 @@ final class TopStoriesViewModel {
 }
 
 extension TopStoriesViewModel {
-    func stories(_ closure: @escaping (Result<[Story]>) -> Void) {
+    func stories(_ closure: @escaping Observable<[Story]>) {
         repository.stories { [weak self] result in
             switch result {
             case .success(let stories):
                 self?.stories = stories
                 
-            case .failure(let error):
-                print(error)
+            case .failure:
+                break
             }
             closure(result)
         }

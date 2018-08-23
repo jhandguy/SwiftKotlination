@@ -7,7 +7,7 @@ struct StoryViewModel {
 }
 
 extension StoryViewModel {
-    func story(_ closure: @escaping (Result<Story>) -> Void) {
+    func story(_ closure: @escaping Observable<Story>) {
         return repository.story(closure)
     }
 }

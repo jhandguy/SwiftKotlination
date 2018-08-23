@@ -7,7 +7,7 @@ final class StoryViewControllerTest: XCTestCase {
     
     func testStoryViewControllerViewDidLoad() {
         sut = StoryViewController()
-        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock(result: .failure(ResultError.unknown)))
+        sut.viewModel = StoryViewModel(repository: StoryRepositoryMock(result: .failure(NetworkError.invalidResponse)))
         
         _ = sut.view
         sut.viewDidLoad()
