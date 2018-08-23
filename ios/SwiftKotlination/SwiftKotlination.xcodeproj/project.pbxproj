@@ -72,6 +72,7 @@
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
+		0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */; };
 		0FF77C9F212DF6D80072267A /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F79F20A87780009C30B4 /* Encodable+JSON.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,6 +156,7 @@
 		0FCE5CEB208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FCE5CF0208A85C3001C8FFC /* SwiftKotlinationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftKotlinationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCE5CF6208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +348,7 @@
 		0FA5F77220A5BA16009C30B4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */,
 				0FA5F76920A5B998009C30B4 /* Features */,
 				0F3EA4A5212D8EC80090A69A /* Navigation */,
 				0F3EA4A7212D8F5F0090A69A /* Network */,
@@ -817,6 +820,7 @@
 				0FA5F79720A5F713009C30B4 /* TopStoriesViewModelTest.swift in Sources */,
 				0FA5F77420A5BA4C009C30B4 /* CoordinatorTest.swift in Sources */,
 				0FA5F78B20A5E7CA009C30B4 /* TopStoriesRepositoryTest.swift in Sources */,
+				0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */,
 				0FA5F77920A5BB5F009C30B4 /* CoordinatorMock.swift in Sources */,
 				0FA5F78420A5D2F7009C30B4 /* StoryRepositoryMock.swift in Sources */,
 				0FBFEAB421012DF40030CC22 /* StoryViewTest.swift in Sources */,
