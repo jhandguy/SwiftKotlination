@@ -1,5 +1,4 @@
 import UIKit
-import SnapKit
 
 final class TopStoriesViewController: UIViewController {
     internal weak var coordinator: CoordinatorProtocol?
