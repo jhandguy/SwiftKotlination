@@ -5,7 +5,7 @@ final class APIClientTest: XCTestCase {
     
     var sut: APIClient!
     
-    func testSubscribeToRequest() {
+    func testObserveRequest() {
         let session = URLSessionMock(
             results: [
                 (json: "{}", error: nil)
@@ -50,7 +50,7 @@ final class APIClientTest: XCTestCase {
         session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
     }
     
-    func testSubscribeToRequestSeveralTimesAndExecute() {
+    func testObserveRequestSeveralTimesAndExecute() {
         let session = URLSessionMock(
             results: [
                 (json: "{}", error: nil),
