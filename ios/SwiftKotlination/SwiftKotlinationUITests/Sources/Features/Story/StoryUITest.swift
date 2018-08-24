@@ -5,12 +5,12 @@ final class StoryUITest: XCTestCase {
     
     func testFeatureStory() {
         let story = Story(
-            section: "section",
-            subsection: "subsection",
-            title: "title",
-            abstract: "abstract",
-            byline: "byline",
-            url: "https://url.com"
+            section: "New York",
+            subsection: "Music",
+            title: "New York Today: A Leonard Bernstein Centennial",
+            abstract: "Friday: Remembering a music man and your favorite things about fall.",
+            byline: "By JONATHAN WOLFE",
+            url: "https://www.nytimes.com/2018/08/24/nyregion/new-york-today-leonard-bernstein-centennial.html"
         )
         
         app.launch(.openStory(story))
@@ -19,7 +19,6 @@ final class StoryUITest: XCTestCase {
         XCTAssertTrue(app.staticTexts[story.title].isHittable)
         XCTAssertTrue(app.staticTexts[story.abstract].isHittable)
         XCTAssertTrue(app.staticTexts[story.byline].isHittable)
-        XCTAssertTrue(app.buttons["See More"].isHittable)
         
         app.buttons["See More"].tap()
         

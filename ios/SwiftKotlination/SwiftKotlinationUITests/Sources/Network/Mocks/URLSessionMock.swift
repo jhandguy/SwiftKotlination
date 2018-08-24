@@ -1,24 +1,10 @@
 import Foundation
 
 final class URLSessionMock: Codable, Identifiable {
-    private var responses: [Response]
+    private(set) var responses: [Response]
     
-    private struct Response: Codable {
-        var json: String?
-        var error: NetworkError?
-        var dataTask: URLSessionDataTaskMock
-    }
-    
-    init(results: [(json: String?, error: NetworkError?)] = []) {
-        responses = results.map { result in
-            Response(json: result.json, error: result.error, dataTask: URLSessionDataTaskMock())
-        }
-    }
-    
-    var dataTasks: [URLSessionDataTaskMock] {
-        get {
-            return responses.map { $0.dataTask }
-        }
+    init(responses: [Response] = []) {
+        self.responses = responses
     }
 }
 
@@ -30,7 +16,7 @@ extension URLSessionMock: URLSessionProtocol {
                 return URLSessionDataTaskMock()
         }
         
-        completionHandler(response.json?.data(using: .utf8), nil, response.error)
+        completionHandler(response.file?.data, nil, response.error)
         
         return response.dataTask
     }

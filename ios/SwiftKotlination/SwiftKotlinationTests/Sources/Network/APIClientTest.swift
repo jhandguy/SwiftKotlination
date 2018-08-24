@@ -7,8 +7,8 @@ final class APIClientTest: XCTestCase {
     
     func testObserveRequest() {
         let session = URLSessionMock(
-            results: [
-                (json: "{}", error: nil)
+            responses: [
+                Response(File("top_stories", .json))
             ]
         )
         sut = APIClient(session: session)
@@ -23,14 +23,16 @@ final class APIClientTest: XCTestCase {
             }
         }
         wait(for: [didObserve], timeout: 1)
-        session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
+        session.responses.forEach { response in
+            XCTAssertTrue(response.dataTask.isResumed)
+        }
     }
     
     func testExecuteRequest() {
         let session = URLSessionMock(
-            results: [
-                (json: "{}", error: nil),
-                (json: "{}", error: nil)
+            responses: [
+                Response(File("top_stories", .json)),
+                Response(File("top_stories", .json))
             ]
         )
         sut = APIClient(session: session)
@@ -47,15 +49,17 @@ final class APIClientTest: XCTestCase {
         }
         sut.execute(.fetchTopStories)
         wait(for: [didObserve], timeout: 1)
-        session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
+        session.responses.forEach { response in
+            XCTAssertTrue(response.dataTask.isResumed)
+        }
     }
     
     func testObserveRequestSeveralTimesAndExecute() {
         let session = URLSessionMock(
-            results: [
-                (json: "{}", error: nil),
-                (json: nil, error: .invalidResponse),
-                (json: "{}", error: nil)
+            responses: [
+                Response(File("top_stories", .json)),
+                Response(error: .invalidResponse),
+                Response(File("top_stories", .json))
             ]
         )
         sut = APIClient(session: session)
@@ -80,6 +84,8 @@ final class APIClientTest: XCTestCase {
         }
         sut.execute(.fetchTopStories)
         wait(for: [didObserve], timeout: 1)
-        session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
+        session.responses.forEach { response in
+            XCTAssertTrue(response.dataTask.isResumed)
+        }
     }
 }
