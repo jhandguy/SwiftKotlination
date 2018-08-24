@@ -1,32 +1,32 @@
 import Foundation
 
 protocol TopStoriesRepositoryProtocol {
-    func stories(_ closure: @escaping Observable<[Story]>)
+    func stories(_ observer: @escaping Observer<[Story]>)
     func fetchStories()
 }
 
 struct TopStoriesRepository: TopStoriesRepositoryProtocol {
     let apiClient: APIClientProtocol
     
-    func stories(_ closure: @escaping Observable<[Story]>) {
+    func stories(_ observer: @escaping Observer<[Story]>) {
         apiClient
-            .subscribe(to: .fetchTopStories) { result in
+            .observe(.fetchTopStories) { result in
                 switch result {
                 case .success(let data):
                     do {
                         let topStories = try JSONDecoder().decode(TopStories.self, from: data)
-                        return closure(.success(topStories.results))
+                        return observer(.success(topStories.results))
                     } catch {
-                        return closure(.failure(error))
+                        return observer(.failure(error))
                     }
                     
                 case .failure(let error):
-                    return closure(.failure(error))
+                    return observer(.failure(error))
                 }
         }
     }
     
     func fetchStories() {
-        apiClient.execute(request: .fetchTopStories)
+        apiClient.execute(.fetchTopStories)
     }
 }

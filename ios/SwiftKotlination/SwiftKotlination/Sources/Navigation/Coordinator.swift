@@ -21,14 +21,16 @@ final class Coordinator: CoordinatorProtocol {
     
     func start() {
         let viewController = TopStoriesViewController()
-        viewController.viewModel = TopStoriesViewModel(repository: TopStoriesRepository(apiClient: apiClient))
+        let repository = TopStoriesRepository(apiClient: apiClient)
+        viewController.viewModel = TopStoriesViewModel(repository: repository)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
     
     func open(_ story: Story) {
         let viewController = StoryViewController()
-        viewController.viewModel = StoryViewModel(repository: StoryRepository(story: story))
+        let repository = StoryRepository(story: story)
+        viewController.viewModel = StoryViewModel(repository: repository)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

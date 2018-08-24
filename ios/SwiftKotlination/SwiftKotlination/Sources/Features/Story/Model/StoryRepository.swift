@@ -1,5 +1,5 @@
 protocol StoryRepositoryProtocol {
-    func story(_ closure: @escaping Observable<Story>)
+    func story(_ observer: @escaping Observer<Story>)
 }
 
 struct StoryRepository: StoryRepositoryProtocol {
@@ -9,7 +9,7 @@ struct StoryRepository: StoryRepositoryProtocol {
         self.story = story
     }
     
-    func story(_ closure: @escaping Observable<Story>) {
-        closure(.success(story))
+    func story(_ observer: @escaping Observer<Story>) {
+        observer(.success(story))
     }
 }

@@ -1,22 +1,22 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func subscribe(to request: Request, _ closure: @escaping Observable<Data>)
-    func execute(request: Request)
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>)
+    func execute(_ request: Request)
 }
 
 final class APIClient {
     private var session: URLSessionProtocol
-    private(set) var observables: [Request: [Observable<Data>]]
+    private(set) var observables: [Request: [Observer<Data>]]
     
-    init(session: URLSessionProtocol = URLSession(configuration: URLSessionConfiguration.default)) {
+    init(session: URLSessionProtocol = URLSession(configuration: URLSessionConfiguration.default), observables: [Request: [Observer<Data>]] = [:]) {
         self.session = session
-        observables = [:]
+        self.observables = observables
     }
     
-    private func execute(_ request: Request, with closures: [Observable<Data>]) {
+    private func execute(_ request: Request, with observers: [Observer<Data>]) {
         guard
-            !closures.isEmpty,
+            !observers.isEmpty,
             let urlRequest = build(request) else {
                 return
         }
@@ -24,15 +24,15 @@ final class APIClient {
         let dataTask = session.dataTask(with: urlRequest) { data, urlResponse, error in
             guard let data = data else {
                 guard let error = error else {
-                    closures.forEach { $0(.failure(NetworkError.invalidResponse)) }
+                    observers.forEach { $0(.failure(NetworkError.invalidResponse)) }
                     return
                 }
                 
-                closures.forEach { $0(.failure(error)) }
+                observers.forEach { $0(.failure(error)) }
                 return
             }
             
-            closures.forEach { $0(.success(data)) }
+            observers.forEach { $0(.success(data)) }
         }
         
         dataTask.resume()
@@ -66,18 +66,18 @@ final class APIClient {
 }
 
 extension APIClient: APIClientProtocol {
-    func subscribe(to request: Request, _ closure: @escaping Observable<Data>) {
-        var closures = observables[request] ?? []
-        closures.append(closure)
-        observables[request] = closures
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>) {
+        var observers = observables[request] ?? []
+        observers.append(observer)
+        observables[request] = observers
         
-        execute(request, with: [closure])
+        execute(request, with: [observer])
     }
     
-    func execute(request: Request) {
-        guard let closures = observables[request] else {
+    func execute(_ request: Request) {
+        guard let observers = observables[request] else {
             return
         }
-        execute(request, with: closures)
+        execute(request, with: observers)
     }
 }

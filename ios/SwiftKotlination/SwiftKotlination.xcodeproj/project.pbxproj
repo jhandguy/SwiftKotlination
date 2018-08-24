@@ -62,7 +62,7 @@
 		0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C020A393920090B77F /* StoryViewController.swift */; };
 		0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C220A393C20090B77F /* StoryViewModel.swift */; };
 		0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C420A394E10090B77F /* StoryRepository.swift */; };
-		0FBB65C820A3A6500090B77F /* UIControl+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C720A3A6500090B77F /* UIControl+Closure.swift */; };
+		0FBB65C820A3A6500090B77F /* UIControl+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C720A3A6500090B77F /* UIControl+Observer.swift */; };
 		0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC64AB2209C756300339755 /* SnapKit.framework */; };
 		0FBE92AE209D901C00A32D01 /* TopStoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBE92AD209D901C00A32D01 /* TopStoriesTableViewCell.swift */; };
 		0FBFEAAD20FF92850030CC22 /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBFEAAC20FF92850030CC22 /* StoryView.swift */; };
@@ -144,7 +144,7 @@
 		0FBB65C020A393920090B77F /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		0FBB65C220A393C20090B77F /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		0FBB65C420A394E10090B77F /* StoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryRepository.swift; sourceTree = "<group>"; };
-		0FBB65C720A3A6500090B77F /* UIControl+Closure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Closure.swift"; sourceTree = "<group>"; };
+		0FBB65C720A3A6500090B77F /* UIControl+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Observer.swift"; sourceTree = "<group>"; };
 		0FBE92AD209D901C00A32D01 /* TopStoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCell.swift; sourceTree = "<group>"; };
 		0FBFEAAC20FF92850030CC22 /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		0FBFEAB12100E1DC0030CC22 /* TopStoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesView.swift; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 		0F96C9AA212CB7A20096B97D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FBB65C720A3A6500090B77F /* UIControl+Closure.swift */,
+				0FBB65C720A3A6500090B77F /* UIControl+Observer.swift */,
 				0F165532212C5383005137B0 /* UITableView+ReusableCell.swift */,
 				0F3EA4E1212DF2890090A69A /* UITableViewCell+Identifier.swift */,
 				0F17053F212F50BE00F87958 /* UIViewController+Alert.swift */,
@@ -804,7 +804,7 @@
 			files = (
 				0FC64A41209623B200339755 /* TopStoriesRepository.swift in Sources */,
 				0FD86670212F471E0033CD13 /* NetworkError.swift in Sources */,
-				0FBB65C820A3A6500090B77F /* UIControl+Closure.swift in Sources */,
+				0FBB65C820A3A6500090B77F /* UIControl+Observer.swift in Sources */,
 				0FC64A3B2095EAB700339755 /* Coordinator.swift in Sources */,
 				0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */,
 				0F165533212C5383005137B0 /* UITableView+ReusableCell.swift in Sources */,

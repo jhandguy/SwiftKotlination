@@ -13,7 +13,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         
         sut.viewDidLoad()
         
-        let viewDidLoad = expectation(description: "viewDidLoad")
+        let viewDidLoad = expectation(description: "Expected view to be loaded")
         DispatchQueue.main.async {
             XCTAssertEqual(self.sut.title, "Top Stories")
             XCTAssertEqual(self.sut.view.backgroundColor, .black)
@@ -47,7 +47,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         
         sut.viewDidLoad()
         
-        let viewDidLoad = expectation(description: "viewDidLoad")
+        let viewDidLoad = expectation(description: "Expected view to be loaded")
         DispatchQueue.main.async {
             XCTAssertTrue(self.sut.topStoriesView.tableView.visibleCells.isEmpty)
             XCTAssertTrue(self.sut.presentedViewController is UIAlertController)
@@ -64,7 +64,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         
         sut.viewDidLoad()
         
-        let viewDidLoad = expectation(description: "viewDidLoad")
+        let viewDidLoad = expectation(description: "Expected view to be loaded")
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.topStoriesView.tableView.visibleCells.isEmpty)
             viewDidLoad.fulfill()
@@ -74,7 +74,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         repository.result = .success([])
         sut.viewWillAppear(true)
         
-        let viewWillAppear = expectation(description: "viewWillAppear")
+        let viewWillAppear = expectation(description: "Expected view to appear")
         DispatchQueue.main.async {
             XCTAssertTrue(self.sut.topStoriesView.tableView.visibleCells.isEmpty)
             viewWillAppear.fulfill()
@@ -94,7 +94,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         
         sut.viewDidLoad()
         
-        let viewDidLoad = expectation(description: "viewDidLoad")
+        let viewDidLoad = expectation(description: "Expected view to be loaded")
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.topStoriesView.tableView.visibleCells.isEmpty)
             viewDidLoad.fulfill()
@@ -104,7 +104,7 @@ final class TopStoriesViewControllerTest: XCTestCase {
         repository.result = .failure(NetworkError.invalidResponse)
         sut.viewWillAppear(true)
         
-        let viewWillAppear = expectation(description: "viewWillAppear")
+        let viewWillAppear = expectation(description: "Expected view to appear")
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.topStoriesView.tableView.visibleCells.isEmpty)
             XCTAssertTrue(self.sut.presentedViewController is UIAlertController)

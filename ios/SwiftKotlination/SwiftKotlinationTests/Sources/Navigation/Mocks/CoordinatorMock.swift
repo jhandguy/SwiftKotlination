@@ -7,7 +7,7 @@ final class CoordinatorMock: CoordinatorProtocol {
     
     init(expectedMethods: [ExpectedMethod] = []) {
         self.expectedMethods = expectedMethods
-        expectation = XCTestExpectation(description: "Expected to call methods: \(expectedMethods.map { $0.rawValue }.joined(separator: ", "))")
+        expectation = XCTestExpectation(description: "Expected methods \(expectedMethods.map { $0.rawValue }.joined(separator: ", ")) to be called")
         expectation.expectedFulfillmentCount = expectedMethods.count
     }
     

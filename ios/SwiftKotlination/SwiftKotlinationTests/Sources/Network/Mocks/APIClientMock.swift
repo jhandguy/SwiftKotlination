@@ -2,32 +2,32 @@ import Foundation
 @testable import SwiftKotlination
 
 final class APIClientMock: APIClientProtocol {
-    private var closures: [Observable<Data>] = []
+    private var observers: [Observer<Data>] = []
     private let result: Result<String?>
     
     init(result: Result<String?>) {
         self.result = result
     }
     
-    func subscribe(to request: Request, _ closure: @escaping Observable<Data>) {
-        closures.append(closure)
-        execute(request: request)
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>) {
+        observers.append(observer)
+        execute(request)
     }
     
-    func execute(request: Request) {
+    func execute(_ request: Request) {
         switch result {
         case .success(let json):
             guard
                 let json = json,
                 let data = json.data(using: .utf8) else {
                     
-                closures.forEach { $0(.failure(NetworkError.invalidResponse)) }
+                observers.forEach { $0(.failure(NetworkError.invalidResponse)) }
                 return
             }
             
-            closures.forEach { $0(.success(data)) }
+            observers.forEach { $0(.success(data)) }
         case .failure(let error):
-            closures.forEach { $0(.failure(error)) }
+            observers.forEach { $0(.failure(error)) }
         }
     }
 }

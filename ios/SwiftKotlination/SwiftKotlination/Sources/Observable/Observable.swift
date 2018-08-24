@@ -1,1 +1,1 @@
-typealias Observable<T> = (Result<T>) -> Void
+typealias Observer<T> = (Result<T>) -> Void

@@ -13,16 +13,16 @@ final class APIClientTest: XCTestCase {
         )
         sut = APIClient(session: session)
         
-        let notifyClosure = expectation(description: "Closure is notified")
-        sut.subscribe(to: .fetchTopStories) { result in
+        let didObserve = expectation(description: "Expected observer to be notified")
+        sut.observe(.fetchTopStories) { result in
             switch result {
             case .success:
-                notifyClosure.fulfill()
+                didObserve.fulfill()
             case .failure:
                 break
             }
         }
-        wait(for: [notifyClosure], timeout: 1)
+        wait(for: [didObserve], timeout: 1)
         session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
     }
     
@@ -35,18 +35,18 @@ final class APIClientTest: XCTestCase {
         )
         sut = APIClient(session: session)
         
-        let notifyClosure = expectation(description: "Closure is notified")
-        notifyClosure.expectedFulfillmentCount = 2
-        sut.subscribe(to: .fetchTopStories) { result in
+        let didObserve = expectation(description: "Expected observer to be notified")
+        didObserve.expectedFulfillmentCount = 2
+        sut.observe(.fetchTopStories) { result in
             switch result {
             case .success:
-                notifyClosure.fulfill()
+                didObserve.fulfill()
             case .failure:
                 break
             }
         }
-        sut.execute(request: .fetchTopStories)
-        wait(for: [notifyClosure], timeout: 1)
+        sut.execute(.fetchTopStories)
+        wait(for: [didObserve], timeout: 1)
         session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
     }
     
@@ -60,26 +60,26 @@ final class APIClientTest: XCTestCase {
         )
         sut = APIClient(session: session)
         
-        let notifyClosure = expectation(description: "Closure is notified")
-        notifyClosure.expectedFulfillmentCount = 4
-        sut.subscribe(to: .fetchTopStories) { result in
+        let didObserve = expectation(description: "Expected observer to be notified")
+        didObserve.expectedFulfillmentCount = 4
+        sut.observe(.fetchTopStories) { result in
             switch result {
             case .success:
-                notifyClosure.fulfill()
+                didObserve.fulfill()
             case .failure:
                 break
             }
         }
-        sut.subscribe(to: .fetchTopStories) { result in
+        sut.observe(.fetchTopStories) { result in
             switch result {
             case .success:
-                notifyClosure.fulfill()
+                didObserve.fulfill()
             case .failure:
-                notifyClosure.fulfill()
+                didObserve.fulfill()
             }
         }
-        sut.execute(request: .fetchTopStories)
-        wait(for: [notifyClosure], timeout: 1)
+        sut.execute(.fetchTopStories)
+        wait(for: [didObserve], timeout: 1)
         session.dataTasks.forEach { XCTAssertTrue($0.isResumed)}
     }
 }

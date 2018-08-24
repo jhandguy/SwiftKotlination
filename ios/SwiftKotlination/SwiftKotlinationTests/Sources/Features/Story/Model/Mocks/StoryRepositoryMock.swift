@@ -8,7 +8,7 @@ final class StoryRepositoryMock: StoryRepositoryProtocol {
         self.result = result
     }
     
-    func story(_ closure: @escaping Observable<Story>) {
-        closure(result)
+    func story(_ observer: @escaping Observer<Story>) {
+        observer(result)
     }
 }
