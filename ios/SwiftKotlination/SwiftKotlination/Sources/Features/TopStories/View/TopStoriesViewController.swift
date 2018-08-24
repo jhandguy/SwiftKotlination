@@ -27,7 +27,7 @@ final class TopStoriesViewController: UIViewController {
                         self?.topStoriesView.tableView.reloadData()
                     }
                 case .failure(let error):
-                    self?.presentAlert(with: error)
+                    self?.presentAlertController(with: error, animated: true)
                 }
             }
     }

@@ -39,7 +39,7 @@ final class StoryViewController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    self?.presentAlert(with: error)
+                    self?.presentAlertController(with: error, animated: true)
                 }
             }
     }

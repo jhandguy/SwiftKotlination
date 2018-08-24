@@ -5,9 +5,9 @@ final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
     private var closure: Observable<[Story]>
     internal var result: Result<[Story]>
     
-    init(result: Result<[Story]>) {
+    init(result: Result<[Story]>, closure: @escaping Observable<[Story]> = { _ in }) {
         self.result = result
-        self.closure = { _ in }
+        self.closure = closure
     }
     
     func stories(_ closure: @escaping Observable<[Story]>) {

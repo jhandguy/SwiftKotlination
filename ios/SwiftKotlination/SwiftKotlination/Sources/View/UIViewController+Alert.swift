@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIViewController {
-    func presentAlert(with error: Error) {
+    func presentAlertController(with error: Error, animated: Bool) {
         let description = (error as? ErrorStringConvertible)?.description ?? "Something went wrong."
         let alertController = UIAlertController(
             title: "Error",
@@ -15,6 +15,6 @@ extension UIViewController {
         )
         alertController.addAction(alertAction)
         
-        present(alertController, animated: true)
+        present(alertController, animated: animated)
     }
 }

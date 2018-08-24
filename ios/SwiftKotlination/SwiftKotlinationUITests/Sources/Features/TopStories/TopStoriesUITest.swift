@@ -4,7 +4,7 @@ import XCTest
 final class TopStoriesUITest: XCTestCase {
     private lazy var app: XCUIApplication = XCUIApplication()
     
-    func testFeatureTopStories() {
+    func testFeatureTopStoriesSuccess() {
         let topStories = TopStories(
             results: [
                 Story(
@@ -44,5 +44,19 @@ final class TopStoriesUITest: XCTestCase {
             app.buttons["Top Stories"].tap()
             XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
         }
+    }
+    
+    func testFeatureTopStoriesFailure() {
+        let sessionMock = URLSessionMock(
+            results: [
+                (json: nil, error: NetworkError.invalidResponse)
+            ]
+        )
+        
+        app.launch(.start, with: sessionMock)
+        
+        XCTAssertEqual(app.tables.firstMatch.cells.count, 0)
+        
+        app.alerts["Error"].buttons["Ok"].tap()
     }
 }
