@@ -72,7 +72,6 @@
 		0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C220A393C20090B77F /* StoryViewModel.swift */; };
 		0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C420A394E10090B77F /* StoryRepository.swift */; };
 		0FBB65C820A3A6500090B77F /* UIControl+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C720A3A6500090B77F /* UIControl+Observer.swift */; };
-		0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC64AB2209C756300339755 /* SnapKit.framework */; };
 		0FC64A3B2095EAB700339755 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3A2095EAB700339755 /* Coordinator.swift */; };
 		0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3C2095EC5000339755 /* TopStoriesTableViewController.swift */; };
 		0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3E2095F5E400339755 /* TopStoriesViewModel.swift */; };
@@ -180,7 +179,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FBE92A5209CF6F500A32D01 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,7 +716,6 @@
 				0FCE5CCD208A85C1001C8FFC /* Sources */,
 				0FCE5CCE208A85C1001C8FFC /* Frameworks */,
 				0FCE5CCF208A85C1001C8FFC /* Resources */,
-				0FC64AB4209C769400339755 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -839,23 +836,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0FC64AB4209C769400339755 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0FCE5CCD208A85C1001C8FFC /* Sources */ = {
