@@ -20,7 +20,9 @@ final class Coordinator: CoordinatorProtocol {
     }
     
     func start() {
-        let viewController = TopStoriesViewController()
+        guard let viewController = TopStoriesTableViewController.storyBoardInstance else {
+            return
+        }
         let repository = TopStoriesRepository(apiClient: apiClient)
         viewController.viewModel = TopStoriesViewModel(repository: repository)
         viewController.coordinator = self
@@ -28,7 +30,9 @@ final class Coordinator: CoordinatorProtocol {
     }
     
     func open(_ story: Story) {
-        let viewController = StoryViewController()
+        guard let viewController = StoryViewController.storyBoardInstance else {
+            return
+        }
         let repository = StoryRepository(story: story)
         viewController.viewModel = StoryViewModel(repository: repository)
         viewController.coordinator = self
@@ -40,6 +44,6 @@ final class Coordinator: CoordinatorProtocol {
             return
         }
         let viewController = SFSafariViewController(url: url)
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.present(viewController, animated: true)
     }
 }

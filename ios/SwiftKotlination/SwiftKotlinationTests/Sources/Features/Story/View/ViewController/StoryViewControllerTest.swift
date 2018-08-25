@@ -5,34 +5,33 @@ final class StoryViewControllerTest: XCTestCase {
     
     var sut: StoryViewController!
     
-    func testStoryViewControllerViewDidLoad() {
-        let repository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut = StoryViewController()
-        sut.viewModel = StoryViewModel(repository: repository)
+    override func setUp() {
+        super.setUp()
         
-        sut.viewDidLoad()
+        guard let viewController = StoryViewController.storyBoardInstance else {
+            XCTFail("Expected view controller story board instantiation to succeed")
+            return
+        }
+        sut = viewController
         
-        XCTAssertEqual(sut.view, sut.storyView)
-        XCTAssertEqual(sut.view.backgroundColor, .black)
+        _ = sut.view
     }
     
     func testStoryViewControllerViewWillAppearSuccess() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
         let repository = StoryRepositoryMock(result: .success(story))
-        sut = StoryViewController()
         sut.viewModel = StoryViewModel(repository: repository)
         
         sut.viewWillAppear(false)
         
         XCTAssertEqual(sut.title, "\(story.section) - \(story.subsection)")
-        XCTAssertEqual(sut.storyView.titleLabel.text, story.title)
-        XCTAssertEqual(sut.storyView.abstractLabel.text, story.abstract)
-        XCTAssertEqual(sut.storyView.byLineLabel.text, story.byline)
+        XCTAssertEqual(sut.titleLabel.text, story.title)
+        XCTAssertEqual(sut.abstractLabel.text, story.abstract)
+        XCTAssertEqual(sut.bylineLabel.text, story.byline)
     }
     
     func testStoryViewControllerViewWillAppearFailure() {
         let repository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut = StoryViewController()
         sut.viewModel = StoryViewModel(repository: repository)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -41,24 +40,19 @@ final class StoryViewControllerTest: XCTestCase {
         
         sut.viewWillAppear(false)
         
-        XCTAssertNil(sut.title)
-        XCTAssertNil(sut.storyView.titleLabel.text)
-        XCTAssertNil(sut.storyView.abstractLabel.text)
-        XCTAssertNil(sut.storyView.byLineLabel.text)
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
     
     func testStoryViewControllerOpenUrl() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
         let repository = StoryRepositoryMock(result: .success(story))
-        sut = StoryViewController()
         sut.viewModel = StoryViewModel(repository: repository)
         
         sut.viewWillAppear(false)
         
         let coordinator = CoordinatorMock(expectedMethods: [.openUrl])
         sut.coordinator = coordinator
-        sut.storyView.urlButton.sendActions(for: .touchUpInside)
+        sut.urlButton.sendActions(for: .touchUpInside)
         wait(for: [coordinator.expectation], timeout: 1)
     }
 }

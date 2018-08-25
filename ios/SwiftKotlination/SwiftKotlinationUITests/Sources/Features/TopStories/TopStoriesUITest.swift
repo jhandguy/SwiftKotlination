@@ -26,7 +26,7 @@ final class TopStoriesUITest: XCTestCase {
             XCTAssertTrue(app.staticTexts[storyLines[index].title].isHittable)
             XCTAssertTrue(app.staticTexts[storyLines[index].byline].isHittable)
             
-            app.tables.firstMatch.cells.element(boundBy: index).buttons["SEE"].tap()
+            app.tables.firstMatch.cells.element(boundBy: index).tap()
             
             XCTAssertTrue(app.navigationBars[storyLines[index].category].isHittable)
             app.buttons["Top Stories"].tap()

@@ -6,11 +6,11 @@ final class CoordinatorTest: XCTestCase {
     
     var sut: Coordinator!
     
-    func testCoordinatorStartsWithTopStoriesViewController() {
+    func testCoordinatorStartsWithTopStoriesTableViewController() {
         sut = Coordinator(window: UIWindow(), apiClient: APIClient())
         sut.start()
         XCTAssertEqual(sut.navigationController.viewControllers.count, 1)
-        XCTAssertTrue(sut.navigationController.viewControllers.first is TopStoriesViewController)
+        XCTAssertTrue(sut.navigationController.viewControllers.first is TopStoriesTableViewController)
     }
     
     func testCoordinatorOpensStoryWithStoryViewController() {
@@ -28,7 +28,6 @@ final class CoordinatorTest: XCTestCase {
         }
         sut = Coordinator(window: UIWindow(), apiClient: APIClient())
         sut.open(url)
-        XCTAssertEqual(sut.navigationController.viewControllers.count, 1)
-        XCTAssertTrue(sut.navigationController.viewControllers.first is SFSafariViewController)
+        XCTAssertTrue(sut.navigationController.presentedViewController is SFSafariViewController)
     }
 }

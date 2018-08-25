@@ -11,6 +11,6 @@ final class SafariUITest: XCTestCase {
         
         app.launch(.openUrl(url))
         
-        XCTAssertTrue(app.navigationBars["SFSafariView"].exists)
+        XCTAssertTrue(app.buttons["URL"].isHittable)
     }
 }

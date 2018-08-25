@@ -20,12 +20,10 @@ final class StoryUITest: XCTestCase {
         XCTAssertTrue(app.staticTexts[story.abstract].isHittable)
         XCTAssertTrue(app.staticTexts[story.byline].isHittable)
         
-        app.buttons["See More"].tap()
+        app.buttons["Read more..."].tap()
         
-        XCTAssertTrue(app.buttons["\(story.section) - \(story.subsection)"].isHittable)
+        XCTAssertTrue(app.buttons["URL"].isHittable)
         
-        app.buttons["\(story.section) - \(story.subsection)"].tap()
-        
-        XCTAssertTrue(app.navigationBars["\(story.section) - \(story.subsection)"].isHittable)
+        app.buttons["Done"].tap()
     }
 }
