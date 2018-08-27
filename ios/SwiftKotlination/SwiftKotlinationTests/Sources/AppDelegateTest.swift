@@ -5,7 +5,7 @@ final class AppDelegateTest: XCTestCase {
     
     var sut: AppDelegate!
     
-    func testAppDelegateStartsCoordinator() {
+    func testAppDelegateStartsCoordinatorSuccessfully() {
         let coordinator = CoordinatorMock(expectedMethods: [.start])
         sut = AppDelegate()
         sut.coordinator = coordinator

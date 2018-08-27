@@ -1,28 +1,24 @@
-final class TopStoriesViewModel {
-    internal let repository: TopStoriesRepositoryProtocol
-    private(set) var stories: [Story]
-    
-    init(repository: TopStoriesRepositoryProtocol) {
-        self.repository = repository
-        self.stories = []
-    }
+import Foundation
+
+struct TopStoriesViewModel {
+    let topStoriesRepository: TopStoriesRepositoryProtocol
+    let imageRepository: ImageRepositoryProtocol
 }
 
 extension TopStoriesViewModel {
     func stories(_ observer: @escaping Observer<[Story]>) {
-        repository.stories { [weak self] result in
-            switch result {
-            case .success(let stories):
-                self?.stories = stories
-                
-            case .failure:
-                break
-            }
-            observer(result)
-        }
+        topStoriesRepository.stories(observer)
     }
     
     func reload() {
-        repository.fetchStories()
+        topStoriesRepository.fetchStories()
+    }
+    
+    func image(with url: String, _ observer: @escaping Observer<Data>) {
+        imageRepository.image(with: url, observer)
+    }
+    
+    var stories: [Story] {
+        return topStoriesRepository.stories
     }
 }

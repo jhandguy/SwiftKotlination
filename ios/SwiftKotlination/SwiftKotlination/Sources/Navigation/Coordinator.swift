@@ -23,8 +23,9 @@ final class Coordinator: CoordinatorProtocol {
         guard let viewController = TopStoriesTableViewController.storyBoardInstance else {
             return
         }
-        let repository = TopStoriesRepository(apiClient: apiClient)
-        viewController.viewModel = TopStoriesViewModel(repository: repository)
+        let topStoriesRepository = TopStoriesRepository(apiClient: apiClient)
+        let imageRepository = ImageRepository(apiClient: apiClient)
+        viewController.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
@@ -33,8 +34,8 @@ final class Coordinator: CoordinatorProtocol {
         guard let viewController = StoryViewController.storyBoardInstance else {
             return
         }
-        let repository = StoryRepository(story: story)
-        viewController.viewModel = StoryViewModel(repository: repository)
+        let storyRepository = StoryRepository(story: story)
+        viewController.viewModel = StoryViewModel(storyRepository: storyRepository)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

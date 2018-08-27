@@ -10,6 +10,10 @@ final class TopStoriesTableViewController: UITableViewController {
         title = "Top Stories"
         
         tableView.registerNib(TopStoriesTableViewCell.self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         viewModel
             .stories { [weak self] result in
@@ -21,13 +25,7 @@ final class TopStoriesTableViewController: UITableViewController {
                 case .failure(let error):
                     self?.presentAlertController(with: error, animated: true)
                 }
-            }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        viewModel.reload()
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,6 +39,28 @@ final class TopStoriesTableViewController: UITableViewController {
         let story = viewModel.stories[indexPath.row]
         cell.titleLabel.text = story.title
         cell.bylineLabel.text = story.byline
+        
+        guard let url = story.firstImageUrl(.small) else {
+            return cell
+        }
+        
+        viewModel.image(with: url) { result in
+            switch result {
+            case .success(let data):
+                guard let image = UIImage(data: data) else {
+                    return
+                }
+                
+                image.resize(width: 85, height: 85) { image in
+                    DispatchQueue.main.async {
+                        cell.urlImageView.image = image
+                    }
+                }
+
+            case .failure:
+                break
+            }
+        }
         
         return cell
     }

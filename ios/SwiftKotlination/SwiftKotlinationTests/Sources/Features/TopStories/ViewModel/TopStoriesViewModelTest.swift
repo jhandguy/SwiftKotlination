@@ -5,10 +5,11 @@ final class TopStoriesViewModelTest: XCTestCase {
     
     var sut: TopStoriesViewModel!
     
-    func testTopStoriesViewModelStoriesSuccess() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story]))
-        sut = TopStoriesViewModel(repository: repository)
+    func testTopStoriesViewModelFetchesTopStoriesSuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut
             .stories { result in
@@ -23,9 +24,10 @@ final class TopStoriesViewModelTest: XCTestCase {
             }
     }
     
-    func testTopStoriesViewModelStoriesFailure() {
-        let repository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut = TopStoriesViewModel(repository: repository)
+    func testTopStoriesViewModelFetchesTopStoriesUnsuccessfully() {
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut
             .stories { result in
@@ -43,9 +45,9 @@ final class TopStoriesViewModelTest: XCTestCase {
             }
     }
     
-    func testTopStoriesViewModelReloadSuccess() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story])) { result in
+    func testTopStoriesViewModelReloadsSuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story])) { result in
             switch result {
             case .success(let stories):
                 XCTAssertEqual(stories.count, 1)
@@ -55,13 +57,14 @@ final class TopStoriesViewModelTest: XCTestCase {
                 XCTFail("Reload stories should succeed, found error \(error)")
             }
         }
-        sut = TopStoriesViewModel(repository: repository)
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut.reload()
     }
     
-    func testTopStoriesViewModelReloadFailure() {
-        let repository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse)) { result in
+    func testTopStoriesViewModelReloadsUnsuccessfully() {
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse)) { result in
             switch result {
             case .success(let stories):
                 XCTFail("Reload stories should fail, found stories \(stories)")
@@ -74,7 +77,8 @@ final class TopStoriesViewModelTest: XCTestCase {
                 XCTAssertEqual(error, .invalidResponse)
             }
         }
-        sut = TopStoriesViewModel(repository: repository)
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut.reload()
     }

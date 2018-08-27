@@ -1,13 +1,9 @@
 struct StoryViewModel {
-    private let repository: StoryRepositoryProtocol
-    
-    init(repository: StoryRepositoryProtocol) {
-        self.repository = repository
-    }
+    let storyRepository: StoryRepositoryProtocol
 }
 
 extension StoryViewModel {
     func story(_ observer: @escaping Observer<Story>) {
-        return repository.story(observer)
+        return storyRepository.story(observer)
     }
 }

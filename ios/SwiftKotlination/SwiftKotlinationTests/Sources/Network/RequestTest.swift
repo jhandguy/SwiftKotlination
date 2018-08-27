@@ -5,7 +5,22 @@ final class RequestTest: XCTestCase {
     
     var sut: Request!
     
-    func testFetchTopStoriesRequest() {
+    func testFetchImageRequestSuccessfully() {
+        let url = "https://static01.nyt.com/images/2018/08/27/opinion/27gordon/27gordon-thumbLarge.jpg"
+        sut = .fetchImage(url)
+        
+        XCTAssertEqual(sut.url, url)
+        XCTAssertEqual(sut.method, .get)
+        
+        switch sut.parameters {
+        case .none:
+            break
+        default:
+            XCTFail("Expected no parameters")
+        }
+    }
+    
+    func testFetchTopStoriesRequestSuccessfully() {
         sut = .fetchTopStories
         
         XCTAssertEqual(sut.url, "https://api.nytimes.com/svc/topstories/v2/home.json")

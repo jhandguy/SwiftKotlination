@@ -1,20 +1,60 @@
 {
     "results": [
         {
-            "section": "Briefing",
-            "subsection": "",
-            "title": "Donald Trump, Australia, Hawaii: Your Friday Briefing",
-            "abstract": "Here\u2019s what you need to know to start your day.",
-            "url": "https:\/\/www.nytimes.com\/2018\/08\/24\/briefing\/donald-trump-australia-hawaii.html",
-            "byline": "By CHRIS STANFORD"
+            "section": "U.S.",
+            "subsection": "Politics",
+            "title": "Preliminary Nafta Deal Reached Between U.S. and Mexico",
+            "abstract": "The agreement is a major step for President Trump, who has threatened to scrap the pact altogether. But Canada is still on the sidelines, and many issues are unresolved.",
+            "url": "https://www.nytimes.com/2018/08/27/us/politics/us-mexico-nafta-deal.html",
+            "byline": "By ANA SWANSON and KATIE ROGERS",
+            "multimedia": [
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbStandard.jpg",
+                    "format": "Standard Thumbnail"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbLarge.jpg",
+                    "format": "thumbLarge"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-articleInline-v2.jpg",
+                    "format": "Normal"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-mediumThreeByTwo210-v2.jpg",
+                    "format": "mediumThreeByTwo210"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-superJumbo-v2.jpg",
+                    "format": "superJumbo"
+                }
+            ]
         },
         {
-            "section": "New York",
-            "subsection": "Music",
-            "title": "New York Today: A Leonard Bernstein Centennial",
-            "abstract": "Friday: Remembering a music man and your favorite things about fall.",
-            "url": "https:\/\/www.nytimes.com\/2018\/08\/24\/nyregion\/new-york-today-leonard-bernstein-centennial.html",
-            "byline": "By JONATHAN WOLFE"
+            "section": "U.S.",
+            "subsection": "",
+            "title": "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
+            "abstract": "The vacant Senate seat of the late John McCain has exposed the rift between his followers and the party’s Trumpian base.",
+            "url": "https://www.nytimes.com/2018/08/26/us/politics/john-mccain-trump-replacement.html",
+            "byline": "By JONATHAN MARTIN",
+            "multimedia": [
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbStandard.jpg",
+                    "format": "Standard Thumbnail"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbLarge.jpg",
+                    "format": "thumbLarge"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-articleInline-v2.jpg",
+                    "format": "Normal"
+                },
+                {
+                    "url": "https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-mediumThreeByTwo210-v2.jpg",
+                    "format": "mediumThreeByTwo210"
+                }
+            ]
         }
     ]
 }

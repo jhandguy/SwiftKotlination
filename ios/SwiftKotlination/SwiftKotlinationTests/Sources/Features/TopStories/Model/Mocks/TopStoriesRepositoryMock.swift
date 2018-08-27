@@ -18,4 +18,13 @@ final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
     func fetchStories() {
         stories(observer)
     }
+    
+    var stories: [Story] {
+        switch result {
+        case .success(let stories):
+            return stories
+        case .failure:
+            return []
+        }
+    }
 }

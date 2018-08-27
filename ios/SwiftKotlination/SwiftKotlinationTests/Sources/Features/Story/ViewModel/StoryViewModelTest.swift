@@ -5,10 +5,10 @@ final class StoryViewModelTest: XCTestCase {
     
     var sut: StoryViewModel!
     
-    func testStoryViewModelStorySuccess() {
-        let expectedStory = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = StoryRepositoryMock(result: .success(expectedStory))
-        sut = StoryViewModel(repository: repository)
+    func testStoryViewModelFetchesStorySuccessfully() {
+        let expectedStory = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let storyRepository = StoryRepositoryMock(result: .success(expectedStory))
+        sut = StoryViewModel(storyRepository: storyRepository)
         sut
             .story { result in
                 switch result {
@@ -21,9 +21,9 @@ final class StoryViewModelTest: XCTestCase {
             }
     }
     
-    func testStoryViewModelStoryFailure() {
-        let repository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut = StoryViewModel(repository: repository)
+    func testStoryViewModelFetchesStoryUnsuccesfully() {
+        let storyRepository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = StoryViewModel(storyRepository: storyRepository)
         
         sut
             .story { result in

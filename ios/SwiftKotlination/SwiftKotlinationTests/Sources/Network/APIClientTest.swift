@@ -5,7 +5,7 @@ final class APIClientTest: XCTestCase {
     
     var sut: APIClient!
     
-    func testObserveRequest() {
+    func testObserveRequestSuccessfully() {
         let session = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json))
@@ -28,7 +28,7 @@ final class APIClientTest: XCTestCase {
         }
     }
     
-    func testExecuteRequest() {
+    func testExecuteRequestSuccessfully() {
         let session = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json)),
@@ -54,7 +54,7 @@ final class APIClientTest: XCTestCase {
         }
     }
     
-    func testObserveRequestSeveralTimesAndExecute() {
+    func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
         let session = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json)),

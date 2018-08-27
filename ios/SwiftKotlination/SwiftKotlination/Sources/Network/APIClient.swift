@@ -18,6 +18,7 @@ final class APIClient {
         guard
             !observers.isEmpty,
             let urlRequest = build(request) else {
+                observers.forEach { $0(.failure(NetworkError.invalidRequest)) }
                 return
         }
         

@@ -17,10 +17,10 @@ final class StoryViewControllerTest: XCTestCase {
         _ = sut.view
     }
     
-    func testStoryViewControllerViewWillAppearSuccess() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = StoryRepositoryMock(result: .success(story))
-        sut.viewModel = StoryViewModel(repository: repository)
+    func testStoryViewControllerFetchesStorySuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let storyRepository = StoryRepositoryMock(result: .success(story))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
         
         sut.viewWillAppear(false)
         
@@ -30,9 +30,9 @@ final class StoryViewControllerTest: XCTestCase {
         XCTAssertEqual(sut.bylineLabel.text, story.byline)
     }
     
-    func testStoryViewControllerViewWillAppearFailure() {
-        let repository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(repository: repository)
+    func testStoryViewControllerFetchesStoryUnsuccessfully() {
+        let storyRepository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -43,10 +43,10 @@ final class StoryViewControllerTest: XCTestCase {
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
     
-    func testStoryViewControllerOpenUrl() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = StoryRepositoryMock(result: .success(story))
-        sut.viewModel = StoryViewModel(repository: repository)
+    func testStoryViewControllerOpensUrlSuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let storyRepository = StoryRepositoryMock(result: .success(story))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
         
         sut.viewWillAppear(false)
         

@@ -16,8 +16,16 @@ final class TopStoriesUITest: XCTestCase {
         XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
         
         let storyLines = [
-            (title: "Donald Trump, Australia, Hawaii: Your Friday Briefing", byline: "By CHRIS STANFORD", category: "Briefing"),
-            (title: "New York Today: A Leonard Bernstein Centennial", byline: "By JONATHAN WOLFE", category: "New York - Music"),
+            (
+                title: "Preliminary Nafta Deal Reached Between U.S. and Mexico",
+                byline: "By ANA SWANSON and KATIE ROGERS",
+                category: "U.S. - Politics"
+            ),
+            (
+                title: "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
+                byline: "By JONATHAN MARTIN",
+                category: "U.S."
+            )
         ]
         
         XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)

@@ -5,12 +5,34 @@ final class StoryUITest: XCTestCase {
     
     func testFeatureStory() {
         let story = Story(
-            section: "New York",
-            subsection: "Music",
-            title: "New York Today: A Leonard Bernstein Centennial",
-            abstract: "Friday: Remembering a music man and your favorite things about fall.",
-            byline: "By JONATHAN WOLFE",
-            url: "https://www.nytimes.com/2018/08/24/nyregion/new-york-today-leonard-bernstein-centennial.html"
+            section: "U.S.",
+            subsection: "Politics",
+            title: "A Trump Endorsement Can Decide a Race. Here’s How to Get One.",
+            abstract: "The president’s grip on G.O.P. primary voters is as strong as it has been since he seized the party’s nomination.",
+            byline: "By JONATHAN MARTIN and MAGGIE HABERMAN",
+            url: "https://www.nytimes.com/2018/08/27/us/politics/trump-endorsements.html",
+            multimedia: [
+                Mutlimedia(
+                    url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-thumbStandard.jpg",
+                    format: .icon
+                ),
+                Mutlimedia(
+                    url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-thumbLarge.jpg",
+                    format: .small
+                ),
+                Mutlimedia(
+                    url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-articleInline.jpg",
+                    format: .normal
+                ),
+                Mutlimedia(
+                    url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-mediumThreeByTwo210.jpg",
+                    format: .medium
+                ),
+                Mutlimedia(
+                    url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-superJumbo.jpg",
+                    format: .large
+                )
+            ]
         )
         
         app.launch(.openStory(story))

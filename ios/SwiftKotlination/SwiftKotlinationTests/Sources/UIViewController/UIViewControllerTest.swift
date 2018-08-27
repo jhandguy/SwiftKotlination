@@ -17,7 +17,7 @@ final class UIViewControllerTest: XCTestCase {
         sut.viewDidLoad()
     }
     
-    func testViewControllerPresentAlertController() {
+    func testViewControllerPresentsAlertControllerSuccessfully() {
         let error: NetworkError = .invalidResponse
         sut.presentAlertController(with: error, animated: false)
         

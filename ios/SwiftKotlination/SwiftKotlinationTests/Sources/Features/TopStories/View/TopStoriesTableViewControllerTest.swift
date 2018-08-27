@@ -16,113 +16,74 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut = viewController
     }
     
-    func testTopStoriesTableViewControllerViewDidLoadSuccess() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story]))
-        sut.viewModel = TopStoriesViewModel(repository: repository)
+    func testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        sut.viewModel = topStoriesViewModel
         
         sut.viewDidLoad()
+        sut.viewWillAppear(false)
         
-        let viewDidLoad = expectation(description: "Expected view to be loaded")
+        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
         DispatchQueue.main.async {
-            XCTAssertEqual(self.sut.title, "Top Stories")
-            
-            XCTAssertEqual(self.sut.tableView.visibleCells.count, 1)
-            
-            guard let cell = self.sut.tableView.cellForRow(at: IndexPath(item: 0, section: 0)) as? TopStoriesTableViewCell else {
-                XCTFail("Cell should be of type \(TopStoriesTableViewCell.self)")
-                return
-            }
-            
-            XCTAssertEqual(cell.titleLabel.text, story.title)
-            XCTAssertEqual(cell.bylineLabel.text, story.byline)
-            
-            viewDidLoad.fulfill()
+            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
+            tableViewIsNotEmpty.fulfill()
         }
-        wait(for: [viewDidLoad], timeout: 1)
+        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        
+        topStoriesRepository.result = .success([])
+        topStoriesViewModel.reload()
+        
+        let tableViewIsEmpty = expectation(description: "Expected table view to be empty")
+        DispatchQueue.main.async {
+            XCTAssertTrue(self.sut.tableView.visibleCells.isEmpty)
+            tableViewIsEmpty.fulfill()
+        }
+        wait(for: [tableViewIsEmpty], timeout: 1)
     }
     
-    func testTopStoriesTableViewControllerViewDidLoadFailure() {
-        let repository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(repository: repository)
+    func testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        sut.viewModel = topStoriesViewModel
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
         window.rootViewController = sut
         
         sut.viewDidLoad()
+        sut.viewWillAppear(false)
         
-        let viewDidLoad = expectation(description: "Expected view to be loaded")
-        DispatchQueue.main.async {
-            XCTAssertTrue(self.sut.tableView.visibleCells.isEmpty)
-            XCTAssertTrue(self.sut.presentedViewController is UIAlertController)
-            viewDidLoad.fulfill()
-        }
-        wait(for: [viewDidLoad], timeout: 1)
-    }
-    
-    func testTopStoriesTableViewControllerViewWillAppearSuccess() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story]))
-        sut.viewModel = TopStoriesViewModel(repository: repository)
-        
-        sut.viewDidLoad()
-        
-        let viewDidLoad = expectation(description: "Expected view to be loaded")
+        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            viewDidLoad.fulfill()
+            tableViewIsNotEmpty.fulfill()
         }
-        wait(for: [viewDidLoad], timeout: 1)
+        wait(for: [tableViewIsNotEmpty], timeout: 1)
         
-        repository.result = .success([])
-        sut.viewWillAppear(true)
+        topStoriesRepository.result = .failure(NetworkError.invalidResponse)
+        topStoriesViewModel.reload()
         
-        let viewWillAppear = expectation(description: "Expected view to appear")
-        DispatchQueue.main.async {
-            XCTAssertTrue(self.sut.tableView.visibleCells.isEmpty)
-            viewWillAppear.fulfill()
-        }
-        wait(for: [viewWillAppear], timeout: 1)
-    }
-    
-    func testTopStoriesTableViewControllerViewWillAppearFailure() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story]))
-        sut = TopStoriesTableViewController()
-        sut.viewModel = TopStoriesViewModel(repository: repository)
-        
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        window.rootViewController = sut
-        
-        sut.viewDidLoad()
-        
-        let viewDidLoad = expectation(description: "Expected view to be loaded")
-        DispatchQueue.main.async {
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            viewDidLoad.fulfill()
-        }
-        wait(for: [viewDidLoad], timeout: 1)
-        
-        repository.result = .failure(NetworkError.invalidResponse)
-        sut.viewWillAppear(true)
-        
-        let viewWillAppear = expectation(description: "Expected view to appear")
+        let alertControllerIsPresented = expectation(description: "Expected alert controller to be presented")
         DispatchQueue.main.async {
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             XCTAssertTrue(self.sut.presentedViewController is UIAlertController)
-            viewWillAppear.fulfill()
+            alertControllerIsPresented.fulfill()
         }
-        wait(for: [viewWillAppear], timeout: 1)
+        wait(for: [alertControllerIsPresented], timeout: 1)
     }
     
-    func testTopStoriesTableViewControllerOpenStory() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url")
-        let repository = TopStoriesRepositoryMock(result: .success([story]))
+    func testTopStoriesTableViewControllerOpensStorySuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         let coordinator = CoordinatorMock(expectedMethods: [.openStory])
         sut = TopStoriesTableViewController()
-        sut.viewModel = TopStoriesViewModel(repository: repository)
+        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         sut.coordinator = coordinator
         
         sut.viewDidLoad()
