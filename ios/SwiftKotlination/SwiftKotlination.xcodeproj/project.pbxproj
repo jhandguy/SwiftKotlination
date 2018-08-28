@@ -252,34 +252,18 @@
 		0F2026EC213343C8009B80CE /* TopStories */ = {
 			isa = PBXGroup;
 			children = (
-				0F2026ED213343D2009B80CE /* View */,
-			);
-			path = TopStories;
-			sourceTree = "<group>";
-		};
-		0F2026ED213343D2009B80CE /* View */ = {
-			isa = PBXGroup;
-			children = (
 				0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */,
 				0F4A205321314B80002543B8 /* TopStoriesTableViewController.storyboard */,
 			);
-			path = View;
+			path = TopStories;
 			sourceTree = "<group>";
 		};
 		0F2026EE213343E4009B80CE /* Story */ = {
 			isa = PBXGroup;
 			children = (
-				0F2026EF213343E9009B80CE /* View */,
-			);
-			path = Story;
-			sourceTree = "<group>";
-		};
-		0F2026EF213343E9009B80CE /* View */ = {
-			isa = PBXGroup;
-			children = (
 				0F4A206021316ADD002543B8 /* StoryViewController.storyboard */,
 			);
-			path = View;
+			path = Story;
 			sourceTree = "<group>";
 		};
 		0F2026F021334515009B80CE /* Extensions */ = {
