@@ -21,7 +21,11 @@ final class TopStoriesRepositoryTest: XCTestCase {
                 )
             ]
         )
-        let apiClient = APIClientMock(result: .success(topStories.json))
+        guard let data = topStories.data else {
+            XCTFail("Invalid data")
+            return
+        }
+        let apiClient = APIClientMock(result: .success(data))
         sut = TopStoriesRepository(apiClient: apiClient)
         sut
             .stories { result in
@@ -33,6 +37,19 @@ final class TopStoriesRepositoryTest: XCTestCase {
                     XCTFail("Fetch TopStories should succeed, found error \(error)")
                 }
             }
+        
+        apiClient.result = .failure(NetworkError.invalidRequest)
+        
+        sut
+            .stories { result in
+                switch result {
+                case .success(let stories):
+                    XCTAssertEqual(stories, topStories.results)
+                    
+                case .failure(let error):
+                    XCTFail("Fetch TopStories should succeed, found error \(error)")
+                }
+        }
     }
     
     func testTopStoriesRepositoryFetchesTopStoriesUnsuccessfully() {

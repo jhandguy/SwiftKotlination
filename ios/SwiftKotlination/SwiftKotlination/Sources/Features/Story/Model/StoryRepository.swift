@@ -3,7 +3,7 @@ protocol StoryRepositoryProtocol {
 }
 
 final class StoryRepository: StoryRepositoryProtocol {
-    var story: Story
+    internal var story: Story
     
     init(story: Story) {
         self.story = story

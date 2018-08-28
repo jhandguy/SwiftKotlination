@@ -36,11 +36,12 @@ final class TopStoriesTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(TopStoriesTableViewCell.self, for: indexPath) else {
             return UITableViewCell()
         }
+        
         let story = viewModel.stories[indexPath.row]
         cell.titleLabel.text = story.title
         cell.bylineLabel.text = story.byline
         
-        guard let url = story.firstImageUrl(.small) else {
+        guard let url = story.imageUrl(.small) else {
             return cell
         }
         
@@ -51,10 +52,8 @@ final class TopStoriesTableViewController: UITableViewController {
                     return
                 }
                 
-                image.resize(width: 85, height: 85) { image in
-                    DispatchQueue.main.async {
-                        cell.urlImageView.image = image
-                    }
+                DispatchQueue.main.async {
+                    cell.multimediaImageView.image = image
                 }
 
             case .failure:

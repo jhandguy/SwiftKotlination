@@ -77,6 +77,88 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         wait(for: [alertControllerIsPresented], timeout: 1)
     }
     
+    func testTopStoriesTableViewControllerFetchesImageSuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        
+        let file = File("28DC-nafta-thumbLarge", .jpg)
+        guard
+            let data = file.data,
+            let expectedImage = UIImage(data: data) else {
+                
+            XCTFail("Invalid image file")
+            return
+        }
+        let imageRepository = ImageRepositoryMock(result: .success(data))
+        
+        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        sut.viewModel = topStoriesViewModel
+        
+        sut.viewDidLoad()
+        sut.viewWillAppear(false)
+        
+        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
+        DispatchQueue.main.async {
+            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
+            tableViewIsNotEmpty.fulfill()
+        }
+        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        
+        let imageIsFetched = expectation(description: "Expected image to be fetched")
+        DispatchQueue.main.async {
+            guard
+                let cell = self.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
+                let image = cell.multimediaImageView.image else {
+                    
+                    XCTFail("Invalid cell")
+                    return
+            }
+            
+            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+            imageIsFetched.fulfill()
+        }
+        wait(for: [imageIsFetched], timeout: 1)
+    }
+    
+    func testTopStoriesTableViewControllerFetchesImageUnsuccessfully() {
+        guard let expectedImage = UIImage(named: "Empty Placeholder Image") else {
+            
+            XCTFail("Invalid image file")
+            return
+        }
+        
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        sut.viewModel = topStoriesViewModel
+        
+        sut.viewDidLoad()
+        sut.viewWillAppear(false)
+        
+        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
+        DispatchQueue.main.async {
+            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
+            tableViewIsNotEmpty.fulfill()
+        }
+        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        
+        let imageIsFetched = expectation(description: "Expected image to be fetched")
+        DispatchQueue.main.async {
+            guard
+                let cell = self.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
+                let image = cell.multimediaImageView.image else {
+                    
+                    XCTFail("Invalid cell")
+                    return
+            }
+            
+            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+            imageIsFetched.fulfill()
+        }
+        wait(for: [imageIsFetched], timeout: 1)
+    }
+    
     func testTopStoriesTableViewControllerOpensStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))

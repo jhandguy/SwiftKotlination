@@ -4,9 +4,11 @@ import XCTest
 final class TopStoriesUITest: XCTestCase {
     private lazy var app: XCUIApplication = XCUIApplication()
     
-    func testFeatureTopStoriesSuccess() {
+    func testFeatureTopStoriesSuccessfully() {
         let sessionMock = URLSessionMock(
             responses: [
+                Response(File("27arizpolitics7-thumbLarge", .jpg)),
+                Response(File("28DC-nafta-thumbLarge", .jpg)),
                 Response(File("top_stories", .json))
             ]
         )
@@ -42,7 +44,7 @@ final class TopStoriesUITest: XCTestCase {
         }
     }
     
-    func testFeatureTopStoriesFailure() {
+    func testFeatureTopStoriesUnsuccessfully() {
         let sessionMock = URLSessionMock(
             responses: [
                 Response(error: .invalidResponse)

@@ -1,14 +1,14 @@
 import Foundation
 
 protocol TopStoriesRepositoryProtocol {
+    var stories: [Story] { get }
     func stories(_ observer: @escaping Observer<[Story]>)
     func fetchStories()
-    var stories: [Story] { get }
 }
 
 final class TopStoriesRepository: TopStoriesRepositoryProtocol {
     private let apiClient: APIClientProtocol
-    var stories: [Story]
+    internal var stories: [Story]
     
     init(apiClient: APIClientProtocol, stories: [Story] = []) {
         self.apiClient = apiClient
@@ -38,7 +38,7 @@ final class TopStoriesRepository: TopStoriesRepositoryProtocol {
         
         return observer(.success(stories))
     }
-    
+
     func fetchStories() {
         stories = []
         apiClient.execute(.fetchTopStories)

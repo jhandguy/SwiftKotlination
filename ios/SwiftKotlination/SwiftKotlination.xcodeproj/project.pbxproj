@@ -17,9 +17,11 @@
 		0F170549212FDF3A00F87958 /* UIViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F170548212FDF3A00F87958 /* UIViewControllerTest.swift */; };
 		0F2027002133DE17009B80CE /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2026FF2133DE17009B80CE /* ImageRepository.swift */; };
 		0F2027022133DFC8009B80CE /* Mutlimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2027012133DFC8009B80CE /* Mutlimedia.swift */; };
-		0F202706213435E1009B80CE /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F202705213435E1009B80CE /* UIImage+Resize.swift */; };
 		0F202707213469A9009B80CE /* Mutlimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2027012133DFC8009B80CE /* Mutlimedia.swift */; };
 		0F20270B21346EAE009B80CE /* ImageRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20270A21346EAE009B80CE /* ImageRepositoryMock.swift */; };
+		0F26DD6321353E9200E50417 /* ImageRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26DD6221353E9200E50417 /* ImageRepositoryTests.swift */; };
+		0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */; };
+		0F26DD6921354B3D00E50417 /* 28DC-nafta-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
 		0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4AA212D95750090A69A /* APIClientTest.swift */; };
@@ -119,8 +121,10 @@
 		0F170548212FDF3A00F87958 /* UIViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerTest.swift; sourceTree = "<group>"; };
 		0F2026FF2133DE17009B80CE /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		0F2027012133DFC8009B80CE /* Mutlimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutlimedia.swift; sourceTree = "<group>"; };
-		0F202705213435E1009B80CE /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		0F20270A21346EAE009B80CE /* ImageRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryMock.swift; sourceTree = "<group>"; };
+		0F26DD6221353E9200E50417 /* ImageRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryTests.swift; sourceTree = "<group>"; };
+		0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-thumbLarge.jpg"; sourceTree = "<group>"; };
+		0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28DC-nafta-thumbLarge.jpg"; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
 		0F3EA4AA212D95750090A69A /* APIClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTest.swift; sourceTree = "<group>"; };
@@ -282,7 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				0F2026F12133452C009B80CE /* UIControl */,
-				0F202704213435CF009B80CE /* UIImage */,
 				0F2026F22133453A009B80CE /* UITableView */,
 				0F2026F321334544009B80CE /* UITableViewCell */,
 				0F2026F42133454F009B80CE /* UIViewController */,
@@ -362,6 +365,8 @@
 			isa = PBXGroup;
 			children = (
 				0F4A204621302503002543B8 /* top_stories.json */,
+				0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */,
+				0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */,
 			);
 			path = TopStories;
 			sourceTree = "<group>";
@@ -384,17 +389,10 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0F202704213435CF009B80CE /* UIImage */ = {
-			isa = PBXGroup;
-			children = (
-				0F202705213435E1009B80CE /* UIImage+Resize.swift */,
-			);
-			path = UIImage;
-			sourceTree = "<group>";
-		};
 		0F20270821346E90009B80CE /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0F26DD6221353E9200E50417 /* ImageRepositoryTests.swift */,
 				0F20270921346E9B009B80CE /* Mocks */,
 			);
 			path = Model;
@@ -929,9 +927,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F26DD6921354B3D00E50417 /* 28DC-nafta-thumbLarge.jpg in Resources */,
 				0F4A204921302B1B002543B8 /* top_stories.json in Resources */,
 				0F4A206121316ADD002543B8 /* StoryViewController.storyboard in Resources */,
 				0F4A205421314B80002543B8 /* TopStoriesTableViewController.storyboard in Resources */,
+				0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */,
 				0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */,
 				0F4A205A21316107002543B8 /* TopStoriesTableViewCell.xib in Resources */,
 				0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */,
@@ -992,7 +992,6 @@
 				0F3EA4AE212D99CD0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F4A205C213169FF002543B8 /* UIViewController+Identifiable.swift in Sources */,
 				0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */,
-				0F202706213435E1009B80CE /* UIImage+Resize.swift in Sources */,
 				0FA5F7A220A877CE009C30B4 /* Decodable+JSON.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
 				0F4A204D213030F5002543B8 /* Response.swift in Sources */,
@@ -1006,6 +1005,7 @@
 				0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */,
 				0FA5F77E20A5D239009C30B4 /* StoryViewControllerTest.swift in Sources */,
 				0F170549212FDF3A00F87958 /* UIViewControllerTest.swift in Sources */,
+				0F26DD6321353E9200E50417 /* ImageRepositoryTests.swift in Sources */,
 				0FA5F79320A5F3AB009C30B4 /* TopStoriesTableViewControllerTest.swift in Sources */,
 				0FA5F78620A5DFA5009C30B4 /* StoryViewModelTest.swift in Sources */,
 				0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */,

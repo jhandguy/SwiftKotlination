@@ -11,39 +11,51 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="cyY-2Y-Min" detailTextLabel="bo3-2b-6r5" imageView="9el-q8-LHT" style="IBUITableViewCellStyleSubtitle" id="63M-db-aqX" customClass="TopStoriesTableViewCell" customModule="SwiftKotlination" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="470" height="104"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="W3e-ci-d0q" customClass="TopStoriesTableViewCell" customModule="SwiftKotlination" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="730" height="151"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="63M-db-aqX" id="Kl2-Un-3yZ">
-                <rect key="frame" x="0.0" y="0.0" width="470" height="103.5"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W3e-ci-d0q" id="iz8-RM-CHt">
+                <rect key="frame" x="0.0" y="0.0" width="730" height="150.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cyY-2Y-Min">
-                        <rect key="frame" x="120" y="32" width="35.5" height="20.5"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Empty Placeholder Image" translatesAutoresizingMaskIntoConstraints="NO" id="9OF-uo-KAb">
+                        <rect key="frame" x="0.0" y="0.5" width="150" height="150"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="G1q-JF-EhM"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIQ-Yz-ktJ" userLabel="Title Label">
+                        <rect key="frame" x="166" y="8" width="548" height="20.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Byline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bo3-2b-6r5">
-                        <rect key="frame" x="120" y="55.5" width="34.5" height="14.5"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOQ-fy-8ih" userLabel="Byline Label">
+                        <rect key="frame" x="166" y="36.5" width="548" height="18"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Empty Placeholder Image" id="9el-q8-LHT">
-                        <rect key="frame" x="20" y="9" width="85" height="85"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="9OF-uo-KAb" firstAttribute="leading" secondItem="iz8-RM-CHt" secondAttribute="leading" id="4zj-np-1Bz"/>
+                    <constraint firstAttribute="bottom" secondItem="9OF-uo-KAb" secondAttribute="bottom" id="96s-jA-oBN"/>
+                    <constraint firstAttribute="trailing" secondItem="nOQ-fy-8ih" secondAttribute="trailing" constant="16" id="B7h-Et-PXl"/>
+                    <constraint firstItem="nOQ-fy-8ih" firstAttribute="top" secondItem="lIQ-Yz-ktJ" secondAttribute="bottom" constant="8" id="FwW-md-nTt"/>
+                    <constraint firstItem="lIQ-Yz-ktJ" firstAttribute="leading" secondItem="9OF-uo-KAb" secondAttribute="trailing" constant="16" id="Qd1-ZE-XhO"/>
+                    <constraint firstAttribute="trailing" secondItem="lIQ-Yz-ktJ" secondAttribute="trailing" constant="16" id="SMz-m1-y2Y"/>
+                    <constraint firstItem="lIQ-Yz-ktJ" firstAttribute="top" secondItem="iz8-RM-CHt" secondAttribute="top" constant="8" id="lSo-Vs-DxC"/>
+                    <constraint firstItem="nOQ-fy-8ih" firstAttribute="leading" secondItem="9OF-uo-KAb" secondAttribute="trailing" constant="16" id="oIh-dJ-8yQ"/>
+                    <constraint firstItem="9OF-uo-KAb" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nOQ-fy-8ih" secondAttribute="bottom" constant="8" id="vyS-0y-EGL"/>
+                    <constraint firstItem="9OF-uo-KAb" firstAttribute="top" secondItem="iz8-RM-CHt" secondAttribute="top" id="xYO-ez-AeN"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="bylineLabel" destination="bo3-2b-6r5" id="5UZ-g6-eA8"/>
-                <outlet property="titleLabel" destination="cyY-2Y-Min" id="R3u-YT-OCa"/>
-                <outlet property="urlImageView" destination="9el-q8-LHT" id="pIa-zz-0ar"/>
+                <outlet property="bylineLabel" destination="nOQ-fy-8ih" id="NCa-3T-YMr"/>
+                <outlet property="multimediaImageView" destination="9OF-uo-KAb" id="Pvn-DU-Syg"/>
+                <outlet property="titleLabel" destination="lIQ-Yz-ktJ" id="3L7-0L-9Ej"/>
             </connections>
-            <point key="canvasLocation" x="114" y="550"/>
+            <point key="canvasLocation" x="78" y="886.5"/>
         </tableViewCell>
     </objects>
     <resources>

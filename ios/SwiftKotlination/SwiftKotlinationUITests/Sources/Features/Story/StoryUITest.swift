@@ -3,7 +3,7 @@ import XCTest
 final class StoryUITest: XCTestCase {
     private lazy var app: XCUIApplication = XCUIApplication()
     
-    func testFeatureStory() {
+    func testFeatureStorySuccessfully() {
         let story = Story(
             section: "U.S.",
             subsection: "Politics",

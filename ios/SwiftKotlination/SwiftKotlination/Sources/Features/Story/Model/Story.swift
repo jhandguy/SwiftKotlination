@@ -9,7 +9,7 @@ struct Story: Codable, Equatable {
 }
 
 extension Story {
-    func firstImageUrl(_ format: Mutlimedia.Format) -> String? {
+    func imageUrl(_ format: Mutlimedia.Format) -> String? {
         return multimedia.filter { $0.format == .small }.first?.url
     }
 }
