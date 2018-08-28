@@ -7,6 +7,7 @@ final class TopStoriesUITest: XCTestCase {
     func testFeatureTopStoriesSuccessfully() {
         let sessionMock = URLSessionMock(
             responses: [
+                Response(File("top_stories", .json)),
                 Response(File("27arizpolitics7-thumbLarge", .jpg)),
                 Response(File("28DC-nafta-thumbLarge", .jpg)),
                 Response(File("top_stories", .json))
@@ -42,6 +43,12 @@ final class TopStoriesUITest: XCTestCase {
             app.buttons["Top Stories"].tap()
             XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
         }
+        
+        let start = app.tables.cells.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let finish = app.tables.cells.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 2))
+        start.press(forDuration: 0, thenDragTo: finish)
+        
+        XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)
     }
     
     func testFeatureTopStoriesUnsuccessfully() {

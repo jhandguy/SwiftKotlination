@@ -20,8 +20,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        sut.viewModel = topStoriesViewModel
+        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut.viewDidLoad()
         sut.viewWillAppear(false)
@@ -34,7 +33,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         wait(for: [tableViewIsNotEmpty], timeout: 1)
         
         topStoriesRepository.result = .success([])
-        topStoriesViewModel.reload()
+        sut.refreshControl?.sendActions(for: .valueChanged)
         
         let tableViewIsEmpty = expectation(description: "Expected table view to be empty")
         DispatchQueue.main.async {
@@ -48,8 +47,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        sut.viewModel = topStoriesViewModel
+        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -66,7 +64,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         wait(for: [tableViewIsNotEmpty], timeout: 1)
         
         topStoriesRepository.result = .failure(NetworkError.invalidResponse)
-        topStoriesViewModel.reload()
+        sut.refreshControl?.sendActions(for: .valueChanged)
         
         let alertControllerIsPresented = expectation(description: "Expected alert controller to be presented")
         DispatchQueue.main.async {
@@ -78,19 +76,17 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
     }
     
     func testTopStoriesTableViewControllerFetchesImageSuccessfully() {
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        
-        let file = File("28DC-nafta-thumbLarge", .jpg)
         guard
-            let data = file.data,
+            let data = File("28DC-nafta-thumbLarge", .jpg).data,
             let expectedImage = UIImage(data: data) else {
                 
-            XCTFail("Invalid image file")
-            return
+                XCTFail("Invalid image")
+                return
         }
-        let imageRepository = ImageRepositoryMock(result: .success(data))
         
+        let imageRepository = ImageRepositoryMock(result: .success(data))
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         sut.viewModel = topStoriesViewModel
         
@@ -122,16 +118,14 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
     
     func testTopStoriesTableViewControllerFetchesImageUnsuccessfully() {
         guard let expectedImage = UIImage(named: "Empty Placeholder Image") else {
-            
-            XCTFail("Invalid image file")
+            XCTFail("Invalid image")
             return
         }
         
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        sut.viewModel = topStoriesViewModel
+        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut.viewDidLoad()
         sut.viewWillAppear(false)

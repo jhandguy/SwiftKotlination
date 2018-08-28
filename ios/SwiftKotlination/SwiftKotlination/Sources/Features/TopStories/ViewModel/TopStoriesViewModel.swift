@@ -10,7 +10,7 @@ extension TopStoriesViewModel {
         topStoriesRepository.stories(observer)
     }
     
-    func reload() {
+    func refresh() {
         topStoriesRepository.fetchStories()
     }
     

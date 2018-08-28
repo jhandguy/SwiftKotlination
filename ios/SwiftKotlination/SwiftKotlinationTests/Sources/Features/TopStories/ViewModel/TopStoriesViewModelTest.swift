@@ -45,7 +45,7 @@ final class TopStoriesViewModelTest: XCTestCase {
             }
     }
     
-    func testTopStoriesViewModelReloadsSuccessfully() {
+    func testTopStoriesViewModelRefreshsSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story])) { result in
             switch result {
@@ -54,20 +54,20 @@ final class TopStoriesViewModelTest: XCTestCase {
                 XCTAssertEqual(stories.first, story)
                 
             case .failure(let error):
-                XCTFail("Reload stories should succeed, found error \(error)")
+                XCTFail("Refresh stories should succeed, found error \(error)")
             }
         }
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.reload()
+        sut.refresh()
     }
     
-    func testTopStoriesViewModelReloadsUnsuccessfully() {
+    func testTopStoriesViewModelRefreshsUnsuccessfully() {
         let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse)) { result in
             switch result {
             case .success(let stories):
-                XCTFail("Reload stories should fail, found stories \(stories)")
+                XCTFail("Refresh stories should fail, found stories \(stories)")
                 
             case .failure(let error):
                 guard let error = error as? NetworkError else {
@@ -80,6 +80,6 @@ final class TopStoriesViewModelTest: XCTestCase {
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.reload()
+        sut.refresh()
     }
 }

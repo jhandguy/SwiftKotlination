@@ -10,6 +10,11 @@ final class TopStoriesTableViewController: UITableViewController {
         title = "Top Stories"
         
         tableView.registerNib(TopStoriesTableViewCell.self)
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.on(.valueChanged) {
+            self.viewModel.refresh()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +30,10 @@ final class TopStoriesTableViewController: UITableViewController {
                 case .failure(let error):
                     self?.presentAlertController(with: error, animated: true)
                 }
+                
+                DispatchQueue.main.async {
+                    self?.refreshControl?.endRefreshing()
+                }
         }
     }
     
@@ -37,11 +46,16 @@ final class TopStoriesTableViewController: UITableViewController {
             return UITableViewCell()
         }
         
+        guard indexPath.row < viewModel.stories.count else {
+            return cell
+        }
+        
         let story = viewModel.stories[indexPath.row]
         cell.titleLabel.text = story.title
         cell.bylineLabel.text = story.byline
         
         guard let url = story.imageUrl(.small) else {
+            cell.multimediaImageView.image = UIImage(named: "Empty Placeholder Image")
             return cell
         }
         
@@ -57,7 +71,9 @@ final class TopStoriesTableViewController: UITableViewController {
                 }
 
             case .failure:
-                break
+                DispatchQueue.main.async {
+                    cell.multimediaImageView.image = UIImage(named: "Empty Placeholder Image")
+                }
             }
         }
         
