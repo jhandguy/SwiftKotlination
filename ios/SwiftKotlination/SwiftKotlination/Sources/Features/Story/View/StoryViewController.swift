@@ -15,10 +15,9 @@ final class StoryViewController: UIViewController {
         
         viewModel
             .story { [weak self] result in
+                guard let `self` = self else { return }
                 switch result {
                 case .success(let story):
-                    guard let `self` = self else { return }
-                    
                     self.title = [story.section, story.subsection]
                         .filter { !$0.isEmpty }
                         .joined(separator: " - ")
@@ -34,7 +33,7 @@ final class StoryViewController: UIViewController {
                     }
                     
                 case .failure(let error):
-                    self?.presentAlertController(with: error, animated: true)
+                    self.presentAlertController(with: error, animated: true)
                 }
             }
     }

@@ -12,8 +12,8 @@ final class TopStoriesTableViewController: UITableViewController {
         tableView.registerNib(TopStoriesTableViewCell.self)
         
         refreshControl = UIRefreshControl()
-        refreshControl?.on(.valueChanged) {
-            self.viewModel.refresh()
+        refreshControl?.on(.valueChanged) { [weak self] in
+            self?.viewModel.refresh()
         }
     }
     
@@ -24,14 +24,14 @@ final class TopStoriesTableViewController: UITableViewController {
             .stories { [weak self] result in
                 switch result {
                 case .success:
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
                         self?.tableView.reloadData()
                     }
                 case .failure(let error):
                     self?.presentAlertController(with: error, animated: true)
                 }
                 
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [weak self] in
                     self?.refreshControl?.endRefreshing()
                 }
         }
