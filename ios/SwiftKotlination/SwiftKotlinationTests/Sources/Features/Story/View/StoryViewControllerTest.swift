@@ -61,24 +61,14 @@ final class StoryViewControllerTest: XCTestCase {
         
         sut.viewWillAppear(false)
         
-        let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            
-            XCTAssertFalse(self.sut.multimediaImageView.isHidden)
-            
-            guard let image = self.sut.multimediaImageView.image else {
-                XCTFail("Invalid image view")
-                return
-            }
-            
-            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
-            imageIsFetched.fulfill()
+        XCTAssertFalse(sut.multimediaImageView.isHidden)
+        
+        guard let image = sut.multimediaImageView.image else {
+            XCTFail("Invalid image view")
+            return
         }
-        wait(for: [imageIsFetched], timeout: 1)
+        
+        XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
     }
     
     func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
@@ -89,16 +79,7 @@ final class StoryViewControllerTest: XCTestCase {
         
         sut.viewWillAppear(false)
         
-        let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertTrue(self.sut.multimediaImageView.isHidden)
-            imageIsFetched.fulfill()
-        }
-        wait(for: [imageIsFetched], timeout: 1)
+        XCTAssertTrue(sut.multimediaImageView.isHidden)
     }
     
     func testStoryViewControllerOpensUrlSuccessfully() {
@@ -109,9 +90,9 @@ final class StoryViewControllerTest: XCTestCase {
         
         sut.viewWillAppear(false)
         
-        let coordinator = CoordinatorMock(expectedMethods: [.openUrl])
+        let coordinator = CoordinatorMock()
         sut.coordinator = coordinator
         sut.urlButton.sendActions(for: .touchUpInside)
-        wait(for: [coordinator.expectation], timeout: 1)
+        XCTAssertTrue(coordinator.didOpenUrl)
     }
 }

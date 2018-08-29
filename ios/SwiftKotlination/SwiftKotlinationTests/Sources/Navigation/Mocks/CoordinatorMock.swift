@@ -2,36 +2,19 @@ import XCTest
 @testable import SwiftKotlination
 
 final class CoordinatorMock: CoordinatorProtocol {
-    var expectation: XCTestExpectation
-    var expectedMethods: [ExpectedMethod]
-    
-    init(expectedMethods: [ExpectedMethod] = []) {
-        self.expectedMethods = expectedMethods
-        expectation = XCTestExpectation(description: "Expected methods \(expectedMethods.map { $0.rawValue }.joined(separator: ", ")) to be called")
-        expectation.expectedFulfillmentCount = expectedMethods.count
-    }
-    
-    enum ExpectedMethod: String {
-        case start
-        case openStory
-        case openUrl
-    }
+    private(set) var didStart = false
+    private(set) var didOpenStory = false
+    private(set) var didOpenUrl = false
     
     func start() {
-        if expectedMethods.contains(.start) {
-            expectation.fulfill()
-        }
+        didStart = true
     }
     
     func open(_ story: Story) {
-        if expectedMethods.contains(.openStory) {
-            expectation.fulfill()
-        }
+        didOpenStory = true
     }
     
     func open(_ url: URL) {
-        if expectedMethods.contains(.openUrl) {
-            expectation.fulfill()
-        }
+        didOpenUrl = true
     }
 }

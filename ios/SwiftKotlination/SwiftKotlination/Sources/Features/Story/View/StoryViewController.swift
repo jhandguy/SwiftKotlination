@@ -16,51 +16,54 @@ final class StoryViewController: UIViewController {
         
         viewModel
             .story { [weak self] result in
-                guard let `self` = self else { return }
                 switch result {
                 case .success(let story):
-                    self.title = [story.section, story.subsection]
-                        .filter { !$0.isEmpty }
-                        .joined(separator: " - ")
+                    self?.bind(with: story)
                     
-                    self.titleLabel.text = story.title
-                    self.abstractLabel.text = story.abstract
-                    self.bylineLabel.text = story.byline
-                    self.urlButton.on(.touchUpInside) { [weak self] in
-                        guard let url = URL(string: story.url) else {
-                            return
-                        }
-                        self?.coordinator?.open(url)
-                    }
-                    
-                    guard let url = story.imageUrl(.large) else {
-                        self.multimediaImageView.isHidden = true
+                case .failure(let error):
+                    self?.presentAlertController(with: error, animated: true)
+                }
+            }
+    }
+    
+    private func bind(with story: Story) {
+        title = [story.section, story.subsection]
+            .filter { !$0.isEmpty }
+            .joined(separator: " - ")
+        
+        titleLabel.text = story.title
+        abstractLabel.text = story.abstract
+        bylineLabel.text = story.byline
+        urlButton.on(.touchUpInside) { [weak self] in
+            guard let url = URL(string: story.url) else {
+                return
+            }
+            self?.coordinator?.open(url)
+        }
+        
+        guard let url = story.imageUrl(.large) else {
+            multimediaImageView.isHidden = true
+            return
+        }
+        
+        viewModel.image(with: url) { [weak self] result in
+            switch result {
+            case .success(let data):
+                runOnMainThread {
+                    guard let image = UIImage(data: data) else {
+                        self?.multimediaImageView.isHidden = true
                         return
                     }
                     
-                    self.viewModel.image(with: url) { [weak self] result in
-                        switch result {
-                        case .success(let data):
-                            DispatchQueue.main.async { [weak self] in
-                                guard let image = UIImage(data: data) else {
-                                    self?.multimediaImageView.isHidden = true
-                                    return
-                                }
-                                
-                                self?.multimediaImageView.image = image
-                                self?.multimediaImageView.isHidden = false
-                            }
-                            
-                        case .failure:
-                            DispatchQueue.main.async { [weak self] in
-                                self?.multimediaImageView.isHidden = true
-                            }
-                        }
-                    }
-                    
-                case .failure(let error):
-                    self.presentAlertController(with: error, animated: true)
+                    self?.multimediaImageView.image = image
+                    self?.multimediaImageView.isHidden = false
+                }
+                
+            case .failure:
+                runOnMainThread {
+                    self?.multimediaImageView.isHidden = true
                 }
             }
+        }
     }
 }

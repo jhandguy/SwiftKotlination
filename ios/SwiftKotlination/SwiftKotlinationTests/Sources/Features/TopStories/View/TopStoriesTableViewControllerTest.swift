@@ -25,30 +25,12 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewDidLoad()
         sut.viewWillAppear(false)
         
-        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            tableViewIsNotEmpty.fulfill()
-        }
-        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
         
         topStoriesRepository.result = .success([])
         sut.refreshControl?.sendActions(for: .valueChanged)
         
-        let tableViewIsEmpty = expectation(description: "Expected table view to be empty")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertTrue(self.sut.tableView.visibleCells.isEmpty)
-            tableViewIsEmpty.fulfill()
-        }
-        wait(for: [tableViewIsEmpty], timeout: 1)
+        XCTAssertTrue(sut.tableView.visibleCells.isEmpty)
     }
     
     func testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully() {
@@ -64,31 +46,13 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewDidLoad()
         sut.viewWillAppear(false)
         
-        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            tableViewIsNotEmpty.fulfill()
-        }
-        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
         
         topStoriesRepository.result = .failure(NetworkError.invalidResponse)
         sut.refreshControl?.sendActions(for: .valueChanged)
         
-        let alertControllerIsPresented = expectation(description: "Expected alert controller to be presented")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            XCTAssertTrue(self.sut.presentedViewController is UIAlertController)
-            alertControllerIsPresented.fulfill()
-        }
-        wait(for: [alertControllerIsPresented], timeout: 1)
+        XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
+        XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
     
     func testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully() {
@@ -108,32 +72,18 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewDidLoad()
         sut.viewWillAppear(false)
         
-        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            tableViewIsNotEmpty.fulfill()
-        }
-        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
         
-        let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async { [weak self] in
-            guard
-                let cell = self?.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
-                let image = cell.multimediaImageView.image else {
-                    
-                    XCTFail("Invalid cell")
-                    return
-            }
-            
-            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
-            XCTAssertFalse(cell.multimediaImageView.isHidden)
-            imageIsFetched.fulfill()
+        guard
+            let cell = sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
+            let image = cell.multimediaImageView.image else {
+                
+                XCTFail("Invalid cell")
+                return
         }
-        wait(for: [imageIsFetched], timeout: 1)
+        
+        XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+        XCTAssertFalse(cell.multimediaImageView.isHidden)
     }
     
     func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
@@ -145,48 +95,27 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewDidLoad()
         sut.viewWillAppear(false)
         
-        let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
-            tableViewIsNotEmpty.fulfill()
-        }
-        wait(for: [tableViewIsNotEmpty], timeout: 1)
+        XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
         
-        let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async { [weak self] in
-            guard let cell = self?.sut.tableView.visibleCells.first as? TopStoriesTableViewCell else {
-                    XCTFail("Invalid cell")
-                    return
-            }
-            
-            XCTAssertTrue(cell.multimediaImageView.isHidden)
-            imageIsFetched.fulfill()
+        guard let cell = sut.tableView.visibleCells.first as? TopStoriesTableViewCell else {
+            XCTFail("Invalid cell")
+            return
         }
-        wait(for: [imageIsFetched], timeout: 1)
+        
+        XCTAssertTrue(cell.multimediaImageView.isHidden)
     }
     
     func testTopStoriesTableViewControllerOpensStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        let coordinator = CoordinatorMock(expectedMethods: [.openStory])
-        sut = TopStoriesTableViewController()
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        sut.coordinator = coordinator
         
         sut.viewDidLoad()
         
-        DispatchQueue.main.async { [weak self] in
-            guard let `self` = self else {
-                XCTFail("Self should not be nil")
-                return
-            }
-            self.sut.tableView(self.sut.tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
-        }
-        wait(for: [coordinator.expectation], timeout: 1)
+        let coordinator = CoordinatorMock()
+        sut.coordinator = coordinator
+        sut.tableView(sut.tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
+        XCTAssertTrue(coordinator.didOpenStory)
     }
 }

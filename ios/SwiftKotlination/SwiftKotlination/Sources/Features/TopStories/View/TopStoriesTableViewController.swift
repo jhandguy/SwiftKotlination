@@ -24,17 +24,22 @@ final class TopStoriesTableViewController: UITableViewController {
             .stories { [weak self] result in
                 switch result {
                 case .success:
-                    DispatchQueue.main.async { [weak self] in
+                    runOnMainThread {
                         self?.tableView.reloadData()
                     }
                 case .failure(let error):
                     self?.presentAlertController(with: error, animated: true)
                 }
                 
-                DispatchQueue.main.async { [weak self] in
+                runOnMainThread {
                     self?.refreshControl?.endRefreshing()
                 }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let story = viewModel.stories[indexPath.row]
+        coordinator?.open(story)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,6 +56,10 @@ final class TopStoriesTableViewController: UITableViewController {
         }
         
         let story = viewModel.stories[indexPath.row]
+        return bind(cell, with: story)
+    }
+    
+    private func bind(_ cell: TopStoriesTableViewCell, with story: Story) -> TopStoriesTableViewCell {
         cell.titleLabel.text = story.title
         cell.bylineLabel.text = story.byline
         
@@ -62,7 +71,7 @@ final class TopStoriesTableViewController: UITableViewController {
         viewModel.image(with: url) { result in
             switch result {
             case .success(let data):
-                DispatchQueue.main.async {
+                runOnMainThread {
                     guard let image = UIImage(data: data) else {
                         cell.multimediaImageView.isHidden = true
                         return
@@ -71,19 +80,14 @@ final class TopStoriesTableViewController: UITableViewController {
                     cell.multimediaImageView.image = image
                     cell.multimediaImageView.isHidden = false
                 }
-
+                
             case .failure:
-                DispatchQueue.main.async {
+                runOnMainThread {
                     cell.multimediaImageView.isHidden = true
                 }
             }
         }
         
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let story = viewModel.stories[indexPath.row]
-        coordinator?.open(story)
     }
 }

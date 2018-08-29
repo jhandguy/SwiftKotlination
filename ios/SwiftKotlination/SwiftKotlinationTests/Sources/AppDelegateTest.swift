@@ -5,14 +5,18 @@ final class AppDelegateTest: XCTestCase {
     
     var sut: AppDelegate!
     
-    func testAppDelegateStartsCoordinatorSuccessfully() {
-        let coordinator = CoordinatorMock(expectedMethods: [.start])
+    override func setUp() {
+        super.setUp()
         sut = AppDelegate()
+    }
+    
+    func testAppDelegateStartsCoordinatorSuccessfully() {
+        let coordinator = CoordinatorMock()
         sut.coordinator = coordinator
         
         _ = sut.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
         
-        wait(for: [coordinator.expectation], timeout: 1)
+        XCTAssertTrue(coordinator.didStart)
     }
     
 }

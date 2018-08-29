@@ -6,84 +6,97 @@ final class APIClientTest: XCTestCase {
     var sut: APIClient!
     
     func testObserveRequestSuccessfully() {
+        let file = File("top_stories", .json)
         let session = URLSessionMock(
             responses: [
-                Response(File("top_stories", .json))
+                Response(file)
             ]
         )
         sut = APIClient(session: session)
         
-        let didObserve = expectation(description: "Expected observer to be notified")
+        var times = 0
+        
         sut.observe(.fetchTopStories) { result in
             switch result {
-            case .success:
-                didObserve.fulfill()
+            case .success(let data):
+                XCTAssertEqual(data, file.data)
             case .failure:
-                break
+                XCTFail("Observe on request should succeed")
             }
+            times += 1
         }
-        wait(for: [didObserve], timeout: 1)
+        XCTAssertEqual(times, 1)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
     }
     
     func testExecuteRequestSuccessfully() {
+        let file = File("top_stories", .json)
         let session = URLSessionMock(
             responses: [
-                Response(File("top_stories", .json)),
-                Response(File("top_stories", .json))
+                Response(file),
+                Response(file)
             ]
         )
         sut = APIClient(session: session)
         
-        let didObserve = expectation(description: "Expected observer to be notified")
-        didObserve.expectedFulfillmentCount = 2
+        var times = 0
+        
         sut.observe(.fetchTopStories) { result in
             switch result {
-            case .success:
-                didObserve.fulfill()
+            case .success(let data):
+                XCTAssertEqual(data, file.data)
             case .failure:
-                break
+                XCTFail("Execute request should succeed")
             }
+            times += 1
         }
+        
         sut.execute(.fetchTopStories)
-        wait(for: [didObserve], timeout: 1)
+        
+        XCTAssertEqual(times, 2)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
     }
     
     func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
+        let file = File("top_stories", .json)
         let session = URLSessionMock(
             responses: [
-                Response(File("top_stories", .json)),
+                Response(file),
                 Response(error: .invalidResponse),
-                Response(File("top_stories", .json))
+                Response(file)
             ]
         )
         sut = APIClient(session: session)
         
-        let didObserve = expectation(description: "Expected observer to be notified")
-        didObserve.expectedFulfillmentCount = 4
+        var times = 0
+        
         sut.observe(.fetchTopStories) { result in
             switch result {
-            case .success:
-                didObserve.fulfill()
+            case .success(let data):
+                XCTAssertEqual(data, file.data)
             case .failure:
                 break
             }
+            times += 1
         }
+        
         sut.observe(.fetchTopStories) { result in
             switch result {
-            case .success:
-                didObserve.fulfill()
-            case .failure:
-                didObserve.fulfill()
+            case .success(let data):
+                XCTAssertEqual(data, file.data)
+            case .failure(let error):
+                XCTAssertEqual(error as? NetworkError, .invalidResponse)
             }
+            times += 1
         }
+        
         sut.execute(.fetchTopStories)
-        wait(for: [didObserve], timeout: 1)
+        
+        XCTAssertEqual(times, 4)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }

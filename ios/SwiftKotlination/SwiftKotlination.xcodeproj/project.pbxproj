@@ -25,6 +25,7 @@
 		0F26DD6F2136B2C000E50417 /* 28DC-nafta-superJumbo-v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */; };
 		0F26DD712136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */; };
 		0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */; };
+		0F26DD782136F3B000E50417 /* MainThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26DD772136F3B000E50417 /* MainThread.swift */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
 		0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4AA212D95750090A69A /* APIClientTest.swift */; };
@@ -131,6 +132,7 @@
 		0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28DC-nafta-superJumbo-v2.jpg"; sourceTree = "<group>"; };
 		0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-superJumbo-v2.jpg"; sourceTree = "<group>"; };
 		0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28trump-endorsements1-superJumbo.jpg"; sourceTree = "<group>"; };
+		0F26DD772136F3B000E50417 /* MainThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThread.swift; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
 		0F3EA4AA212D95750090A69A /* APIClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTest.swift; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 			isa = PBXGroup;
 			children = (
 				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
+				0F26DD772136F3B000E50417 /* MainThread.swift */,
 				0F2026F021334515009B80CE /* Extensions */,
 				0FCE5D02208A8650001C8FFC /* Features */,
 				0F2026FE2133DE03009B80CE /* Model */,
@@ -983,6 +986,7 @@
 				0F3EA4E7212DF4560090A69A /* CoordinatorStub+Decodable.swift in Sources */,
 				0F2027022133DFC8009B80CE /* Mutlimedia.swift in Sources */,
 				0F3EA4C8212DBC710090A69A /* URLSessionDataTaskMock.swift in Sources */,
+				0F26DD782136F3B000E50417 /* MainThread.swift in Sources */,
 				0F2027002133DE17009B80CE /* ImageRepository.swift in Sources */,
 				0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */,
 				0F3EA4AE212D99CD0090A69A /* URLSessionProtocol.swift in Sources */,
