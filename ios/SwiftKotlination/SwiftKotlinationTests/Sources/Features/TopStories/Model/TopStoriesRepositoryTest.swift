@@ -16,7 +16,7 @@ final class TopStoriesRepositoryTest: XCTestCase {
                     byline: "By CHRIS STANFORD",
                     url: "https://www.nytimes.com/2018/05/11/briefing/kirstjen-nielsen-spotify-cannes-film-festival.html",
                     multimedia: [
-                        Mutlimedia(url: "https://static01.nyt.com/images/2018/05/11/world/11us-ambriefing-israel-sub/merlin_137938851_81051c92-3244-40b6-8034-99ca55739e43-superJumbo.jpg", format: .large)
+                        Multimedia(url: "https://static01.nyt.com/images/2018/05/11/world/11us-ambriefing-israel-sub/merlin_137938851_81051c92-3244-40b6-8034-99ca55739e43-superJumbo.jpg", format: .large)
                     ]
                 )
             ]

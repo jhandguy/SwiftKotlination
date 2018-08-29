@@ -1,4 +1,4 @@
-struct Mutlimedia: Codable, Equatable {
+struct Multimedia: Codable, Equatable {
     let url: String
     let format: Format
     

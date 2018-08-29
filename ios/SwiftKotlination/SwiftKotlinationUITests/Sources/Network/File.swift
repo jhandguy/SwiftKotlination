@@ -7,7 +7,6 @@ final class File: Codable {
     enum Extension: String, Codable {
         case json
         case jpg
-        case png
     }
     
     init(_ name: String, _ extension: Extension) {

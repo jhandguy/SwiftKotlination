@@ -12,30 +12,36 @@ final class StoryUITest: XCTestCase {
             byline: "By JONATHAN MARTIN and MAGGIE HABERMAN",
             url: "https://www.nytimes.com/2018/08/27/us/politics/trump-endorsements.html",
             multimedia: [
-                Mutlimedia(
+                Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-thumbStandard.jpg",
                     format: .icon
                 ),
-                Mutlimedia(
+                Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-thumbLarge.jpg",
                     format: .small
                 ),
-                Mutlimedia(
+                Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-articleInline.jpg",
                     format: .normal
                 ),
-                Mutlimedia(
+                Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-mediumThreeByTwo210.jpg",
                     format: .medium
                 ),
-                Mutlimedia(
+                Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-superJumbo.jpg",
                     format: .large
                 )
             ]
         )
         
-        app.launch(.openStory(story))
+        let sessionMock = URLSessionMock(
+            responses: [
+                Response(File("28trump-endorsements1-superJumbo", .jpg))
+            ]
+        )
+        
+        app.launch(.openStory(story), with: sessionMock)
         
         XCTAssertTrue(app.navigationBars["\(story.section) - \(story.subsection)"].isHittable)
         XCTAssertTrue(app.staticTexts[story.title].isHittable)

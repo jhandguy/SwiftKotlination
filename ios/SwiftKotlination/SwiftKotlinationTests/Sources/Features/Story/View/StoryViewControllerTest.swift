@@ -20,7 +20,8 @@ final class StoryViewControllerTest: XCTestCase {
     func testStoryViewControllerFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let storyRepository = StoryRepositoryMock(result: .success(story))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         
         sut.viewWillAppear(false)
         
@@ -32,7 +33,8 @@ final class StoryViewControllerTest: XCTestCase {
     
     func testStoryViewControllerFetchesStoryUnsuccessfully() {
         let storyRepository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -43,10 +45,67 @@ final class StoryViewControllerTest: XCTestCase {
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
     
+    func testStoryViewControllerFetchesStoryImageSuccessfully() {
+        guard
+            let data = File("28DC-nafta-thumbLarge", .jpg).data,
+            let expectedImage = UIImage(data: data) else {
+                
+                XCTFail("Invalid image")
+                return
+        }
+        
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
+        let storyRepository = StoryRepositoryMock(result: .success(story))
+        let imageRepository = ImageRepositoryMock(result: .success(data))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        
+        sut.viewWillAppear(false)
+        
+        let imageIsFetched = expectation(description: "Expected image to be fetched")
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
+            
+            XCTAssertFalse(self.sut.multimediaImageView.isHidden)
+            
+            guard let image = self.sut.multimediaImageView.image else {
+                XCTFail("Invalid image view")
+                return
+            }
+            
+            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+            imageIsFetched.fulfill()
+        }
+        wait(for: [imageIsFetched], timeout: 1)
+    }
+    
+    func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
+        let storyRepository = StoryRepositoryMock(result: .success(story))
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        
+        sut.viewWillAppear(false)
+        
+        let imageIsFetched = expectation(description: "Expected image to be fetched")
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
+            XCTAssertTrue(self.sut.multimediaImageView.isHidden)
+            imageIsFetched.fulfill()
+        }
+        wait(for: [imageIsFetched], timeout: 1)
+    }
+    
     func testStoryViewControllerOpensUrlSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let storyRepository = StoryRepositoryMock(result: .success(story))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository)
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         
         sut.viewWillAppear(false)
         

@@ -35,7 +35,8 @@ final class Coordinator: CoordinatorProtocol {
             return
         }
         let storyRepository = StoryRepository(story: story)
-        viewController.viewModel = StoryViewModel(storyRepository: storyRepository)
+        let imageRepository = ImageRepository(apiClient: apiClient)
+        viewController.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }

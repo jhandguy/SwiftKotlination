@@ -8,6 +8,8 @@ final class TopStoriesUITest: XCTestCase {
         let sessionMock = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json)),
+                Response(File("27arizpolitics7-superJumbo-v2", .jpg)),
+                Response(File("28DC-nafta-superJumbo-v2", .jpg)),
                 Response(File("27arizpolitics7-thumbLarge", .jpg)),
                 Response(File("28DC-nafta-thumbLarge", .jpg)),
                 Response(File("top_stories", .json))

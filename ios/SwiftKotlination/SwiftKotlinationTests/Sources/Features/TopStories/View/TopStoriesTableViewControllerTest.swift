@@ -26,7 +26,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewWillAppear(false)
         
         let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             tableViewIsNotEmpty.fulfill()
         }
@@ -36,7 +40,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.refreshControl?.sendActions(for: .valueChanged)
         
         let tableViewIsEmpty = expectation(description: "Expected table view to be empty")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertTrue(self.sut.tableView.visibleCells.isEmpty)
             tableViewIsEmpty.fulfill()
         }
@@ -57,7 +65,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewWillAppear(false)
         
         let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             tableViewIsNotEmpty.fulfill()
         }
@@ -67,7 +79,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.refreshControl?.sendActions(for: .valueChanged)
         
         let alertControllerIsPresented = expectation(description: "Expected alert controller to be presented")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             XCTAssertTrue(self.sut.presentedViewController is UIAlertController)
             alertControllerIsPresented.fulfill()
@@ -75,7 +91,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         wait(for: [alertControllerIsPresented], timeout: 1)
     }
     
-    func testTopStoriesTableViewControllerFetchesImageSuccessfully() {
+    func testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully() {
         guard
             let data = File("28DC-nafta-thumbLarge", .jpg).data,
             let expectedImage = UIImage(data: data) else {
@@ -85,25 +101,28 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         }
         
         let imageRepository = ImageRepositoryMock(result: .success(data))
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        let topStoriesViewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        sut.viewModel = topStoriesViewModel
+        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut.viewDidLoad()
         sut.viewWillAppear(false)
         
         let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             tableViewIsNotEmpty.fulfill()
         }
         wait(for: [tableViewIsNotEmpty], timeout: 1)
         
         let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
             guard
-                let cell = self.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
+                let cell = self?.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
                 let image = cell.multimediaImageView.image else {
                     
                     XCTFail("Invalid cell")
@@ -111,18 +130,14 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
             }
             
             XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+            XCTAssertFalse(cell.multimediaImageView.isHidden)
             imageIsFetched.fulfill()
         }
         wait(for: [imageIsFetched], timeout: 1)
     }
     
-    func testTopStoriesTableViewControllerFetchesImageUnsuccessfully() {
-        guard let expectedImage = UIImage(named: "Empty Placeholder Image") else {
-            XCTFail("Invalid image")
-            return
-        }
-        
-        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Mutlimedia(url: "url", format: .small)])
+    func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
@@ -131,23 +146,24 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         sut.viewWillAppear(false)
         
         let tableViewIsNotEmpty = expectation(description: "Expected table view to not be empty")
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             XCTAssertFalse(self.sut.tableView.visibleCells.isEmpty)
             tableViewIsNotEmpty.fulfill()
         }
         wait(for: [tableViewIsNotEmpty], timeout: 1)
         
         let imageIsFetched = expectation(description: "Expected image to be fetched")
-        DispatchQueue.main.async {
-            guard
-                let cell = self.sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
-                let image = cell.multimediaImageView.image else {
-                    
+        DispatchQueue.main.async { [weak self] in
+            guard let cell = self?.sut.tableView.visibleCells.first as? TopStoriesTableViewCell else {
                     XCTFail("Invalid cell")
                     return
             }
             
-            XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+            XCTAssertTrue(cell.multimediaImageView.isHidden)
             imageIsFetched.fulfill()
         }
         wait(for: [imageIsFetched], timeout: 1)
@@ -164,7 +180,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         
         sut.viewDidLoad()
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let `self` = self else {
+                XCTFail("Self should not be nil")
+                return
+            }
             self.sut.tableView(self.sut.tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
         }
         wait(for: [coordinator.expectation], timeout: 1)

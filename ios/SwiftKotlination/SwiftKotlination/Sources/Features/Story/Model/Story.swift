@@ -5,11 +5,11 @@ struct Story: Codable, Equatable {
     let abstract: String
     let byline: String
     let url: String
-    let multimedia: [Mutlimedia]
+    let multimedia: [Multimedia]
 }
 
 extension Story {
-    func imageUrl(_ format: Mutlimedia.Format) -> String? {
-        return multimedia.filter { $0.format == .small }.first?.url
+    func imageUrl(_ format: Multimedia.Format) -> String? {
+        return multimedia.filter { $0.format == format }.first?.url
     }
 }

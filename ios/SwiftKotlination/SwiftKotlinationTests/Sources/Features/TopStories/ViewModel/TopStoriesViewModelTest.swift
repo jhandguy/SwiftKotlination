@@ -45,6 +45,45 @@ final class TopStoriesViewModelTest: XCTestCase {
             }
     }
     
+    func testTopStoriesViewModelFetchesTopStoryImageSuccessfully() {
+        guard let expectedData = File("28DC-nafta-thumbLarge", .jpg).data else {
+            XCTFail("Invalid image")
+            return
+        }
+        
+        let imageRepository = ImageRepositoryMock(result: .success(expectedData))
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        
+        sut
+            .image(with: "") { result in
+                switch result {
+                case .success(let data):
+                    XCTAssertEqual(data, expectedData)
+                    
+                case .failure(let error):
+                    XCTFail("Fetch TopStory Image should succeed, found error \(error)")
+                }
+            }
+    }
+    
+    func testTopStoriesViewModelFetchesTopStoryImageUnsuccessfully() {
+        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        
+        sut
+            .image(with: "") { result in
+                switch result {
+                case .success(let data):
+                    XCTFail("Fetch TopStory Image should fail, found image with data \(data)")
+                    
+                case .failure(let error):
+                    XCTAssertEqual(error as? NetworkError, .invalidResponse)
+                }
+            }
+    }
+    
     func testTopStoriesViewModelRefreshsSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story])) { result in

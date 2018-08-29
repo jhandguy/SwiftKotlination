@@ -13,6 +13,8 @@ extension URLSessionMock: URLSessionProtocol {
         guard
             !responses.isEmpty,
             let response = responses.popLast() else {
+                
+                completionHandler(nil, nil, NetworkError.invalidRequest)
                 return URLSessionDataTaskMock()
         }
         

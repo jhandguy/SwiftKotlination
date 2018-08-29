@@ -22,6 +22,9 @@
 		0F26DD6321353E9200E50417 /* ImageRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26DD6221353E9200E50417 /* ImageRepositoryTests.swift */; };
 		0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */; };
 		0F26DD6921354B3D00E50417 /* 28DC-nafta-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */; };
+		0F26DD6F2136B2C000E50417 /* 28DC-nafta-superJumbo-v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */; };
+		0F26DD712136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */; };
+		0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
 		0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4AA212D95750090A69A /* APIClientTest.swift */; };
@@ -125,6 +128,9 @@
 		0F26DD6221353E9200E50417 /* ImageRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepositoryTests.swift; sourceTree = "<group>"; };
 		0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-thumbLarge.jpg"; sourceTree = "<group>"; };
 		0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28DC-nafta-thumbLarge.jpg"; sourceTree = "<group>"; };
+		0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28DC-nafta-superJumbo-v2.jpg"; sourceTree = "<group>"; };
+		0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-superJumbo-v2.jpg"; sourceTree = "<group>"; };
+		0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28trump-endorsements1-superJumbo.jpg"; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
 		0F3EA4AA212D95750090A69A /* APIClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTest.swift; sourceTree = "<group>"; };
@@ -350,7 +356,10 @@
 			children = (
 				0F4A204621302503002543B8 /* top_stories.json */,
 				0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */,
+				0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */,
 				0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */,
+				0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */,
+				0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */,
 			);
 			path = TopStories;
 			sourceTree = "<group>";
@@ -916,9 +925,12 @@
 				0F4A206121316ADD002543B8 /* StoryViewController.storyboard in Resources */,
 				0F4A205421314B80002543B8 /* TopStoriesTableViewController.storyboard in Resources */,
 				0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */,
+				0F26DD712136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg in Resources */,
 				0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */,
 				0F4A205A21316107002543B8 /* TopStoriesTableViewCell.xib in Resources */,
 				0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */,
+				0F26DD6F2136B2C000E50417 /* 28DC-nafta-superJumbo-v2.jpg in Resources */,
+				0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

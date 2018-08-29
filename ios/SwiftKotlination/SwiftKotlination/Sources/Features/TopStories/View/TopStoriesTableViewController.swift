@@ -55,24 +55,26 @@ final class TopStoriesTableViewController: UITableViewController {
         cell.bylineLabel.text = story.byline
         
         guard let url = story.imageUrl(.small) else {
-            cell.multimediaImageView.image = UIImage(named: "Empty Placeholder Image")
+            cell.multimediaImageView.isHidden = true
             return cell
         }
         
         viewModel.image(with: url) { result in
             switch result {
             case .success(let data):
-                guard let image = UIImage(data: data) else {
-                    return
-                }
-                
                 DispatchQueue.main.async {
+                    guard let image = UIImage(data: data) else {
+                        cell.multimediaImageView.isHidden = true
+                        return
+                    }
+                    
                     cell.multimediaImageView.image = image
+                    cell.multimediaImageView.isHidden = false
                 }
 
             case .failure:
                 DispatchQueue.main.async {
-                    cell.multimediaImageView.image = UIImage(named: "Empty Placeholder Image")
+                    cell.multimediaImageView.isHidden = true
                 }
             }
         }

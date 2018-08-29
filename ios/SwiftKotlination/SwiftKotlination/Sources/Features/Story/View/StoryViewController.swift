@@ -2,6 +2,7 @@ import UIKit
 
 final class StoryViewController: UIViewController {
     
+    @IBOutlet private(set) weak var multimediaImageView: UIImageView!
     @IBOutlet private(set) weak var titleLabel: UILabel!
     @IBOutlet private(set) weak var abstractLabel: UILabel!
     @IBOutlet private(set) weak var bylineLabel: UILabel!
@@ -30,6 +31,31 @@ final class StoryViewController: UIViewController {
                             return
                         }
                         self?.coordinator?.open(url)
+                    }
+                    
+                    guard let url = story.imageUrl(.large) else {
+                        self.multimediaImageView.isHidden = true
+                        return
+                    }
+                    
+                    self.viewModel.image(with: url) { [weak self] result in
+                        switch result {
+                        case .success(let data):
+                            DispatchQueue.main.async { [weak self] in
+                                guard let image = UIImage(data: data) else {
+                                    self?.multimediaImageView.isHidden = true
+                                    return
+                                }
+                                
+                                self?.multimediaImageView.image = image
+                                self?.multimediaImageView.isHidden = false
+                            }
+                            
+                        case .failure:
+                            DispatchQueue.main.async { [weak self] in
+                                self?.multimediaImageView.isHidden = true
+                            }
+                        }
                     }
                     
                 case .failure(let error):
