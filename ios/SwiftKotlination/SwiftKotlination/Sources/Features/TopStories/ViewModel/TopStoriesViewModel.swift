@@ -9,8 +9,8 @@ final class TopStoriesViewModel {
         self.imageRepository = imageRepository
     }
     
-    internal var stories: [Story] = []
-    internal var images: [String: UIImage] = [:]
+    var stories: [Story] = []
+    var images: [String: UIImage] = [:]
     
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {

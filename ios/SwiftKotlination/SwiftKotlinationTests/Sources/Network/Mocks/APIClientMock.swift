@@ -3,7 +3,7 @@ import Foundation
 
 final class APIClientMock: APIClientProtocol {
     private var observers: [Observer<Data>] = []
-    internal var result: Result<Data>
+    var result: Result<Data>
     
     init(result: Result<Data>) {
         self.result = result

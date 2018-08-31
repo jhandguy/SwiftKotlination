@@ -8,8 +8,8 @@ final class StoryViewController: UIViewController {
     @IBOutlet private(set) weak var bylineLabel: UILabel!
     @IBOutlet private(set) weak var urlButton: UIButton!
     
-    internal weak var coordinator: CoordinatorProtocol?
-    internal var viewModel: StoryViewModel!
+    weak var coordinator: CoordinatorProtocol?
+    var viewModel: StoryViewModel!
     private let disposeBag = DisposeBag()
     
     override func viewWillAppear(_ animated: Bool) {

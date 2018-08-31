@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftKotlination
 
 final class ImageRepositoryMock: ImageRepositoryProtocol {
-    internal var result: Result<Data>
+    var result: Result<Data>
     
     init(result: Result<Data>) {
         self.result = result

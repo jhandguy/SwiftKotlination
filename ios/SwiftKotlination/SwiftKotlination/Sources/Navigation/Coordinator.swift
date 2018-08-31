@@ -10,7 +10,7 @@ protocol CoordinatorProtocol: class {
 final class Coordinator: CoordinatorProtocol {
     private var window: UIWindow
     private let apiClient: APIClientProtocol
-    internal let navigationController = UINavigationController()
+    let navigationController = UINavigationController()
     
     init(window: UIWindow, apiClient: APIClientProtocol) {
         self.window = window

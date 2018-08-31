@@ -1,9 +1,9 @@
 import UIKit
 
 final class TopStoriesTableViewController: UITableViewController {
-    internal weak var coordinator: CoordinatorProtocol?
-    internal var viewModel: TopStoriesViewModel!
-    internal let disposeBag = DisposeBag()
+    weak var coordinator: CoordinatorProtocol?
+    var viewModel: TopStoriesViewModel!
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
