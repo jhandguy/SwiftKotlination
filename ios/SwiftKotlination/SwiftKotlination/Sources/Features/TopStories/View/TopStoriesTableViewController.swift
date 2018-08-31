@@ -3,6 +3,7 @@ import UIKit
 final class TopStoriesTableViewController: UITableViewController {
     internal weak var coordinator: CoordinatorProtocol?
     internal var viewModel: TopStoriesViewModel!
+    internal let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +35,13 @@ final class TopStoriesTableViewController: UITableViewController {
                 runOnMainThread {
                     self?.refreshControl?.endRefreshing()
                 }
-        }
+            }.disposed(by: disposeBag)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        disposeBag.dispose()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,25 +75,21 @@ final class TopStoriesTableViewController: UITableViewController {
             return cell
         }
         
-        viewModel.image(with: url) { result in
-            switch result {
-            case .success(let data):
-                runOnMainThread {
-                    guard let image = UIImage(data: data) else {
-                        cell.multimediaImageView.isHidden = true
-                        return
+        viewModel
+            .image(with: url) { result in
+                switch result {
+                case .success(let image):
+                    runOnMainThread {
+                        cell.multimediaImageView.image = image
+                        cell.multimediaImageView.isHidden = false
                     }
                     
-                    cell.multimediaImageView.image = image
-                    cell.multimediaImageView.isHidden = false
+                case .failure:
+                    runOnMainThread {
+                        cell.multimediaImageView.isHidden = true
+                    }
                 }
-                
-            case .failure:
-                runOnMainThread {
-                    cell.multimediaImageView.isHidden = true
-                }
-            }
-        }
+            }?.disposed(by: disposeBag)
         
         return cell
     }

@@ -2,12 +2,8 @@ protocol StoryRepositoryProtocol {
     func story(_ observer: @escaping Observer<Story>)
 }
 
-final class StoryRepository: StoryRepositoryProtocol {
-    internal var story: Story
-    
-    init(story: Story) {
-        self.story = story
-    }
+struct StoryRepository: StoryRepositoryProtocol {
+    let story: Story
     
     func story(_ observer: @escaping Observer<Story>) {
         observer(.success(story))

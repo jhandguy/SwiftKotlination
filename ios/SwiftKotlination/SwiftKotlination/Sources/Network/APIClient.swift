@@ -1,15 +1,16 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func observe(_ request: Request, _ observer: @escaping Observer<Data>)
+    @discardableResult
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>) -> Disposable
     func execute(_ request: Request)
 }
 
 final class APIClient {
     private var session: URLSessionProtocol
-    private(set) var observables: [Request: [Observer<Data>]]
+    private(set) var observables: [Request: [UUID: Observer<Data>]]
     
-    init(session: URLSessionProtocol = URLSession(configuration: URLSessionConfiguration.default), observables: [Request: [Observer<Data>]] = [:]) {
+    init(session: URLSessionProtocol = URLSession(configuration: URLSessionConfiguration.default), observables: [Request: [UUID: Observer<Data>]] = [:]) {
         self.session = session
         self.observables = observables
     }
@@ -67,18 +68,24 @@ final class APIClient {
 }
 
 extension APIClient: APIClientProtocol {
-    func observe(_ request: Request, _ observer: @escaping Observer<Data>) {
-        var observers = observables[request] ?? []
-        observers.append(observer)
+    @discardableResult
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>) -> Disposable {
+        let id = UUID()
+        var observers = observables[request] ?? [:]
+        observers[id] = observer
         observables[request] = observers
         
         execute(request, with: [observer])
+        
+        return Disposable { [weak self] in
+            self?.observables[request]?.removeValue(forKey: id)
+        }
     }
     
     func execute(_ request: Request) {
         guard let observers = observables[request] else {
             return
         }
-        execute(request, with: observers)
+        execute(request, with: observers.map { $0.value })
     }
 }

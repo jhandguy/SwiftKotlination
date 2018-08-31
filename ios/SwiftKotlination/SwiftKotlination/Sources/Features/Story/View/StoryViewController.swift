@@ -10,6 +10,7 @@ final class StoryViewController: UIViewController {
     
     internal weak var coordinator: CoordinatorProtocol?
     internal var viewModel: StoryViewModel!
+    private let disposeBag = DisposeBag()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -24,6 +25,12 @@ final class StoryViewController: UIViewController {
                     self?.presentAlertController(with: error, animated: true)
                 }
             }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        disposeBag.dispose()
     }
     
     private func bind(with story: Story) {
@@ -46,24 +53,20 @@ final class StoryViewController: UIViewController {
             return
         }
         
-        viewModel.image(with: url) { [weak self] result in
-            switch result {
-            case .success(let data):
-                runOnMainThread {
-                    guard let image = UIImage(data: data) else {
-                        self?.multimediaImageView.isHidden = true
-                        return
+        viewModel
+            .image(with: url) { [weak self] result in
+                switch result {
+                case .success(let image):
+                    runOnMainThread {
+                        self?.multimediaImageView.image = image
+                        self?.multimediaImageView.isHidden = false
                     }
                     
-                    self?.multimediaImageView.image = image
-                    self?.multimediaImageView.isHidden = false
+                case .failure:
+                    runOnMainThread {
+                        self?.multimediaImageView.isHidden = true
+                    }
                 }
-                
-            case .failure:
-                runOnMainThread {
-                    self?.multimediaImageView.isHidden = true
-                }
-            }
-        }
+            }?.disposed(by: disposeBag)
     }
 }

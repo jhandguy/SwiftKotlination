@@ -88,6 +88,8 @@
 		0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A3E2095F5E400339755 /* TopStoriesViewModel.swift */; };
 		0FC64A41209623B200339755 /* TopStoriesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A40209623B200339755 /* TopStoriesRepository.swift */; };
 		0FC64A472096543D00339755 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A462096543D00339755 /* Story.swift */; };
+		0FC74198213938CF00E0F254 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74197213938CF00E0F254 /* Disposable.swift */; };
+		0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74199213938DA00E0F254 /* DisposeBag.swift */; };
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
@@ -182,6 +184,8 @@
 		0FC64A40209623B200339755 /* TopStoriesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesRepository.swift; sourceTree = "<group>"; };
 		0FC64A462096543D00339755 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		0FC64AB2209C756300339755 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		0FC74197213938CF00E0F254 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		0FC74199213938DA00E0F254 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
 		0FCE5CD1208A85C1001C8FFC /* SwiftKotlination.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftKotlination.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -674,7 +678,7 @@
 				0F2026FE2133DE03009B80CE /* Model */,
 				0F16552B212C264E005137B0 /* Navigation */,
 				0F16552A212C2641005137B0 /* Network */,
-				0FD8666E212F46EF0033CD13 /* Observer */,
+				0FD8666E212F46EF0033CD13 /* Observable */,
 				0F2026FD21334816009B80CE /* Protocols */,
 			);
 			path = Sources;
@@ -784,13 +788,15 @@
 			path = TopStories;
 			sourceTree = "<group>";
 		};
-		0FD8666E212F46EF0033CD13 /* Observer */ = {
+		0FD8666E212F46EF0033CD13 /* Observable */ = {
 			isa = PBXGroup;
 			children = (
 				0F9EEE64212F4AAA006056E5 /* Observer.swift */,
 				0F16552E212C2680005137B0 /* Result.swift */,
+				0FC74197213938CF00E0F254 /* Disposable.swift */,
+				0FC74199213938DA00E0F254 /* DisposeBag.swift */,
 			);
-			path = Observer;
+			path = Observable;
 			sourceTree = "<group>";
 		};
 		0FF77CA0212DF8210072267A /* Stubs */ = {
@@ -965,12 +971,14 @@
 				0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */,
 				0F165533212C5383005137B0 /* UITableView+ReusableCell.swift in Sources */,
 				0F170542212F575300F87958 /* ErrorStringConvertible.swift in Sources */,
+				0FC74198213938CF00E0F254 /* Disposable.swift in Sources */,
 				0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */,
 				0F16552F212C2680005137B0 /* Result.swift in Sources */,
 				0F3EA4D0212DC1610090A69A /* Parameters.swift in Sources */,
 				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
 				0F4A205821315C54002543B8 /* TopStoriesTableViewCell.swift in Sources */,
 				0F4A204421302372002543B8 /* File.swift in Sources */,
+				0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */,
 				0F3EA4C7212DBC570090A69A /* URLSessionMock.swift in Sources */,
 				0F3EA4DF212DF1590090A69A /* Identifiable.swift in Sources */,

@@ -1,34 +1,29 @@
-import Foundation
+import UIKit
 
 protocol ImageRepositoryProtocol {
-    func image(with url: String, _ observer: @escaping Observer<Data>)
+    @discardableResult
+    func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable
 }
 
-final class ImageRepository: ImageRepositoryProtocol {
-    private let apiClient: APIClientProtocol
-    private(set) var images: [String: Data]
+struct ImageRepository: ImageRepositoryProtocol {
+    let apiClient: APIClientProtocol
     
-    init(apiClient: APIClientProtocol) {
-        self.apiClient = apiClient
-        self.images = [:]
-    }
-    
-    func image(with url: String, _ observer: @escaping Observer<Data>) {
-        guard let image = images[url] else {
-            apiClient.observe(.fetchImage(url)) { [weak self] result in
+    @discardableResult
+    func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
+        return apiClient
+            .observe(.fetchImage(url)) { result in
                 switch result {
                 case .success(let data):
-                    self?.images[url] = data
+                    guard let image = UIImage(data: data) else {
+                        observer(.failure(NetworkError.invalidResponse))
+                        return
+                    }
                     
-                case .failure:
-                    break
+                    observer(.success(image))
+                    
+                case .failure(let error):
+                    observer(.failure(error))
                 }
-                
-                observer(result)
-            }
-            return
         }
-        
-        observer(.success(image))
     }
 }

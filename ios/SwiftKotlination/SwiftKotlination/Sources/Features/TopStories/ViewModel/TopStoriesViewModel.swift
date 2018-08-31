@@ -1,24 +1,53 @@
-import Foundation
+import UIKit
 
-struct TopStoriesViewModel {
-    let topStoriesRepository: TopStoriesRepositoryProtocol
-    let imageRepository: ImageRepositoryProtocol
-}
-
-extension TopStoriesViewModel {
-    func stories(_ observer: @escaping Observer<[Story]>) {
-        topStoriesRepository.stories(observer)
+final class TopStoriesViewModel {
+    private let topStoriesRepository: TopStoriesRepositoryProtocol
+    private let imageRepository: ImageRepositoryProtocol
+    
+    init(topStoriesRepository: TopStoriesRepositoryProtocol, imageRepository: ImageRepositoryProtocol) {
+        self.topStoriesRepository = topStoriesRepository
+        self.imageRepository = imageRepository
+    }
+    
+    internal var stories: [Story] = []
+    internal var images: [String: UIImage] = [:]
+    
+    @discardableResult
+    func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
+        return topStoriesRepository
+            .stories { [weak self] result in
+                switch result {
+                case .success(let stories):
+                    self?.stories = stories
+                    
+                case .failure:
+                    break
+                }
+                observer(result)
+        }
     }
     
     func refresh() {
         topStoriesRepository.fetchStories()
     }
     
-    func image(with url: String, _ observer: @escaping Observer<Data>) {
-        imageRepository.image(with: url, observer)
-    }
-    
-    var stories: [Story] {
-        return topStoriesRepository.stories
+    @discardableResult
+    func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable? {
+        guard let image = images[url] else {
+            return imageRepository
+                .image(with: url) { [weak self] result in
+                    switch result {
+                    case .success(let image):
+                        self?.images[url] = image
+                        
+                    case .failure:
+                        break
+                    }
+                    observer(result)
+            }
+        }
+        
+        observer(.success(image))
+        return nil
     }
 }
