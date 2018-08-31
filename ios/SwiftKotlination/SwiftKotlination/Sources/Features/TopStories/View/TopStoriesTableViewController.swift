@@ -27,13 +27,14 @@ final class TopStoriesTableViewController: UITableViewController {
                 case .success:
                     runOnMainThread {
                         self?.tableView.reloadData()
+                        self?.refreshControl?.endRefreshing()
                     }
                 case .failure(let error):
-                    self?.presentAlertController(with: error, animated: true)
-                }
-                
-                runOnMainThread {
-                    self?.refreshControl?.endRefreshing()
+                    self?.presentAlertController(with: error, animated: true) {
+                        runOnMainThread {
+                            self?.refreshControl?.endRefreshing()
+                        }
+                    }
                 }
             }.disposed(by: disposeBag)
     }

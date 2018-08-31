@@ -4,7 +4,7 @@ final class URLSessionMock: Codable, Identifiable {
     private(set) var responses: [Response]
     
     init(responses: [Response] = []) {
-        self.responses = responses
+        self.responses = responses.reversed()
     }
 }
 

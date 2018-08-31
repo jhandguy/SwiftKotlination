@@ -1,14 +1,11 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class ImageRepositoryMock: ImageRepositoryProtocol {
-    var result: Result<Data>
+struct ImageRepositoryMock: ImageRepositoryProtocol {
+    var result: Result<UIImage>
     
-    init(result: Result<Data>) {
-        self.result = result
-    }
-    
-    func image(with url: String, _ observer: @escaping (Result<Data>) -> Void) {
+    func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
         observer(result)
+        return Disposable {}
     }
 }

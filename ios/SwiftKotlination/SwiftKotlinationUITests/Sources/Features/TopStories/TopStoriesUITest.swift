@@ -8,17 +8,20 @@ final class TopStoriesUITest: XCTestCase {
         let sessionMock = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json)),
-                Response(File("27arizpolitics7-superJumbo-v2", .jpg)),
-                Response(File("28DC-nafta-superJumbo-v2", .jpg)),
-                Response(File("27arizpolitics7-thumbLarge", .jpg)),
                 Response(File("28DC-nafta-thumbLarge", .jpg)),
-                Response(File("top_stories", .json))
+                Response(File("27arizpolitics7-thumbLarge", .jpg)),
+                Response(File("28DC-nafta-superJumbo-v2", .jpg)),
+                Response(File("top_stories", .json)),
+                Response(File("27arizpolitics7-superJumbo-v2", .jpg)),
+                Response(File("top_stories", .json)),
+                Response(error: .invalidResponse)
             ]
         )
         
         app.launch(.start, with: sessionMock)
         
         XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
+        XCTAssertTrue(app.tables.firstMatch.isHittable)
         
         let storyLines = [
             (
@@ -33,37 +36,29 @@ final class TopStoriesUITest: XCTestCase {
             )
         ]
         
-        XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)
-        
         for index in 0...storyLines.count - 1 {
+            XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)
             XCTAssertTrue(app.staticTexts[storyLines[index].title].isHittable)
             XCTAssertTrue(app.staticTexts[storyLines[index].byline].isHittable)
             
             app.tables.firstMatch.cells.element(boundBy: index).tap()
             
             XCTAssertTrue(app.navigationBars[storyLines[index].category].isHittable)
+            
             app.buttons["Top Stories"].tap()
+            
             XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
+            XCTAssertTrue(app.tables.firstMatch.isHittable)
         }
         
-        let start = app.tables.cells.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-        let finish = app.tables.cells.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 2))
-        start.press(forDuration: 0, thenDragTo: finish)
+        app.tables.firstMatch.refresh()
         
-        XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)
-    }
-    
-    func testFeatureTopStoriesUnsuccessfully() {
-        let sessionMock = URLSessionMock(
-            responses: [
-                Response(error: .invalidResponse)
-            ]
-        )
-        
-        app.launch(.start, with: sessionMock)
-        
-        XCTAssertEqual(app.tables.firstMatch.cells.count, 0)
+        XCTAssertFalse(app.navigationBars["Top Stories"].isHittable)
+        XCTAssertFalse(app.tables.firstMatch.isHittable)
         
         app.alerts["Error"].buttons["Ok"].tap()
+        
+        XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
+        XCTAssertTrue(app.tables.firstMatch.isHittable)
     }
 }

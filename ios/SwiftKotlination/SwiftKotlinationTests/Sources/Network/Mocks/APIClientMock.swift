@@ -2,16 +2,19 @@ import Foundation
 @testable import SwiftKotlination
 
 final class APIClientMock: APIClientProtocol {
-    private var observers: [Observer<Data>] = []
     var result: Result<Data>
+    var observers: [Observer<Data>] = []
     
     init(result: Result<Data>) {
         self.result = result
     }
     
-    func observe(_ request: Request, _ observer: @escaping Observer<Data>) {
+    @discardableResult
+    func observe(_ request: Request, _ observer: @escaping Observer<Data>) -> Disposable {
         observers.append(observer)
         execute(request)
+        
+        return Disposable {}
     }
     
     func execute(_ request: Request) {

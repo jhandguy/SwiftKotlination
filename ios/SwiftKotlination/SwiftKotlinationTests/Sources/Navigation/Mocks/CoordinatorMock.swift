@@ -2,19 +2,19 @@ import XCTest
 @testable import SwiftKotlination
 
 final class CoordinatorMock: CoordinatorProtocol {
-    private(set) var didStart = false
-    private(set) var didOpenStory = false
-    private(set) var didOpenUrl = false
+    private(set) var isStarted = false
+    private(set) var isStoryOpened = false
+    private(set) var isUrlOpened = false
     
     func start() {
-        didStart = true
+        isStarted = true
     }
     
     func open(_ story: Story) {
-        didOpenStory = true
+        isStoryOpened = true
     }
     
     func open(_ url: URL) {
-        didOpenUrl = true
+        isUrlOpened = true
     }
 }

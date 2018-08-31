@@ -19,7 +19,7 @@ final class TopStoriesViewModelTest: XCTestCase {
                     XCTAssertEqual(stories.first, story)
                     
                 case .failure(let error):
-                    XCTFail("Get Stories should succeed, found error \(error)")
+                    XCTFail("Fetch Stories should succeed, found error \(error)")
                 }
             }
     }
@@ -33,33 +33,32 @@ final class TopStoriesViewModelTest: XCTestCase {
             .stories { result in
                 switch result {
                 case .success(let stories):
-                    XCTFail("Get Stories should fail, found stories \(stories)")
+                    XCTFail("Fetch Stories should fail, found stories \(stories)")
                     
                 case .failure(let error):
-                    guard let error = error as? NetworkError else {
-                        XCTFail("Invalid error")
-                        return
-                    }
-                    XCTAssertEqual(error, .invalidResponse)
+                    XCTAssertEqual(error as? NetworkError, .invalidResponse)
                 }
             }
     }
     
     func testTopStoriesViewModelFetchesTopStoryImageSuccessfully() {
-        guard let expectedData = File("28DC-nafta-thumbLarge", .jpg).data else {
+        guard
+            let data = File("28DC-nafta-thumbLarge", .jpg).data,
+            let expectedImage = UIImage(data: data) else {
+                
             XCTFail("Invalid image")
             return
         }
         
-        let imageRepository = ImageRepositoryMock(result: .success(expectedData))
+        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
         let topStoriesRepository = TopStoriesRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
         sut
             .image(with: "") { result in
                 switch result {
-                case .success(let data):
-                    XCTAssertEqual(data, expectedData)
+                case .success(let image):
+                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
                     
                 case .failure(let error):
                     XCTFail("Fetch TopStory Image should succeed, found error \(error)")
@@ -75,8 +74,8 @@ final class TopStoriesViewModelTest: XCTestCase {
         sut
             .image(with: "") { result in
                 switch result {
-                case .success(let data):
-                    XCTFail("Fetch TopStory Image should fail, found image with data \(data)")
+                case .success(let image):
+                    XCTFail("Fetch TopStory Image should fail, found image \(image)")
                     
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
@@ -109,11 +108,7 @@ final class TopStoriesViewModelTest: XCTestCase {
                 XCTFail("Refresh stories should fail, found stories \(stories)")
                 
             case .failure(let error):
-                guard let error = error as? NetworkError else {
-                    XCTFail("Invalid error")
-                    return
-                }
-                XCTAssertEqual(error, .invalidResponse)
+                XCTAssertEqual(error as? NetworkError, .invalidResponse)
             }
         }
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))

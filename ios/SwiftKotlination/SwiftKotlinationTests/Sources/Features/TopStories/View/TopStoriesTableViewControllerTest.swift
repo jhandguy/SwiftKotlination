@@ -14,6 +14,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         }
         
         sut = viewController
+        sut.viewDidLoad()
     }
     
     func testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully() {
@@ -22,7 +23,6 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.viewDidLoad()
         sut.viewWillAppear(false)
         
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
@@ -43,7 +43,6 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         window.makeKeyAndVisible()
         window.rootViewController = sut
         
-        sut.viewDidLoad()
         sut.viewWillAppear(false)
         
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
@@ -64,14 +63,14 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
                 return
         }
         
-        let imageRepository = ImageRepositoryMock(result: .success(data))
+        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
         let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.viewDidLoad()
         sut.viewWillAppear(false)
         
+        XCTAssertFalse(sut.disposeBag.disposables.isEmpty)
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
         
         guard
@@ -84,6 +83,10 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         
         XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
         XCTAssertFalse(cell.multimediaImageView.isHidden)
+        
+        sut.viewWillDisappear(false)
+        
+        XCTAssertTrue(sut.disposeBag.disposables.isEmpty)
     }
     
     func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
@@ -92,7 +95,6 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.viewDidLoad()
         sut.viewWillAppear(false)
         
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
@@ -111,11 +113,11 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
         
-        sut.viewDidLoad()
+        sut.viewWillAppear(false)
         
         let coordinator = CoordinatorMock()
         sut.coordinator = coordinator
         sut.tableView(sut.tableView, didSelectRowAt: IndexPath(item: 0, section: 0))
-        XCTAssertTrue(coordinator.didOpenStory)
+        XCTAssertTrue(coordinator.isStoryOpened)
     }
 }

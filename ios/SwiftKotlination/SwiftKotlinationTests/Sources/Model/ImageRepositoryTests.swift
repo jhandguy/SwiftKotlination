@@ -8,8 +8,7 @@ final class ImageRepositoryTest: XCTestCase {
     func testImageRepositoryFetchesImageSuccessfully() {
         guard
             let data = File("27arizpolitics7-thumbLarge", .jpg).data,
-            let image = UIImage(data: data),
-            let expectedData = UIImagePNGRepresentation(image) else {
+            let expectedImage = UIImage(data: data) else {
                 
             XCTFail("Invalid image")
             return
@@ -20,29 +19,8 @@ final class ImageRepositoryTest: XCTestCase {
         sut
             .image(with: "url") { result in
                 switch result {
-                case .success(let data):
-                    guard let image = UIImage(data: data) else {
-                        XCTFail("Invalid image")
-                        return
-                    }
-                    XCTAssertEqual(UIImagePNGRepresentation(image), expectedData)
-                    
-                case .failure(let error):
-                    XCTFail("Fetch Image should succeed, found error \(error)")
-                }
-        }
-        
-        apiClient.result = .failure(NetworkError.invalidResponse)
-        
-        sut
-            .image(with: "url") { result in
-                switch result {
-                case .success(let data):
-                    guard let image = UIImage(data: data) else {
-                        XCTFail("Invalid image")
-                        return
-                    }
-                    XCTAssertEqual(UIImagePNGRepresentation(image), expectedData)
+                case .success(let image):
+                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
                     
                 case .failure(let error):
                     XCTFail("Fetch Image should succeed, found error \(error)")
@@ -56,12 +34,55 @@ final class ImageRepositoryTest: XCTestCase {
         sut
             .image(with: "url") { result in
                 switch result {
-                case .success(let data):
-                    XCTFail("Fetch Image should fail, found image with data \(data)")
+                case .success(let image):
+                    XCTFail("Fetch Image should fail, found image \(image)")
                     
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
                 }
         }
+    }
+    
+    func testImageRepositoryFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() {
+        guard
+            let data = File("27arizpolitics7-thumbLarge", .jpg).data,
+            let expectedImage = UIImage(data: data) else {
+                
+                XCTFail("Invalid image")
+                return
+        }
+        
+        let apiClient = APIClientMock(result: .success(data))
+        sut = ImageRepository(apiClient: apiClient)
+        
+        var times = 0
+        
+        sut
+            .image(with: "url") { result in
+                switch result {
+                case .success(let image):
+                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+                    
+                case .failure(let error):
+                    XCTAssertEqual(error as? NetworkError, .invalidRequest)
+                }
+                times += 1
+        }
+        
+        apiClient.result = .failure(NetworkError.invalidRequest)
+        
+        sut
+            .image(with: "url") { result in
+                switch result {
+                case .success(let image):
+                    XCTFail("Fetch Image should fail, found image \(image)")
+                    
+                case .failure(let error):
+                    XCTAssertEqual(error as? NetworkError, .invalidRequest)
+                }
+                times += 1
+        }
+        
+        XCTAssertEqual(times, 3)
     }
 }

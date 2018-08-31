@@ -16,7 +16,7 @@ final class AppDelegateTest: XCTestCase {
         
         _ = sut.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
         
-        XCTAssertTrue(coordinator.didStart)
+        XCTAssertTrue(coordinator.isStarted)
     }
     
 }

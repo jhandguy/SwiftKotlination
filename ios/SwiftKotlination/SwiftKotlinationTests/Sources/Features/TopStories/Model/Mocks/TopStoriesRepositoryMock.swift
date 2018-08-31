@@ -2,17 +2,20 @@ import XCTest
 @testable import SwiftKotlination
 
 final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
-    private var observer: Observer<[Story]>
     var result: Result<[Story]>
+    var observer: Observer<[Story]>
     
     init(result: Result<[Story]>, observer: @escaping Observer<[Story]> = { _ in }) {
         self.result = result
         self.observer = observer
     }
     
-    func stories(_ observer: @escaping Observer<[Story]>) {
+    @discardableResult
+    func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
         self.observer = observer
         observer(result)
+        
+        return Disposable {}
     }
     
     func fetchStories() {

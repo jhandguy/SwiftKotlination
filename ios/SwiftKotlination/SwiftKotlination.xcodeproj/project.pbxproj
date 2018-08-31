@@ -26,6 +26,7 @@
 		0F26DD712136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */; };
 		0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */; };
 		0F26DD782136F3B000E50417 /* MainThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26DD772136F3B000E50417 /* MainThread.swift */; };
+		0F2BA4EA2139902400920537 /* DisposeBagTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2BA4E92139902400920537 /* DisposeBagTest.swift */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
 		0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4AA212D95750090A69A /* APIClientTest.swift */; };
@@ -90,6 +91,7 @@
 		0FC64A472096543D00339755 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A462096543D00339755 /* Story.swift */; };
 		0FC74198213938CF00E0F254 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74197213938CF00E0F254 /* Disposable.swift */; };
 		0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74199213938DA00E0F254 /* DisposeBag.swift */; };
+		0FC741A2213989F500E0F254 /* XCUIElement+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */; };
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
@@ -135,6 +137,7 @@
 		0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-superJumbo-v2.jpg"; sourceTree = "<group>"; };
 		0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28trump-endorsements1-superJumbo.jpg"; sourceTree = "<group>"; };
 		0F26DD772136F3B000E50417 /* MainThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainThread.swift; sourceTree = "<group>"; };
+		0F2BA4E92139902400920537 /* DisposeBagTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBagTest.swift; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
 		0F3EA4AA212D95750090A69A /* APIClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTest.swift; sourceTree = "<group>"; };
@@ -186,6 +189,7 @@
 		0FC64AB2209C756300339755 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		0FC74197213938CF00E0F254 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		0FC74199213938DA00E0F254 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
+		0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Refresh.swift"; sourceTree = "<group>"; };
 		0FCE5CD1208A85C1001C8FFC /* SwiftKotlination.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftKotlination.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				0F3EA4D9212DC5F80090A69A /* Codable */,
 				0F2026F7213345F5009B80CE /* CoordinatorStub */,
 				0FA5F79C20A8774F009C30B4 /* XCUIApplication */,
+				0FC741A321398AA300E0F254 /* XCUIElement */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -403,6 +408,14 @@
 				0F20270A21346EAE009B80CE /* ImageRepositoryMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0F2BA4E82139900800920537 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				0F2BA4E92139902400920537 /* DisposeBagTest.swift */,
+			);
+			path = Observable;
 			sourceTree = "<group>";
 		};
 		0F3EA4A5212D8EC80090A69A /* Navigation */ = {
@@ -541,6 +554,7 @@
 				0F20270821346E90009B80CE /* Model */,
 				0F3EA4A5212D8EC80090A69A /* Navigation */,
 				0F3EA4A7212D8F5F0090A69A /* Network */,
+				0F2BA4E82139900800920537 /* Observable */,
 				0F170547212FDF2200F87958 /* UIViewController */,
 			);
 			path = Sources;
@@ -717,6 +731,14 @@
 				0FC64AB2209C756300339755 /* SnapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0FC741A321398AA300E0F254 /* XCUIElement */ = {
+			isa = PBXGroup;
+			children = (
+				0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */,
+			);
+			path = XCUIElement;
 			sourceTree = "<group>";
 		};
 		0FCE5CC8208A85C1001C8FFC = {
@@ -1022,6 +1044,7 @@
 				0FA5F79720A5F713009C30B4 /* TopStoriesViewModelTest.swift in Sources */,
 				0F20270B21346EAE009B80CE /* ImageRepositoryMock.swift in Sources */,
 				0F170545212F57E300F87958 /* NetworkErrorTest.swift in Sources */,
+				0F2BA4EA2139902400920537 /* DisposeBagTest.swift in Sources */,
 				0FA5F77420A5BA4C009C30B4 /* CoordinatorTest.swift in Sources */,
 				0FA5F78B20A5E7CA009C30B4 /* TopStoriesRepositoryTest.swift in Sources */,
 				0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */,
@@ -1049,6 +1072,7 @@
 				0FA5F7AC20A8DBA8009C30B4 /* TopStories.swift in Sources */,
 				0F3EA4CB212DBF8C0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F170543212F577900F87958 /* ErrorStringConvertible.swift in Sources */,
+				0FC741A2213989F500E0F254 /* XCUIElement+Refresh.swift in Sources */,
 				0FA5F7A020A87780009C30B4 /* Encodable+JSON.swift in Sources */,
 				0FA5F7A920A8CBD2009C30B4 /* XCUIApplication+Launch.swift in Sources */,
 				0F3EA4E0212DF1DD0090A69A /* Identifiable.swift in Sources */,

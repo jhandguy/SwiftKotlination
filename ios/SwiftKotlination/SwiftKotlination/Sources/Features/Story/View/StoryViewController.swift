@@ -10,7 +10,7 @@ final class StoryViewController: UIViewController {
     
     weak var coordinator: CoordinatorProtocol?
     var viewModel: StoryViewModel!
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

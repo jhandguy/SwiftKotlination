@@ -12,23 +12,34 @@ final class APIClientTest: XCTestCase {
                 Response(file)
             ]
         )
+        let disposeBag = DisposeBag()
         sut = APIClient(session: session)
         
         var times = 0
         
-        sut.observe(.fetchTopStories) { result in
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, file.data)
-            case .failure:
-                XCTFail("Observe on request should succeed")
-            }
-            times += 1
-        }
+        sut
+            .observe(.fetchTopStories) { result in
+                switch result {
+                case .success(let data):
+                    XCTAssertEqual(data, file.data)
+                case .failure(let error):
+                    XCTFail("Observe on request should succeed, found error \(error)")
+                }
+                times += 1
+        }.disposed(by: disposeBag)
+        
         XCTAssertEqual(times, 1)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
+        
+        disposeBag.dispose()
+        
+        guard let observers = sut.observables[.fetchTopStories] else {
+            XCTFail("Expected observables to not be nil")
+            return
+        }
+        XCTAssertTrue(observers.isEmpty)
     }
     
     func testExecuteRequestSuccessfully() {
@@ -39,19 +50,21 @@ final class APIClientTest: XCTestCase {
                 Response(file)
             ]
         )
+        let disposeBag = DisposeBag()
         sut = APIClient(session: session)
         
         var times = 0
         
-        sut.observe(.fetchTopStories) { result in
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, file.data)
-            case .failure:
-                XCTFail("Execute request should succeed")
-            }
-            times += 1
-        }
+        sut
+            .observe(.fetchTopStories) { result in
+                switch result {
+                case .success(let data):
+                    XCTAssertEqual(data, file.data)
+                case .failure(let error):
+                    XCTFail("Execute request should succeed, found error \(error)")
+                }
+                times += 1
+        }.disposed(by: disposeBag)
         
         sut.execute(.fetchTopStories)
         
@@ -59,6 +72,14 @@ final class APIClientTest: XCTestCase {
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
+        
+        disposeBag.dispose()
+        
+        guard let observers = sut.observables[.fetchTopStories] else {
+            XCTFail("Expected observables to not be nil")
+            return
+        }
+        XCTAssertTrue(observers.isEmpty)
     }
     
     func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
@@ -70,29 +91,32 @@ final class APIClientTest: XCTestCase {
                 Response(file)
             ]
         )
+        let disposeBag = DisposeBag()
         sut = APIClient(session: session)
         
         var times = 0
         
-        sut.observe(.fetchTopStories) { result in
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, file.data)
-            case .failure:
-                break
-            }
-            times += 1
-        }
+        sut
+            .observe(.fetchTopStories) { result in
+                switch result {
+                case .success(let data):
+                    XCTAssertEqual(data, file.data)
+                case .failure:
+                    break
+                }
+                times += 1
+        }.disposed(by: disposeBag)
         
-        sut.observe(.fetchTopStories) { result in
-            switch result {
-            case .success(let data):
-                XCTAssertEqual(data, file.data)
-            case .failure(let error):
-                XCTAssertEqual(error as? NetworkError, .invalidResponse)
-            }
-            times += 1
-        }
+        sut
+            .observe(.fetchTopStories) { result in
+                switch result {
+                case .success(let data):
+                    XCTAssertEqual(data, file.data)
+                case .failure(let error):
+                    XCTAssertEqual(error as? NetworkError, .invalidResponse)
+                }
+                times += 1
+        }.disposed(by: disposeBag)
         
         sut.execute(.fetchTopStories)
         
@@ -100,5 +124,13 @@ final class APIClientTest: XCTestCase {
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
+        
+        disposeBag.dispose()
+        
+        guard let observers = sut.observables[.fetchTopStories] else {
+            XCTFail("Expected observables to not be nil")
+            return
+        }
+        XCTAssertTrue(observers.isEmpty)
     }
 }

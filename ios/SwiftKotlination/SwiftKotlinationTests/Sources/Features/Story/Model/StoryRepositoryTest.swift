@@ -17,6 +17,6 @@ final class StoryRepositoryTest: XCTestCase {
                 case .failure(let error):
                     XCTFail("Fetch Story should succeed, found error \(error)")
                 }
-            }
+        }
     }
 }

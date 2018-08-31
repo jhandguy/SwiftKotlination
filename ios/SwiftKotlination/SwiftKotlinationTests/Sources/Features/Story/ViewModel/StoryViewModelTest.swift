@@ -17,9 +17,9 @@ final class StoryViewModelTest: XCTestCase {
                     XCTAssertEqual(story, expectedStory)
                 
                 case .failure(let error):
-                    XCTFail("Get Story should succeed, found error \(error)")
+                    XCTFail("Fetch Story should succeed, found error \(error)")
                 }
-            }
+        }
     }
     
     func testStoryViewModelFetchesStoryUnsuccesfully() {
@@ -31,38 +31,37 @@ final class StoryViewModelTest: XCTestCase {
             .story { result in
                 switch result {
                 case .success(let story):
-                    XCTFail("Get Story should fail, found story \(story)")
+                    XCTFail("Fetch Story should fail, found story \(story)")
                     
                 case .failure(let error):
-                    guard let error = error as? NetworkError else {
-                        XCTFail("Invalid error")
-                        return
-                    }
-                    XCTAssertEqual(error, .invalidResponse)
+                    XCTAssertEqual(error as? NetworkError, .invalidResponse)
                 }
-            }
+        }
     }
     
     func testStoryViewModelFetchesStoryImageSuccessfully() {
-        guard let expectedData = File("28DC-nafta-thumbLarge", .jpg).data else {
+        guard
+            let data = File("28DC-nafta-thumbLarge", .jpg).data,
+            let expectedImage = UIImage(data: data) else {
+                
             XCTFail("Invalid image")
             return
         }
         
-        let imageRepository = ImageRepositoryMock(result: .success(expectedData))
+        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
         let storyRepository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
         sut = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         
         sut
             .image(with: "") { result in
                 switch result {
-                case .success(let data):
-                    XCTAssertEqual(data, expectedData)
+                case .success(let image):
+                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
                     
                 case .failure(let error):
                     XCTFail("Fetch Story Image should succeed, found error \(error)")
                 }
-            }
+        }
     }
     
     func testStoryViewModelFetchesStoryImageUnsuccessfully() {
@@ -73,12 +72,12 @@ final class StoryViewModelTest: XCTestCase {
         sut
             .image(with: "") { result in
                 switch result {
-                case .success(let data):
-                    XCTFail("Fetch Story Image should fail, found image with data \(data)")
+                case .success(let image):
+                    XCTFail("Fetch Story Image should fail, found image \(image)")
                     
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
                 }
-            }
+        }
     }
 }

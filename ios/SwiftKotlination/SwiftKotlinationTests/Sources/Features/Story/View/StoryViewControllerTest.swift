@@ -56,11 +56,12 @@ final class StoryViewControllerTest: XCTestCase {
         
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
         let storyRepository = StoryRepositoryMock(result: .success(story))
-        let imageRepository = ImageRepositoryMock(result: .success(data))
+        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
         sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
         
         sut.viewWillAppear(false)
         
+        XCTAssertFalse(sut.disposeBag.disposables.isEmpty)
         XCTAssertFalse(sut.multimediaImageView.isHidden)
         
         guard let image = sut.multimediaImageView.image else {
@@ -68,7 +69,11 @@ final class StoryViewControllerTest: XCTestCase {
             return
         }
         
-        XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+        XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+        
+        sut.viewWillDisappear(false)
+        
+        XCTAssertTrue(sut.disposeBag.disposables.isEmpty)
     }
     
     func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
@@ -93,6 +98,6 @@ final class StoryViewControllerTest: XCTestCase {
         let coordinator = CoordinatorMock()
         sut.coordinator = coordinator
         sut.urlButton.sendActions(for: .touchUpInside)
-        XCTAssertTrue(coordinator.didOpenUrl)
+        XCTAssertTrue(coordinator.isUrlOpened)
     }
 }

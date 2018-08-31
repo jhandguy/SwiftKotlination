@@ -37,13 +37,15 @@ final class StoryUITest: XCTestCase {
         
         let sessionMock = URLSessionMock(
             responses: [
-                Response(File("28trump-endorsements1-superJumbo", .jpg))
+                Response(File("28trump-endorsements1-superJumbo", .jpg)),
+                Response(error: .invalidResponse)
             ]
         )
         
         app.launch(.openStory(story), with: sessionMock)
         
         XCTAssertTrue(app.navigationBars["\(story.section) - \(story.subsection)"].isHittable)
+        XCTAssertTrue(app.images.firstMatch.exists)
         XCTAssertTrue(app.staticTexts[story.title].isHittable)
         XCTAssertTrue(app.staticTexts[story.abstract].isHittable)
         XCTAssertTrue(app.staticTexts[story.byline].isHittable)
@@ -53,5 +55,7 @@ final class StoryUITest: XCTestCase {
         XCTAssertTrue(app.buttons["URL"].isHittable)
         
         app.buttons["Done"].tap()
+        
+        XCTAssertTrue(app.images.firstMatch.exists)
     }
 }
