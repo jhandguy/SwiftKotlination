@@ -1,0 +1,48 @@
+---
+format_version: '6'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
+trigger_map:
+- push_branch: "*"
+  workflow: run_ios_tests
+- pull_request_source_branch: "*"
+  workflow: run_ios_tests
+workflows:
+  run_ios_tests:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - cache-pull: {}
+    - fastlane:
+        inputs:
+        - work_dir: "."
+        - update_fastlane: 'false'
+        - lane: run_tests
+    - codecov:
+        inputs:
+        - CODECOV_TOKEN: e7a349f1-b449-4e61-915f-8838c19c8ad0
+    - cache-push: {}
+  capture_ios_screenshots:
+    steps:
+    - activate-ssh-key:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone: {}
+    - cache-pull: {}
+    - fastlane:
+        inputs:
+        - update_fastlane: 'false'
+        - lane: capture_ios_screenshots
+    - cache-push: {}
+app:
+  envs:
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/SwiftKotlination/SwiftKotlination.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: SwiftKotlination
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: development
+
