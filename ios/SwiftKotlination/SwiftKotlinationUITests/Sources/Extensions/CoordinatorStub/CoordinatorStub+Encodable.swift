@@ -1,7 +1,7 @@
 extension CoordinatorStub: Encodable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         switch self {
         case .start:
             break

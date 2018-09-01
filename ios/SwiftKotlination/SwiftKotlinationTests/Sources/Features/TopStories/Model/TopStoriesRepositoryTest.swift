@@ -2,9 +2,9 @@ import XCTest
 @testable import SwiftKotlination
 
 final class TopStoriesRepositoryTest: XCTestCase {
-    
+
     var sut: TopStoriesRepository!
-    
+
     func testTopStoriesRepositoryFetchesTopStoriesSuccessfully() {
         let topStories = TopStories(
             results: [
@@ -28,7 +28,7 @@ final class TopStoriesRepositoryTest: XCTestCase {
             XCTFail("Invalid data")
             return
         }
-        
+
         let apiClient = APIClientMock(result: .success(data))
         sut = TopStoriesRepository(apiClient: apiClient)
         sut
@@ -36,13 +36,13 @@ final class TopStoriesRepositoryTest: XCTestCase {
                 switch result {
                 case .success(let stories):
                     XCTAssertEqual(stories, topStories.results)
-                    
+
                 case .failure(let error):
                     XCTFail("Fetch TopStories should succeed, found error \(error)")
                 }
         }
     }
-    
+
     func testTopStoriesRepositoryFetchesTopStoriesUnsuccessfully() {
         let apiClient = APIClientMock(result: .failure(NetworkError.invalidResponse))
         sut = TopStoriesRepository(apiClient: apiClient)
@@ -51,13 +51,13 @@ final class TopStoriesRepositoryTest: XCTestCase {
                 switch result {
                 case .success(let stories):
                     XCTFail("Fetch TopStories should fail, found stories \(stories)")
-                    
+
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
                 }
         }
     }
-    
+
     func testTopStoriesRepositoryFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() {
         let topStories = TopStories(
             results: [
@@ -81,44 +81,44 @@ final class TopStoriesRepositoryTest: XCTestCase {
             XCTFail("Invalid data")
             return
         }
-        
+
         let apiClient = APIClientMock(result: .success(data))
         sut = TopStoriesRepository(apiClient: apiClient)
-        
+
         var times = 0
-        
+
         sut
             .stories { result in
                 switch result {
                 case .success(let stories):
                     XCTAssertEqual(stories, topStories.results)
-                    
+
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidRequest)
                 }
                 times += 1
         }
-        
+
         XCTAssertEqual(times, 1)
-        
+
         apiClient.result = .failure(NetworkError.invalidRequest)
-        
+
         sut
             .stories { result in
                 switch result {
                 case .success(let stories):
                     XCTFail("Fetch TopStories for the second time should fail, found stories \(stories)")
-                    
+
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidRequest)
                 }
                 times += 1
         }
-        
+
         XCTAssertEqual(times, 3)
-        
+
         sut.fetchStories()
-        
+
         XCTAssertEqual(times, 5)
     }
 }

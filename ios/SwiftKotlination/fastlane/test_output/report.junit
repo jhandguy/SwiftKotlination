@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<testsuites name='SwiftKotlinationTests.xctest' tests='43' failures='0'>
+  <testsuite name='SwiftKotlinationUITests.SafariUITest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationUITests.SafariUITest' name='testSafariSuccessfully' time='5.454'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationUITests.StoryUITest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationUITests.StoryUITest' name='testFeatureStorySuccessfully' time='9.766'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationUITests.TopStoriesUITest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationUITests.TopStoriesUITest' name='testFeatureTopStoriesSuccessfully' time='17.554'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.APIClientTest' tests='3' failures='0'>
+    <testcase classname='SwiftKotlinationTests.APIClientTest' name='testExecuteRequestSuccessfully' time='0.004'/>
+    <testcase classname='SwiftKotlinationTests.APIClientTest' name='testObserveRequestSeveralTimesAndExecuteSuccessfully' time='0.002'/>
+    <testcase classname='SwiftKotlinationTests.APIClientTest' name='testObserveRequestSuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.AppDelegateTest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationTests.AppDelegateTest' name='testAppDelegateStartsCoordinatorSuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.CoordinatorTest' tests='3' failures='0'>
+    <testcase classname='SwiftKotlinationTests.CoordinatorTest' name='testCoordinatorOpensStoryWithStoryViewControllerSuccessfully' time='0.010'/>
+    <testcase classname='SwiftKotlinationTests.CoordinatorTest' name='testCoordinatorOpensUrlWithSafariViewControllerSuccessfully' time='0.014'/>
+    <testcase classname='SwiftKotlinationTests.CoordinatorTest' name='testCoordinatorStartsWithTopStoriesTableViewControllerSuccessfully' time='0.012'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.DisposeBagTest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationTests.DisposeBagTest' name='testDisposeBagDisposesSuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.ImageRepositoryTest' tests='3' failures='0'>
+    <testcase classname='SwiftKotlinationTests.ImageRepositoryTest' name='testImageRepositoryFetchesImageOnceSuccessfullyAndOnceUnsuccessfully' time='0.010'/>
+    <testcase classname='SwiftKotlinationTests.ImageRepositoryTest' name='testImageRepositoryFetchesImageSuccessfully' time='0.005'/>
+    <testcase classname='SwiftKotlinationTests.ImageRepositoryTest' name='testImageRepositoryFetchesImageUnsuccessfully' time='0.000'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.NetworkErrorTest' tests='2' failures='0'>
+    <testcase classname='SwiftKotlinationTests.NetworkErrorTest' name='testInvalidRequestSuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.NetworkErrorTest' name='testInvalidResponseSuccessfully' time='0.000'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.RequestTest' tests='2' failures='0'>
+    <testcase classname='SwiftKotlinationTests.RequestTest' name='testFetchImageRequestSuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.RequestTest' name='testFetchTopStoriesRequestSuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.StoryRepositoryTest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationTests.StoryRepositoryTest' name='testStoryRepositoryFetchesStorySuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.StoryViewControllerTest' tests='5' failures='0'>
+    <testcase classname='SwiftKotlinationTests.StoryViewControllerTest' name='testStoryViewControllerFetchesStoryImageSuccessfully' time='0.010'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewControllerTest' name='testStoryViewControllerFetchesStoryImageUnsuccessfully' time='0.003'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewControllerTest' name='testStoryViewControllerFetchesStorySuccessfully' time='0.003'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewControllerTest' name='testStoryViewControllerFetchesStoryUnsuccessfully' time='0.017'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewControllerTest' name='testStoryViewControllerOpensUrlSuccessfully' time='0.003'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.StoryViewModelTest' tests='4' failures='0'>
+    <testcase classname='SwiftKotlinationTests.StoryViewModelTest' name='testStoryViewModelFetchesStoryImageSuccessfully' time='0.006'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewModelTest' name='testStoryViewModelFetchesStoryImageUnsuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewModelTest' name='testStoryViewModelFetchesStorySuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.StoryViewModelTest' name='testStoryViewModelFetchesStoryUnsuccesfully' time='0.000'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.TopStoriesRepositoryTest' tests='3' failures='0'>
+    <testcase classname='SwiftKotlinationTests.TopStoriesRepositoryTest' name='testTopStoriesRepositoryFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully' time='0.002'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesRepositoryTest' name='testTopStoriesRepositoryFetchesTopStoriesSuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesRepositoryTest' name='testTopStoriesRepositoryFetchesTopStoriesUnsuccessfully' time='0.000'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.TopStoriesTableViewControllerTest' tests='5' failures='0'>
+    <testcase classname='SwiftKotlinationTests.TopStoriesTableViewControllerTest' name='testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully' time='0.006'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesTableViewControllerTest' name='testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully' time='0.028'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesTableViewControllerTest' name='testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully' time='0.010'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesTableViewControllerTest' name='testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully' time='0.004'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesTableViewControllerTest' name='testTopStoriesTableViewControllerOpensStorySuccessfully' time='0.003'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.TopStoriesViewModelTest' tests='6' failures='0'>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelFetchesTopStoriesSuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelFetchesTopStoriesUnsuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelFetchesTopStoryImageSuccessfully' time='0.006'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelFetchesTopStoryImageUnsuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelRefreshsSuccessfully' time='0.001'/>
+    <testcase classname='SwiftKotlinationTests.TopStoriesViewModelTest' name='testTopStoriesViewModelRefreshsUnsuccessfully' time='0.001'/>
+  </testsuite>
+  <testsuite name='SwiftKotlinationTests.UIViewControllerTest' tests='1' failures='0'>
+    <testcase classname='SwiftKotlinationTests.UIViewControllerTest' name='testViewControllerPresentsAlertControllerSuccessfully' time='0.009'/>
+  </testsuite>
+</testsuites>

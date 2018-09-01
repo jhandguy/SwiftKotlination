@@ -5,20 +5,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var coordinator: CoordinatorProtocol!
-    
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+
         var apiClient = APIClient()
         if
             let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
             let sessionMock = URLSessionMock.decode(from: encodedSessionMock) {
-            
+
             apiClient = APIClient(session: sessionMock)
         }
-        
+
         coordinator = Coordinator(window: window!, apiClient: apiClient)
-        
+
         return true
     }
 
@@ -26,12 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard
             let encodedCoordinatorStub = ProcessInfo.processInfo.environment[CoordinatorStub.identifier],
             let coordinatorStub = CoordinatorStub.decode(from: encodedCoordinatorStub) else {
-                
+
                 coordinator.start()
                 return true
         }
-        
-        
+
         switch coordinatorStub {
         case .start:
             coordinator.start()
@@ -40,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .openUrl(let url):
             coordinator.open(url)
         }
-        
+
         return true
     }
 }

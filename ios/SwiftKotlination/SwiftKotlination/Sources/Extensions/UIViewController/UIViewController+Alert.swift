@@ -14,7 +14,7 @@ extension UIViewController {
             handler: { _ in }
         )
         alertController.addAction(alertAction)
-        
+
         present(alertController, animated: animated, completion: completion)
     }
 }

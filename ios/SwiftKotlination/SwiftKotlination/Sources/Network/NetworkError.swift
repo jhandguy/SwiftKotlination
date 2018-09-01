@@ -1,7 +1,7 @@
 enum NetworkError: String, ErrorStringConvertible, Codable {
     case invalidResponse
     case invalidRequest
-    
+
     var description: String {
         switch self {
         case .invalidRequest:

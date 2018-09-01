@@ -3,7 +3,7 @@ import Foundation
 enum Request: Hashable {
     case fetchImage(String)
     case fetchTopStories
-    
+
     var url: String {
         switch self {
         case .fetchTopStories:
@@ -12,7 +12,7 @@ enum Request: Hashable {
             return url
         }
     }
-    
+
     var method: HTTPMethod {
         switch self {
         case .fetchTopStories,
@@ -20,7 +20,7 @@ enum Request: Hashable {
             return .get
         }
     }
-    
+
     var parameters: Parameters {
         switch self {
         case .fetchTopStories:

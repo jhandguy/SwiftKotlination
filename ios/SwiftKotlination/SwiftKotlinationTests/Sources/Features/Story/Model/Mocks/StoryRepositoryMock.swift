@@ -3,7 +3,7 @@ import XCTest
 
 struct StoryRepositoryMock: StoryRepositoryProtocol {
     let result: Result<Story>
-    
+
     func story(_ observer: @escaping Observer<Story>) {
         observer(result)
     }

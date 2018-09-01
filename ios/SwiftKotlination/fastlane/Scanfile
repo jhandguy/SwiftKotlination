@@ -1,0 +1,3 @@
+devices(["iPhone X"])
+clean(true)
+code_coverage(true)

@@ -8,7 +8,7 @@ protocol TopStoriesRepositoryProtocol {
 
 struct TopStoriesRepository: TopStoriesRepositoryProtocol {
     let apiClient: APIClientProtocol
-    
+
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
         return apiClient
@@ -21,7 +21,7 @@ struct TopStoriesRepository: TopStoriesRepositoryProtocol {
                     } catch {
                         observer(.failure(error))
                     }
-                    
+
                 case .failure(let error):
                     observer(.failure(error))
                 }

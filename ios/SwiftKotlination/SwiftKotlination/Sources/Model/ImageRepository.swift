@@ -7,7 +7,7 @@ protocol ImageRepositoryProtocol {
 
 struct ImageRepository: ImageRepositoryProtocol {
     let apiClient: APIClientProtocol
-    
+
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
         return apiClient
@@ -18,9 +18,9 @@ struct ImageRepository: ImageRepositoryProtocol {
                         observer(.failure(NetworkError.invalidResponse))
                         return
                     }
-                    
+
                     observer(.success(image))
-                    
+
                 case .failure(let error):
                     observer(.failure(error))
                 }

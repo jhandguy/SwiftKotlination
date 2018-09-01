@@ -1,7 +1,7 @@
 struct Multimedia: Codable, Equatable {
     let url: String
     let format: Format
-    
+
     enum Format: String, Codable {
         case icon = "Standard Thumbnail"
         case small = "thumbLarge"

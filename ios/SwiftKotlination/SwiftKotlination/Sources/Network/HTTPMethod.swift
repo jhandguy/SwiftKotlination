@@ -4,7 +4,7 @@ enum HTTPMethod: String {
     case get
     case delete
     case patch
-    
+
     var name: String {
         return rawValue.uppercased()
     }

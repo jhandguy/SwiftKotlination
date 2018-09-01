@@ -2,9 +2,9 @@ import XCTest
 @testable import SwiftKotlination
 
 final class APIClientTest: XCTestCase {
-    
+
     var sut: APIClient!
-    
+
     func testObserveRequestSuccessfully() {
         let file = File("top_stories", .json)
         let session = URLSessionMock(
@@ -14,9 +14,9 @@ final class APIClientTest: XCTestCase {
         )
         let disposeBag = DisposeBag()
         sut = APIClient(session: session)
-        
+
         var times = 0
-        
+
         sut
             .observe(.fetchTopStories) { result in
                 switch result {
@@ -27,21 +27,21 @@ final class APIClientTest: XCTestCase {
                 }
                 times += 1
         }.disposed(by: disposeBag)
-        
+
         XCTAssertEqual(times, 1)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
-        
+
         disposeBag.dispose()
-        
+
         guard let observers = sut.observables[.fetchTopStories] else {
             XCTFail("Expected observables to not be nil")
             return
         }
         XCTAssertTrue(observers.isEmpty)
     }
-    
+
     func testExecuteRequestSuccessfully() {
         let file = File("top_stories", .json)
         let session = URLSessionMock(
@@ -52,9 +52,9 @@ final class APIClientTest: XCTestCase {
         )
         let disposeBag = DisposeBag()
         sut = APIClient(session: session)
-        
+
         var times = 0
-        
+
         sut
             .observe(.fetchTopStories) { result in
                 switch result {
@@ -65,23 +65,23 @@ final class APIClientTest: XCTestCase {
                 }
                 times += 1
         }.disposed(by: disposeBag)
-        
+
         sut.execute(.fetchTopStories)
-        
+
         XCTAssertEqual(times, 2)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
-        
+
         disposeBag.dispose()
-        
+
         guard let observers = sut.observables[.fetchTopStories] else {
             XCTFail("Expected observables to not be nil")
             return
         }
         XCTAssertTrue(observers.isEmpty)
     }
-    
+
     func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
         let file = File("top_stories", .json)
         let session = URLSessionMock(
@@ -93,9 +93,9 @@ final class APIClientTest: XCTestCase {
         )
         let disposeBag = DisposeBag()
         sut = APIClient(session: session)
-        
+
         var times = 0
-        
+
         sut
             .observe(.fetchTopStories) { result in
                 switch result {
@@ -106,7 +106,7 @@ final class APIClientTest: XCTestCase {
                 }
                 times += 1
         }.disposed(by: disposeBag)
-        
+
         sut
             .observe(.fetchTopStories) { result in
                 switch result {
@@ -117,16 +117,16 @@ final class APIClientTest: XCTestCase {
                 }
                 times += 1
         }.disposed(by: disposeBag)
-        
+
         sut.execute(.fetchTopStories)
-        
+
         XCTAssertEqual(times, 4)
         session.responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
-        
+
         disposeBag.dispose()
-        
+
         guard let observers = sut.observables[.fetchTopStories] else {
             XCTFail("Expected observables to not be nil")
             return
