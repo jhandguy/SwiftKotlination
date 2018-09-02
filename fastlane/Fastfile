@@ -3,7 +3,6 @@ $devices_android = ""
 
 platform :ios do
   lane :tests do
-    swiftlint
     run_tests(devices: $devices_ios, clean: true, code_coverage: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
   end
 
