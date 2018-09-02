@@ -1,0 +1,22 @@
+$device_ios = "iPhone X"
+$device_android = ""
+
+platform :ios do
+  lane :tests do
+    run_tests(device: $device_ios, clean: true, code_coverage: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
+  end
+
+  lane :screenshots do
+    capture_ios_screenshots(device: $device_ios, clear_previous_screenshots: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
+  end
+end
+
+platform :android do
+  lane :tests do
+
+  end
+
+  lane :screenshots do
+
+  end
+end

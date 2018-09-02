@@ -1,3 +1,5 @@
 ios/SwiftKotlination/SwiftKotlination.xcodeproj/project.xcworkspace/xcuserdata
-ios/SwiftKotlination/fastlane/test_output
-ios/SwiftKotlination/fastlane/screenshots
+
+fastlane/test_output
+fastlane/screenshots
+fastlane/report.xml
