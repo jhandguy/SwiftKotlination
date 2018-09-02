@@ -79,7 +79,7 @@
 		0FA5F7A920A8CBD2009C30B4 /* XCUIApplication+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7A820A8CBD2009C30B4 /* XCUIApplication+Launch.swift */; };
 		0FA5F7AB20A8D6AD009C30B4 /* TopStoriesUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */; };
 		0FA5F7AC20A8DBA8009C30B4 /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65B820A23FF80090B77F /* TopStories.swift */; };
-		0FB7A20D213A970C00A2A777 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7A20C213A970B00A2A777 /* SnapshotHelper.swift */; };
+		0FB7A20F213C6FCB00A2A777 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */; };
 		0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65B820A23FF80090B77F /* TopStories.swift */; };
 		0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C020A393920090B77F /* StoryViewController.swift */; };
 		0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65C220A393C20090B77F /* StoryViewModel.swift */; };
@@ -177,7 +177,7 @@
 		0FA5F7A420A87827009C30B4 /* CoordinatorStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorStub.swift; sourceTree = "<group>"; };
 		0FA5F7A820A8CBD2009C30B4 /* XCUIApplication+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Launch.swift"; sourceTree = "<group>"; };
 		0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesUITest.swift; sourceTree = "<group>"; };
-		0FB7A20C213A970B00A2A777 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = "<group>"; };
+		0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		0FBB65B820A23FF80090B77F /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
 		0FBB65C020A393920090B77F /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		0FBB65C220A393C20090B77F /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
@@ -639,6 +639,14 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		0FB7A210213C6FD600A2A777 /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */,
+			);
+			path = Snapshot;
+			sourceTree = "<group>";
+		};
 		0FBB65BC20A392EE0090B77F /* Story */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,7 +745,6 @@
 		0FCE5CC8208A85C1001C8FFC = {
 			isa = PBXGroup;
 			children = (
-				0FB7A20C213A970B00A2A777 /* SnapshotHelper.swift */,
 				0FCE5CD3208A85C1001C8FFC /* SwiftKotlination */,
 				0FCE5CE8208A85C2001C8FFC /* SwiftKotlinationTests */,
 				0FCE5CF3208A85C3001C8FFC /* SwiftKotlinationUITests */,
@@ -779,6 +786,7 @@
 			children = (
 				0F2026F821334655009B80CE /* Resources */,
 				0FA5F79A20A87740009C30B4 /* Sources */,
+				0FB7A210213C6FD600A2A777 /* Snapshot */,
 				0FCE5CF6208A85C3001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlinationUITests;
@@ -1052,7 +1060,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0FB7A20D213A970C00A2A777 /* SnapshotHelper.swift in Sources */,
+				0FB7A20F213C6FCB00A2A777 /* SnapshotHelper.swift in Sources */,
 				0F9EEE66212F4F21006056E5 /* NetworkError.swift in Sources */,
 				0F3EA4C4212DBA0C0090A69A /* URLSessionMock.swift in Sources */,
 				0FA5F7A520A87827009C30B4 /* CoordinatorStub.swift in Sources */,
