@@ -19,27 +19,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="730" height="150.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTg-CR-Z1k">
-                        <rect key="frame" x="0.0" y="0.0" width="730" height="150.5"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GTg-CR-Z1k">
+                        <rect key="frame" x="8" y="8" width="714" height="134.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9OF-uo-KAb">
-                                <rect key="frame" x="0.0" y="0.0" width="150.5" height="150.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="134.5" height="134.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9OF-uo-KAb" secondAttribute="height" multiplier="1:1" id="uBn-ox-wOd"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="sgN-jO-Fxy">
-                                <rect key="frame" x="150.5" y="0.0" width="579.5" height="150.5"/>
+                                <rect key="frame" x="142.5" y="0.0" width="571.5" height="134.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIQ-Yz-ktJ" userLabel="Title Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="579.5" height="80"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lIQ-Yz-ktJ" userLabel="Title Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="571.5" height="75.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOQ-fy-8ih" userLabel="Byline Label">
-                                        <rect key="frame" x="0.0" y="80" width="579.5" height="70.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOQ-fy-8ih" userLabel="Byline Label">
+                                        <rect key="frame" x="0.0" y="75.5" width="571.5" height="59"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -49,10 +49,10 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="GTg-CR-Z1k" firstAttribute="top" secondItem="iz8-RM-CHt" secondAttribute="top" id="0XE-23-h0v"/>
-                    <constraint firstAttribute="trailing" secondItem="GTg-CR-Z1k" secondAttribute="trailing" id="WdB-rI-keO"/>
-                    <constraint firstAttribute="bottom" secondItem="GTg-CR-Z1k" secondAttribute="bottom" id="cVK-GR-718"/>
-                    <constraint firstItem="GTg-CR-Z1k" firstAttribute="leading" secondItem="iz8-RM-CHt" secondAttribute="leading" id="nUK-vM-LU0"/>
+                    <constraint firstItem="GTg-CR-Z1k" firstAttribute="top" secondItem="iz8-RM-CHt" secondAttribute="top" constant="8" id="0XE-23-h0v"/>
+                    <constraint firstAttribute="trailing" secondItem="GTg-CR-Z1k" secondAttribute="trailing" constant="8" id="WdB-rI-keO"/>
+                    <constraint firstAttribute="bottom" secondItem="GTg-CR-Z1k" secondAttribute="bottom" constant="8" id="cVK-GR-718"/>
+                    <constraint firstItem="GTg-CR-Z1k" firstAttribute="leading" secondItem="iz8-RM-CHt" secondAttribute="leading" constant="8" id="nUK-vM-LU0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
