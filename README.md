@@ -5,11 +5,14 @@
 Experimental comparison app, implementing the same Architecture and Design Patterns in iOS Swift and Android Kotlin.
 
 ## Architecture
-
 - MVVM
 
 ## Design Patterns
-
-- Coordinator
+- Observation
+- Coordination
 - Dependency Injection
-- Observer
+
+## Screenshots
+### iOS
+![Alt text](fastlane/screenshots/en-US/iPhone%20X-Top%20Stories.png?raw=true "Top Stories")
+![Alt text](fastlane/screenshots/en-US/iPhone%20X-Story.png?raw=true "Story")
