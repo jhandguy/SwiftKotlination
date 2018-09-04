@@ -8,7 +8,7 @@ protocol CoordinatorProtocol: class {
 }
 
 final class Coordinator {
-    
+
     // MARK: - Private Properties
 
     private var window: UIWindow

@@ -1,7 +1,7 @@
 import UIKit
 
 final class TopStoriesTableViewController: UITableViewController {
-    
+
     // MARK: - Internal Properties
 
     weak var coordinator: CoordinatorProtocol?

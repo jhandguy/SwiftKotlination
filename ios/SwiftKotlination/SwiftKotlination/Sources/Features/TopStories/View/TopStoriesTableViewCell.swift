@@ -1,7 +1,7 @@
 import UIKit
 
 final class TopStoriesTableViewCell: UITableViewCell {
-    
+
     // MARK: - IBOutlet Properties
 
     @IBOutlet private(set) weak var multimediaImageView: UIImageView!

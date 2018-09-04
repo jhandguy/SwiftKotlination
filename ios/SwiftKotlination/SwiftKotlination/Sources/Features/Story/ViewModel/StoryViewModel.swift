@@ -1,7 +1,7 @@
 import UIKit
 
 final class StoryViewModel {
-    
+
     // MARK: - Private Properties
 
     private let storyRepository: StoryRepositoryProtocol

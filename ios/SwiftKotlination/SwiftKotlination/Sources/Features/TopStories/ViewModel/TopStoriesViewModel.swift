@@ -1,7 +1,7 @@
 import UIKit
 
 final class TopStoriesViewModel {
-    
+
     // MARK: - Private Properties
 
     private let topStoriesRepository: TopStoriesRepositoryProtocol
