@@ -6,9 +6,13 @@ protocol TopStoriesRepositoryProtocol {
     func fetchStories()
 }
 
-struct TopStoriesRepository: TopStoriesRepositoryProtocol {
+struct TopStoriesRepository {
     let apiClient: APIClientProtocol
+}
 
+// MARK: - Protocol Methods
+
+extension TopStoriesRepository: TopStoriesRepositoryProtocol {
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
         return apiClient

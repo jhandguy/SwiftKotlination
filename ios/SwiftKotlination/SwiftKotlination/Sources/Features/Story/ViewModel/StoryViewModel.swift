@@ -1,15 +1,24 @@
 import UIKit
 
 final class StoryViewModel {
+    
+    // MARK: - Private Properties
+
     private let storyRepository: StoryRepositoryProtocol
     private let imageRepository: ImageRepositoryProtocol
 
-    var image: UIImage?
+    // MARK: - Initializer
 
     init(storyRepository: StoryRepositoryProtocol, imageRepository: ImageRepositoryProtocol) {
         self.storyRepository = storyRepository
         self.imageRepository = imageRepository
     }
+
+    // MARK: - Internal Properties
+
+    var image: UIImage?
+
+    // MARK: - Internal Methods
 
     func story(_ observer: @escaping Observer<Story>) {
         storyRepository.story(observer)

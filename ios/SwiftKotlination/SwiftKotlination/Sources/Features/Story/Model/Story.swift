@@ -8,6 +8,8 @@ struct Story: Codable, Equatable {
     let multimedia: [Multimedia]
 }
 
+// MARK: - Internal Methods
+
 extension Story {
     func imageUrl(_ format: Multimedia.Format) -> String? {
         return multimedia.filter { $0.format == format }.first?.url

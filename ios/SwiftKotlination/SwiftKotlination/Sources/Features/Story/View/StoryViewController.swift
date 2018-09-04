@@ -1,6 +1,8 @@
 import UIKit
 
 final class StoryViewController: UIViewController {
+    
+    // MARK: - IBOutlet Properties
 
     @IBOutlet private(set) weak var multimediaImageView: UIImageView!
     @IBOutlet private(set) weak var titleLabel: UILabel!
@@ -8,9 +10,13 @@ final class StoryViewController: UIViewController {
     @IBOutlet private(set) weak var bylineLabel: UILabel!
     @IBOutlet private(set) weak var urlButton: UIButton!
 
+    // MARK: - Internal Properties
+
     weak var coordinator: CoordinatorProtocol?
     var viewModel: StoryViewModel!
     let disposeBag = DisposeBag()
+
+    // MARK: - Lifecycle Methods
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,6 +38,8 @@ final class StoryViewController: UIViewController {
 
         disposeBag.dispose()
     }
+
+    // MARK: - Private Methods
 
     private func bind(with story: Story) {
         title = [story.section, story.subsection]

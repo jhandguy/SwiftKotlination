@@ -1,6 +1,7 @@
 import UIKit
 
 extension UIControl {
+
     typealias Observer = () -> Void
 
     private class Observable: NSObject {
@@ -11,6 +12,8 @@ extension UIControl {
             self.observer = observer
         }
     }
+
+    // MARK: - Private Properties
 
     private var observer: Observer {
         get {
@@ -25,10 +28,14 @@ extension UIControl {
         }
     }
 
+    // MARK: - Private Methods
+
     @objc
     private func observe() {
         observer()
     }
+
+    // MARK: - Internal Methods
 
     func on(_ controlEvents: UIControlEvents, _ observer: @escaping Observer) {
         self.observer = observer

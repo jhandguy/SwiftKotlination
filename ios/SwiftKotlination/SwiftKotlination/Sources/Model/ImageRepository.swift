@@ -5,9 +5,13 @@ protocol ImageRepositoryProtocol {
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable
 }
 
-struct ImageRepository: ImageRepositoryProtocol {
+struct ImageRepository {
     let apiClient: APIClientProtocol
+}
 
+// MARK: - Protocol Methods
+
+extension ImageRepository: ImageRepositoryProtocol {
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
         return apiClient

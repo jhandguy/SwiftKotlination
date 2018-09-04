@@ -1,6 +1,9 @@
 import UIKit
 
 extension UITableView {
+
+    // MARK: - Internal Methods
+
     func registerNib<T: UITableViewCell>(_: T.Type) {
         let nib = UINib(nibName: T.identifier, bundle: Bundle.main)
         register(nib, forCellReuseIdentifier: T.identifier)

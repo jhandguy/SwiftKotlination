@@ -1,9 +1,14 @@
 import UIKit
 
 final class TopStoriesTableViewController: UITableViewController {
+    
+    // MARK: - Internal Properties
+
     weak var coordinator: CoordinatorProtocol?
     var viewModel: TopStoriesViewModel!
     let disposeBag = DisposeBag()
+
+    // MARK: - Lifecycle Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +50,8 @@ final class TopStoriesTableViewController: UITableViewController {
         disposeBag.dispose()
     }
 
+    // MARK: - UITableView Methods
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let story = viewModel.stories[indexPath.row]
         coordinator?.open(story)
@@ -66,6 +73,8 @@ final class TopStoriesTableViewController: UITableViewController {
         let story = viewModel.stories[indexPath.row]
         return bind(cell, with: story)
     }
+
+    // MARK: - Private Methods
 
     private func bind(_ cell: TopStoriesTableViewCell, with story: Story) -> TopStoriesTableViewCell {
         cell.titleLabel.text = story.title

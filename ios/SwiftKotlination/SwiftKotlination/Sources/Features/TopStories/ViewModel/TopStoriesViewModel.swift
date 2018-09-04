@@ -1,16 +1,25 @@
 import UIKit
 
 final class TopStoriesViewModel {
+    
+    // MARK: - Private Properties
+
     private let topStoriesRepository: TopStoriesRepositoryProtocol
     private let imageRepository: ImageRepositoryProtocol
+
+    // MARK: - Initializer
 
     init(topStoriesRepository: TopStoriesRepositoryProtocol, imageRepository: ImageRepositoryProtocol) {
         self.topStoriesRepository = topStoriesRepository
         self.imageRepository = imageRepository
     }
 
+    // MARK: - Internal Properties
+
     var stories: [Story] = []
     var images: [String: UIImage] = [:]
+
+    // MARK: - Internal Methods
 
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {

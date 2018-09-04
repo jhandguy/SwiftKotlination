@@ -7,10 +7,14 @@ protocol CoordinatorProtocol: class {
     func open(_ url: URL)
 }
 
-final class Coordinator: CoordinatorProtocol {
+final class Coordinator {
+    
+    // MARK: - Private Properties
+
     private var window: UIWindow
     private let apiClient: APIClientProtocol
-    let navigationController = UINavigationController()
+
+    // MARK: - Initializer
 
     init(window: UIWindow, apiClient: APIClientProtocol) {
         self.window = window
@@ -19,6 +23,14 @@ final class Coordinator: CoordinatorProtocol {
         self.apiClient = apiClient
     }
 
+    // MARK: - Internal Properties
+
+    let navigationController = UINavigationController()
+}
+
+// MARK: - Protocol Methods
+
+extension Coordinator: CoordinatorProtocol {
     func start() {
         guard let viewController = TopStoriesTableViewController.storyBoardInstance else {
             return
