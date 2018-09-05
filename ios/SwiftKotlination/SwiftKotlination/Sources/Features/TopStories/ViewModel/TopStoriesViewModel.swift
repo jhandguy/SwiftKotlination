@@ -1,4 +1,4 @@
-import UIKit
+import UIKit.UIImage
 
 final class TopStoriesViewModel {
 
