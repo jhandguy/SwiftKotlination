@@ -35,11 +35,7 @@ final class TopStoriesTableViewController: UITableViewController {
                         self?.refreshControl?.endRefreshing()
                     }
                 case .failure(let error):
-                    self?.presentAlertController(with: error, animated: true) {
-                        runOnMainThread {
-                            self?.refreshControl?.endRefreshing()
-                        }
-                    }
+                    self?.present(error)
                 }
             }.disposed(by: disposeBag)
     }
@@ -71,12 +67,12 @@ final class TopStoriesTableViewController: UITableViewController {
         }
 
         let story = viewModel.stories[indexPath.row]
-        return bind(cell, with: story)
+        return bind(story, with: cell)
     }
 
     // MARK: - Private Methods
 
-    private func bind(_ cell: TopStoriesTableViewCell, with story: Story) -> TopStoriesTableViewCell {
+    private func bind(_ story: Story, with cell: TopStoriesTableViewCell) -> TopStoriesTableViewCell {
         cell.titleLabel.text = story.title
         cell.bylineLabel.text = story.byline
 
@@ -102,5 +98,14 @@ final class TopStoriesTableViewController: UITableViewController {
             }?.disposed(by: disposeBag)
 
         return cell
+    }
+
+    private func present(_ error: Error) {
+        let presenter = ErrorPresenter(error: error)
+        presenter.present(in: self, animated: true) {
+            runOnMainThread { [weak self] in
+                self?.refreshControl?.endRefreshing()
+            }
+        }
     }
 }

@@ -25,10 +25,10 @@ final class StoryViewController: UIViewController {
             .story { [weak self] result in
                 switch result {
                 case .success(let story):
-                    self?.bind(with: story)
+                    self?.bind(story)
 
                 case .failure(let error):
-                    self?.presentAlertController(with: error, animated: true)
+                    self?.present(error)
                 }
             }
     }
@@ -41,7 +41,7 @@ final class StoryViewController: UIViewController {
 
     // MARK: - Private Methods
 
-    private func bind(with story: Story) {
+    private func bind(_ story: Story) {
         title = [story.section, story.subsection]
             .filter { !$0.isEmpty }
             .joined(separator: " - ")
@@ -76,5 +76,10 @@ final class StoryViewController: UIViewController {
                     }
                 }
             }?.disposed(by: disposeBag)
+    }
+
+    private func present(_ error: Error) {
+        let presenter = ErrorPresenter(error: error)
+        presenter.present(in: self, animated: true)
     }
 }

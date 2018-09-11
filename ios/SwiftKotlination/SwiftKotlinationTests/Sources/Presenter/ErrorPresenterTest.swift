@@ -1,27 +1,25 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class UIViewControllerTest: XCTestCase {
+final class ErrorPresenterTest: XCTestCase {
 
-    var sut: UIViewController!
+    var sut: ErrorPresenter!
 
-    override func setUp() {
-        super.setUp()
+    func testErrorPresenterPresentsAlertControllerSuccessfully() {
+        let error: NetworkError = .invalidResponse
+        sut = ErrorPresenter(error: error)
 
-        sut = UIViewController()
+        let viewController = UIViewController()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
-        window.rootViewController = sut
+        window.rootViewController = viewController
 
-        sut.viewDidLoad()
-    }
+        viewController.viewDidLoad()
 
-    func testViewControllerPresentsAlertControllerSuccessfully() {
-        let error: NetworkError = .invalidResponse
-        sut.presentAlertController(with: error, animated: false)
+        sut.present(in: viewController, animated: false)
 
-        guard let alertController = sut.presentedViewController as? UIAlertController else {
+        guard let alertController = viewController.presentedViewController as? UIAlertController else {
             XCTFail("Expected UIAlertController to be presented")
             return
         }
