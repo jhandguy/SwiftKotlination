@@ -8,20 +8,14 @@ final class StoryViewControllerTest: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        guard let viewController = StoryViewController.storyBoardInstance else {
-            XCTFail("Expected view controller story board instantiation to succeed")
-            return
-        }
-        sut = viewController
-
+        sut = StoryViewController.storyBoardInstance
         _ = sut.view
     }
 
     func testStoryViewControllerFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let storyRepository = StoryRepositoryMock(result: .success(story))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(story: story, factory: factory)
 
         sut.viewWillAppear(false)
 
@@ -32,9 +26,9 @@ final class StoryViewControllerTest: XCTestCase {
     }
 
     func testStoryViewControllerFetchesStoryUnsuccessfully() {
-        let storyRepository = StoryRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
+        let factory = RepositoryFactoryMock(storyResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(story: story, factory: factory)
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -55,9 +49,8 @@ final class StoryViewControllerTest: XCTestCase {
         }
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let storyRepository = StoryRepositoryMock(result: .success(story))
-        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .success(expectedImage))
+        sut.viewModel = StoryViewModel(story: story, factory: factory)
 
         sut.viewWillAppear(false)
 
@@ -78,9 +71,8 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let storyRepository = StoryRepositoryMock(result: .success(story))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(story: story, factory: factory)
 
         sut.viewWillAppear(false)
 
@@ -89,9 +81,8 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerOpensUrlSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let storyRepository = StoryRepositoryMock(result: .success(story))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = StoryViewModel(story: story, factory: factory)
 
         sut.viewWillAppear(false)
 

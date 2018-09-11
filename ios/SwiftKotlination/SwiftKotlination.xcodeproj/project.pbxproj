@@ -96,6 +96,13 @@
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
+		0FCFF0392147A843009CFE93 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF0382147A843009CFE93 /* Factory.swift */; };
+		0FCFF03B2147C37E009CFE93 /* Factory+ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF03A2147C37E009CFE93 /* Factory+ViewController.swift */; };
+		0FCFF03D2147C3A6009CFE93 /* Factory+Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF03C2147C3A6009CFE93 /* Factory+Repository.swift */; };
+		0FCFF0442147CCAD009CFE93 /* RepositoryFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF0432147CCAD009CFE93 /* RepositoryFactoryMock.swift */; };
+		0FCFF0462147CCB8009CFE93 /* ViewControllerFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF0452147CCB8009CFE93 /* ViewControllerFactoryMock.swift */; };
+		0FCFF0482147E0EC009CFE93 /* Factory+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF0472147E0EC009CFE93 /* Factory+Coordinator.swift */; };
+		0FCFF04A2147EADB009CFE93 /* CoordinatorFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCFF0492147EADB009CFE93 /* CoordinatorFactoryMock.swift */; };
 		0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */; };
 		0FD86670212F471E0033CD13 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8666F212F471E0033CD13 /* NetworkError.swift */; };
 		0FF77C9F212DF6D80072267A /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F79F20A87780009C30B4 /* Encodable+JSON.swift */; };
@@ -200,6 +207,13 @@
 		0FCE5CEB208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0FCE5CF0208A85C3001C8FFC /* SwiftKotlinationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftKotlinationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCE5CF6208A85C3001C8FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0FCFF0382147A843009CFE93 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		0FCFF03A2147C37E009CFE93 /* Factory+ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+ViewController.swift"; sourceTree = "<group>"; };
+		0FCFF03C2147C3A6009CFE93 /* Factory+Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+Repository.swift"; sourceTree = "<group>"; };
+		0FCFF0432147CCAD009CFE93 /* RepositoryFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryFactoryMock.swift; sourceTree = "<group>"; };
+		0FCFF0452147CCB8009CFE93 /* ViewControllerFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactoryMock.swift; sourceTree = "<group>"; };
+		0FCFF0472147E0EC009CFE93 /* Factory+Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Factory+Coordinator.swift"; sourceTree = "<group>"; };
+		0FCFF0492147EADB009CFE93 /* CoordinatorFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactoryMock.swift; sourceTree = "<group>"; };
 		0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTest.swift; sourceTree = "<group>"; };
 		0FD8666F212F471E0033CD13 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -551,6 +565,7 @@
 			isa = PBXGroup;
 			children = (
 				0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */,
+				0FCFF0412147CC79009CFE93 /* Factory */,
 				0FA5F76920A5B998009C30B4 /* Features */,
 				0F20270821346E90009B80CE /* Model */,
 				0F3EA4A5212D8EC80090A69A /* Navigation */,
@@ -713,6 +728,7 @@
 			children = (
 				0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */,
 				0F2026F021334515009B80CE /* Extensions */,
+				0FCFF0372147A823009CFE93 /* Factory */,
 				0FCE5D02208A8650001C8FFC /* Features */,
 				0FB7A211213D6B3E00A2A777 /* Helpers */,
 				0F2026FE2133DE03009B80CE /* Model */,
@@ -825,6 +841,35 @@
 				0FC64A43209653A700339755 /* ViewModel */,
 			);
 			path = TopStories;
+			sourceTree = "<group>";
+		};
+		0FCFF0372147A823009CFE93 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				0FCFF0382147A843009CFE93 /* Factory.swift */,
+				0FCFF0472147E0EC009CFE93 /* Factory+Coordinator.swift */,
+				0FCFF03C2147C3A6009CFE93 /* Factory+Repository.swift */,
+				0FCFF03A2147C37E009CFE93 /* Factory+ViewController.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		0FCFF0412147CC79009CFE93 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				0FCFF0422147CC98009CFE93 /* Mocks */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
+		0FCFF0422147CC98009CFE93 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				0FCFF0432147CCAD009CFE93 /* RepositoryFactoryMock.swift */,
+				0FCFF0452147CCB8009CFE93 /* ViewControllerFactoryMock.swift */,
+				0FCFF0492147EADB009CFE93 /* CoordinatorFactoryMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		0FD8666E212F46EF0033CD13 /* Observable */ = {
@@ -1009,6 +1054,7 @@
 				0FC64A3B2095EAB700339755 /* Coordinator.swift in Sources */,
 				0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */,
 				0F165533212C5383005137B0 /* UITableView+ReusableCell.swift in Sources */,
+				0FCFF03D2147C3A6009CFE93 /* Factory+Repository.swift in Sources */,
 				0F170542212F575300F87958 /* ErrorStringConvertible.swift in Sources */,
 				0FC74198213938CF00E0F254 /* Disposable.swift in Sources */,
 				0FBB65C520A394E10090B77F /* StoryRepository.swift in Sources */,
@@ -1016,6 +1062,7 @@
 				0F3EA4D0212DC1610090A69A /* Parameters.swift in Sources */,
 				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
 				0F4A205821315C54002543B8 /* TopStoriesTableViewCell.swift in Sources */,
+				0FCFF03B2147C37E009CFE93 /* Factory+ViewController.swift in Sources */,
 				0F4A204421302372002543B8 /* File.swift in Sources */,
 				0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */,
@@ -1027,7 +1074,9 @@
 				0F3EA4D1212DC1630090A69A /* HTTPMethod.swift in Sources */,
 				0F16552D212C266F005137B0 /* Request.swift in Sources */,
 				0F3EA4B0212D9E990090A69A /* URLSessionDataTaskProtocol.swift in Sources */,
+				0FCFF0392147A843009CFE93 /* Factory.swift in Sources */,
 				0F3EA4E2212DF2890090A69A /* UITableViewCell+Identifiable.swift in Sources */,
+				0FCFF0482147E0EC009CFE93 /* Factory+Coordinator.swift in Sources */,
 				0F9EEE65212F4AAA006056E5 /* Observer.swift in Sources */,
 				0F170540212F50BE00F87958 /* UIViewController+Alert.swift in Sources */,
 				0F3EA4E7212DF4560090A69A /* CoordinatorStub+Decodable.swift in Sources */,
@@ -1050,9 +1099,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F3EA4AB212D95750090A69A /* APIClientTest.swift in Sources */,
+				0FCFF0442147CCAD009CFE93 /* RepositoryFactoryMock.swift in Sources */,
 				0FA5F77E20A5D239009C30B4 /* StoryViewControllerTest.swift in Sources */,
 				0F170549212FDF3A00F87958 /* UIViewControllerTest.swift in Sources */,
 				0F26DD6321353E9200E50417 /* ImageRepositoryTests.swift in Sources */,
+				0FCFF0462147CCB8009CFE93 /* ViewControllerFactoryMock.swift in Sources */,
 				0FA5F79320A5F3AB009C30B4 /* TopStoriesTableViewControllerTest.swift in Sources */,
 				0FA5F78620A5DFA5009C30B4 /* StoryViewModelTest.swift in Sources */,
 				0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */,
@@ -1066,6 +1117,7 @@
 				0FA5F78B20A5E7CA009C30B4 /* TopStoriesRepositoryTest.swift in Sources */,
 				0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */,
 				0FA5F77920A5BB5F009C30B4 /* CoordinatorMock.swift in Sources */,
+				0FCFF04A2147EADB009CFE93 /* CoordinatorFactoryMock.swift in Sources */,
 				0FA5F78420A5D2F7009C30B4 /* StoryRepositoryMock.swift in Sources */,
 				0FA5F78920A5E71A009C30B4 /* TopStoriesRepositoryMock.swift in Sources */,
 				0FA5F78F20A5EE5C009C30B4 /* APIClientMock.swift in Sources */,

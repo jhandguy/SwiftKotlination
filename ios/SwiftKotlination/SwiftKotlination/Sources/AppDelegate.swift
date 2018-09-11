@@ -5,14 +5,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Internal Properties
 
-    var window: UIWindow?
-    var coordinator: CoordinatorProtocol!
+    var factory: CoordinatorFactory!
+
+    // MARK: - Private Properties
+
+    private lazy var coordinator: CoordinatorProtocol = factory.makeCoordinator(for: UIWindow(frame: UIScreen.main.bounds))
 
     // MARK: - Lifecycle Methods
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-
         var apiClient = APIClient()
         if
             let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
@@ -21,8 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             apiClient = APIClient(session: sessionMock)
         }
 
-        coordinator = Coordinator(window: window!, apiClient: apiClient)
-
+        factory = Factory(apiClient: apiClient)
         return true
     }
 

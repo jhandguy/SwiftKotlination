@@ -5,9 +5,9 @@ final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
     var result: Result<[Story]>
     var observer: Observer<[Story]>
 
-    init(result: Result<[Story]>, observer: @escaping Observer<[Story]> = { _ in }) {
+    init(result: Result<[Story]>) {
         self.result = result
-        self.observer = observer
+        self.observer = { _ in }
     }
 
     @discardableResult
@@ -20,14 +20,5 @@ final class TopStoriesRepositoryMock: TopStoriesRepositoryProtocol {
 
     func fetchStories() {
         stories(observer)
-    }
-
-    var stories: [Story] {
-        switch result {
-        case .success(let stories):
-            return stories
-        case .failure:
-            return []
-        }
     }
 }

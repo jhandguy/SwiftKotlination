@@ -11,12 +11,12 @@ final class AppDelegateTest: XCTestCase {
     }
 
     func testAppDelegateStartsCoordinatorSuccessfully() {
-        let coordinator = CoordinatorMock()
-        sut.coordinator = coordinator
+        let factory = CoordinatorFactoryMock(coordinator: CoordinatorMock())
+        sut.factory = factory
 
         _ = sut.application(UIApplication.shared, didFinishLaunchingWithOptions: [:])
 
-        XCTAssertTrue(coordinator.isStarted)
+        XCTAssertTrue(factory.coordinator.isStarted)
     }
 
 }

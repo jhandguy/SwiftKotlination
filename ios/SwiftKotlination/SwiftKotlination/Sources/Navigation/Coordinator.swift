@@ -11,16 +11,16 @@ final class Coordinator {
 
     // MARK: - Private Properties
 
-    private var window: UIWindow
-    private let apiClient: APIClientProtocol
+    private let window: UIWindow
+    private let factory: ViewControllerFactory
 
     // MARK: - Initializer
 
-    init(window: UIWindow, apiClient: APIClientProtocol) {
+    init(window: UIWindow, factory: ViewControllerFactory) {
         self.window = window
         self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
-        self.apiClient = apiClient
+        self.factory = factory
     }
 
     // MARK: - Internal Properties
@@ -32,24 +32,12 @@ final class Coordinator {
 
 extension Coordinator: CoordinatorProtocol {
     func start() {
-        guard let viewController = TopStoriesTableViewController.storyBoardInstance else {
-            return
-        }
-        let topStoriesRepository = TopStoriesRepository(apiClient: apiClient)
-        let imageRepository = ImageRepository(apiClient: apiClient)
-        viewController.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
-        viewController.coordinator = self
+        let viewController = factory.makeTopStoriesTableViewController(with: self)
         navigationController.pushViewController(viewController, animated: true)
     }
 
     func open(_ story: Story) {
-        guard let viewController = StoryViewController.storyBoardInstance else {
-            return
-        }
-        let storyRepository = StoryRepository(story: story)
-        let imageRepository = ImageRepository(apiClient: apiClient)
-        viewController.viewModel = StoryViewModel(storyRepository: storyRepository, imageRepository: imageRepository)
-        viewController.coordinator = self
+        let viewController = factory.makeStoryViewController(with: self, for: story)
         navigationController.pushViewController(viewController, animated: true)
     }
 

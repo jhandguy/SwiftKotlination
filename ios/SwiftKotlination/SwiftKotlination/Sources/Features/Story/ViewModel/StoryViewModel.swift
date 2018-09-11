@@ -4,14 +4,17 @@ final class StoryViewModel {
 
     // MARK: - Private Properties
 
-    private let storyRepository: StoryRepositoryProtocol
-    private let imageRepository: ImageRepositoryProtocol
+    private let story: Story
+    private let factory: RepositoryFactory
+
+    private lazy var storyRepository: StoryRepositoryProtocol = factory.makeStoryRepository(for: story)
+    private lazy var imageRepository: ImageRepositoryProtocol = factory.makeImageRepository()
 
     // MARK: - Initializer
 
-    init(storyRepository: StoryRepositoryProtocol, imageRepository: ImageRepositoryProtocol) {
-        self.storyRepository = storyRepository
-        self.imageRepository = imageRepository
+    init(story: Story, factory: RepositoryFactory) {
+        self.story = story
+        self.factory = factory
     }
 
     // MARK: - Internal Properties

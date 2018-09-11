@@ -8,26 +8,20 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        guard let viewController = TopStoriesTableViewController.storyBoardInstance else {
-            XCTFail("Expected view controller story board instantiation to succeed")
-            return
-        }
-
-        sut = viewController
+        sut = TopStoriesTableViewController.storyBoardInstance
         sut.viewDidLoad()
     }
 
     func testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = TopStoriesViewModel(factory: factory)
 
         sut.viewWillAppear(false)
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        topStoriesRepository.result = .success([])
+        factory.topStoriesRepository.result = .success([])
         sut.refreshControl?.sendActions(for: .valueChanged)
 
         XCTAssertTrue(sut.tableView.visibleCells.isEmpty)
@@ -35,9 +29,8 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = TopStoriesViewModel(factory: factory)
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -47,7 +40,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        topStoriesRepository.result = .failure(NetworkError.invalidResponse)
+        factory.topStoriesRepository.result = .failure(NetworkError.invalidResponse)
         sut.refreshControl?.sendActions(for: .valueChanged)
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
@@ -62,11 +55,9 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
                 XCTFail("Invalid image")
                 return
         }
-
-        let imageRepository = ImageRepositoryMock(result: .success(expectedImage))
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .success(expectedImage))
+        sut.viewModel = TopStoriesViewModel(factory: factory)
 
         sut.viewWillAppear(false)
 
@@ -91,9 +82,8 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = TopStoriesViewModel(factory: factory)
 
         sut.viewWillAppear(false)
 
@@ -109,9 +99,8 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerOpensStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let topStoriesRepository = TopStoriesRepositoryMock(result: .success([story]))
-        let imageRepository = ImageRepositoryMock(result: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(topStoriesRepository: topStoriesRepository, imageRepository: imageRepository)
+        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        sut.viewModel = TopStoriesViewModel(factory: factory)
 
         sut.viewWillAppear(false)
 

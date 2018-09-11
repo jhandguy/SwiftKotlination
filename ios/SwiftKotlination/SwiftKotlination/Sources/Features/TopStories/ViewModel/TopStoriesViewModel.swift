@@ -4,14 +4,15 @@ final class TopStoriesViewModel {
 
     // MARK: - Private Properties
 
-    private let topStoriesRepository: TopStoriesRepositoryProtocol
-    private let imageRepository: ImageRepositoryProtocol
+    private let factory: RepositoryFactory
+
+    private lazy var topStoriesRepository: TopStoriesRepositoryProtocol = factory.makeTopStoriesRepository()
+    private lazy var imageRepository: ImageRepositoryProtocol = factory.makeImageRepository()
 
     // MARK: - Initializer
 
-    init(topStoriesRepository: TopStoriesRepositoryProtocol, imageRepository: ImageRepositoryProtocol) {
-        self.topStoriesRepository = topStoriesRepository
-        self.imageRepository = imageRepository
+    init(factory: RepositoryFactory) {
+        self.factory = factory
     }
 
     // MARK: - Internal Properties
