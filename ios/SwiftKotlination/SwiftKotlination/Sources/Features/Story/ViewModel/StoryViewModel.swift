@@ -4,17 +4,18 @@ final class StoryViewModel {
 
     // MARK: - Private Properties
 
+    typealias Factory = ImageFactory & StoryFactory
+    private let factory: Factory
     private let story: Story
-    private let factory: RepositoryFactory
 
-    private lazy var storyRepository: StoryRepositoryProtocol = factory.makeStoryRepository(for: story)
-    private lazy var imageRepository: ImageRepositoryProtocol = factory.makeImageRepository()
+    private lazy var storyManager: StoryManagerProtocol = factory.makeStoryBoundFactory(for: story).makeStoryManager()
+    private lazy var imageManager: ImageManagerProtocol = factory.makeImageManager()
 
     // MARK: - Initializer
 
-    init(story: Story, factory: RepositoryFactory) {
-        self.story = story
+    init(factory: Factory, story: Story) {
         self.factory = factory
+        self.story = story
     }
 
     // MARK: - Internal Properties
@@ -24,13 +25,13 @@ final class StoryViewModel {
     // MARK: - Internal Methods
 
     func story(_ observer: @escaping Observer<Story>) {
-        storyRepository.story(observer)
+        storyManager.story(observer)
     }
 
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable? {
         guard let image = image else {
-            return imageRepository
+            return imageManager
                 .image(with: url) { [weak self] result in
                     switch result {
                     case .success(let image):

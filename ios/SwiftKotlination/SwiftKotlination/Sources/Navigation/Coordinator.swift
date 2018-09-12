@@ -11,33 +11,35 @@ final class Coordinator {
 
     // MARK: - Private Properties
 
-    private let window: UIWindow
     private let factory: ViewControllerFactory
-
-    // MARK: - Initializer
-
-    init(window: UIWindow, factory: ViewControllerFactory) {
-        self.window = window
-        self.window.rootViewController = navigationController
-        self.window.makeKeyAndVisible()
-        self.factory = factory
-    }
+    private let window: UIWindow
 
     // MARK: - Internal Properties
 
     let navigationController = UINavigationController()
+
+    // MARK: - Initializer
+
+    init(factory: ViewControllerFactory, window: UIWindow) {
+        self.factory = factory
+        self.window = window
+        self.window.rootViewController = navigationController
+        self.window.makeKeyAndVisible()
+    }
 }
 
 // MARK: - Protocol Methods
 
 extension Coordinator: CoordinatorProtocol {
     func start() {
-        let viewController = factory.makeTopStoriesTableViewController(with: self)
+        let viewController = factory.makeTopStoriesTableViewController()
+        viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
 
     func open(_ story: Story) {
-        let viewController = factory.makeStoryViewController(with: self, for: story)
+        let viewController = factory.makeStoryViewController(for: story)
+        viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
 

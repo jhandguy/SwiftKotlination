@@ -1,14 +1,14 @@
-protocol StoryRepositoryProtocol {
+protocol StoryManagerProtocol {
     func story(_ observer: @escaping Observer<Story>)
 }
 
-struct StoryRepository {
+struct StoryManager {
     let story: Story
 }
 
 // MARK: - Protocol Methods
 
-extension StoryRepository: StoryRepositoryProtocol {
+extension StoryManager: StoryManagerProtocol {
     func story(_ observer: @escaping Observer<Story>) {
         observer(.success(story))
     }

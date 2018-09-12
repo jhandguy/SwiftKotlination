@@ -1,7 +1,7 @@
 import Foundation
 @testable import SwiftKotlination
 
-final class APIClientMock: APIClientProtocol {
+final class NetworkManagerMock: NetworkManagerProtocol {
     var result: Result<Data>
     var observers: [Observer<Data>] = []
 

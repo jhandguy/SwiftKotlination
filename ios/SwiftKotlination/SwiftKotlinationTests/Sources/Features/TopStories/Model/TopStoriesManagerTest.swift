@@ -1,11 +1,11 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class TopStoriesRepositoryTest: XCTestCase {
+final class TopStoriesManagerTest: XCTestCase {
 
-    var sut: TopStoriesRepository!
+    var sut: TopStoriesManager!
 
-    func testTopStoriesRepositoryFetchesTopStoriesSuccessfully() {
+    func testTopStoriesManagerFetchesTopStoriesSuccessfully() {
         let topStories = TopStories(
             results: [
                 Story(
@@ -29,8 +29,8 @@ final class TopStoriesRepositoryTest: XCTestCase {
             return
         }
 
-        let apiClient = APIClientMock(result: .success(data))
-        sut = TopStoriesRepository(apiClient: apiClient)
+        let networkManager = NetworkManagerMock(result: .success(data))
+        sut = TopStoriesManager(networkManager: networkManager)
         sut
             .stories { result in
                 switch result {
@@ -43,9 +43,9 @@ final class TopStoriesRepositoryTest: XCTestCase {
         }
     }
 
-    func testTopStoriesRepositoryFetchesTopStoriesUnsuccessfully() {
-        let apiClient = APIClientMock(result: .failure(NetworkError.invalidResponse))
-        sut = TopStoriesRepository(apiClient: apiClient)
+    func testTopStoriesManagerFetchesTopStoriesUnsuccessfully() {
+        let networkManager = NetworkManagerMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesManager(networkManager: networkManager)
         sut
             .stories { result in
                 switch result {
@@ -58,7 +58,7 @@ final class TopStoriesRepositoryTest: XCTestCase {
         }
     }
 
-    func testTopStoriesRepositoryFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() {
+    func testTopStoriesManagerFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() {
         let topStories = TopStories(
             results: [
                 Story(
@@ -82,8 +82,8 @@ final class TopStoriesRepositoryTest: XCTestCase {
             return
         }
 
-        let apiClient = APIClientMock(result: .success(data))
-        sut = TopStoriesRepository(apiClient: apiClient)
+        let networkManager = NetworkManagerMock(result: .success(data))
+        sut = TopStoriesManager(networkManager: networkManager)
 
         var times = 0
 
@@ -101,7 +101,7 @@ final class TopStoriesRepositoryTest: XCTestCase {
 
         XCTAssertEqual(times, 1)
 
-        apiClient.result = .failure(NetworkError.invalidRequest)
+        networkManager.result = .failure(NetworkError.invalidRequest)
 
         sut
             .stories { result in

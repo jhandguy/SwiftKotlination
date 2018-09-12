@@ -9,7 +9,10 @@ final class CoordinatorTest: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        sut = Coordinator(window: UIWindow(), factory: ViewControllerFactoryMock())
+        sut = Coordinator(
+            factory: ViewControllerFactoryMock(),
+            window: UIWindow()
+        )
     }
 
     func testCoordinatorStartsWithTopStoriesTableViewControllerSuccessfully() {

@@ -1,13 +1,13 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class StoryRepositoryTest: XCTestCase {
+final class StoryManagerTest: XCTestCase {
 
-    var sut: StoryRepository!
+    var sut: StoryManager!
 
-    func testStoryRepositoryFetchesStorySuccessfully() {
+    func testStoryManagerFetchesStorySuccessfully() {
         let expectedStory = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        sut = StoryRepository(story: expectedStory)
+        sut = StoryManager(story: expectedStory)
         sut
             .story { result in
                 switch result {

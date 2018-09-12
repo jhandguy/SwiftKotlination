@@ -1,9 +1,9 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class APIClientTest: XCTestCase {
+final class NetworkManagerTest: XCTestCase {
 
-    var sut: APIClient!
+    var sut: NetworkManager!
 
     func testObserveRequestSuccessfully() {
         let file = File("top_stories", .json)
@@ -13,7 +13,7 @@ final class APIClientTest: XCTestCase {
             ]
         )
         let disposeBag = DisposeBag()
-        sut = APIClient(session: session)
+        sut = NetworkManager(session: session)
 
         var times = 0
 
@@ -51,7 +51,7 @@ final class APIClientTest: XCTestCase {
             ]
         )
         let disposeBag = DisposeBag()
-        sut = APIClient(session: session)
+        sut = NetworkManager(session: session)
 
         var times = 0
 
@@ -92,7 +92,7 @@ final class APIClientTest: XCTestCase {
             ]
         )
         let disposeBag = DisposeBag()
-        sut = APIClient(session: session)
+        sut = NetworkManager(session: session)
 
         var times = 0
 

@@ -1,20 +1,20 @@
 import UIKit.UIImage
 
-protocol ImageRepositoryProtocol {
+protocol ImageManagerProtocol {
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable
 }
 
-struct ImageRepository {
-    let apiClient: APIClientProtocol
+struct ImageManager {
+    let networkManager: NetworkManagerProtocol
 }
 
 // MARK: - Protocol Methods
 
-extension ImageRepository: ImageRepositoryProtocol {
+extension ImageManager: ImageManagerProtocol {
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
-        return apiClient
+        return networkManager
             .observe(.fetchImage(url)) { result in
                 switch result {
                 case .success(let data):

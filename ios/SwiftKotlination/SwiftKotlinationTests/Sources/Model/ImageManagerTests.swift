@@ -1,11 +1,11 @@
 import XCTest
 @testable import SwiftKotlination
 
-final class ImageRepositoryTest: XCTestCase {
+final class ImageManagerTest: XCTestCase {
 
-    var sut: ImageRepository!
+    var sut: ImageManager!
 
-    func testImageRepositoryFetchesImageSuccessfully() {
+    func testImageManagerFetchesImageSuccessfully() {
         guard
             let data = File("27arizpolitics7-thumbLarge", .jpg).data,
             let expectedImage = UIImage(data: data) else {
@@ -14,8 +14,8 @@ final class ImageRepositoryTest: XCTestCase {
             return
         }
 
-        let apiClient = APIClientMock(result: .success(data))
-        sut = ImageRepository(apiClient: apiClient)
+        let networkManager = NetworkManagerMock(result: .success(data))
+        sut = ImageManager(networkManager: networkManager)
         sut
             .image(with: "url") { result in
                 switch result {
@@ -28,9 +28,9 @@ final class ImageRepositoryTest: XCTestCase {
         }
     }
 
-    func testImageRepositoryFetchesImageUnsuccessfully() {
-        let apiClient = APIClientMock(result: .failure(NetworkError.invalidResponse))
-        sut = ImageRepository(apiClient: apiClient)
+    func testImageManagerFetchesImageUnsuccessfully() {
+        let networkManager = NetworkManagerMock(result: .failure(NetworkError.invalidResponse))
+        sut = ImageManager(networkManager: networkManager)
         sut
             .image(with: "url") { result in
                 switch result {
@@ -43,7 +43,7 @@ final class ImageRepositoryTest: XCTestCase {
         }
     }
 
-    func testImageRepositoryFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() {
+    func testImageManagerFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() {
         guard
             let data = File("27arizpolitics7-thumbLarge", .jpg).data,
             let expectedImage = UIImage(data: data) else {
@@ -52,8 +52,8 @@ final class ImageRepositoryTest: XCTestCase {
                 return
         }
 
-        let apiClient = APIClientMock(result: .success(data))
-        sut = ImageRepository(apiClient: apiClient)
+        let networkManager = NetworkManagerMock(result: .success(data))
+        sut = ImageManager(networkManager: networkManager)
 
         var times = 0
 
@@ -69,7 +69,7 @@ final class ImageRepositoryTest: XCTestCase {
                 times += 1
         }
 
-        apiClient.result = .failure(NetworkError.invalidRequest)
+        networkManager.result = .failure(NetworkError.invalidRequest)
 
         sut
             .image(with: "url") { result in

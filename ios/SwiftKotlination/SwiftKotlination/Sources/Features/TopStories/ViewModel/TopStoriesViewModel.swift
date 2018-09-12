@@ -4,14 +4,15 @@ final class TopStoriesViewModel {
 
     // MARK: - Private Properties
 
-    private let factory: RepositoryFactory
+    typealias Factory = ImageFactory & TopStoriesFactory
+    private let factory: Factory
 
-    private lazy var topStoriesRepository: TopStoriesRepositoryProtocol = factory.makeTopStoriesRepository()
-    private lazy var imageRepository: ImageRepositoryProtocol = factory.makeImageRepository()
+    private lazy var topStoriesManager: TopStoriesManagerProtocol = factory.makeTopStoriesManager()
+    private lazy var imageManager: ImageManagerProtocol = factory.makeImageManager()
 
     // MARK: - Initializer
 
-    init(factory: RepositoryFactory) {
+    init(factory: Factory) {
         self.factory = factory
     }
 
@@ -24,7 +25,7 @@ final class TopStoriesViewModel {
 
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
-        return topStoriesRepository
+        return topStoriesManager
             .stories { [weak self] result in
                 switch result {
                 case .success(let stories):
@@ -38,13 +39,13 @@ final class TopStoriesViewModel {
     }
 
     func refresh() {
-        topStoriesRepository.fetchStories()
+        topStoriesManager.fetchStories()
     }
 
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable? {
         guard let image = images[url] else {
-            return imageRepository
+            return imageManager
                 .image(with: url) { [weak self] result in
                     switch result {
                     case .success(let image):

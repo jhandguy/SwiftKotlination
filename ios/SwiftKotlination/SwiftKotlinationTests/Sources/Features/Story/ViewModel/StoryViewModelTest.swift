@@ -7,8 +7,13 @@ final class StoryViewModelTest: XCTestCase {
 
     func testStoryViewModelFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
-        sut = StoryViewModel(story: story, factory: factory)
+        let factory = StoryFactoryMock(
+            storyBoundFactory: StoryBoundFactoryMock(
+                storyManager: StoryManagerMock(result: .success(story))
+            ),
+            imageManager: ImageManagerMock(result: .failure(NetworkError.invalidResponse))
+        )
+        sut = StoryViewModel(factory: factory, story: story)
 
         sut
             .story { result in
@@ -24,8 +29,8 @@ final class StoryViewModelTest: XCTestCase {
 
     func testStoryViewModelFetchesStoryUnsuccesfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
-        sut = StoryViewModel(story: story, factory: factory)
+        let factory = StoryFactoryMock()
+        sut = StoryViewModel(factory: factory, story: story)
 
         sut
             .story { result in
@@ -49,8 +54,10 @@ final class StoryViewModelTest: XCTestCase {
         }
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .failure(NetworkError.invalidResponse), imageResult: .success(expectedImage))
-        sut = StoryViewModel(story: story, factory: factory)
+        let factory = StoryFactoryMock(
+            imageManager: ImageManagerMock(result: .success(expectedImage))
+        )
+        sut = StoryViewModel(factory: factory, story: story)
 
         sut
             .image(with: "") { result in
@@ -66,8 +73,8 @@ final class StoryViewModelTest: XCTestCase {
 
     func testStoryViewModelFetchesStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
-        sut = StoryViewModel(story: story, factory: factory)
+        let factory = StoryFactoryMock()
+        sut = StoryViewModel(factory: factory, story: story)
 
         sut
             .image(with: "") { result in

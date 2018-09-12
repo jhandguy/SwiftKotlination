@@ -1,21 +1,21 @@
 import Foundation
 
-protocol TopStoriesRepositoryProtocol {
+protocol TopStoriesManagerProtocol {
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable
     func fetchStories()
 }
 
-struct TopStoriesRepository {
-    let apiClient: APIClientProtocol
+struct TopStoriesManager {
+    let networkManager: NetworkManagerProtocol
 }
 
 // MARK: - Protocol Methods
 
-extension TopStoriesRepository: TopStoriesRepositoryProtocol {
+extension TopStoriesManager: TopStoriesManagerProtocol {
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {
-        return apiClient
+        return networkManager
             .observe(.fetchTopStories) { result in
                 switch result {
                 case .success(let data):
@@ -33,6 +33,6 @@ extension TopStoriesRepository: TopStoriesRepositoryProtocol {
     }
 
     func fetchStories() {
-        apiClient.execute(.fetchTopStories)
+        networkManager.execute(.fetchTopStories)
     }
 }

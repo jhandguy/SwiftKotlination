@@ -5,23 +5,20 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     var sut: TopStoriesTableViewController!
 
-    override func setUp() {
-        super.setUp()
-
-        sut = TopStoriesTableViewController.storyBoardInstance
-        sut.viewDidLoad()
-    }
-
     func testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(factory: factory)
+        let factory = ViewControllerFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
+
+        sut = factory.makeTopStoriesTableViewController()
+        sut.viewDidLoad()
 
         sut.viewWillAppear(false)
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        factory.topStoriesRepository.result = .success([])
+        factory.topStoriesManager.result = .success([])
         sut.refreshControl?.sendActions(for: .valueChanged)
 
         XCTAssertTrue(sut.tableView.visibleCells.isEmpty)
@@ -29,8 +26,12 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(factory: factory)
+        let factory = ViewControllerFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
+
+        sut = factory.makeTopStoriesTableViewController()
+        sut.viewDidLoad()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -40,7 +41,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        factory.topStoriesRepository.result = .failure(NetworkError.invalidResponse)
+        factory.topStoriesManager.result = .failure(NetworkError.invalidResponse)
         sut.refreshControl?.sendActions(for: .valueChanged)
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
@@ -56,8 +57,13 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
                 return
         }
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .success(expectedImage))
-        sut.viewModel = TopStoriesViewModel(factory: factory)
+        let factory = ViewControllerFactoryMock(
+            imageManager: ImageManagerMock(result: .success(expectedImage)),
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
+
+        sut = factory.makeTopStoriesTableViewController()
+        sut.viewDidLoad()
 
         sut.viewWillAppear(false)
 
@@ -82,8 +88,12 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(factory: factory)
+        let factory = ViewControllerFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
+
+        sut = factory.makeTopStoriesTableViewController()
+        sut.viewDidLoad()
 
         sut.viewWillAppear(false)
 
@@ -99,8 +109,12 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerOpensStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = TopStoriesViewModel(factory: factory)
+        let factory = ViewControllerFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
+
+        sut = factory.makeTopStoriesTableViewController()
+        sut.viewDidLoad()
 
         sut.viewWillAppear(false)
 

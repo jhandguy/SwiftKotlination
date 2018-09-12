@@ -1,20 +1,51 @@
 @testable import SwiftKotlination
 
-struct ViewControllerFactoryMock {}
+struct ViewControllerFactoryMock {
+    let imageManager: ImageManagerMock
+    let topStoriesManager: TopStoriesManagerMock
+    let storyBoundFactory: StoryBoundFactoryMock
+
+    init(
+        imageManager: ImageManagerMock = ImageManagerMock(),
+        topStoriesManager: TopStoriesManagerMock = TopStoriesManagerMock(),
+        storyBoundFactory: StoryBoundFactoryMock = StoryBoundFactoryMock()
+        ) {
+
+        self.imageManager = imageManager
+        self.topStoriesManager = topStoriesManager
+        self.storyBoundFactory = storyBoundFactory
+    }
+}
+
+extension ViewControllerFactoryMock: ImageFactory {
+    func makeImageManager() -> ImageManagerProtocol {
+        return imageManager
+    }
+}
+
+extension ViewControllerFactoryMock: StoryFactory {
+    func makeStoryBoundFactory(for story: Story) -> StoryBoundFactoryProtocol {
+        return storyBoundFactory
+    }
+}
+
+extension ViewControllerFactoryMock: TopStoriesFactory {
+    func makeTopStoriesManager() -> TopStoriesManagerProtocol {
+        return topStoriesManager
+    }
+}
 
 extension ViewControllerFactoryMock: ViewControllerFactory {
-    func makeTopStoriesTableViewController(with coordinator: CoordinatorProtocol) -> TopStoriesTableViewController {
+    func makeTopStoriesTableViewController() -> TopStoriesTableViewController {
         let viewController = TopStoriesTableViewController.storyBoardInstance
-        viewController.coordinator = coordinator
-        viewController.viewModel = TopStoriesViewModel(factory: RepositoryFactoryMock())
+        viewController.viewModel = TopStoriesViewModel(factory: self)
 
         return viewController
     }
 
-    func makeStoryViewController(with coordinator: CoordinatorProtocol, for story: Story) -> StoryViewController {
+    func makeStoryViewController(for story: Story) -> StoryViewController {
         let viewController = StoryViewController.storyBoardInstance
-        viewController.coordinator = coordinator
-        viewController.viewModel = StoryViewModel(story: story, factory: RepositoryFactoryMock())
+        viewController.viewModel = StoryViewModel(factory: self, story: story)
 
         return viewController
     }

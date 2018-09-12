@@ -5,24 +5,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Internal Properties
 
-    var factory: CoordinatorFactory!
-
-    // MARK: - Private Properties
-
-    private lazy var coordinator: CoordinatorProtocol = factory.makeCoordinator(for: UIWindow(frame: UIScreen.main.bounds))
+    var coordinator: CoordinatorProtocol!
 
     // MARK: - Lifecycle Methods
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
-        var apiClient = APIClient()
+        let session: URLSessionProtocol
         if
             let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
             let sessionMock = URLSessionMock.decode(from: encodedSessionMock) {
 
-            apiClient = APIClient(session: sessionMock)
+            session = sessionMock
+        } else {
+            session = URLSession(configuration: URLSessionConfiguration.default)
         }
+        let networkManager = NetworkManager(session: session)
+        let factory = DependencyManager(networkManager: networkManager)
+        let window = UIWindow(frame: UIScreen.main.bounds)
 
-        factory = Factory(apiClient: apiClient)
+        coordinator = Coordinator(factory: factory, window: window)
+
         return true
     }
 

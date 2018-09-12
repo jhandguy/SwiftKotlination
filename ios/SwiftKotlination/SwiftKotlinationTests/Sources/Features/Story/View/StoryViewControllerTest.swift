@@ -5,17 +5,16 @@ final class StoryViewControllerTest: XCTestCase {
 
     var sut: StoryViewController!
 
-    override func setUp() {
-        super.setUp()
-
-        sut = StoryViewController.storyBoardInstance
-        _ = sut.view
-    }
-
     func testStoryViewControllerFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(story: story, factory: factory)
+        let factory = ViewControllerFactoryMock(
+            storyBoundFactory: StoryBoundFactoryMock(
+                storyManager: StoryManagerMock(result: .success(story))
+            )
+        )
+
+        sut = factory.makeStoryViewController(for: story)
+        _ = sut.view
 
         sut.viewWillAppear(false)
 
@@ -27,8 +26,10 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStoryUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(story: story, factory: factory)
+        let factory = ViewControllerFactoryMock()
+
+        sut = factory.makeStoryViewController(for: story)
+        _ = sut.view
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -49,8 +50,13 @@ final class StoryViewControllerTest: XCTestCase {
         }
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .success(expectedImage))
-        sut.viewModel = StoryViewModel(story: story, factory: factory)
+        let factory = ViewControllerFactoryMock(
+            imageManager: ImageManagerMock(result: .success(expectedImage)),
+            storyBoundFactory: StoryBoundFactoryMock(storyManager: StoryManagerMock(result: .success(story)))
+        )
+
+        sut = factory.makeStoryViewController(for: story)
+        _ = sut.view
 
         sut.viewWillAppear(false)
 
@@ -71,8 +77,14 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(story: story, factory: factory)
+        let factory = ViewControllerFactoryMock(
+            storyBoundFactory: StoryBoundFactoryMock(
+                storyManager: StoryManagerMock(result: .success(story))
+            )
+        )
+
+        sut = factory.makeStoryViewController(for: story)
+        _ = sut.view
 
         sut.viewWillAppear(false)
 
@@ -81,8 +93,14 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerOpensUrlSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(storyResult: .success(story), imageResult: .failure(NetworkError.invalidResponse))
-        sut.viewModel = StoryViewModel(story: story, factory: factory)
+        let factory = ViewControllerFactoryMock(
+            storyBoundFactory: StoryBoundFactoryMock(
+                storyManager: StoryManagerMock(result: .success(story))
+            )
+        )
+
+        sut = factory.makeStoryViewController(for: story)
+        _ = sut.view
 
         sut.viewWillAppear(false)
 

@@ -1,12 +1,12 @@
 import Foundation
 
-protocol APIClientProtocol {
+protocol NetworkManagerProtocol {
     @discardableResult
     func observe(_ request: Request, _ observer: @escaping Observer<Data>) -> Disposable
     func execute(_ request: Request)
 }
 
-final class APIClient {
+final class NetworkManager {
 
     // MARK: - Private Properties
 
@@ -15,7 +15,7 @@ final class APIClient {
 
     // MARK: - Initializer
 
-    init(session: URLSessionProtocol = URLSession(configuration: URLSessionConfiguration.default), observables: [Request: [UUID: Observer<Data>]] = [:]) {
+    init(session: URLSessionProtocol, observables: [Request: [UUID: Observer<Data>]] = [:]) {
         self.session = session
         self.observables = observables
     }
@@ -76,7 +76,7 @@ final class APIClient {
 
 // MARK: - Protocol Methods
 
-extension APIClient: APIClientProtocol {
+extension NetworkManager: NetworkManagerProtocol {
     @discardableResult
     func observe(_ request: Request, _ observer: @escaping Observer<Data>) -> Disposable {
         let uuid = UUID()

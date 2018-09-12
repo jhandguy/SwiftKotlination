@@ -7,7 +7,9 @@ final class TopStoriesViewModelTest: XCTestCase {
 
     func testTopStoriesViewModelFetchesTopStoriesSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        let factory = TopStoriesFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
         sut = TopStoriesViewModel(factory: factory)
 
         sut
@@ -24,7 +26,7 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
 
     func testTopStoriesViewModelFetchesTopStoriesUnsuccessfully() {
-        let factory = RepositoryFactoryMock(topStoriesResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
+        let factory = TopStoriesFactoryMock()
         sut = TopStoriesViewModel(factory: factory)
 
         sut
@@ -48,7 +50,9 @@ final class TopStoriesViewModelTest: XCTestCase {
             return
         }
 
-        let factory = RepositoryFactoryMock(topStoriesResult: .failure(NetworkError.invalidResponse), imageResult: .success(expectedImage))
+        let factory = TopStoriesFactoryMock(
+            imageManager: ImageManagerMock(result: .success(expectedImage))
+        )
         sut = TopStoriesViewModel(factory: factory)
 
         sut
@@ -64,7 +68,7 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
 
     func testTopStoriesViewModelFetchesTopStoryImageUnsuccessfully() {
-        let factory = RepositoryFactoryMock(topStoriesResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
+        let factory = TopStoriesFactoryMock()
         sut = TopStoriesViewModel(factory: factory)
 
         sut
@@ -81,7 +85,9 @@ final class TopStoriesViewModelTest: XCTestCase {
 
     func testTopStoriesViewModelRefreshsSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = RepositoryFactoryMock(topStoriesResult: .success([story]), imageResult: .failure(NetworkError.invalidResponse))
+        let factory = TopStoriesFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        )
         sut = TopStoriesViewModel(factory: factory)
 
         var times = 0
@@ -107,7 +113,7 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
 
     func testTopStoriesViewModelRefreshsUnsuccessfully() {
-        let factory = RepositoryFactoryMock(topStoriesResult: .failure(NetworkError.invalidResponse), imageResult: .failure(NetworkError.invalidResponse))
+        let factory = TopStoriesFactoryMock()
         sut = TopStoriesViewModel(factory: factory)
 
         var times = 0
