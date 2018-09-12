@@ -262,8 +262,8 @@
 		0F0E8A5C21490009000B7268 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				0F0E8A60214902AF000B7268 /* StoryBoundFactory.swift */,
 				0F0E8A582148FF94000B7268 /* DependencyManager+StoryFactory.swift */,
+				0F0E8A60214902AF000B7268 /* StoryBoundFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
