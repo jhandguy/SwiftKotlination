@@ -8,10 +8,10 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 - MVVM
 
 ## Design Patterns
-- Coordinator
-- Factory
 - Observer
 - Presenter
+- Coordinator
+- Factory
 
 ## Screenshots
 ### iOS
