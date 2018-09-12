@@ -10,7 +10,7 @@
 		0F0E8A532147FB2F000B7268 /* ErrorPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A522147FB2F000B7268 /* ErrorPresenterTest.swift */; };
 		0F0E8A572148FF5F000B7268 /* DependencyManager+ImageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A562148FF5F000B7268 /* DependencyManager+ImageFactory.swift */; };
 		0F0E8A592148FF94000B7268 /* DependencyManager+StoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A582148FF94000B7268 /* DependencyManager+StoryFactory.swift */; };
-		0F0E8A5B2148FFA6000B7268 /* TopStoriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A5A2148FFA6000B7268 /* TopStoriesFactory.swift */; };
+		0F0E8A5B2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A5A2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift */; };
 		0F0E8A5F21490253000B7268 /* DependencyManager+ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A5E21490253000B7268 /* DependencyManager+ViewControllerFactory.swift */; };
 		0F0E8A61214902AF000B7268 /* StoryBoundFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A60214902AF000B7268 /* StoryBoundFactory.swift */; };
 		0F0E8A672149120D000B7268 /* StoryFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A662149120D000B7268 /* StoryFactoryMock.swift */; };
@@ -133,7 +133,7 @@
 		0F0E8A522147FB2F000B7268 /* ErrorPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenterTest.swift; sourceTree = "<group>"; };
 		0F0E8A562148FF5F000B7268 /* DependencyManager+ImageFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DependencyManager+ImageFactory.swift"; sourceTree = "<group>"; };
 		0F0E8A582148FF94000B7268 /* DependencyManager+StoryFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DependencyManager+StoryFactory.swift"; sourceTree = "<group>"; };
-		0F0E8A5A2148FFA6000B7268 /* TopStoriesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesFactory.swift; sourceTree = "<group>"; };
+		0F0E8A5A2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DependencyManager+TopStoriesFactory.swift"; sourceTree = "<group>"; };
 		0F0E8A5E21490253000B7268 /* DependencyManager+ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DependencyManager+ViewControllerFactory.swift"; sourceTree = "<group>"; };
 		0F0E8A60214902AF000B7268 /* StoryBoundFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryBoundFactory.swift; sourceTree = "<group>"; };
 		0F0E8A662149120D000B7268 /* StoryFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryFactoryMock.swift; sourceTree = "<group>"; };
@@ -271,7 +271,7 @@
 		0F0E8A5D2149001D000B7268 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
-				0F0E8A5A2148FFA6000B7268 /* TopStoriesFactory.swift */,
+				0F0E8A5A2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift */,
 			);
 			path = Factory;
 			sourceTree = "<group>";
@@ -1131,7 +1131,7 @@
 				0F4A205821315C54002543B8 /* TopStoriesTableViewCell.swift in Sources */,
 				0F4A204421302372002543B8 /* File.swift in Sources */,
 				0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */,
-				0F0E8A5B2148FFA6000B7268 /* TopStoriesFactory.swift in Sources */,
+				0F0E8A5B2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */,
 				0F3EA4C7212DBC570090A69A /* URLSessionMock.swift in Sources */,
 				0F3EA4DF212DF1590090A69A /* Identifiable.swift in Sources */,
