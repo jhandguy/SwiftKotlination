@@ -20,7 +20,7 @@ final class ImageManagerTest: XCTestCase {
             .image(with: "url") { result in
                 switch result {
                 case .success(let image):
-                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
 
                 case .failure(let error):
                     XCTFail("Fetch Image should succeed, found error \(error)")
@@ -61,7 +61,7 @@ final class ImageManagerTest: XCTestCase {
             .image(with: "url") { result in
                 switch result {
                 case .success(let image):
-                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
 
                 case .failure(let error):
                     XCTAssertEqual(error as? NetworkError, .invalidRequest)

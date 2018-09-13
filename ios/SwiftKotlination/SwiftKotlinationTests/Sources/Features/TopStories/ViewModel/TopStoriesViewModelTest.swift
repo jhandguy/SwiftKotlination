@@ -59,7 +59,7 @@ final class TopStoriesViewModelTest: XCTestCase {
             .image(with: "") { result in
                 switch result {
                 case .success(let image):
-                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
 
                 case .failure(let error):
                     XCTFail("Fetch TopStory Image should succeed, found error \(error)")

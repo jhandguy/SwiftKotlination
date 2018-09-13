@@ -1043,15 +1043,16 @@
 				TargetAttributes = {
 					0FCE5CD0208A85C1001C8FFC = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 1000;
 					};
 					0FCE5CE4208A85C2001C8FFC = {
 						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1000;
 						TestTargetID = 0FCE5CD0208A85C1001C8FFC;
 					};
 					0FCE5CEF208A85C3001C8FFC = {
 						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 0930;
+						LastSwiftMigration = 1000;
 						TestTargetID = 0FCE5CD0208A85C1001C8FFC;
 					};
 				};
@@ -1379,7 +1380,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlination;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1397,7 +1398,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlination;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1419,7 +1420,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftKotlination.app/SwiftKotlination";
 			};
@@ -1441,7 +1442,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftKotlination.app/SwiftKotlination";
 			};
@@ -1463,7 +1464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SwiftKotlination;
 			};
@@ -1484,7 +1485,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SwiftKotlination;
 			};

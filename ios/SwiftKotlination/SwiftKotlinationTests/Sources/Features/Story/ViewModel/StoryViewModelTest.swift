@@ -63,7 +63,7 @@ final class StoryViewModelTest: XCTestCase {
             .image(with: "") { result in
                 switch result {
                 case .success(let image):
-                    XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
 
                 case .failure(let error):
                     XCTFail("Fetch Story Image should succeed, found error \(error)")

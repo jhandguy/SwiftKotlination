@@ -37,7 +37,7 @@ extension UIControl {
 
     // MARK: - Internal Methods
 
-    func on(_ controlEvents: UIControlEvents, _ observer: @escaping Observer) {
+    func on(_ controlEvents: UIControl.Event, _ observer: @escaping Observer) {
         self.observer = observer
         addTarget(self, action: #selector(observe), for: controlEvents)
     }

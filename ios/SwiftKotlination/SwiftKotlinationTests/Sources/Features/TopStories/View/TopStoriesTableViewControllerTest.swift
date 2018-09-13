@@ -78,7 +78,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
                 return
         }
 
-        XCTAssertEqual(UIImagePNGRepresentation(expectedImage), UIImagePNGRepresentation(image))
+        XCTAssertEqual(expectedImage.pngData(), image.pngData())
         XCTAssertFalse(cell.multimediaImageView.isHidden)
 
         sut.viewWillDisappear(false)

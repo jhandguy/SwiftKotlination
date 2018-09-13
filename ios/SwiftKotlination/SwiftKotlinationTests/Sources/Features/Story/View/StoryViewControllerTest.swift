@@ -68,7 +68,7 @@ final class StoryViewControllerTest: XCTestCase {
             return
         }
 
-        XCTAssertEqual(UIImagePNGRepresentation(image), UIImagePNGRepresentation(expectedImage))
+        XCTAssertEqual(image.pngData(), expectedImage.pngData())
 
         sut.viewWillDisappear(false)
 

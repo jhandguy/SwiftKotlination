@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Lifecycle Methods
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         let session: URLSessionProtocol
         if
             let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         guard
             let encodedCoordinatorStub = ProcessInfo.processInfo.environment[CoordinatorStub.identifier],
             let coordinatorStub = CoordinatorStub.decode(from: encodedCoordinatorStub) else {
