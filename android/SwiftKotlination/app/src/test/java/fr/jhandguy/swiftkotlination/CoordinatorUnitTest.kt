@@ -11,7 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.core.parameter.parametersOf
-import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.robolectric.Robolectric.buildActivity
@@ -66,6 +66,6 @@ class CoordinatorUnitTest: KoinTest {
 
     @After
     fun after() {
-        closeKoin()
+        stopKoin()
     }
 }

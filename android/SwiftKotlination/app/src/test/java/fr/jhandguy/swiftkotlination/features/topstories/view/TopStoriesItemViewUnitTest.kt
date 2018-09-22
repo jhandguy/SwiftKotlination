@@ -15,7 +15,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.test.KoinTest
 import org.robolectric.Robolectric.buildActivity
 import org.robolectric.RobolectricTestRunner
@@ -52,6 +52,6 @@ class TopStoriesItemViewUnitTest: KoinTest {
 
     @After
     fun after() {
-        closeKoin()
+        stopKoin()
     }
 }

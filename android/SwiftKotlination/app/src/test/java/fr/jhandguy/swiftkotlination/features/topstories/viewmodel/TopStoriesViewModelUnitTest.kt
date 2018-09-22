@@ -12,7 +12,7 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.closeKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
@@ -74,6 +74,6 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @After
     fun after() {
-        closeKoin()
+        stopKoin()
     }
 }
