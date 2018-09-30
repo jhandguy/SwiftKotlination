@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="top_stories_list" type="id">1</item>
-    <item name="top_stories_item_title" type="id">2</item>
-    <item name="top_stories_item_byline" type="id">3</item>
-    <item name="top_stories_item_button" type="id">4</item>
-    <item name="story_title" type="id">5</item>
-    <item name="story_abstract" type="id">6</item>
-    <item name="story_byline" type="id">7</item>
-    <item name="story_button" type="id">8</item>
+    <item name="top_stories_list" type="id"/>
+    <item name="top_stories_item_title" type="id"/>
+    <item name="top_stories_item_byline" type="id"/>
+    <item name="top_stories_item_button" type="id"/>
+    <item name="story_title" type="id"/>
+    <item name="story_abstract" type="id"/>
+    <item name="story_byline" type="id"/>
+    <item name="story_button" type="id"/>
 </resources>
