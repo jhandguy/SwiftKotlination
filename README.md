@@ -12,8 +12,3 @@ Experimental comparison app, implementing the same Architecture and Design Patte
 - Presenter
 - Coordinator
 - Factory
-
-## Screenshots
-### iOS
-![Alt text](fastlane/screenshots/en-US/iPhone%20X-Top%20Stories.png?raw=true "Top Stories")
-![Alt text](fastlane/screenshots/en-US/iPhone%20X-Story.png?raw=true "Story")
