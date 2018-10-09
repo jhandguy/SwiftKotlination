@@ -62,6 +62,7 @@
 		0F4A205A21316107002543B8 /* TopStoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */; };
 		0F4A205C213169FF002543B8 /* UIViewController+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A205B213169FF002543B8 /* UIViewController+Identifiable.swift */; };
 		0F4A206121316ADD002543B8 /* StoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A206021316ADD002543B8 /* StoryViewController.storyboard */; };
+		0F967079216CEB030030DBB8 /* DependencyManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */; };
 		0F9EEE63212F4893006056E5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16552E212C2680005137B0 /* Result.swift */; };
 		0F9EEE65212F4AAA006056E5 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EEE64212F4AAA006056E5 /* Observer.swift */; };
 		0F9EEE66212F4F21006056E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8666F212F471E0033CD13 /* NetworkError.swift */; };
@@ -176,6 +177,7 @@
 		0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopStoriesTableViewCell.xib; sourceTree = "<group>"; };
 		0F4A205B213169FF002543B8 /* UIViewController+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Identifiable.swift"; sourceTree = "<group>"; };
 		0F4A206021316ADD002543B8 /* StoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryViewController.storyboard; sourceTree = "<group>"; };
+		0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManagerTest.swift; sourceTree = "<group>"; };
 		0F9EEE64212F4AAA006056E5 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		0FA5F77320A5BA4C009C30B4 /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 		0FA5F77820A5BB5F009C30B4 /* CoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMock.swift; sourceTree = "<group>"; };
@@ -918,6 +920,7 @@
 		0FCFF0412147CC79009CFE93 /* Factory */ = {
 			isa = PBXGroup;
 			children = (
+				0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */,
 				0FCFF0422147CC98009CFE93 /* Mocks */,
 			);
 			path = Factory;
@@ -1183,6 +1186,7 @@
 				0F0E8A6C2149147C000B7268 /* TopStoriesFactoryMock.swift in Sources */,
 				0F0E8A672149120D000B7268 /* StoryFactoryMock.swift in Sources */,
 				0FF77C9F212DF6D80072267A /* Encodable+JSON.swift in Sources */,
+				0F967079216CEB030030DBB8 /* DependencyManagerTest.swift in Sources */,
 				0FA5F79720A5F713009C30B4 /* TopStoriesViewModelTest.swift in Sources */,
 				0F20270B21346EAE009B80CE /* ImageManagerMock.swift in Sources */,
 				0F170545212F57E300F87958 /* NetworkErrorTest.swift in Sources */,
