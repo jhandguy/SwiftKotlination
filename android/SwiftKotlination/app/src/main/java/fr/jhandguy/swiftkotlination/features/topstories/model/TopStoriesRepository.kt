@@ -1,12 +1,11 @@
 package fr.jhandguy.swiftkotlination.features.topstories.model
 
-import fr.jhandguy.swiftkotlination.features.story.model.Story
 import io.reactivex.Observable
 
 interface TopStoriesRepository {
-    var topStories: Observable<List<Story>>
+    var topStories: Observable<TopStories>
 }
 
 class TopStoriesRepositoryImpl(topStoriesService: TopStoriesService): TopStoriesRepository {
-    override var topStories: Observable<List<Story>> = topStoriesService.getObservable().map { it.results }
+    override var topStories: Observable<TopStories> = topStoriesService.getObservable().map { it }
 }

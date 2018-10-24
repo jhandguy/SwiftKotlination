@@ -5,5 +5,5 @@ import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesReposito
 import io.reactivex.Observable
 
 class TopStoriesViewModel(repository: TopStoriesRepository) {
-    var topStories: Observable<List<Story>> = repository.topStories
+    var topStories: Observable<List<Story>> = repository.topStories.map { it.results }
 }

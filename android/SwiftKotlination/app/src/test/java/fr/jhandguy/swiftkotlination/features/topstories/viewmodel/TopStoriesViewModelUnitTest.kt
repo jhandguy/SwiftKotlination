@@ -2,6 +2,7 @@ package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
 import com.nhaarman.mockito_kotlin.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
@@ -12,8 +13,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.mockito.Mock
@@ -38,19 +39,21 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
     @Test
     fun `top stories are fetched correctly`() {
-        val stories = listOf(
-                Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
-                Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
+        val topStories = TopStories(
+                results = listOf(
+                    Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
+                    Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
+                )
         )
 
         whenever(repository.topStories)
-                .thenReturn(Observable.just(stories))
+                .thenReturn(Observable.just(topStories))
 
         viewModel
                 .topStories
                 .subscribeBy(
                         onNext = {
-                            assertEquals(it, stories)
+                            assertEquals(it, topStories)
                         },
                         onError = {
                             fail(it.message)
