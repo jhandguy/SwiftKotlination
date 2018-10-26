@@ -3,7 +3,6 @@
     <item name="top_stories_list" type="id"/>
     <item name="top_stories_item_title" type="id"/>
     <item name="top_stories_item_byline" type="id"/>
-    <item name="top_stories_item_button" type="id"/>
     <item name="story_title" type="id"/>
     <item name="story_abstract" type="id"/>
     <item name="story_byline" type="id"/>

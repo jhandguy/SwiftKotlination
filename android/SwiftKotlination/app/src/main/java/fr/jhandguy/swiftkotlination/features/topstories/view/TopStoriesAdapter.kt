@@ -3,7 +3,6 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.R
@@ -23,14 +22,11 @@ class TopStoriesAdapter(val coordinator: Coordinator, var topStories: List<Story
     class ViewHolder(itemView: View, val coordinator: Coordinator) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.find(R.id.top_stories_item_title)
         val byline: TextView = itemView.find(R.id.top_stories_item_byline)
-        val button: Button = itemView.find(R.id.top_stories_item_button)
 
         fun bind(story: Story) {
             title.text = story.title
             byline.text = story.byline
-            button.isEnabled = true
-            button.onClick {
-                button.isEnabled = false
+            itemView.onClick {
                 coordinator.open(story)
             }
         }

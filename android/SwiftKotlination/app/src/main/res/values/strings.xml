@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SwiftKotlination</string>
-    <string name="top_stories_button_title">See</string>
-    <string name="story_button_title">See More</string>
+    <string name="story_button_title">See More…</string>
 </resources>
