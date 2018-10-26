@@ -1,11 +1,11 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import io.reactivex.Observable
+import fr.jhandguy.swiftkotlination.network.Result
 
 interface StoryRepository {
-    var story: Observable<Story>
+    suspend fun story(observer: (Result<Story>) -> (Unit))
 }
 
-class StoryRepositoryImpl(story: Story): StoryRepository {
-    override var story: Observable<Story> = Observable.just(story)
+class StoryRepositoryImpl(private val story: Story): StoryRepository {
+    override suspend fun story(observer: (Result<Story>) -> (Unit)) = observer(Result.Success(story))
 }

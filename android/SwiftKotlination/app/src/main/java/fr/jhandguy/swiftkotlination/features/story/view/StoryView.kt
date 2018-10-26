@@ -2,7 +2,6 @@ package fr.jhandguy.swiftkotlination.features.story.view
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
 import fr.jhandguy.swiftkotlination.Coordinator
@@ -21,7 +20,7 @@ class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoC
             textView {
                 text = story.title
                 textAlignment = View.TEXT_ALIGNMENT_CENTER
-                textColorResource = R.color.colorAccent
+                textColorResource = R.color.primary_text
                 textSize = sp(9).toFloat()
                 id = R.id.story_title
             }.lparams(width = matchParent, height = wrapContent) {
@@ -33,7 +32,7 @@ class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoC
 
             textView {
                 text = story.abstract
-                textColorResource = R.color.colorAccent
+                textColorResource = R.color.primary_text
                 textSize = sp(6).toFloat()
                 id = R.id.story_abstract
             }.lparams(width = matchParent, height = wrapContent) {
@@ -45,8 +44,8 @@ class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoC
 
             textView {
                 text = story.byline
-                textColorResource = R.color.colorAccent
-                textSize = sp(4).toFloat()
+                textColorResource = R.color.secondary_text
+                textSize = sp(5).toFloat()
                 id = R.id.story_byline
             }.lparams(width = matchParent, height = wrapContent) {
                 topToBottom = R.id.story_abstract
@@ -58,11 +57,10 @@ class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoC
             button {
                 textResource = R.string.story_button_title
                 allCaps = false
-                textColor = Color.RED
-                typeface = Typeface.DEFAULT
                 textSize = sp(6).toFloat()
-                backgroundColor = Color.BLACK
                 id = R.id.story_button
+                backgroundColor = Color.TRANSPARENT
+                textColorResource = R.color.accent
 
                 onClick {
                     coordinator.open(story.url)

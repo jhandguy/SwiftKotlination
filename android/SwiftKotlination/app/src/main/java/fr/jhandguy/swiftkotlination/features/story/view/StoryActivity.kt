@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import fr.jhandguy.swiftkotlination.network.Result
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.ext.android.bindScope
@@ -18,7 +18,7 @@ class StoryActivity: AppCompatActivity() {
 
     val coordinator: Coordinator by inject { parametersOf(this) }
 
-    val viewModel: StoryViewModel by inject { parametersOf(intent.extras.getSerializable(Story::class.java.simpleName)) }
+    val viewModel: StoryViewModel by inject { parametersOf(intent?.extras?.get(Story::class.java.simpleName) ?: Story()) }
 
     val view: StoryView by inject { parametersOf(this) }
 
@@ -34,22 +34,20 @@ class StoryActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel
-                .story
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = { story ->
-                            title = arrayOf(story.section, story.subsection)
-                                    .filter { it.isNotEmpty() }
-                                    .joinToString(separator = " - ")
-                            view.story = story
-                            view.setContentView(this)
-                        },
-                        onError = {
-                            print(it.message)
-                        }
-                )
+        async(UI) {
+            viewModel.story { result ->
+                when(result) {
+                    is Result.Success -> {
+                        title = arrayOf(result.data.section, result.data.subsection)
+                                .filter { it.isNotEmpty() }
+                                .joinToString(separator = " - ")
+                        view.story = result.data
+                        view.setContentView(this@StoryActivity)
+                    }
+                    is Result.Failure -> print(result.error)
+                }
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

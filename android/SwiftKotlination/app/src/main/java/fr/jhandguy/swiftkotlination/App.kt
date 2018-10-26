@@ -2,6 +2,7 @@ package fr.jhandguy.swiftkotlination
 
 import android.app.Activity
 import android.app.Application
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl
@@ -17,7 +18,6 @@ import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 open class App: Application() {
@@ -31,8 +31,8 @@ open class App: Application() {
             Retrofit
                     .Builder()
                     .baseUrl("https://api.nytimes.com")
+                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
                     .addConverterFactory(MoshiConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()
                     .create(TopStoriesService::class.java)
                     as TopStoriesService

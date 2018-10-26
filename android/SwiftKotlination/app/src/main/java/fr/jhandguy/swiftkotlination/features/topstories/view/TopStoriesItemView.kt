@@ -2,7 +2,6 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.Typeface.DEFAULT_BOLD
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
@@ -18,7 +17,7 @@ class TopStoriesItemView : AnkoComponent<Context> {
             lparams(width = matchParent, height = wrapContent)
 
             textView {
-                textColorResource = R.color.colorAccent
+                textColorResource = R.color.primary_text
                 textSize = sp(6).toFloat()
                 typeface = DEFAULT_BOLD
                 id = R.id.top_stories_item_title
@@ -29,7 +28,7 @@ class TopStoriesItemView : AnkoComponent<Context> {
             }
 
             textView {
-                textColorResource = R.color.colorAccent
+                textColorResource = R.color.secondary_text
                 textSize = sp(5).toFloat()
                 lines = 1
                 id = R.id.top_stories_item_byline
@@ -42,12 +41,12 @@ class TopStoriesItemView : AnkoComponent<Context> {
             }
 
             button {
-                textColor = Color.RED
+                allCaps = false
                 textSize = sp(6).toFloat()
-                backgroundColor = Color.BLACK
                 textResource = R.string.top_stories_button_title
-                typeface = Typeface.DEFAULT
                 id = R.id.top_stories_item_button
+                backgroundColor = Color.TRANSPARENT
+                textColorResource = R.color.accent
             }.lparams(width = wrapContent, height = wrapContent) {
                 rightToRight = PARENT_ID
                 topToTop = PARENT_ID

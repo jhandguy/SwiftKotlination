@@ -1,25 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
     </style>
-
-    <style name="ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="android:titleTextStyle">@style/TitleBarTextColor</item>
-    </style>
-
-    <style name="TitleBarTextColor" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <style name="AppTheme" parent="AppBaseTheme">
-
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:titleTextStyle">@style/TitleBarTextColor</item>
-        <item name="android:windowBackground">@android:color/black</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-    </style>
-
 </resources>

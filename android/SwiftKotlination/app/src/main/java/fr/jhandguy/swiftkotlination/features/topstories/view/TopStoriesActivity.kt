@@ -3,9 +3,9 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import fr.jhandguy.swiftkotlination.network.Result
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.ext.android.bindScope
@@ -31,18 +31,16 @@ class TopStoriesActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        viewModel
-                .topStories
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            view.adapter.topStories = it
-                            view.adapter.notifyDataSetChanged()
-                        },
-                        onError = {
-                            print(it.message)
-                        }
-                )
+        async(UI) {
+            viewModel.topStories { result ->
+                when (result) {
+                    is Result.Success -> {
+                        view.adapter.topStories = result.data
+                        view.adapter.notifyDataSetChanged()
+                    }
+                    is Result.Failure -> print(result.error)
+                }
+            }
+        }
     }
 }

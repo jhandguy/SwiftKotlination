@@ -2,8 +2,8 @@ package fr.jhandguy.swiftkotlination.features.story.viewModel
 
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
-import io.reactivex.Observable
+import fr.jhandguy.swiftkotlination.network.Result
 
-class StoryViewModel(repository: StoryRepository) {
-    var story: Observable<Story> = repository.story
+class StoryViewModel(private val repository: StoryRepository) {
+    suspend fun story(observer: (Result<Story>) -> (Unit)) = repository.story(observer)
 }

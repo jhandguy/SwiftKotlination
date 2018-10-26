@@ -2,8 +2,13 @@ package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import io.reactivex.Observable
+import fr.jhandguy.swiftkotlination.network.Result
 
-class TopStoriesViewModel(repository: TopStoriesRepository) {
-    var topStories: Observable<List<Story>> = repository.topStories.map { it.results }
+class TopStoriesViewModel(private val repository: TopStoriesRepository) {
+    suspend fun topStories(observer: (Result<List<Story>>) -> (Unit)) = repository.topStories { result ->
+        when (result) {
+            is Result.Success -> observer(Result.Success(result.data.results))
+            is Result.Failure -> observer(result)
+        }
+    }
 }
