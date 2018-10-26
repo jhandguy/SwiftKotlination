@@ -1,14 +1,15 @@
 package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.subscribeBy
+import fr.jhandguy.swiftkotlination.network.Result
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
+import kotlinx.coroutines.experimental.runBlocking
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -46,33 +47,38 @@ class TopStoriesViewModelUnitTest: KoinTest {
                 )
         )
 
-        whenever(repository.topStories)
-                .thenReturn(Observable.just(topStories))
+        runBlocking {
+            whenever(repository.topStories(any())).thenAnswer {
+                val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
+                observer?.invoke(Result.Success(topStories))
+            }
 
-        viewModel
-                .topStories
-                .subscribeBy(
-                        onNext = {
-                            assertEquals(it, topStories)
-                        },
-                        onError = {
-                            fail(it.message)
-                        }
-                )
+            viewModel.topStories { result ->
+                when(result) {
+                    is Result.Success -> assertEquals(result.data, topStories.results)
+                    is Result.Failure -> fail(result.error.message)
+                }
+            }
+        }
     }
 
     @Test
     fun `error is thrown correctly`() {
         val error = Error("error message")
 
-        whenever(repository.topStories)
-                .thenReturn(Observable.error(error))
+        runBlocking {
+            whenever(repository.topStories(any())).thenAnswer {
+                val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
+                observer?.invoke(Result.Failure(error))
+            }
 
-        viewModel
-                .topStories
-                .doOnError {
-                    assertEquals(it, error)
+            viewModel.topStories { result ->
+                when(result) {
+                    is Result.Success -> fail("Coroutine should throw error")
+                    is Result.Failure -> assertEquals(result.error, error)
                 }
+            }
+        }
     }
 
     @After

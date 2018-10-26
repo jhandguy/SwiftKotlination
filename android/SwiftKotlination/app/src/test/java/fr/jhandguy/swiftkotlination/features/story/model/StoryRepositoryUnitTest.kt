@@ -1,14 +1,15 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import io.reactivex.rxkotlin.subscribeBy
+import fr.jhandguy.swiftkotlination.network.Result
+import kotlinx.coroutines.experimental.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 
@@ -29,16 +30,15 @@ class StoryRepositoryUnitTest: KoinTest {
 
     @Test
     fun `story is injected correctly`() {
-        repository
-                .story
-                .subscribeBy(
-                        onNext = {
-                            assertEquals(it, story)
-                        },
-                        onError = {
-                            fail(it.message)
+        runBlocking {
+            repository
+                    .story { result ->
+                        when(result) {
+                            is Result.Success -> assertEquals(result.data, story)
+                            is Result.Failure -> fail(result.error.message)
                         }
-                )
+                    }
+        }
     }
 
     @After

@@ -3,22 +3,24 @@ package fr.jhandguy.swiftkotlination.features.topstories.model
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import io.reactivex.Observable
-import io.reactivex.rxkotlin.subscribeBy
+import fr.jhandguy.swiftkotlination.network.Result
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.fail
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.runBlocking
+import okhttp3.ResponseBody
 import org.junit.After
-import org.junit.Assert
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.StandAloneContext.startKoin
+import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner::class)
 class TopStoriesRepositoryUnitTest: KoinTest {
@@ -44,33 +46,38 @@ class TopStoriesRepositoryUnitTest: KoinTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
 
-        whenever(service.getObservable(any()))
-                .thenReturn(Observable.just(topStories))
+        whenever(service.topStories(any()))
+                .thenReturn(async {
+                    Response.success(topStories)
+                })
 
-        repository
-                .topStories
-                .subscribeBy(
-                        onNext = {
-                            assertEquals(it, topStories.results)
-                        },
-                        onError = {
-                            fail(it.message)
-                        }
-                )
+        runBlocking {
+            repository.topStories { result ->
+                when(result) {
+                    is Result.Success -> assertEquals(result.data, topStories)
+                    is Result.Failure -> fail(result.error.message)
+                }
+            }
+        }
     }
 
     @Test
     fun `error is thrown correctly`() {
-        val error = Error("error message")
+        val error = Error("Error fetching top stories: 404 - Response.error()")
 
-        whenever(service.getObservable(any()))
-                .thenReturn(Observable.error(error))
+        whenever(service.topStories(any()))
+                .thenReturn(async {
+                    Response.error<TopStories>(404, ResponseBody.create(null, ""))
+                })
 
-        repository
-                .topStories
-                .doOnError {
-                    assertEquals(it, error)
+        runBlocking {
+            repository.topStories { result ->
+                when(result) {
+                    is Result.Success -> fail("Coroutine should throw error")
+                    is Result.Failure -> assertEquals(result.error.message, error.message)
                 }
+            }
+        }
     }
 
     @After
