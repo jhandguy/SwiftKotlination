@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.features.topstories.model
 
-import fr.jhandguy.swiftkotlination.network.Result
+import fr.jhandguy.swiftkotlination.Result
 
 interface TopStoriesRepository {
     suspend fun topStories(observer: (Result<TopStories>) -> Unit)

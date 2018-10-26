@@ -3,7 +3,7 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.network.Result
+import fr.jhandguy.swiftkotlination.Result
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.setContentView

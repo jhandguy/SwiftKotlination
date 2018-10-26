@@ -6,7 +6,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.network.Result
+import fr.jhandguy.swiftkotlination.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.experimental.runBlocking

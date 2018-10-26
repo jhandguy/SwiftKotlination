@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.network.Result
+import fr.jhandguy.swiftkotlination.Result
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import org.jetbrains.anko.setContentView

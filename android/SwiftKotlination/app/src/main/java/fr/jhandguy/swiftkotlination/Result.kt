@@ -1,4 +1,4 @@
-package fr.jhandguy.swiftkotlination.network
+package fr.jhandguy.swiftkotlination
 
 sealed class Result<out T: Any> {
     data class Success<out T: Any>(val data: T): Result<T>()

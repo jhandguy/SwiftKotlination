@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import fr.jhandguy.swiftkotlination.network.Result
+import fr.jhandguy.swiftkotlination.Result
 
 interface StoryRepository {
     suspend fun story(observer: (Result<Story>) -> Unit)

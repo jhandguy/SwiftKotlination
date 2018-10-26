@@ -2,8 +2,8 @@ package fr.jhandguy.swiftkotlination.features.topstories.model
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.network.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.experimental.async
