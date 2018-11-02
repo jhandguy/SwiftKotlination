@@ -1,13 +1,14 @@
 package fr.jhandguy.swiftkotlination.features.topstories.model
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.whenever
 import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody
 import org.junit.After
 import org.junit.Before
@@ -47,9 +48,11 @@ class TopStoriesRepositoryUnitTest: KoinTest {
         ))
 
         whenever(service.topStories(any()))
-                .thenReturn(async {
-                    Response.success(topStories)
-                })
+                .thenReturn(
+                        GlobalScope.async {
+                            Response.success(topStories)
+                        }
+                )
 
         runBlocking {
             repository.topStories { result ->
@@ -66,9 +69,11 @@ class TopStoriesRepositoryUnitTest: KoinTest {
         val error = Error("Error fetching top stories: 404 - Response.error()")
 
         whenever(service.topStories(any()))
-                .thenReturn(async {
-                    Response.error<TopStories>(404, ResponseBody.create(null, ""))
-                })
+                .thenReturn(
+                        GlobalScope.async {
+                            Response.error<TopStories>(404, ResponseBody.create(null, ""))
+                        }
+                )
 
         runBlocking {
             repository.topStories { result ->

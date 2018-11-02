@@ -2,7 +2,7 @@ package fr.jhandguy.swiftkotlination
 
 import android.app.Activity
 import android.app.Application
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl

@@ -1,15 +1,15 @@
 package fr.jhandguy.swiftkotlination.features.story.viewmodel
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doAnswer
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doAnswer
+import com.nhaarman.mockitokotlin2.whenever
+import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

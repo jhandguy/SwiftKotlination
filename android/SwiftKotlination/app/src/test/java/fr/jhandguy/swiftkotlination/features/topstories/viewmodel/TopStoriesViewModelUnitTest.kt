@@ -1,14 +1,14 @@
 package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.whenever
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.whenever
+import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import fr.jhandguy.swiftkotlination.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

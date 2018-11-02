@@ -9,7 +9,6 @@ import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class TopStoriesAdapter(val coordinator: Coordinator, var topStories: List<Story> = ArrayList()): RecyclerView.Adapter<TopStoriesAdapter.ViewHolder>() {
 
@@ -26,7 +25,7 @@ class TopStoriesAdapter(val coordinator: Coordinator, var topStories: List<Story
         fun bind(story: Story) {
             title.text = story.title
             byline.text = story.byline
-            itemView.onClick {
+            itemView.setOnClickListener {
                 coordinator.open(story)
             }
         }

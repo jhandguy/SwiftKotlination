@@ -9,7 +9,6 @@ import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
-import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoComponent<Context> {
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
@@ -62,7 +61,7 @@ class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoC
                 backgroundColor = Color.TRANSPARENT
                 textColorResource = R.color.accent
 
-                onClick {
+                setOnClickListener {
                     coordinator.open(story.url)
                 }
             }.lparams(width = wrapContent, height = wrapContent) {

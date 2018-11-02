@@ -2,10 +2,11 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.Result
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
+import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.ext.android.bindScope
@@ -31,7 +32,7 @@ class TopStoriesActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        async(UI) {
+        CoroutineScope(Dispatchers.Main).launch {
             viewModel.topStories { result ->
                 when (result) {
                     is Result.Success -> {
