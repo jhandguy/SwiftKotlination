@@ -29,7 +29,7 @@ class TopStoriesRepositoryUnitTest: KoinTest {
     @Mock
     lateinit var service: TopStoriesService
 
-    val repository: TopStoriesRepository by inject()
+    val sut: TopStoriesRepository by inject()
 
     @Before
     fun before() {
@@ -55,7 +55,7 @@ class TopStoriesRepositoryUnitTest: KoinTest {
                 )
 
         runBlocking {
-            repository.topStories { result ->
+            sut.topStories { result ->
                 when(result) {
                     is Result.Success -> assertEquals(result.data, topStories)
                     is Result.Failure -> fail(result.error.message)
@@ -76,7 +76,7 @@ class TopStoriesRepositoryUnitTest: KoinTest {
                 )
 
         runBlocking {
-            repository.topStories { result ->
+            sut.topStories { result ->
                 when(result) {
                     is Result.Success -> fail("Coroutine should throw error")
                     is Result.Failure -> assertEquals(result.error.message, error.message)

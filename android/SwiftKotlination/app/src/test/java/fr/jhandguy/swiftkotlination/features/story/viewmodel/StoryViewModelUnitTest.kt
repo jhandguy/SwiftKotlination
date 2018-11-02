@@ -22,14 +22,13 @@ import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-
 @RunWith(MockitoJUnitRunner::class)
 class StoryViewModelUnitTest: KoinTest {
 
     @Mock
     lateinit var repository: StoryRepository
 
-    val viewModel: StoryViewModel by inject()
+    val sut: StoryViewModel by inject()
 
     @Before
     fun before() {
@@ -46,11 +45,12 @@ class StoryViewModelUnitTest: KoinTest {
 
         runBlocking {
             whenever(repository.story(any())).doAnswer {
+                @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? (Result<Story>) -> Unit
                 observer?.invoke(Result.Success(story))
             }
 
-            viewModel.story { result ->
+            sut.story { result ->
                 when(result) {
                     is Result.Success -> assertEquals(result.data, story)
                     is Result.Failure -> fail(result.error.message)
@@ -65,11 +65,12 @@ class StoryViewModelUnitTest: KoinTest {
 
         runBlocking {
             whenever(repository.story(any())).doAnswer {
+                @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? (Result<Story>) -> Unit
                 observer?.invoke(Result.Failure(error))
             }
 
-            viewModel.story { result ->
+            sut.story { result ->
                 when(result) {
                     is Result.Success -> fail("Coroutine should throw error")
                     is Result.Failure -> assertEquals(result.error, error)

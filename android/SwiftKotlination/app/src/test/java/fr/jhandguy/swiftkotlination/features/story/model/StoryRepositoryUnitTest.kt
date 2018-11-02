@@ -17,7 +17,7 @@ class StoryRepositoryUnitTest: KoinTest {
 
     val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
-    val repository: StoryRepository by inject()
+    val sut: StoryRepository by inject()
 
     @Before
     fun before() {
@@ -31,7 +31,7 @@ class StoryRepositoryUnitTest: KoinTest {
     @Test
     fun `story is injected correctly`() {
         runBlocking {
-            repository
+            sut
                     .story { result ->
                         when(result) {
                             is Result.Success -> assertEquals(result.data, story)

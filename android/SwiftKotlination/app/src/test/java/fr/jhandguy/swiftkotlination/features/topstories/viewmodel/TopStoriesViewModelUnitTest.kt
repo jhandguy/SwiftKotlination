@@ -27,7 +27,7 @@ class TopStoriesViewModelUnitTest: KoinTest {
     @Mock
     lateinit var repository: TopStoriesRepository
 
-    val viewModel: TopStoriesViewModel by inject()
+    val sut: TopStoriesViewModel by inject()
 
     @Before
     fun before() {
@@ -49,11 +49,12 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
         runBlocking {
             whenever(repository.topStories(any())).thenAnswer {
+                @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
                 observer?.invoke(Result.Success(topStories))
             }
 
-            viewModel.topStories { result ->
+            sut.topStories { result ->
                 when(result) {
                     is Result.Success -> assertEquals(result.data, topStories.results)
                     is Result.Failure -> fail(result.error.message)
@@ -68,11 +69,12 @@ class TopStoriesViewModelUnitTest: KoinTest {
 
         runBlocking {
             whenever(repository.topStories(any())).thenAnswer {
+                @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
                 observer?.invoke(Result.Failure(error))
             }
 
-            viewModel.topStories { result ->
+            sut.topStories { result ->
                 when(result) {
                     is Result.Success -> fail("Coroutine should throw error")
                     is Result.Failure -> assertEquals(result.error, error)
