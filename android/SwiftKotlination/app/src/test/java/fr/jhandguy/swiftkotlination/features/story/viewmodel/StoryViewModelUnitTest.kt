@@ -27,7 +27,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class StoryViewModelUnitTest: KoinTest {
 
     @Mock
-    lateinit var manager: StoryManagerInterface
+    lateinit var storyManager: StoryManagerInterface
 
     val sut: StoryViewModel by inject()
 
@@ -35,7 +35,7 @@ class StoryViewModelUnitTest: KoinTest {
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { StoryViewModel(manager) }
+                    factory { StoryViewModel(storyManager) }
                 }
         ))
     }
@@ -45,7 +45,7 @@ class StoryViewModelUnitTest: KoinTest {
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
         runBlocking {
-            whenever(manager.story(any())).doAnswer {
+            whenever(storyManager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Success(story))
@@ -65,7 +65,7 @@ class StoryViewModelUnitTest: KoinTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(manager.story(any())).doAnswer {
+            whenever(storyManager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Failure(error))

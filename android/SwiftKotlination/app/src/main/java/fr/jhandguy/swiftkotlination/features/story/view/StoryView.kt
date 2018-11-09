@@ -4,13 +4,13 @@ import android.content.Context
 import android.graphics.Color
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
-import fr.jhandguy.swiftkotlination.Coordinator
+import fr.jhandguy.swiftkotlination.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
 
-class StoryView(var coordinator: Coordinator, var story: Story = Story()): AnkoComponent<Context> {
+class StoryView(var coordinator: CoordinatorInterface, var story: Story = Story()): AnkoComponent<Context> {
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return constraintLayout {
             padding = dip(10)

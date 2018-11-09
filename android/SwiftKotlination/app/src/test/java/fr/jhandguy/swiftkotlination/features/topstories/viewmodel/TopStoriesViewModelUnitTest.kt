@@ -26,7 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class TopStoriesViewModelUnitTest: KoinTest {
 
     @Mock
-    lateinit var manager: TopStoriesManagerInterface
+    lateinit var topStoriesManager: TopStoriesManagerInterface
 
     val sut: TopStoriesViewModel by inject()
 
@@ -34,7 +34,7 @@ class TopStoriesViewModelUnitTest: KoinTest {
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { TopStoriesViewModel(manager) }
+                    factory { TopStoriesViewModel(topStoriesManager) }
                 }
         ))
     }
@@ -49,7 +49,7 @@ class TopStoriesViewModelUnitTest: KoinTest {
         )
 
         runBlocking {
-            whenever(manager.topStories(any())).thenAnswer {
+            whenever(topStoriesManager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Success(topStories))
@@ -69,7 +69,7 @@ class TopStoriesViewModelUnitTest: KoinTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(manager.topStories(any())).thenAnswer {
+            whenever(topStoriesManager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Failure(error))

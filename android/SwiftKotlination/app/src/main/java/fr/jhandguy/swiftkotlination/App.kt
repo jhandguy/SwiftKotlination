@@ -24,7 +24,7 @@ import org.koin.dsl.module.module
 open class App: Application() {
 
     private val navigationModule: Module = module {
-        factory { (activity: Activity) -> CoordinatorImpl(activity) as Coordinator }
+        factory { (activity: Activity) -> Coordinator(activity) as CoordinatorInterface }
     }
 
     private val topStoriesModule: Module = module("top-stories") {

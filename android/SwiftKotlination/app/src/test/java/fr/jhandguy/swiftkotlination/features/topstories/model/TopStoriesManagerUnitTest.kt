@@ -4,7 +4,6 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
 import fr.jhandguy.swiftkotlination.network.Request
@@ -50,15 +49,13 @@ class TopStoriesManagerUnitTest: KoinTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
 
-        launch {
+        runBlocking {
             whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<String>
                 observer?.invoke(Result.Success(JSON.stringify(TopStories.serializer(), topStories)))
             }
-        }
 
-        runBlocking {
             sut.topStories { result ->
                 when(result) {
                     is Result.Success -> assertEquals(result.data, topStories)
@@ -72,15 +69,13 @@ class TopStoriesManagerUnitTest: KoinTest {
     fun `error is thrown correctly`() {
         val error = Error("Error fetching top stories: 404 - Response.error()")
 
-        launch {
+        runBlocking {
             whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? Observer<String>
+                val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Failure(NetworkError.InvalidResponse()))
             }
-        }
 
-        runBlocking {
             sut.topStories { result ->
                 when(result) {
                     is Result.Success -> fail("Coroutine should throw error")

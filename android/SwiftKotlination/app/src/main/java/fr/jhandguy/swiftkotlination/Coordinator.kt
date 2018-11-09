@@ -8,14 +8,14 @@ import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
 import kotlinx.serialization.json.JSON
 
-interface Coordinator {
+interface CoordinatorInterface {
     fun start(): Intent
     fun open(story: Story): Intent
     fun open(url: String): Intent
     fun finish()
 }
 
-class CoordinatorImpl(val activity: Activity): Coordinator {
+class Coordinator(val activity: Activity): CoordinatorInterface {
 
     override fun start(): Intent {
         val intent = Intent(activity, TopStoriesActivity::class.java)
