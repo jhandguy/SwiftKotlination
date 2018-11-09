@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.Coordinator
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
+import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JSON
 import org.jetbrains.anko.setContentView
 import org.koin.android.ext.android.inject
@@ -36,17 +34,19 @@ class StoryActivity: AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        launch {
             viewModel.story { result ->
-                when(result) {
-                    is Result.Success -> {
-                        title = arrayOf(result.data.section, result.data.subsection)
-                                .filter { it.isNotEmpty() }
-                                .joinToString(separator = " - ")
-                        view.story = result.data
-                        view.setContentView(this@StoryActivity)
+                runOnUiThread {
+                    when(result) {
+                        is Result.Success -> {
+                            title = arrayOf(result.data.section, result.data.subsection)
+                                    .filter { it.isNotEmpty() }
+                                    .joinToString(separator = " - ")
+                            view.story = result.data
+                            view.setContentView(this@StoryActivity)
+                        }
+                        is Result.Failure -> print(result.error)
                     }
-                    is Result.Failure -> print(result.error)
                 }
             }
         }
