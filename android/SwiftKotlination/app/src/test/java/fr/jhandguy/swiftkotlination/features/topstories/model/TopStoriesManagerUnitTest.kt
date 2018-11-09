@@ -1,15 +1,19 @@
 package fr.jhandguy.swiftkotlination.features.topstories.model
 
 import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.eq
 import com.nhaarman.mockitokotlin2.whenever
-import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.network.NetworkError
+import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
+import fr.jhandguy.swiftkotlination.network.Request
+import fr.jhandguy.swiftkotlination.observer.Observer
+import fr.jhandguy.swiftkotlination.observer.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import okhttp3.ResponseBody
+import kotlinx.serialization.json.JSON
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -21,21 +25,20 @@ import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner::class)
-class TopStoriesRepositoryUnitTest: KoinTest {
+class TopStoriesManagerUnitTest: KoinTest {
 
     @Mock
-    lateinit var service: TopStoriesService
+    lateinit var networkManager: NetworkManagerInterface
 
-    val sut: TopStoriesRepository by inject()
+    val sut: TopStoriesManagerInterface by inject()
 
     @Before
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { TopStoriesRepositoryImpl(service) as TopStoriesRepository }
+                    factory { TopStoriesManager(networkManager) as TopStoriesManagerInterface }
                 }
         ))
     }
@@ -47,12 +50,13 @@ class TopStoriesRepositoryUnitTest: KoinTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
 
-        whenever(service.topStories(any()))
-                .thenReturn(
-                        GlobalScope.async {
-                            Response.success(topStories)
-                        }
-                )
+        launch {
+            whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
+                @Suppress("UNCHECKED_CAST")
+                val observer = it.arguments.first() as? Observer<String>
+                observer?.invoke(Result.Success(JSON.stringify(TopStories.serializer(), topStories)))
+            }
+        }
 
         runBlocking {
             sut.topStories { result ->
@@ -68,12 +72,13 @@ class TopStoriesRepositoryUnitTest: KoinTest {
     fun `error is thrown correctly`() {
         val error = Error("Error fetching top stories: 404 - Response.error()")
 
-        whenever(service.topStories(any()))
-                .thenReturn(
-                        GlobalScope.async {
-                            Response.error<TopStories>(404, ResponseBody.create(null, ""))
-                        }
-                )
+        launch {
+            whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
+                @Suppress("UNCHECKED_CAST")
+                val observer = it.arguments.first() as? Observer<String>
+                observer?.invoke(Result.Failure(NetworkError.InvalidResponse()))
+            }
+        }
 
         runBlocking {
             sut.topStories { result ->

@@ -1,9 +1,9 @@
 package fr.jhandguy.swiftkotlination.features.story.viewModel
 
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
-import fr.jhandguy.swiftkotlination.Result
+import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
+import fr.jhandguy.swiftkotlination.observer.Observer
 
-class StoryViewModel(private val repository: StoryRepository) {
-    suspend fun story(observer: (Result<Story>) -> Unit) = repository.story(observer)
+class StoryViewModel(private val manager: StoryManagerInterface) {
+    suspend fun story(observer: Observer<Story>) = manager.story(observer)
 }

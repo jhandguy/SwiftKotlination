@@ -3,10 +3,11 @@ package fr.jhandguy.swiftkotlination.features.story.viewmodel
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.whenever
-import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
+import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
+import fr.jhandguy.swiftkotlination.observer.Observer
+import fr.jhandguy.swiftkotlination.observer.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.runBlocking
@@ -26,7 +27,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class StoryViewModelUnitTest: KoinTest {
 
     @Mock
-    lateinit var repository: StoryRepository
+    lateinit var manager: StoryManagerInterface
 
     val sut: StoryViewModel by inject()
 
@@ -34,7 +35,7 @@ class StoryViewModelUnitTest: KoinTest {
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { StoryViewModel(repository) }
+                    factory { StoryViewModel(manager) }
                 }
         ))
     }
@@ -44,9 +45,9 @@ class StoryViewModelUnitTest: KoinTest {
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
         runBlocking {
-            whenever(repository.story(any())).doAnswer {
+            whenever(manager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? (Result<Story>) -> Unit
+                val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Success(story))
             }
 
@@ -64,9 +65,9 @@ class StoryViewModelUnitTest: KoinTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(repository.story(any())).doAnswer {
+            whenever(manager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? (Result<Story>) -> Unit
+                val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Failure(error))
             }
 

@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import fr.jhandguy.swiftkotlination.Result
+import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -13,17 +13,17 @@ import org.koin.standalone.StandAloneContext.stopKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 
-class StoryRepositoryUnitTest: KoinTest {
+class StoryManagerUnitTest: KoinTest {
 
     val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
-    val sut: StoryRepository by inject()
+    val sut: StoryManagerInterface by inject()
 
     @Before
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { StoryRepositoryImpl(story) as StoryRepository }
+                    factory { StoryManager(story) as StoryManagerInterface }
                 }
         ))
     }

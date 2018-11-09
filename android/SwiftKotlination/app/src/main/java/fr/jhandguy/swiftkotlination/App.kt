@@ -2,23 +2,24 @@ package fr.jhandguy.swiftkotlination
 
 import android.app.Activity
 import android.app.Application
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryRepository
-import fr.jhandguy.swiftkotlination.features.story.model.StoryRepositoryImpl
+import fr.jhandguy.swiftkotlination.features.story.model.StoryManager
+import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
 import fr.jhandguy.swiftkotlination.features.story.view.StoryView
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepositoryImpl
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesService
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesAdapter
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesView
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
+import fr.jhandguy.swiftkotlination.network.NetworkManager
+import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 open class App: Application() {
 
@@ -27,24 +28,15 @@ open class App: Application() {
     }
 
     private val topStoriesModule: Module = module("top-stories") {
-        single {
-            Retrofit
-                    .Builder()
-                    .baseUrl("https://api.nytimes.com")
-                    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                    .addConverterFactory(MoshiConverterFactory.create())
-                    .build()
-                    .create(TopStoriesService::class.java)
-                    as TopStoriesService
-        }
-        factory { TopStoriesRepositoryImpl(get()) as TopStoriesRepository }
+        single { NetworkManager() as NetworkManagerInterface }
+        factory { TopStoriesManager(get()) as TopStoriesManagerInterface }
         factory { TopStoriesViewModel(get()) }
         factory { TopStoriesAdapter(get { it } ) }
-        factory { TopStoriesView(get { it } ) }
+        factory { TopStoriesView(get { it }, get { it } ) }
     }
 
     private val storyModule: Module = module("story") {
-        factory { (story: Story) -> StoryRepositoryImpl(story) as StoryRepository }
+        factory { (story: Story) -> StoryManager(story) as StoryManagerInterface }
         factory { StoryViewModel(get { it } ) }
         factory { StoryView(get { it } ) }
     }
@@ -53,4 +45,8 @@ open class App: Application() {
         super.onCreate()
         startKoin(this, listOf(navigationModule, topStoriesModule, storyModule))
     }
+}
+
+fun launch(block: suspend CoroutineScope.() -> Unit) {
+    CoroutineScope(Dispatchers.Default).launch(block = block)
 }

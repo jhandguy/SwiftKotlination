@@ -1,14 +1,17 @@
 package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
-import fr.jhandguy.swiftkotlination.Result
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
+import fr.jhandguy.swiftkotlination.observer.Observer
+import fr.jhandguy.swiftkotlination.observer.Result
 
-class TopStoriesViewModel(private val repository: TopStoriesRepository) {
-    suspend fun topStories(observer: (Result<List<Story>>) -> Unit) = repository.topStories { result ->
+class TopStoriesViewModel(private val manager: TopStoriesManagerInterface) {
+    suspend fun topStories(observer: Observer<List<Story>>) = manager.topStories { result ->
         when (result) {
             is Result.Success -> observer(Result.Success(result.data.results))
             is Result.Failure -> observer(result)
         }
     }
+
+    suspend fun refresh() = manager.fetchStories()
 }

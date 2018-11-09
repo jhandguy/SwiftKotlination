@@ -6,6 +6,7 @@ import android.net.Uri
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
+import kotlinx.serialization.json.JSON
 
 interface Coordinator {
     fun start(): Intent
@@ -26,7 +27,7 @@ class CoordinatorImpl(val activity: Activity): Coordinator {
 
     override fun open(story: Story): Intent {
         val intent = Intent(activity, StoryActivity::class.java)
-        intent.putExtra(story.javaClass.simpleName, story)
+        intent.putExtra(story.javaClass.simpleName, JSON.stringify(Story.serializer(), story))
         activity.startActivity(intent)
 
         return intent

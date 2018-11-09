@@ -2,10 +2,11 @@ package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
-import fr.jhandguy.swiftkotlination.Result
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesRepository
+import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
+import fr.jhandguy.swiftkotlination.observer.Observer
+import fr.jhandguy.swiftkotlination.observer.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.runBlocking
@@ -25,7 +26,7 @@ import org.mockito.junit.MockitoJUnitRunner
 class TopStoriesViewModelUnitTest: KoinTest {
 
     @Mock
-    lateinit var repository: TopStoriesRepository
+    lateinit var manager: TopStoriesManagerInterface
 
     val sut: TopStoriesViewModel by inject()
 
@@ -33,7 +34,7 @@ class TopStoriesViewModelUnitTest: KoinTest {
     fun before() {
         startKoin(listOf(
                 module {
-                    factory { TopStoriesViewModel(repository) }
+                    factory { TopStoriesViewModel(manager) }
                 }
         ))
     }
@@ -48,9 +49,9 @@ class TopStoriesViewModelUnitTest: KoinTest {
         )
 
         runBlocking {
-            whenever(repository.topStories(any())).thenAnswer {
+            whenever(manager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
+                val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Success(topStories))
             }
 
@@ -68,9 +69,9 @@ class TopStoriesViewModelUnitTest: KoinTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(repository.topStories(any())).thenAnswer {
+            whenever(manager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? (Result<TopStories>) -> Unit
+                val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Failure(error))
             }
 

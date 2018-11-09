@@ -1,11 +1,12 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Story(
-        var section: String = "",
-        var subsection: String = "",
-        var title: String = "",
-        var abstract: String = "",
-        var url: String = "",
-        var byline: String = ""): Serializable
+        val section: String = "",
+        val subsection: String = "",
+        val title: String = "",
+        val abstract: String = "",
+        val url: String = "",
+        val byline: String = "")
