@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import fr.jhandguy.swiftkotlination.CoordinatorInterface
+import fr.jhandguy.swiftkotlination.navigation.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.AnkoContext

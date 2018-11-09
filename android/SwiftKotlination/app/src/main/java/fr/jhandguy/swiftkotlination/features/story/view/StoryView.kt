@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
-import fr.jhandguy.swiftkotlination.CoordinatorInterface
+import fr.jhandguy.swiftkotlination.navigation.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.*

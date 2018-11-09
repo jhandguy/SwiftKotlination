@@ -12,6 +12,8 @@ import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerI
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesAdapter
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesView
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
+import fr.jhandguy.swiftkotlination.navigation.Coordinator
+import fr.jhandguy.swiftkotlination.navigation.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.network.NetworkManager
 import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
 import kotlinx.coroutines.CoroutineScope

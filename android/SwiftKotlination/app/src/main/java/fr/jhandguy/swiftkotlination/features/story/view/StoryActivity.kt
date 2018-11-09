@@ -2,7 +2,7 @@ package fr.jhandguy.swiftkotlination.features.story.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import fr.jhandguy.swiftkotlination.CoordinatorInterface
+import fr.jhandguy.swiftkotlination.navigation.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import fr.jhandguy.swiftkotlination.launch
