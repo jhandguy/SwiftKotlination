@@ -10,7 +10,7 @@ final class CoordinatorTest: XCTestCase {
         super.setUp()
 
         sut = Coordinator(
-            factory: ViewControllerFactoryMock(),
+            factory: FactoryMock(),
             window: UIWindow()
         )
     }

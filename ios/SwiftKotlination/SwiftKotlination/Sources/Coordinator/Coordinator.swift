@@ -9,9 +9,11 @@ protocol CoordinatorProtocol: class {
 
 final class Coordinator {
 
+    typealias Factory = TopStoriesFactory & StoryFactory
+
     // MARK: - Private Properties
 
-    private let factory: ViewControllerFactory
+    private let factory: Factory
     private let window: UIWindow
 
     // MARK: - Internal Properties
@@ -20,7 +22,7 @@ final class Coordinator {
 
     // MARK: - Initializer
 
-    init(factory: ViewControllerFactory, window: UIWindow) {
+    init(factory: Factory, window: UIWindow) {
         self.factory = factory
         self.window = window
         self.window.rootViewController = navigationController

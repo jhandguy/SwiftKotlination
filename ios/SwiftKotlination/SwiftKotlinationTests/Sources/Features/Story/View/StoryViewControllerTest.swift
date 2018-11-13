@@ -7,10 +7,8 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock(
-            storyBoundFactory: StoryBoundFactoryMock(
-                storyManager: StoryManagerMock(result: .success(story))
-            )
+        let factory = StoryFactoryMock(
+            storyManager: StoryManagerMock(result: .success(story))
         )
 
         sut = factory.makeStoryViewController(for: story)
@@ -26,7 +24,7 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStoryUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock()
+        let factory = StoryFactoryMock()
 
         sut = factory.makeStoryViewController(for: story)
         _ = sut.view
@@ -50,9 +48,9 @@ final class StoryViewControllerTest: XCTestCase {
         }
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let factory = ViewControllerFactoryMock(
-            imageManager: ImageManagerMock(result: .success(expectedImage)),
-            storyBoundFactory: StoryBoundFactoryMock(storyManager: StoryManagerMock(result: .success(story)))
+        let factory = StoryFactoryMock(
+            storyManager: StoryManagerMock(result: .success(story)),
+            imageManager: ImageManagerMock(result: .success(expectedImage))
         )
 
         sut = factory.makeStoryViewController(for: story)
@@ -77,10 +75,8 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerFetchesStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
-        let factory = ViewControllerFactoryMock(
-            storyBoundFactory: StoryBoundFactoryMock(
-                storyManager: StoryManagerMock(result: .success(story))
-            )
+        let factory = StoryFactoryMock(
+            storyManager: StoryManagerMock(result: .success(story))
         )
 
         sut = factory.makeStoryViewController(for: story)
@@ -93,10 +89,8 @@ final class StoryViewControllerTest: XCTestCase {
 
     func testStoryViewControllerOpensUrlSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock(
-            storyBoundFactory: StoryBoundFactoryMock(
-                storyManager: StoryManagerMock(result: .success(story))
-            )
+        let factory = StoryFactoryMock(
+            storyManager: StoryManagerMock(result: .success(story))
         )
 
         sut = factory.makeStoryViewController(for: story)

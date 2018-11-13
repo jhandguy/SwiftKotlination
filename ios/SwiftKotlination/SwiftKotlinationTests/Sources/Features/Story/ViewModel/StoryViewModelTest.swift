@@ -8,9 +8,7 @@ final class StoryViewModelTest: XCTestCase {
     func testStoryViewModelFetchesStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let factory = StoryFactoryMock(
-            storyBoundFactory: StoryBoundFactoryMock(
-                storyManager: StoryManagerMock(result: .success(story))
-            ),
+            storyManager: StoryManagerMock(result: .success(story)),
             imageManager: ImageManagerMock(result: .failure(NetworkError.invalidResponse))
         )
         sut = StoryViewModel(factory: factory, story: story)

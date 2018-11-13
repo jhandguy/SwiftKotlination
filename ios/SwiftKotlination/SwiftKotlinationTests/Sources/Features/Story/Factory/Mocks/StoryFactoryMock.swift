@@ -1,18 +1,25 @@
 @testable import SwiftKotlination
 
 struct StoryFactoryMock {
-    let storyBoundFactory: StoryBoundFactoryMock
+    let storyManager: StoryManagerProtocol
     let imageManager: ImageManagerMock
 
-    init(storyBoundFactory: StoryBoundFactoryMock = StoryBoundFactoryMock(), imageManager: ImageManagerMock = ImageManagerMock()) {
-        self.storyBoundFactory = storyBoundFactory
+    init(storyManager: StoryManagerProtocol = StoryManagerMock(), imageManager: ImageManagerMock = ImageManagerMock()) {
+        self.storyManager = storyManager
         self.imageManager = imageManager
     }
 }
 
 extension StoryFactoryMock: StoryFactory {
-    func makeStoryBoundFactory(for story: Story) -> StoryBoundFactoryProtocol {
-        return storyBoundFactory
+    func makeStoryManager(for story: Story) -> StoryManagerProtocol {
+        return storyManager
+    }
+
+    func makeStoryViewController(for story: Story) -> StoryViewController {
+        let viewController = StoryViewController.storyBoardInstance
+        viewController.viewModel = StoryViewModel(factory: self, story: story)
+
+        return viewController
     }
 }
 

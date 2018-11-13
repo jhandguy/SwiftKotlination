@@ -7,7 +7,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoriesSuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock(
+        let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story]))
         )
 
@@ -26,7 +26,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoriesUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock(
+        let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story]))
         )
 
@@ -57,9 +57,9 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
                 return
         }
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let factory = ViewControllerFactoryMock(
-            imageManager: ImageManagerMock(result: .success(expectedImage)),
-            topStoriesManager: TopStoriesManagerMock(result: .success([story]))
+        let factory = TopStoriesFactoryMock(
+            topStoriesManager: TopStoriesManagerMock(result: .success([story])),
+            imageManager: ImageManagerMock(result: .success(expectedImage))
         )
 
         sut = factory.makeTopStoriesTableViewController()
@@ -88,7 +88,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
-        let factory = ViewControllerFactoryMock(
+        let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story]))
         )
 
@@ -109,7 +109,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
     func testTopStoriesTableViewControllerOpensStorySuccessfully() {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
-        let factory = ViewControllerFactoryMock(
+        let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story]))
         )
 
