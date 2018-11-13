@@ -13,33 +13,23 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JSON
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
-import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class TopStoriesManagerUnitTest: KoinTest {
+class TopStoriesManagerUnitTest {
 
     @Mock
     lateinit var networkManager: NetworkManagerInterface
 
-    val sut: TopStoriesManagerInterface by inject()
+    lateinit var sut: TopStoriesManager
 
     @Before
     fun before() {
-        startKoin(listOf(
-                module {
-                    factory { TopStoriesManager(networkManager) as TopStoriesManagerInterface }
-                }
-        ))
+        sut = TopStoriesManager(networkManager)
     }
 
     @Test
@@ -83,10 +73,5 @@ class TopStoriesManagerUnitTest: KoinTest {
                 }
             }
         }
-    }
-
-    @After
-    fun after() {
-        stopKoin()
     }
 }

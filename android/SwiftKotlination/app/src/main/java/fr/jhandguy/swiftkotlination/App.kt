@@ -1,51 +1,18 @@
 package fr.jhandguy.swiftkotlination
 
-import android.app.Activity
 import android.app.Application
-import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryManager
-import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
-import fr.jhandguy.swiftkotlination.features.story.view.StoryView
-import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
-import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesAdapter
-import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesView
-import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.navigation.Coordinator
-import fr.jhandguy.swiftkotlination.navigation.CoordinatorInterface
+import fr.jhandguy.swiftkotlination.factory.DependencyManager
 import fr.jhandguy.swiftkotlination.network.NetworkManager
-import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.startKoin
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.module
 
 open class App: Application() {
-
-    private val navigationModule: Module = module {
-        factory { (activity: Activity) -> Coordinator(activity) as CoordinatorInterface }
-    }
-
-    private val topStoriesModule: Module = module("top-stories") {
-        single { NetworkManager() as NetworkManagerInterface }
-        factory { TopStoriesManager(get()) as TopStoriesManagerInterface }
-        factory { TopStoriesViewModel(get()) }
-        factory { TopStoriesAdapter(get { it } ) }
-        factory { TopStoriesView(get { it }, get { it } ) }
-    }
-
-    private val storyModule: Module = module("story") {
-        factory { (story: Story) -> StoryManager(story) as StoryManagerInterface }
-        factory { StoryViewModel(get { it } ) }
-        factory { StoryView(get { it } ) }
-    }
+    lateinit var factory: DependencyManager
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this, listOf(navigationModule, topStoriesModule, storyModule))
+        factory = DependencyManager(NetworkManager())
     }
 }
 

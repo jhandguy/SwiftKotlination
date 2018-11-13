@@ -2,28 +2,24 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
+import fr.jhandguy.swiftkotlination.App
+import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
 import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import org.jetbrains.anko.setContentView
-import org.koin.android.ext.android.inject
-import org.koin.android.scope.ext.android.bindScope
-import org.koin.android.scope.ext.android.getOrCreateScope
-import org.koin.core.parameter.parametersOf
 
 class TopStoriesActivity: AppCompatActivity() {
 
-    val viewModel: TopStoriesViewModel by inject()
-
-    val view: TopStoriesView by inject { parametersOf(this) }
-
-    val disposeBag = DisposeBag()
+    private val factory: TopStoriesFactory  by lazy { (application as App).factory }
+    private val coordinator                 by lazy {  factory.makeCoordinator(this) }
+    private val viewModel                   by lazy {  factory.makeTopStoriesViewModel() }
+    private val adapter                     by lazy {  TopStoriesAdapter(coordinator) }
+    private val view                        by lazy {  TopStoriesView(adapter, viewModel) }
+    private val disposeBag = DisposeBag()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        bindScope(getOrCreateScope("top-stories"))
 
         title = "Top Stories"
 

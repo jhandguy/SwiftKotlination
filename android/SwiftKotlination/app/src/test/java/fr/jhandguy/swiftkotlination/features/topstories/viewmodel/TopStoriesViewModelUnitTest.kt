@@ -3,6 +3,7 @@ package fr.jhandguy.swiftkotlination.features.topstories.viewmodel
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
 import fr.jhandguy.swiftkotlination.observer.Observer
@@ -10,33 +11,28 @@ import fr.jhandguy.swiftkotlination.observer.Result
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.fail
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
-import org.koin.test.KoinTest
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class TopStoriesViewModelUnitTest: KoinTest {
+class TopStoriesViewModelUnitTest {
 
     @Mock
     lateinit var topStoriesManager: TopStoriesManagerInterface
 
-    val sut: TopStoriesViewModel by inject()
+    @Mock
+    lateinit var topStoriesFactory: TopStoriesFactory
+
+    lateinit var sut: TopStoriesViewModel
 
     @Before
     fun before() {
-        startKoin(listOf(
-                module {
-                    factory { TopStoriesViewModel(topStoriesManager) }
-                }
-        ))
+        whenever(topStoriesFactory.makeTopStoriesManager())
+                .thenReturn(topStoriesManager)
+        sut = TopStoriesViewModel(topStoriesFactory)
     }
 
     @Test
@@ -82,10 +78,5 @@ class TopStoriesViewModelUnitTest: KoinTest {
                 }
             }
         }
-    }
-
-    @After
-    fun after() {
-        stopKoin()
     }
 }

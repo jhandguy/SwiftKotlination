@@ -56,14 +56,10 @@ dependencies {
     implementation 'org.jetbrains.anko:anko:0.10.7'
     implementation 'org.jetbrains.anko:anko-recyclerview-v7:0.10.7'
     implementation 'org.jetbrains.anko:anko-constraint-layout:0.10.7'
-    implementation 'org.koin:koin-android:1.0.0'
-    implementation 'org.koin:koin-android-scope:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0'
-    testImplementation 'org.koin:koin-test:1.0.0'
 
-    androidTestImplementation 'org.koin:koin-test:1.0.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 

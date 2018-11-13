@@ -2,30 +2,20 @@ package fr.jhandguy.swiftkotlination.features.story.model
 
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
-import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
-import org.koin.test.KoinTest
 
-class StoryManagerUnitTest: KoinTest {
+class StoryManagerUnitTest {
 
     val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
-    val sut: StoryManagerInterface by inject()
+    lateinit var sut: StoryManager
 
     @Before
     fun before() {
-        startKoin(listOf(
-                module {
-                    factory { StoryManager(story) as StoryManagerInterface }
-                }
-        ))
+        sut = StoryManager(story)
     }
 
     @Test
@@ -39,10 +29,5 @@ class StoryManagerUnitTest: KoinTest {
                         }
                     }
         }
-    }
-
-    @After
-    fun after() {
-        stopKoin()
     }
 }

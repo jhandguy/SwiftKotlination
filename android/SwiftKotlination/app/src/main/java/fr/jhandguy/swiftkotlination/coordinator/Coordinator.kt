@@ -1,4 +1,4 @@
-package fr.jhandguy.swiftkotlination.navigation
+package fr.jhandguy.swiftkotlination.coordinator
 
 import android.app.Activity
 import android.content.Intent
