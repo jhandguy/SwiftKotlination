@@ -35,8 +35,8 @@ class TopStoriesActivity: AppCompatActivity() {
                 runOnUiThread {
                     when (result) {
                         is Result.Success -> {
-                            view.adapter.topStories = result.data
-                            view.adapter.notifyDataSetChanged()
+                            adapter.topStories = result.data
+                            adapter.notifyDataSetChanged()
                         }
                         is Result.Failure -> print(result.error)
                     }

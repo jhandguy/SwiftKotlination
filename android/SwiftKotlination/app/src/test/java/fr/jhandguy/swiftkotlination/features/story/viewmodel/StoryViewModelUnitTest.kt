@@ -22,18 +22,17 @@ import org.mockito.junit.MockitoJUnitRunner
 class StoryViewModelUnitTest {
 
     @Mock
-    lateinit var storyManager: StoryManagerInterface
+    lateinit var manager: StoryManagerInterface
 
     @Mock
-    lateinit var storyFactory: StoryFactory
+    lateinit var factory: StoryFactory
 
     lateinit var sut: StoryViewModel
 
     @Before
     fun before() {
-        whenever(storyFactory.makeStoryManager(any()))
-                .thenReturn(storyManager)
-        sut = StoryViewModel(storyFactory)
+        whenever(factory.makeStoryManager(any())).thenReturn(manager)
+        sut = StoryViewModel(factory)
     }
 
     @Test
@@ -41,7 +40,7 @@ class StoryViewModelUnitTest {
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
 
         runBlocking {
-            whenever(storyManager.story(any())).doAnswer {
+            whenever(manager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Success(story))
@@ -61,7 +60,7 @@ class StoryViewModelUnitTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(storyManager.story(any())).doAnswer {
+            whenever(manager.story(any())).doAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<Story>
                 observer?.invoke(Result.Failure(error))

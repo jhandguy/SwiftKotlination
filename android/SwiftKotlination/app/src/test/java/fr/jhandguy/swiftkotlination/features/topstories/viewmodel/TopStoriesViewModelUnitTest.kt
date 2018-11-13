@@ -21,18 +21,17 @@ import org.mockito.junit.MockitoJUnitRunner
 class TopStoriesViewModelUnitTest {
 
     @Mock
-    lateinit var topStoriesManager: TopStoriesManagerInterface
+    lateinit var manager: TopStoriesManagerInterface
 
     @Mock
-    lateinit var topStoriesFactory: TopStoriesFactory
+    lateinit var factory: TopStoriesFactory
 
     lateinit var sut: TopStoriesViewModel
 
     @Before
     fun before() {
-        whenever(topStoriesFactory.makeTopStoriesManager())
-                .thenReturn(topStoriesManager)
-        sut = TopStoriesViewModel(topStoriesFactory)
+        whenever(factory.makeTopStoriesManager()).thenReturn(manager)
+        sut = TopStoriesViewModel(factory)
     }
 
     @Test
@@ -45,7 +44,7 @@ class TopStoriesViewModelUnitTest {
         )
 
         runBlocking {
-            whenever(topStoriesManager.topStories(any())).thenAnswer {
+            whenever(manager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Success(topStories))
@@ -65,7 +64,7 @@ class TopStoriesViewModelUnitTest {
         val error = Error("error message")
 
         runBlocking {
-            whenever(topStoriesManager.topStories(any())).thenAnswer {
+            whenever(manager.topStories(any())).thenAnswer {
                 @Suppress("UNCHECKED_CAST")
                 val observer = it.arguments.first() as? Observer<TopStories>
                 observer?.invoke(Result.Failure(error))
