@@ -3,39 +3,43 @@ package fr.jhandguy.swiftkotlination.network
 import fr.jhandguy.swiftkotlination.observer.Disposable
 import fr.jhandguy.swiftkotlination.observer.Observer
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.coroutines.suspendCancellableCoroutine
 import java.net.HttpURLConnection
 import java.net.URL
+import java.net.URLStreamHandler
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 interface NetworkManagerInterface {
-    suspend fun observe(request: Request, observer: Observer<String>): Disposable
+    suspend fun observe(request: Request, observer: Observer<ByteArray>): Disposable
     suspend fun execute(request: Request)
 }
 
-class NetworkManager(var observables: MutableMap<Request, MutableMap<UUID, Observer<String>>> = HashMap()): NetworkManagerInterface {
+class NetworkManager(val handler: URLStreamHandler? = null, var observables: MutableMap<Request, MutableMap<UUID, Observer<ByteArray>>> = HashMap()): NetworkManagerInterface {
 
-    private suspend fun execute(request: Request, observers: List<Observer<String>>) {
+    private suspend fun execute(request: Request, observers: List<Observer<ByteArray>>) {
         if (observers.isEmpty()) { return }
 
-        build(request)?.let { response ->
-            if (response.second / 100 == 2) {
-                observers.forEach { it(Result.Success(response.first)) }
-            } else {
-                observers.forEach { it(Result.Failure(NetworkError.InvalidResponse())) }
+        build(request)?.let { connection ->
+            connection.inputStream?.let { data ->
+                val bytes = data.readBytes()
+                observers.forEach { it(Result.Success(bytes)) }
+            } ?: connection.errorStream?.let { error ->
+                val bytes = error.readBytes()
+                observers.forEach { it(Result.Failure(Error(String(bytes)))) }
             }
+            connection.disconnect()
         } ?: observers.forEach { it(Result.Failure(NetworkError.InvalidRequest())) }
     }
 
-    private suspend fun build(request: Request): Pair<String, Int>? = suspendCancellableCoroutine { continuation ->
+    private suspend fun build(request: Request): HttpURLConnection? = suspendCoroutine { continuation ->
         try {
             val urlWithParameters = request.url + when(request.parameters) {
                 is Parameters.Url -> "?${(request.parameters as Parameters.Url).url.joinToString("&") { (key, value) -> "$key=$value" }}"
                 else -> ""
             }
-            val url = URL(urlWithParameters)
+            val url = URL(null, urlWithParameters, handler)
             val connection = url.openConnection() as HttpURLConnection
             connection.apply {
                 requestMethod = request.method.name
@@ -44,15 +48,14 @@ class NetworkManager(var observables: MutableMap<Request, MutableMap<UUID, Obser
                     else -> {}
                 }
             }
-            val data = connection.inputStream.bufferedReader().readText()
-            continuation.resume(Pair(data, connection.responseCode))
+            continuation.resume(connection)
 
         } catch(e: Exception) {
             continuation.resume(null)
         }
     }
 
-    override suspend fun observe(request: Request, observer: Observer<String>): Disposable {
+    override suspend fun observe(request: Request, observer: Observer<ByteArray>): Disposable {
         val uuid = UUID.randomUUID()
         val observers = observables[request] ?: HashMap()
         observers[uuid] = observer

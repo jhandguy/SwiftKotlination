@@ -16,7 +16,7 @@ class TopStoriesManager(private val networkManager: NetworkManagerInterface): To
     override suspend fun topStories(observer: Observer<TopStories>) =
             networkManager.observe(Request.FetchTopStories) { result ->
                 when(result) {
-                    is Result.Success -> observer(Result.Success(JSON(strictMode = false).parse(TopStories.serializer(), result.data)))
+                    is Result.Success -> observer(Result.Success(JSON(strictMode = false).parse(TopStories.serializer(), String(result.data))))
                     is Result.Failure -> observer(result)
                 }
             }

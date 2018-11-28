@@ -1,51 +1,29 @@
 package fr.jhandguy.swiftkotlination.features.topstories.model
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.eq
-import com.nhaarman.mockitokotlin2.whenever
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.network.NetworkError
-import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
-import fr.jhandguy.swiftkotlination.network.Request
-import fr.jhandguy.swiftkotlination.observer.Observer
+import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JSON
-import org.junit.Before
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class TopStoriesManagerUnitTest {
-
-    @Mock
-    lateinit var networkManager: NetworkManagerInterface
 
     lateinit var sut: TopStoriesManager
 
-    @Before
-    fun before() {
-        sut = TopStoriesManager(networkManager)
-    }
-
     @Test
-    fun `top stories are fetched correctly`() {
+    fun `top stories are observed correctly`() {
         val topStories = TopStories(listOf(
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
+        val data = JSON.stringify(TopStories.serializer(), topStories).toByteArray()
+        val networkManager = NetworkManagerMock(Result.Success(data))
+        sut = TopStoriesManager(networkManager)
 
         runBlocking {
-            whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
-                @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? Observer<String>
-                observer?.invoke(Result.Success(JSON.stringify(TopStories.serializer(), topStories)))
-            }
-
             sut.topStories { result ->
                 when(result) {
                     is Result.Success -> assertEquals(result.data, topStories)
@@ -56,16 +34,42 @@ class TopStoriesManagerUnitTest {
     }
 
     @Test
-    fun `error is thrown correctly`() {
-        val error = Error("Error fetching top stories: 404 - Response.error()")
+    fun `top stories are observed and fetched correctly`() {
+        val topStories = TopStories(listOf(
+                Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
+                Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
+        ))
+        val data = JSON.stringify(TopStories.serializer(), topStories).toByteArray()
+        val networkManager = NetworkManagerMock(Result.Success(data))
+
+        sut = TopStoriesManager(networkManager)
 
         runBlocking {
-            whenever(networkManager.observe(eq(Request.FetchTopStories), any())).thenAnswer {
-                @Suppress("UNCHECKED_CAST")
-                val observer = it.arguments.first() as? Observer<TopStories>
-                observer?.invoke(Result.Failure(NetworkError.InvalidResponse()))
+            var times = 0
+
+            sut.topStories { result ->
+                when(result) {
+                    is Result.Success -> assertEquals(result.data, topStories)
+                    is Result.Failure -> fail(result.error.message)
+                }
+                times += 1
             }
 
+            assertEquals(times, 1)
+
+            sut.fetchStories()
+
+            assertEquals(times, 2)
+        }
+    }
+
+    @Test
+    fun `error is thrown correctly`() {
+        val error = Error("Error fetching top stories: 404 - Response.error()")
+        val networkManager = NetworkManagerMock(Result.Failure(error))
+        sut = TopStoriesManager(networkManager)
+
+        runBlocking {
             sut.topStories { result ->
                 when(result) {
                     is Result.Success -> fail("Coroutine should throw error")
