@@ -7,14 +7,13 @@ final class NetworkManagerTest: XCTestCase {
 
     func testObserveRequestSuccessfully() {
         let file = File("top_stories", .json)
-        let session = URLSessionMock(
-            responses: [
-                Response(file)
-            ]
-        )
-        let disposeBag = DisposeBag()
+        let responses = [
+            Response(file)
+        ]
+        let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
+        let disposeBag = DisposeBag()
         var times = 0
 
         sut
@@ -29,7 +28,8 @@ final class NetworkManagerTest: XCTestCase {
         }.disposed(by: disposeBag)
 
         XCTAssertEqual(times, 1)
-        session.responses.forEach { response in
+        XCTAssertTrue(session.responses.isEmpty)
+        responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
@@ -44,15 +44,14 @@ final class NetworkManagerTest: XCTestCase {
 
     func testExecuteRequestSuccessfully() {
         let file = File("top_stories", .json)
-        let session = URLSessionMock(
-            responses: [
-                Response(file),
-                Response(file)
-            ]
-        )
-        let disposeBag = DisposeBag()
+        let responses = [
+            Response(file),
+            Response(file)
+        ]
+        let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
+        let disposeBag = DisposeBag()
         var times = 0
 
         sut
@@ -69,7 +68,8 @@ final class NetworkManagerTest: XCTestCase {
         sut.execute(.fetchTopStories)
 
         XCTAssertEqual(times, 2)
-        session.responses.forEach { response in
+        XCTAssertTrue(session.responses.isEmpty)
+        responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
@@ -84,16 +84,15 @@ final class NetworkManagerTest: XCTestCase {
 
     func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
         let file = File("top_stories", .json)
-        let session = URLSessionMock(
-            responses: [
-                Response(file),
-                Response(error: .invalidResponse),
-                Response(file)
-            ]
-        )
-        let disposeBag = DisposeBag()
+        let responses = [
+            Response(file),
+            Response(error: .invalidResponse),
+            Response(file)
+        ]
+        let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
+        let disposeBag = DisposeBag()
         var times = 0
 
         sut
@@ -101,8 +100,8 @@ final class NetworkManagerTest: XCTestCase {
                 switch result {
                 case .success(let data):
                     XCTAssertEqual(data, file.data)
-                case .failure:
-                    break
+                case .failure(let error):
+                    XCTFail("Execute request should succeed, found error \(error)")
                 }
                 times += 1
         }.disposed(by: disposeBag)
@@ -121,7 +120,8 @@ final class NetworkManagerTest: XCTestCase {
         sut.execute(.fetchTopStories)
 
         XCTAssertEqual(times, 4)
-        session.responses.forEach { response in
+        XCTAssertTrue(session.responses.isEmpty)
+        responses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 

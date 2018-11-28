@@ -18,11 +18,6 @@ final class NetworkManagerMock: NetworkManagerProtocol {
     }
 
     func execute(_ request: Request) {
-        switch result {
-        case .success(let data):
-            observers.forEach { $0(.success(data)) }
-        case .failure(let error):
-            observers.forEach { $0(.failure(error)) }
-        }
+        observers.forEach { $0(result) }
     }
 }
