@@ -10,6 +10,19 @@ final class TopStoriesUITest: XCTestCase {
     }
 
     func testFeatureTopStoriesSuccessfully() {
+        let topStories = [
+            (
+                title: "Preliminary Nafta Deal Reached Between U.S. and Mexico",
+                byline: "By ANA SWANSON and KATIE ROGERS",
+                category: "U.S. - Politics"
+            ),
+            (
+                title: "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
+                byline: "By JONATHAN MARTIN",
+                category: "U.S."
+            )
+        ]
+
         let sessionMock = URLSessionMock(
             responses: [
                 Response(File("top_stories", .json)),
@@ -25,47 +38,23 @@ final class TopStoriesUITest: XCTestCase {
 
         app.launch(.start, with: sessionMock)
 
-        XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
-        XCTAssertTrue(app.tables.firstMatch.isHittable)
-
-        snapshot("Top Stories")
-
-        let storyLines = [
-            (
-                title: "Preliminary Nafta Deal Reached Between U.S. and Mexico",
-                byline: "By ANA SWANSON and KATIE ROGERS",
-                category: "U.S. - Politics"
-            ),
-            (
-                title: "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
-                byline: "By JONATHAN MARTIN",
-                category: "U.S."
-            )
-        ]
-
-        for index in 0...storyLines.count - 1 {
-            XCTAssertEqual(app.tables.firstMatch.cells.count, storyLines.count)
-            XCTAssertTrue(app.staticTexts[storyLines[index].title].isHittable)
-            XCTAssertTrue(app.staticTexts[storyLines[index].byline].isHittable)
-
-            app.tables.firstMatch.cells.element(boundBy: index).tap()
-
-            XCTAssertTrue(app.navigationBars[storyLines[index].category].isHittable)
-
-            app.buttons["Top Stories"].tap()
-
-            XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
-            XCTAssertTrue(app.tables.firstMatch.isHittable)
-        }
-
-        app.tables.firstMatch.refresh()
-
-        XCTAssertFalse(app.navigationBars["Top Stories"].isHittable)
-        XCTAssertFalse(app.tables.firstMatch.isHittable)
-
-        app.alerts["Error"].buttons["Ok"].tap()
-
-        XCTAssertTrue(app.navigationBars["Top Stories"].isHittable)
-        XCTAssertTrue(app.tables.firstMatch.isHittable)
+        TopStoriesRobot(app)
+            .checkTitle(contains: "Top Stories")
+            .checkTopStoriesTable(.isHittable)
+            .takeScreenshot(named: "Top Stories")
+            .checkTopStoriesCount(is: topStories.count)
+            .forTopStories(at: [0, 1]) { robot, index in
+                let story = topStories[index]
+                robot
+                    .checkTopStoryTitle(contains: story.title)
+                    .checkTopStoryByline(contains: story.byline)
+                    .openStory(at: index)
+                    .checkTitle(contains: story.category)
+                    .closeStory()
+            }
+            .checkTitle(contains: "Top Stories")
+            .refresh(inside: app.tables.firstMatch)
+            .closeErrorAlert()
+            .checkTopStoriesTable(.isHittable)
     }
 }

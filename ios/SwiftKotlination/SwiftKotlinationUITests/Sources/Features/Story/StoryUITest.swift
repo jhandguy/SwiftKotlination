@@ -1,7 +1,7 @@
 import XCTest
 
 final class StoryUITest: XCTestCase {
-    private lazy var app: XCUIApplication = XCUIApplication()
+    private lazy var app = XCUIApplication()
 
     override func setUp() {
         super.setUp()
@@ -42,27 +42,21 @@ final class StoryUITest: XCTestCase {
 
         let sessionMock = URLSessionMock(
             responses: [
-                Response(File("28trump-endorsements1-superJumbo", .jpg)),
-                Response(error: .invalidResponse)
+                Response(File("28trump-endorsements1-superJumbo", .jpg))
             ]
         )
 
         app.launch(.openStory(story), with: sessionMock)
 
-        XCTAssertTrue(app.navigationBars["\(story.section) - \(story.subsection)"].isHittable)
-        XCTAssertTrue(app.images.firstMatch.exists)
-        XCTAssertTrue(app.staticTexts[story.title].isHittable)
-        XCTAssertTrue(app.staticTexts[story.abstract].isHittable)
-        XCTAssertTrue(app.staticTexts[story.byline].isHittable)
-
-        snapshot("Story")
-
-        app.buttons["Read more..."].tap()
-
-        XCTAssertTrue(app.buttons["URL"].isHittable)
-
-        app.buttons["Done"].tap()
-
-        XCTAssertTrue(app.images.firstMatch.exists)
+        StoryRobot(app)
+            .checkTitle(contains: "\(story.section) - \(story.subsection)")
+            .checkStoryImage(.exists)
+            .checkStoryTitle(contains: story.title)
+            .checkStoryAbstract(contains: story.abstract)
+            .checkStoryByline(contains: story.byline)
+            .takeScreenshot(named: "Story")
+            .openSafari()
+            .checkSafariURL(.isHittable)
+            .closeSafari()
     }
 }

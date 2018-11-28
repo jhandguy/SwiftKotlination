@@ -11,6 +11,8 @@ final class SafariUITest: XCTestCase {
 
         app.launch(.openUrl(url))
 
-        XCTAssertTrue(app.buttons["URL"].isHittable)
+        SafariRobot(app)
+            .checkSafariURL(.isHittable)
+            .closeSafari()
     }
 }

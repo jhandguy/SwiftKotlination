@@ -23,6 +23,11 @@
 		0F2027022133DFC8009B80CE /* Mutlimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2027012133DFC8009B80CE /* Mutlimedia.swift */; };
 		0F202707213469A9009B80CE /* Mutlimedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2027012133DFC8009B80CE /* Mutlimedia.swift */; };
 		0F20270B21346EAE009B80CE /* ImageManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F20270A21346EAE009B80CE /* ImageManagerMock.swift */; };
+		0F22CA7F21AED13000914927 /* Robot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F22CA7E21AED13000914927 /* Robot.swift */; };
+		0F22CA8321AED1D800914927 /* StoryRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F22CA8221AED1D800914927 /* StoryRobot.swift */; };
+		0F22CA8521AED1E300914927 /* TopStoriesRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F22CA8421AED1E300914927 /* TopStoriesRobot.swift */; };
+		0F22CA8721AEED9800914927 /* Predicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F22CA8621AEED9800914927 /* Predicate.swift */; };
+		0F22CA8A21AEF06600914927 /* SafariRobot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F22CA8921AEF06600914927 /* SafariRobot.swift */; };
 		0F26DD6321353E9200E50417 /* ImageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F26DD6221353E9200E50417 /* ImageManagerTests.swift */; };
 		0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */; };
 		0F26DD6921354B3D00E50417 /* 28DC-nafta-thumbLarge.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */; };
@@ -98,7 +103,6 @@
 		0FC64A472096543D00339755 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A462096543D00339755 /* Story.swift */; };
 		0FC74198213938CF00E0F254 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74197213938CF00E0F254 /* Disposable.swift */; };
 		0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC74199213938DA00E0F254 /* DisposeBag.swift */; };
-		0FC741A2213989F500E0F254 /* XCUIElement+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */; };
 		0FCE5CD5208A85C1001C8FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */; };
 		0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */; };
 		0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */; };
@@ -144,6 +148,11 @@
 		0F2026FF2133DE17009B80CE /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		0F2027012133DFC8009B80CE /* Mutlimedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mutlimedia.swift; sourceTree = "<group>"; };
 		0F20270A21346EAE009B80CE /* ImageManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManagerMock.swift; sourceTree = "<group>"; };
+		0F22CA7E21AED13000914927 /* Robot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Robot.swift; sourceTree = "<group>"; };
+		0F22CA8221AED1D800914927 /* StoryRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryRobot.swift; sourceTree = "<group>"; };
+		0F22CA8421AED1E300914927 /* TopStoriesRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesRobot.swift; sourceTree = "<group>"; };
+		0F22CA8621AEED9800914927 /* Predicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predicate.swift; sourceTree = "<group>"; };
+		0F22CA8921AEF06600914927 /* SafariRobot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRobot.swift; sourceTree = "<group>"; };
 		0F26DD6221353E9200E50417 /* ImageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManagerTests.swift; sourceTree = "<group>"; };
 		0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-thumbLarge.jpg"; sourceTree = "<group>"; };
 		0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28DC-nafta-thumbLarge.jpg"; sourceTree = "<group>"; };
@@ -205,7 +214,6 @@
 		0FC64A462096543D00339755 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
 		0FC74197213938CF00E0F254 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		0FC74199213938DA00E0F254 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
-		0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement+Refresh.swift"; sourceTree = "<group>"; };
 		0FCE5CD1208A85C1001C8FFC /* SwiftKotlination.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftKotlination.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FCE5CD4208A85C1001C8FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -398,7 +406,6 @@
 				0F3EA4D9212DC5F80090A69A /* Codable */,
 				0F2026F7213345F5009B80CE /* CoordinatorStub */,
 				0FA5F79C20A8774F009C30B4 /* XCUIApplication */,
-				0FC741A321398AA300E0F254 /* XCUIElement */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -474,6 +481,39 @@
 				0F20270A21346EAE009B80CE /* ImageManagerMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		0F22CA7D21AED11B00914927 /* Robot */ = {
+			isa = PBXGroup;
+			children = (
+				0F22CA7E21AED13000914927 /* Robot.swift */,
+				0F22CA8621AEED9800914927 /* Predicate.swift */,
+			);
+			path = Robot;
+			sourceTree = "<group>";
+		};
+		0F22CA8021AED1C300914927 /* Robot */ = {
+			isa = PBXGroup;
+			children = (
+				0F22CA8221AED1D800914927 /* StoryRobot.swift */,
+			);
+			path = Robot;
+			sourceTree = "<group>";
+		};
+		0F22CA8121AED1CB00914927 /* Robot */ = {
+			isa = PBXGroup;
+			children = (
+				0F22CA8421AED1E300914927 /* TopStoriesRobot.swift */,
+			);
+			path = Robot;
+			sourceTree = "<group>";
+		};
+		0F22CA8821AEF05A00914927 /* Robot */ = {
+			isa = PBXGroup;
+			children = (
+				0F22CA8921AEF06600914927 /* SafariRobot.swift */,
+			);
+			path = Robot;
 			sourceTree = "<group>";
 		};
 		0F2BA4E82139900800920537 /* Observer */ = {
@@ -656,10 +696,11 @@
 		0FA5F79A20A87740009C30B4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0F22CA7D21AED11B00914927 /* Robot */,
 				0F3EA4A6212D8EF10090A69A /* Coordinator */,
 				0F2026F6213345D9009B80CE /* Extensions */,
 				0FA5F79B20A87747009C30B4 /* Features */,
-				0FB7A210213C6FD600A2A777 /* Helpers */,
+				0FB7A210213C6FD600A2A777 /* Fastlane */,
 				0F3EA4D6212DC5910090A69A /* Network */,
 				0FF77CA2212DF92D0072267A /* Safari */,
 			);
@@ -686,6 +727,7 @@
 		0FA5F79D20A87757009C30B4 /* TopStories */ = {
 			isa = PBXGroup;
 			children = (
+				0F22CA8121AED1CB00914927 /* Robot */,
 				0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */,
 			);
 			path = TopStories;
@@ -694,6 +736,7 @@
 		0FA5F79E20A8775E009C30B4 /* Story */ = {
 			isa = PBXGroup;
 			children = (
+				0F22CA8021AED1C300914927 /* Robot */,
 				0FA5F79820A8770C009C30B4 /* StoryUITest.swift */,
 			);
 			path = Story;
@@ -708,12 +751,12 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		0FB7A210213C6FD600A2A777 /* Helpers */ = {
+		0FB7A210213C6FD600A2A777 /* Fastlane */ = {
 			isa = PBXGroup;
 			children = (
 				0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */,
 			);
-			path = Helpers;
+			path = Fastlane;
 			sourceTree = "<group>";
 		};
 		0FB7A211213D6B3E00A2A777 /* Helpers */ = {
@@ -820,14 +863,6 @@
 				0FC64A40209623B200339755 /* TopStoriesManager.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		0FC741A321398AA300E0F254 /* XCUIElement */ = {
-			isa = PBXGroup;
-			children = (
-				0FC741A1213989F500E0F254 /* XCUIElement+Refresh.swift */,
-			);
-			path = XCUIElement;
 			sourceTree = "<group>";
 		};
 		0FCE5CC8208A85C1001C8FFC = {
@@ -964,6 +999,7 @@
 		0FF77CA2212DF92D0072267A /* Safari */ = {
 			isa = PBXGroup;
 			children = (
+				0F22CA8821AEF05A00914927 /* Robot */,
 				0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */,
 			);
 			path = Safari;
@@ -1200,19 +1236,23 @@
 				0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */,
 				0F3EA4CC212DBFA10090A69A /* URLSessionDataTaskProtocol.swift in Sources */,
 				0F4A204C213030F2002543B8 /* Response.swift in Sources */,
+				0F22CA7F21AED13000914927 /* Robot.swift in Sources */,
+				0F22CA8A21AEF06600914927 /* SafariRobot.swift in Sources */,
 				0FA5F7AB20A8D6AD009C30B4 /* TopStoriesUITest.swift in Sources */,
 				0F9EEE63212F4893006056E5 /* Result.swift in Sources */,
 				0F4A204321302360002543B8 /* File.swift in Sources */,
+				0F22CA8521AED1E300914927 /* TopStoriesRobot.swift in Sources */,
 				0F3EA4BF212DB9500090A69A /* URLSessionDataTaskMock.swift in Sources */,
 				0FA5F7AC20A8DBA8009C30B4 /* TopStories.swift in Sources */,
 				0F3EA4CB212DBF8C0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F170543212F577900F87958 /* ErrorStringConvertible.swift in Sources */,
-				0FC741A2213989F500E0F254 /* XCUIElement+Refresh.swift in Sources */,
 				0FA5F7A020A87780009C30B4 /* Encodable+JSON.swift in Sources */,
 				0FA5F7A920A8CBD2009C30B4 /* XCUIApplication+Launch.swift in Sources */,
+				0F22CA8321AED1D800914927 /* StoryRobot.swift in Sources */,
 				0F3EA4E0212DF1DD0090A69A /* Identifiable.swift in Sources */,
 				0FA5F79920A8770C009C30B4 /* StoryUITest.swift in Sources */,
 				0FA5F7A720A87894009C30B4 /* Story.swift in Sources */,
+				0F22CA8721AEED9800914927 /* Predicate.swift in Sources */,
 				0F202707213469A9009B80CE /* Mutlimedia.swift in Sources */,
 				0F3EA4E6212DF3D90090A69A /* CoordinatorStub+Encodable.swift in Sources */,
 			);
