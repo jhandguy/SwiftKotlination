@@ -4,7 +4,7 @@ class Robot {
     
     // MARK: - Internal Properties
 
-    static let defaultTimeout: Double = 10
+    static let defaultTimeout: Double = 20
     var app: XCUIApplication
 
     // MARK: - Initializer
