@@ -2,7 +2,7 @@ import Foundation
 
 enum CoordinatorStub: Identifiable {
     case openStory(Story)
-    case openUrl(URL)
+    case openUrl(String)
     case start
 }
 

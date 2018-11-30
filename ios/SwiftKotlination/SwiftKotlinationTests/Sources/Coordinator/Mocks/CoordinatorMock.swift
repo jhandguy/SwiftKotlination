@@ -14,7 +14,7 @@ final class CoordinatorMock: CoordinatorProtocol {
         isStoryOpened = true
     }
 
-    func open(_ url: URL) {
+    func open(_ url: String) {
         isUrlOpened = true
     }
 }

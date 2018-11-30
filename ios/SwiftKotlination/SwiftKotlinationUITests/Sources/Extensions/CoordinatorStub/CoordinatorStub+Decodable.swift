@@ -9,7 +9,7 @@ extension CoordinatorStub: Decodable {
             return
         }
 
-        if let url = try? values.decode(URL.self, forKey: .url) {
+        if let url = try? values.decode(String.self, forKey: .url) {
             self = .openUrl(url)
             return
         }

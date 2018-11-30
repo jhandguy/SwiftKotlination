@@ -50,10 +50,7 @@ final class StoryViewController: UIViewController {
         abstractLabel.text = story.abstract
         bylineLabel.text = story.byline
         urlButton.on(.touchUpInside) { [weak self] in
-            guard let url = URL(string: story.url) else {
-                return
-            }
-            self?.coordinator?.open(url)
+            self?.coordinator?.open(story.url)
         }
 
         guard let url = story.imageUrl(.large) else {

@@ -4,15 +4,12 @@ final class SafariUITest: XCTestCase {
     private lazy var app: XCUIApplication = XCUIApplication()
 
     func testSafariSuccessfully() {
-        guard let url = URL(string: "https://url.com") else {
-            XCTFail("Invalid URL")
-            return
-        }
+        let url = "https://url.com"
 
         app.launch(.openUrl(url))
 
         SafariRobot(app)
-            .checkSafariURL(.isHittable)
+            .checkURL(contains: url)
             .closeSafari()
     }
 }

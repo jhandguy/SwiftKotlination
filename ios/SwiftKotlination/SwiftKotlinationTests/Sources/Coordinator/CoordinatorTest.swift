@@ -31,10 +31,8 @@ final class CoordinatorTest: XCTestCase {
     }
 
     func testCoordinatorOpensUrlWithSafariViewControllerSuccessfully() {
-        guard let url = URL(string: "https://test.com") else {
-            XCTFail("Invalid URL")
-            return
-        }
+        let url = "https://test.com"
+
         sut.open(url)
 
         XCTAssertTrue(sut.navigationController.presentedViewController is SFSafariViewController)

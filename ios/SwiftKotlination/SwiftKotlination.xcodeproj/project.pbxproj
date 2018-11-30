@@ -486,8 +486,8 @@
 		0F22CA7D21AED11B00914927 /* Robot */ = {
 			isa = PBXGroup;
 			children = (
-				0F22CA7E21AED13000914927 /* Robot.swift */,
 				0F22CA8621AEED9800914927 /* Predicate.swift */,
+				0F22CA7E21AED13000914927 /* Robot.swift */,
 			);
 			path = Robot;
 			sourceTree = "<group>";

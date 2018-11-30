@@ -40,10 +40,9 @@ final class TopStoriesUITest: XCTestCase {
 
         TopStoriesRobot(app)
             .checkTitle(contains: "Top Stories")
-            .checkTopStoriesTable(.isHittable)
             .takeScreenshot(named: "Top Stories")
             .checkTopStoriesCount(is: topStories.count)
-            .forTopStories(at: [0, 1]) { robot, index in
+            .forEach(topStories: [0, 1]) { robot, index in
                 let story = topStories[index]
                 robot
                     .checkTopStoryTitle(contains: story.title)
@@ -53,8 +52,8 @@ final class TopStoriesUITest: XCTestCase {
                     .closeStory()
             }
             .checkTitle(contains: "Top Stories")
-            .refresh(inside: app.tables.firstMatch)
+            .checkTopStoriesCount(is: topStories.count)
+            .refreshTopStories()
             .closeErrorAlert()
-            .checkTopStoriesTable(.isHittable)
     }
 }

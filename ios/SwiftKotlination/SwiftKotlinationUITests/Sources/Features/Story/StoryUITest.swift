@@ -50,13 +50,13 @@ final class StoryUITest: XCTestCase {
 
         StoryRobot(app)
             .checkTitle(contains: "\(story.section) - \(story.subsection)")
-            .checkStoryImage(.exists)
+            .checkStoryImage()
             .checkStoryTitle(contains: story.title)
             .checkStoryAbstract(contains: story.abstract)
             .checkStoryByline(contains: story.byline)
             .takeScreenshot(named: "Story")
             .openSafari()
-            .checkSafariURL(.isHittable)
+            .checkURL(contains: story.url)
             .closeSafari()
     }
 }

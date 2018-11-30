@@ -5,9 +5,9 @@ final class StoryRobot: Robot {
     // MARK: - Internal Methods
     
     @discardableResult
-    func checkStoryImage(_ predicate: Predicate) -> Self {
+    func checkStoryImage() -> Self {
         XCTAssertEqual(app.images.count, 1)
-        return assert(app.images.firstMatch, predicate)
+        return assert(app.images.firstMatch, .exists)
     }
 
     @discardableResult

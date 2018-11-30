@@ -1,10 +1,13 @@
 import XCTest
 
 class Robot {
+
+    // MARK: Private Constants
+
+    private static let defaultTimeout: Double = 30
     
     // MARK: - Internal Properties
 
-    static let defaultTimeout: Double = 20
     var app: XCUIApplication
 
     // MARK: - Initializer
@@ -17,29 +20,29 @@ class Robot {
     
     @discardableResult
     func tap(_ element: XCUIElement, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
-        assert(element, .isHittable)
+        assert(element, .isHittable, timeout: timeout)
         element.tap()
         return self
     }
 
     @discardableResult
-    func assert(_ elements: XCUIElement, _ predicate: Predicate, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
-        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "\(predicate.rawValue) == true"), object: elements)
+    func assert(_ element: XCUIElement, _ predicate: Predicate, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "\(predicate.rawValue) == true"), object: element)
         guard XCTWaiter.wait(for: [expectation], timeout: timeout) == .completed else {
-            XCTFail("Element did not fulfill expectation for predicate: \(predicate.rawValue)")
+            XCTFail("[\(self)] Element \(element.description) did not fulfill expectation: \(predicate.rawValue)")
             return self
         }
         return self
     }
 
     @discardableResult
-    func refresh(inside element: XCUIElement) -> Self {
+    func refresh(inside element: XCUIElement, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         guard [.table, .collectionView].contains(element.elementType) else {
-            XCTFail("Cannot refresh inside element of type \(element.elementType)")
+            XCTFail("[\(self)] Cannot refresh inside element \(element.description)")
             return self
         }
         let cell = element.cells.firstMatch
-        assert(cell, .exists)
+        assert(cell, .exists, timeout: timeout)
         let topCoordinate = cell.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
         let bottomCoordinate = cell.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 3))
         topCoordinate.press(forDuration: 0, thenDragTo: bottomCoordinate)
@@ -47,8 +50,8 @@ class Robot {
     }
 
     @discardableResult
-    func checkTitle(contains title: String) -> Self {
-        return assert(app.navigationBars[title], .isHittable)
+    func checkTitle(contains title: String, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+        return assert(app.navigationBars[title], .isHittable, timeout: timeout)
     }
     
     @discardableResult
@@ -58,9 +61,9 @@ class Robot {
     }
 
     @discardableResult
-    func closeErrorAlert() -> Self {
+    func closeErrorAlert(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         let alert = app.alerts["Error"]
-        assert(alert, .exists)
+        assert(alert, .exists, timeout: timeout)
         return tap(alert.buttons["Ok"])
     }
 }

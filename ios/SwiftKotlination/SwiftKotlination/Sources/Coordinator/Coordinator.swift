@@ -4,7 +4,7 @@ import SafariServices
 protocol CoordinatorProtocol: class {
     func start()
     func open(_ story: Story)
-    func open(_ url: URL)
+    func open(_ url: String)
 }
 
 final class Coordinator {
@@ -45,9 +45,11 @@ extension Coordinator: CoordinatorProtocol {
         navigationController.pushViewController(viewController, animated: true)
     }
 
-    func open(_ url: URL) {
-        guard UIApplication.shared.canOpenURL(url) else {
-            return
+    func open(_ url: String) {
+        guard
+            let url = URL(string: url),
+            UIApplication.shared.canOpenURL(url) else {
+                return
         }
         let viewController = SFSafariViewController(url: url)
         navigationController.present(viewController, animated: true)
