@@ -5,9 +5,9 @@ import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JSON
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
+import kotlin.test.Test
 
 class TopStoriesManagerUnitTest {
 

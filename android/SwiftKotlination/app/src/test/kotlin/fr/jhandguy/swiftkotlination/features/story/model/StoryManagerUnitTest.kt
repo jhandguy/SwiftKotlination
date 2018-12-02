@@ -2,10 +2,10 @@ package fr.jhandguy.swiftkotlination.features.story.model
 
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Before
-import org.junit.Test
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
 
 class StoryManagerUnitTest {
 
@@ -13,7 +13,7 @@ class StoryManagerUnitTest {
 
     lateinit var sut: StoryManager
 
-    @Before
+    @BeforeTest
     fun before() {
         sut = StoryManager(story)
     }

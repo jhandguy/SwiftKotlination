@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.model
 
-import org.junit.Test
+import kotlin.test.Test
 
 class ImageManagerUnitTest {
 

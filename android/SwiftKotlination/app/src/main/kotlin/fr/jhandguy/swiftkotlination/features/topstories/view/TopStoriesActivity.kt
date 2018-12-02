@@ -1,7 +1,7 @@
 package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.App
 import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
 import fr.jhandguy.swiftkotlination.launch

@@ -6,9 +6,9 @@ import fr.jhandguy.swiftkotlination.features.story.model.mocks.StoryManagerMock
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
+import kotlin.test.Test
 
 class StoryViewModelUnitTest {
 

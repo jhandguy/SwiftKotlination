@@ -1,13 +1,13 @@
 package fr.jhandguy.swiftkotlination.observer
 
-import org.junit.Before
-import org.junit.Test
+import kotlin.test.BeforeTest
+import kotlin.test.Test
 
 class DisposeBagUnitTest {
 
     lateinit var sut: DisposeBag
 
-    @Before
+    @BeforeTest
     fun before() {
         sut = DisposeBag()
     }

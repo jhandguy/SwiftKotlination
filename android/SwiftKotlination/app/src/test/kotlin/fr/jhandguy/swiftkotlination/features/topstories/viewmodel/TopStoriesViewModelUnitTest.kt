@@ -6,9 +6,9 @@ import fr.jhandguy.swiftkotlination.features.topstories.model.TopStories
 import fr.jhandguy.swiftkotlination.features.topstories.model.mocks.TopStoriesManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Assert.fail
-import org.junit.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
+import kotlin.test.Test
 
 class TopStoriesViewModelUnitTest {
 

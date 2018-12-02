@@ -1,9 +1,9 @@
 package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.content.Context
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.launch

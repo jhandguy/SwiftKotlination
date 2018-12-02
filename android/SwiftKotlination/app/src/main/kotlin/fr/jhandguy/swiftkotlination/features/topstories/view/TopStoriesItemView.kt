@@ -2,8 +2,8 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.content.Context
 import android.graphics.Typeface.DEFAULT_BOLD
-import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintSet
 import fr.jhandguy.swiftkotlination.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
@@ -21,9 +21,9 @@ class TopStoriesItemView : AnkoComponent<Context> {
                 typeface = DEFAULT_BOLD
                 id = R.id.top_stories_item_title
             }.lparams(width = 0, height = wrapContent) {
-                leftToLeft = PARENT_ID
-                topToTop = PARENT_ID
-                rightToRight = PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
+                topToTop = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
             }
 
             textView {
@@ -32,10 +32,10 @@ class TopStoriesItemView : AnkoComponent<Context> {
                 lines = 1
                 id = R.id.top_stories_item_byline
             }.lparams(width = 0, height = wrapContent) {
-                leftToLeft = PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
                 topToBottom = R.id.top_stories_item_title
-                bottomToBottom = PARENT_ID
-                rightToRight = PARENT_ID
+                bottomToBottom = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
                 topMargin = dip(6)
             }
         }

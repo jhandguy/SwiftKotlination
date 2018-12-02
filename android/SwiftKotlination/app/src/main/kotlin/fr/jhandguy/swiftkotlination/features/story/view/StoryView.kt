@@ -2,10 +2,10 @@ package fr.jhandguy.swiftkotlination.features.story.view
 
 import android.content.Context
 import android.graphics.Color
-import android.support.constraint.ConstraintLayout.LayoutParams.PARENT_ID
 import android.view.View
-import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
+import androidx.constraintlayout.widget.ConstraintSet
 import fr.jhandguy.swiftkotlination.R
+import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
@@ -23,9 +23,9 @@ class StoryView(var coordinator: CoordinatorInterface, var story: Story = Story(
                 textSize = sp(9).toFloat()
                 id = R.id.story_title
             }.lparams(width = matchParent, height = wrapContent) {
-                topToTop = PARENT_ID
-                leftToLeft = PARENT_ID
-                rightToRight = PARENT_ID
+                topToTop = ConstraintSet.PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
                 topMargin = dip(14)
             }
 
@@ -36,8 +36,8 @@ class StoryView(var coordinator: CoordinatorInterface, var story: Story = Story(
                 id = R.id.story_abstract
             }.lparams(width = matchParent, height = wrapContent) {
                 topToBottom = R.id.story_title
-                leftToLeft = PARENT_ID
-                rightToRight = PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
                 topMargin = dip(14)
             }
 
@@ -48,8 +48,8 @@ class StoryView(var coordinator: CoordinatorInterface, var story: Story = Story(
                 id = R.id.story_byline
             }.lparams(width = matchParent, height = wrapContent) {
                 topToBottom = R.id.story_abstract
-                leftToLeft = PARENT_ID
-                rightToRight = PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
                 topMargin = dip(10)
             }
 
@@ -66,8 +66,8 @@ class StoryView(var coordinator: CoordinatorInterface, var story: Story = Story(
                 }
             }.lparams(width = wrapContent, height = wrapContent) {
                 topToBottom = R.id.story_byline
-                leftToLeft = PARENT_ID
-                rightToRight = PARENT_ID
+                leftToLeft = ConstraintSet.PARENT_ID
+                rightToRight = ConstraintSet.PARENT_ID
                 topMargin = dip(12)
             }
         }
