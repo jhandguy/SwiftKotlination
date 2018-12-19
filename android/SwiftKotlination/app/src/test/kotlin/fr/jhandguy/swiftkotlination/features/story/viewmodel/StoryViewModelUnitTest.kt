@@ -4,11 +4,13 @@ import fr.jhandguy.swiftkotlination.features.story.factory.mocks.StoryFactoryMoc
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.mocks.StoryManagerMock
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
+import fr.jhandguy.swiftkotlination.model.mocks.ImageManagerMock
+import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import kotlin.test.Test
 
 class StoryViewModelUnitTest {
 
@@ -17,8 +19,13 @@ class StoryViewModelUnitTest {
     @Test
     fun `story is fetched correctly`() {
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
-        val manager = StoryManagerMock(Result.Success(story))
-        val factory = StoryFactoryMock(manager)
+        val storyManager = StoryManagerMock(
+                Result.Success(story)
+        )
+        val imageManager = ImageManagerMock(
+                Result.Failure(NetworkError.InvalidResponse())
+        )
+        val factory = StoryFactoryMock(storyManager, imageManager)
         sut = StoryViewModel(factory)
 
         runBlocking {
@@ -34,8 +41,13 @@ class StoryViewModelUnitTest {
     @Test
     fun `error is thrown correctly`() {
         val error = Error("error message")
-        val manager = StoryManagerMock(Result.Failure(error))
-        val factory = StoryFactoryMock(manager)
+        val storyManager = StoryManagerMock(
+                Result.Failure(error)
+        )
+        val imageManager = ImageManagerMock(
+                Result.Failure(NetworkError.InvalidResponse())
+        )
+        val factory = StoryFactoryMock(storyManager, imageManager)
         sut = StoryViewModel(factory)
 
         runBlocking {

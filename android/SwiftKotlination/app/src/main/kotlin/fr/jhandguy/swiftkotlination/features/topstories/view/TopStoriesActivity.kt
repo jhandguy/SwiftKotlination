@@ -14,7 +14,7 @@ class TopStoriesActivity: AppCompatActivity() {
     private val factory: TopStoriesFactory  by lazy { (application as App).factory }
     private val coordinator                 by lazy {  factory.makeCoordinator(this) }
     private val viewModel                   by lazy {  factory.makeTopStoriesViewModel() }
-    private val adapter                     by lazy {  TopStoriesAdapter(coordinator) }
+    private val adapter                     by lazy {  TopStoriesAdapter(this, viewModel, coordinator) }
     private val view                        by lazy {  TopStoriesView(adapter, viewModel) }
     private val disposeBag = DisposeBag()
 
@@ -35,7 +35,6 @@ class TopStoriesActivity: AppCompatActivity() {
                 runOnUiThread {
                     when (result) {
                         is Result.Success -> {
-                            adapter.topStories = result.data
                             adapter.notifyDataSetChanged()
                         }
                         is Result.Failure -> print(result.error)

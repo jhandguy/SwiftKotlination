@@ -15,7 +15,7 @@ class StoryActivity: AppCompatActivity() {
     private val factory: StoryFactory   by lazy {  (application as App).factory }
     private val coordinator             by lazy {  factory.makeCoordinator(this) }
     private val viewModel               by lazy {  factory.makeStoryViewModel(JSON.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
-    private val view                    by lazy {  StoryView(coordinator) }
+    private val view                    by lazy {  StoryView(this, viewModel, coordinator) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

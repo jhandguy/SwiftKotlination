@@ -12,3 +12,6 @@ data class Story(
         val url: String = "",
         val byline: String = "",
         val multimedia: List<Multimedia> = emptyList())
+
+fun Story.imageUrl(format: Multimedia.Format): String? =
+        multimedia.firstOrNull { it.format == format }?.url

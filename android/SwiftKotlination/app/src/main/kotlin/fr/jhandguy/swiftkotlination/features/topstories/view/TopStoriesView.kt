@@ -7,7 +7,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.launch
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
@@ -17,7 +19,6 @@ class TopStoriesView(var adapter: TopStoriesAdapter, var viewModel: TopStoriesVi
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         swipeRefreshLayout = swipeRefreshLayout {
-            padding = dip(12)
             onRefresh {
                 launch {
                     viewModel.refresh()
