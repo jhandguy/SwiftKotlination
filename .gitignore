@@ -1,5 +1,7 @@
 ios/SwiftKotlination/SwiftKotlination.xcodeproj/project.xcworkspace/xcuserdata
 
+android/SwiftKotlination/.idea
+
 fastlane/test_output
 fastlane/report.xml
 
