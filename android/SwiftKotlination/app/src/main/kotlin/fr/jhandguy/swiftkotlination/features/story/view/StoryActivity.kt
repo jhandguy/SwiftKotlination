@@ -6,6 +6,7 @@ import fr.jhandguy.swiftkotlination.App
 import fr.jhandguy.swiftkotlination.features.story.factory.StoryFactory
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.serialization.json.JSON
 import org.jetbrains.anko.setContentView
@@ -15,7 +16,8 @@ class StoryActivity: AppCompatActivity() {
     private val factory: StoryFactory   by lazy {  (application as App).factory }
     private val coordinator             by lazy {  factory.makeCoordinator(this) }
     private val viewModel               by lazy {  factory.makeStoryViewModel(JSON.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
-    private val view                    by lazy {  StoryView(this, viewModel, coordinator) }
+    private val view                    by lazy {  StoryView(this, viewModel, coordinator, disposeBag) }
+    private val disposeBag = DisposeBag()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,12 @@ class StoryActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        disposeBag.dispose()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -12,11 +12,13 @@ import fr.jhandguy.swiftkotlination.features.story.model.imageUrl
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.model.Multimedia
+import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import org.jetbrains.anko.*
 import org.jetbrains.anko.constraint.layout.constraintLayout
 
-class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, var story: Story = Story()): AnkoComponent<Context> {
+class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, val disposeBag: DisposeBag, var story: Story = Story()): AnkoComponent<Context> {
+
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return scrollView {
             constraintLayout {
@@ -38,7 +40,7 @@ class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coord
                                         }
                                     }
                                 }
-                            }
+                            }?.disposedBy(disposeBag)
                         }
                     } ?: run { visibility = View.GONE }
                 }.lparams(width = matchParent, height = wrapContent) {
