@@ -15,7 +15,7 @@ final class TopStoriesTableViewController: UITableViewController {
 
         title = "Top Stories"
 
-        tableView.registerNib(TopStoriesTableViewCell.self)
+        tableView.register(TopStoriesTableViewCell.self)
 
         refreshControl = UIRefreshControl()
         refreshControl?.on(.valueChanged) { [weak self] in
@@ -48,6 +48,10 @@ final class TopStoriesTableViewController: UITableViewController {
 
     // MARK: - UITableView Methods
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let story = viewModel.stories[indexPath.row]
         coordinator?.open(story)
@@ -59,7 +63,7 @@ final class TopStoriesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(TopStoriesTableViewCell.self, for: indexPath) else {
-            return UITableViewCell()
+            return TopStoriesTableViewCell()
         }
 
         guard indexPath.row < viewModel.stories.count else {

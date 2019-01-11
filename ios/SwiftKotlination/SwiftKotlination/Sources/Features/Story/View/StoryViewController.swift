@@ -2,13 +2,9 @@ import UIKit
 
 final class StoryViewController: UIViewController {
 
-    // MARK: - IBOutlet Properties
+    // MARK: - Private Properties
 
-    @IBOutlet private(set) weak var multimediaImageView: UIImageView!
-    @IBOutlet private(set) weak var titleLabel: UILabel!
-    @IBOutlet private(set) weak var abstractLabel: UILabel!
-    @IBOutlet private(set) weak var bylineLabel: UILabel!
-    @IBOutlet private(set) weak var urlButton: UIButton!
+    private(set) lazy var storyView = StoryView()
 
     // MARK: - Internal Properties
 
@@ -17,6 +13,12 @@ final class StoryViewController: UIViewController {
     let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle Methods
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view = storyView
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,15 +48,15 @@ final class StoryViewController: UIViewController {
             .filter { !$0.isEmpty }
             .joined(separator: " - ")
 
-        titleLabel.text = story.title
-        abstractLabel.text = story.abstract
-        bylineLabel.text = story.byline
-        urlButton.on(.touchUpInside) { [weak self] in
+        storyView.titleLabel.text = story.title
+        storyView.abstractLabel.text = story.abstract
+        storyView.bylineLabel.text = story.byline
+        storyView.urlButton.on(.touchUpInside) { [weak self] in
             self?.coordinator?.open(story.url)
         }
 
         guard let url = story.imageUrl(.large) else {
-            multimediaImageView.isHidden = true
+            storyView.multimediaImageView.isHidden = true
             return
         }
 
@@ -63,13 +65,13 @@ final class StoryViewController: UIViewController {
                 switch result {
                 case .success(let image):
                     runOnMainThread {
-                        self?.multimediaImageView.image = image
-                        self?.multimediaImageView.isHidden = false
+                        self?.storyView.multimediaImageView.image = image
+                        self?.storyView.multimediaImageView.isHidden = false
                     }
 
                 case .failure:
                     runOnMainThread {
-                        self?.multimediaImageView.isHidden = true
+                        self?.storyView.multimediaImageView.isHidden = true
                     }
                 }
             }?.disposed(by: disposeBag)

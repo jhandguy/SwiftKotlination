@@ -5,19 +5,19 @@ class Robot {
     // MARK: Private Constants
 
     private static let defaultTimeout: Double = 30
-    
+
     // MARK: - Internal Properties
 
     var app: XCUIApplication
 
     // MARK: - Initializer
-    
+
     init(_ app: XCUIApplication) {
         self.app = app
     }
 
     // MARK: - Internal Methods
-    
+
     @discardableResult
     func tap(_ element: XCUIElement, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         assert(element, .isHittable, timeout: timeout)
@@ -53,7 +53,7 @@ class Robot {
     func checkTitle(contains title: String, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         return assert(app.navigationBars[title], .isHittable, timeout: timeout)
     }
-    
+
     @discardableResult
     func takeScreenshot(named name: String, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         snapshot(name, timeWaitingForIdle: timeout)

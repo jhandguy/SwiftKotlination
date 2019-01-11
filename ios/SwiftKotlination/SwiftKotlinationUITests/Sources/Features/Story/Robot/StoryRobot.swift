@@ -3,7 +3,7 @@ import XCTest
 final class StoryRobot: Robot {
 
     // MARK: - Internal Methods
-    
+
     @discardableResult
     func checkStoryImage() -> Self {
         XCTAssertEqual(app.images.count, 1)

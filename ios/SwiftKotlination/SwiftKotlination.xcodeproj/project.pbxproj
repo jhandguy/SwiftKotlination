@@ -59,16 +59,15 @@
 		0F4A204921302B1B002543B8 /* top_stories.json in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A204621302503002543B8 /* top_stories.json */; };
 		0F4A204C213030F2002543B8 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A204A213030F2002543B8 /* Response.swift */; };
 		0F4A204D213030F5002543B8 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A204A213030F2002543B8 /* Response.swift */; };
-		0F4A205421314B80002543B8 /* TopStoriesTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A205321314B80002543B8 /* TopStoriesTableViewController.storyboard */; };
-		0F4A205821315C54002543B8 /* TopStoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A205721315C54002543B8 /* TopStoriesTableViewCell.swift */; };
-		0F4A205A21316107002543B8 /* TopStoriesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */; };
-		0F4A205C213169FF002543B8 /* UIViewController+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A205B213169FF002543B8 /* UIViewController+Identifiable.swift */; };
-		0F4A206121316ADD002543B8 /* StoryViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F4A206021316ADD002543B8 /* StoryViewController.storyboard */; };
 		0F967079216CEB030030DBB8 /* DependencyManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */; };
 		0F9EEE63212F4893006056E5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16552E212C2680005137B0 /* Result.swift */; };
 		0F9EEE65212F4AAA006056E5 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EEE64212F4AAA006056E5 /* Observer.swift */; };
 		0F9EEE66212F4F21006056E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8666F212F471E0033CD13 /* NetworkError.swift */; };
 		0FA074F8219B2BDD00476621 /* CoordinatorTest+FactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA074F7219B2BDD00476621 /* CoordinatorTest+FactoryMock.swift */; };
+		0FA3264521CB94A00093507F /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3264421CB94A00093507F /* StoryView.swift */; };
+		0FA3264721D0F6660093507F /* TopStoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3264621D0F6660093507F /* TopStoriesTableViewCell.swift */; };
+		0FA3264921D683EB0093507F /* StoryViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3264821D683EB0093507F /* StoryViewTest.swift */; };
+		0FA3264B21D684140093507F /* TopStoriesTableViewCellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA3264A21D684140093507F /* TopStoriesTableViewCellTest.swift */; };
 		0FA5F77420A5BA4C009C30B4 /* CoordinatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F77320A5BA4C009C30B4 /* CoordinatorTest.swift */; };
 		0FA5F77920A5BB5F009C30B4 /* CoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F77820A5BB5F009C30B4 /* CoordinatorMock.swift */; };
 		0FA5F77B20A5CC96009C30B4 /* StoryManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F77A20A5CC96009C30B4 /* StoryManagerTest.swift */; };
@@ -175,14 +174,13 @@
 		0F4A204221302360002543B8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		0F4A204621302503002543B8 /* top_stories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = top_stories.json; sourceTree = "<group>"; };
 		0F4A204A213030F2002543B8 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
-		0F4A205321314B80002543B8 /* TopStoriesTableViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TopStoriesTableViewController.storyboard; sourceTree = "<group>"; };
-		0F4A205721315C54002543B8 /* TopStoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCell.swift; sourceTree = "<group>"; };
-		0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopStoriesTableViewCell.xib; sourceTree = "<group>"; };
-		0F4A205B213169FF002543B8 /* UIViewController+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Identifiable.swift"; sourceTree = "<group>"; };
-		0F4A206021316ADD002543B8 /* StoryViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StoryViewController.storyboard; sourceTree = "<group>"; };
 		0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManagerTest.swift; sourceTree = "<group>"; };
 		0F9EEE64212F4AAA006056E5 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		0FA074F7219B2BDD00476621 /* CoordinatorTest+FactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoordinatorTest+FactoryMock.swift"; sourceTree = "<group>"; };
+		0FA3264421CB94A00093507F /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		0FA3264621D0F6660093507F /* TopStoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCell.swift; sourceTree = "<group>"; };
+		0FA3264821D683EB0093507F /* StoryViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewTest.swift; sourceTree = "<group>"; };
+		0FA3264A21D684140093507F /* TopStoriesTableViewCellTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesTableViewCellTest.swift; sourceTree = "<group>"; };
 		0FA5F77320A5BA4C009C30B4 /* CoordinatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTest.swift; sourceTree = "<group>"; };
 		0FA5F77820A5BB5F009C30B4 /* CoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMock.swift; sourceTree = "<group>"; };
 		0FA5F77A20A5CC96009C30B4 /* StoryManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryManagerTest.swift; sourceTree = "<group>"; };
@@ -331,39 +329,12 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		0F2026EB213343BC009B80CE /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				0F2026EE213343E4009B80CE /* Story */,
-				0F2026EC213343C8009B80CE /* TopStories */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		0F2026EC213343C8009B80CE /* TopStories */ = {
-			isa = PBXGroup;
-			children = (
-				0F4A205921316107002543B8 /* TopStoriesTableViewCell.xib */,
-				0F4A205321314B80002543B8 /* TopStoriesTableViewController.storyboard */,
-			);
-			path = TopStories;
-			sourceTree = "<group>";
-		};
-		0F2026EE213343E4009B80CE /* Story */ = {
-			isa = PBXGroup;
-			children = (
-				0F4A206021316ADD002543B8 /* StoryViewController.storyboard */,
-			);
-			path = Story;
-			sourceTree = "<group>";
-		};
 		0F2026F021334515009B80CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				0F2026F12133452C009B80CE /* UIControl */,
 				0F2026F22133453A009B80CE /* UITableView */,
 				0F2026F321334544009B80CE /* UITableViewCell */,
-				0F2026F42133454F009B80CE /* UIViewController */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -390,14 +361,6 @@
 				0F3EA4E1212DF2890090A69A /* UITableViewCell+Identifiable.swift */,
 			);
 			path = UITableViewCell;
-			sourceTree = "<group>";
-		};
-		0F2026F42133454F009B80CE /* UIViewController */ = {
-			isa = PBXGroup;
-			children = (
-				0F4A205B213169FF002543B8 /* UIViewController+Identifiable.swift */,
-			);
-			path = UIViewController;
 			sourceTree = "<group>";
 		};
 		0F2026F6213345D9009B80CE /* Extensions */ = {
@@ -617,6 +580,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA5F77D20A5D239009C30B4 /* StoryViewControllerTest.swift */,
+				0FA3264821D683EB0093507F /* StoryViewTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -641,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				0FA5F79220A5F3AB009C30B4 /* TopStoriesTableViewControllerTest.swift */,
+				0FA3264A21D684140093507F /* TopStoriesTableViewCellTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -790,6 +755,7 @@
 			isa = PBXGroup;
 			children = (
 				0FBB65C020A393920090B77F /* StoryViewController.swift */,
+				0FA3264421CB94A00093507F /* StoryView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -814,8 +780,8 @@
 		0FBE92AC209D8FFD00A32D01 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0F4A205721315C54002543B8 /* TopStoriesTableViewCell.swift */,
 				0FC64A3C2095EC5000339755 /* TopStoriesTableViewController.swift */,
+				0FA3264621D0F6660093507F /* TopStoriesTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -843,7 +809,6 @@
 			children = (
 				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
 				0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */,
-				0F2026EB213343BC009B80CE /* Features */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1114,12 +1079,9 @@
 			files = (
 				0F26DD6921354B3D00E50417 /* 28DC-nafta-thumbLarge.jpg in Resources */,
 				0F4A204921302B1B002543B8 /* top_stories.json in Resources */,
-				0F4A206121316ADD002543B8 /* StoryViewController.storyboard in Resources */,
-				0F4A205421314B80002543B8 /* TopStoriesTableViewController.storyboard in Resources */,
 				0F26DD6821354B3A00E50417 /* 27arizpolitics7-thumbLarge.jpg in Resources */,
 				0F26DD712136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg in Resources */,
 				0FCE5CDF208A85C2001C8FFC /* LaunchScreen.storyboard in Resources */,
-				0F4A205A21316107002543B8 /* TopStoriesTableViewCell.xib in Resources */,
 				0FCE5CDC208A85C2001C8FFC /* Assets.xcassets in Resources */,
 				0F26DD6F2136B2C000E50417 /* 28DC-nafta-superJumbo-v2.jpg in Resources */,
 				0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */,
@@ -1159,8 +1121,8 @@
 				0F16552F212C2680005137B0 /* Result.swift in Sources */,
 				0F3EA4D0212DC1610090A69A /* Parameters.swift in Sources */,
 				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
-				0F4A205821315C54002543B8 /* TopStoriesTableViewCell.swift in Sources */,
 				0F4A204421302372002543B8 /* File.swift in Sources */,
+				0FA3264721D0F6660093507F /* TopStoriesTableViewCell.swift in Sources */,
 				0FC7419A213938DA00E0F254 /* DisposeBag.swift in Sources */,
 				0F0E8A5B2148FFA6000B7268 /* DependencyManager+TopStoriesFactory.swift in Sources */,
 				0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */,
@@ -1169,6 +1131,7 @@
 				0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */,
 				0FC64A472096543D00339755 /* Story.swift in Sources */,
 				0FA5F78D20A5E996009C30B4 /* NetworkManager.swift in Sources */,
+				0FA3264521CB94A00093507F /* StoryView.swift in Sources */,
 				0FCFF04D2147F780009CFE93 /* ErrorPresenter.swift in Sources */,
 				0F3EA4D1212DC1630090A69A /* HTTPMethod.swift in Sources */,
 				0F16552D212C266F005137B0 /* Request.swift in Sources */,
@@ -1184,7 +1147,6 @@
 				0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */,
 				0F3EA4AE212D99CD0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F0E8A592148FF94000B7268 /* DependencyManager+StoryFactory.swift in Sources */,
-				0F4A205C213169FF002543B8 /* UIViewController+Identifiable.swift in Sources */,
 				0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */,
 				0FA5F7A220A877CE009C30B4 /* Decodable+JSON.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
@@ -1212,6 +1174,7 @@
 				0FF77C9F212DF6D80072267A /* Encodable+JSON.swift in Sources */,
 				0F967079216CEB030030DBB8 /* DependencyManagerTest.swift in Sources */,
 				0FA5F79720A5F713009C30B4 /* TopStoriesViewModelTest.swift in Sources */,
+				0FA3264B21D684140093507F /* TopStoriesTableViewCellTest.swift in Sources */,
 				0F20270B21346EAE009B80CE /* ImageManagerMock.swift in Sources */,
 				0F170545212F57E300F87958 /* NetworkErrorTest.swift in Sources */,
 				0F2BA4EA2139902400920537 /* DisposeBagTest.swift in Sources */,
@@ -1221,6 +1184,7 @@
 				0FA5F77920A5BB5F009C30B4 /* CoordinatorMock.swift in Sources */,
 				0FA5F78420A5D2F7009C30B4 /* StoryManagerMock.swift in Sources */,
 				0FA5F78920A5E71A009C30B4 /* TopStoriesManagerMock.swift in Sources */,
+				0FA3264921D683EB0093507F /* StoryViewTest.swift in Sources */,
 				0FA5F78F20A5EE5C009C30B4 /* NetworkManagerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,7 +23,7 @@ final class TopStoriesRobot: Robot {
     }
 
     @discardableResult
-    func forEach(topStories indexes: [Int], _ completion: (TopStoriesRobot, Int) -> ()) -> Self {
+    func forEach(topStories indexes: [Int], _ completion: (TopStoriesRobot, Int) -> Void) -> Self {
         indexes.forEach { index in
             completion(self, index)
         }

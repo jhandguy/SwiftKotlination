@@ -12,7 +12,7 @@ struct TopStoriesFactoryMock {
 
 extension TopStoriesFactoryMock: TopStoriesFactory {
     func makeTopStoriesTableViewController() -> TopStoriesTableViewController {
-        let viewController = TopStoriesTableViewController.storyBoardInstance
+        let viewController = TopStoriesTableViewController()
         viewController.viewModel = TopStoriesViewModel(factory: self)
 
         return viewController

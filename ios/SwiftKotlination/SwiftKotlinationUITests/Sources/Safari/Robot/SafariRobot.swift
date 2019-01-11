@@ -3,7 +3,7 @@ import XCTest
 final class SafariRobot: Robot {
 
     // MARK: - Internal Methods
-    
+
     @discardableResult
     func checkURL(contains string: String) -> Self {
         guard let url = URL(string: string) else {
@@ -25,7 +25,7 @@ final class SafariRobot: Robot {
         }
 
         XCTAssertTrue(value.contains(host))
-        
+
         return self
     }
 

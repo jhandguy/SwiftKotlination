@@ -17,7 +17,7 @@ extension CoordinatorTest.FactoryMock: TopStoriesFactory {
     func makeTopStoriesManager() -> TopStoriesManagerProtocol {
         return topStoriesFactory.makeTopStoriesManager()
     }
-    
+
     func makeTopStoriesTableViewController() -> TopStoriesTableViewController {
         return topStoriesFactory.makeTopStoriesTableViewController()
     }
@@ -27,7 +27,7 @@ extension CoordinatorTest.FactoryMock: StoryFactory {
     func makeStoryManager(for story: Story) -> StoryManagerProtocol {
         return storyFactory.makeStoryManager(for: story)
     }
-    
+
     func makeStoryViewController(for story: Story) -> StoryViewController {
         return storyFactory.makeStoryViewController(for: story)
     }

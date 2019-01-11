@@ -12,14 +12,14 @@ final class StoryViewControllerTest: XCTestCase {
         )
 
         sut = factory.makeStoryViewController(for: story)
-        _ = sut.view
 
+        sut.viewDidLoad()
         sut.viewWillAppear(false)
 
         XCTAssertEqual(sut.title, "\(story.section) - \(story.subsection)")
-        XCTAssertEqual(sut.titleLabel.text, story.title)
-        XCTAssertEqual(sut.abstractLabel.text, story.abstract)
-        XCTAssertEqual(sut.bylineLabel.text, story.byline)
+        XCTAssertEqual(sut.storyView.titleLabel.text, story.title)
+        XCTAssertEqual(sut.storyView.abstractLabel.text, story.abstract)
+        XCTAssertEqual(sut.storyView.bylineLabel.text, story.byline)
     }
 
     func testStoryViewControllerFetchesStoryUnsuccessfully() {
@@ -27,7 +27,8 @@ final class StoryViewControllerTest: XCTestCase {
         let factory = StoryFactoryMock()
 
         sut = factory.makeStoryViewController(for: story)
-        _ = sut.view
+
+        sut.viewDidLoad()
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.makeKeyAndVisible()
@@ -54,14 +55,14 @@ final class StoryViewControllerTest: XCTestCase {
         )
 
         sut = factory.makeStoryViewController(for: story)
-        _ = sut.view
 
+        sut.viewDidLoad()
         sut.viewWillAppear(false)
 
         XCTAssertFalse(sut.disposeBag.disposables.isEmpty)
-        XCTAssertFalse(sut.multimediaImageView.isHidden)
+        XCTAssertFalse(sut.storyView.multimediaImageView.isHidden)
 
-        guard let image = sut.multimediaImageView.image else {
+        guard let image = sut.storyView.multimediaImageView.image else {
             XCTFail("Invalid image view")
             return
         }
@@ -80,11 +81,11 @@ final class StoryViewControllerTest: XCTestCase {
         )
 
         sut = factory.makeStoryViewController(for: story)
-        _ = sut.view
 
+        sut.viewDidLoad()
         sut.viewWillAppear(false)
 
-        XCTAssertTrue(sut.multimediaImageView.isHidden)
+        XCTAssertTrue(sut.storyView.multimediaImageView.isHidden)
     }
 
     func testStoryViewControllerOpensUrlSuccessfully() {
@@ -94,13 +95,13 @@ final class StoryViewControllerTest: XCTestCase {
         )
 
         sut = factory.makeStoryViewController(for: story)
-        _ = sut.view
 
+        sut.viewDidLoad()
         sut.viewWillAppear(false)
 
         let coordinator = CoordinatorMock()
         sut.coordinator = coordinator
-        sut.urlButton.sendActions(for: .touchUpInside)
+        sut.storyView.urlButton.sendActions(for: .touchUpInside)
         XCTAssertTrue(coordinator.isUrlOpened)
     }
 }

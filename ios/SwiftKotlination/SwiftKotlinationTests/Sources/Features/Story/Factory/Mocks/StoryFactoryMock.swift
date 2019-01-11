@@ -16,7 +16,7 @@ extension StoryFactoryMock: StoryFactory {
     }
 
     func makeStoryViewController(for story: Story) -> StoryViewController {
-        let viewController = StoryViewController.storyBoardInstance
+        let viewController = StoryViewController()
         viewController.viewModel = StoryViewModel(factory: self, story: story)
 
         return viewController
