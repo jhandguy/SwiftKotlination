@@ -4,6 +4,7 @@ android/SwiftKotlination/.idea
 
 fastlane/test_output
 fastlane/report.xml
+fastlane/screenshots
 
 .bundle
 vendor
