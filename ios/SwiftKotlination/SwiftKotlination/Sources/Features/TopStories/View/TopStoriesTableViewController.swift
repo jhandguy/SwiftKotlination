@@ -30,9 +30,9 @@ final class TopStoriesTableViewController: UITableViewController {
             .stories { [weak self] result in
                 switch result {
                 case .success:
-                    runOnMainThread {
-                        self?.tableView.reloadData()
-                        self?.refreshControl?.endRefreshing()
+                    self?.runOnMainThread {
+                        $0.tableView.reloadData()
+                        $0.refreshControl?.endRefreshing()
                     }
                 case .failure(let error):
                     self?.present(error)
@@ -89,14 +89,14 @@ final class TopStoriesTableViewController: UITableViewController {
             .image(with: url) { result in
                 switch result {
                 case .success(let image):
-                    runOnMainThread {
-                        cell.multimediaImageView.image = image
-                        cell.multimediaImageView.isHidden = false
+                    cell.runOnMainThread {
+                        $0.multimediaImageView.image = image
+                        $0.multimediaImageView.isHidden = false
                     }
 
                 case .failure:
-                    runOnMainThread {
-                        cell.multimediaImageView.isHidden = true
+                    cell.runOnMainThread {
+                        $0.multimediaImageView.isHidden = true
                     }
                 }
             }?.disposed(by: disposeBag)
@@ -106,9 +106,9 @@ final class TopStoriesTableViewController: UITableViewController {
 
     private func present(_ error: Error) {
         let presenter = ErrorPresenter(error: error)
-        presenter.present(in: self, animated: true) {
-            runOnMainThread { [weak self] in
-                self?.refreshControl?.endRefreshing()
+        presenter.present(in: self, animated: true) { [weak self] in
+            self?.runOnMainThread {
+                $0.refreshControl?.endRefreshing()
             }
         }
     }

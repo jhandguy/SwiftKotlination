@@ -64,14 +64,14 @@ final class StoryViewController: UIViewController {
             .image(with: url) { [weak self] result in
                 switch result {
                 case .success(let image):
-                    runOnMainThread {
-                        self?.storyView.multimediaImageView.image = image
-                        self?.storyView.multimediaImageView.isHidden = false
+                    self?.runOnMainThread {
+                        $0.storyView.multimediaImageView.image = image
+                        $0.storyView.multimediaImageView.isHidden = false
                     }
 
                 case .failure:
-                    runOnMainThread {
-                        self?.storyView.multimediaImageView.isHidden = true
+                    self?.runOnMainThread {
+                        $0.storyView.multimediaImageView.isHidden = true
                     }
                 }
             }?.disposed(by: disposeBag)

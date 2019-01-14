@@ -22,95 +22,67 @@ final class StoryView: UIView {
 
     // MARK: - Private Properties
 
-    private lazy var scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            view.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-            view.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            view.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
+    private lazy var scrollView = UIScrollView().with {
+        addSubview($0)
+        $0.activate(constraints: [
+            $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            $0.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
+            $0.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
-        view.showsVerticalScrollIndicator = true
+        $0.showsVerticalScrollIndicator = true
+    }
 
-        return view
-    }()
-
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(view)
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
-            view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8),
-            view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
-            view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 8),
-            view.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16)
+    private lazy var stackView = UIStackView().with {
+        scrollView.addSubview($0)
+        $0.activate(constraints: [
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8),
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8),
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
+            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 8),
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16)
         ])
-        view.axis = .vertical
-        view.alignment = .fill
-        view.distribution = .fill
-        view.spacing = 28
-
-        return view
-    }()
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 28
+    }
 
     // MARK: - Internal Properties
 
-    lazy var multimediaImageView: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(view)
-        NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 2/3)
+    lazy var multimediaImageView = UIImageView().with {
+        stackView.addArrangedSubview($0)
+        $0.activate(constraints: [
+            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 2/3)
         ])
-        view.isHidden = true
+        $0.isHidden = true
+    }
 
-        return view
-    }()
+    lazy var titleLabel = UILabel().with {
+        stackView.addArrangedSubview($0)
+        $0.textAlignment = .center
+        $0.font = UIFont.preferredFont(forTextStyle: .title1)
+        $0.numberOfLines = 0
+    }
 
-    lazy var titleLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(view)
-        view.textAlignment = .center
-        view.font = UIFont.preferredFont(forTextStyle: .title1)
-        view.numberOfLines = 0
+    lazy var abstractLabel = UILabel().with {
+        stackView.addArrangedSubview($0)
+        $0.textAlignment = .justified
+        $0.font = UIFont.preferredFont(forTextStyle: .body)
+        $0.numberOfLines = 0
+    }
 
-        return view
-    }()
+    lazy var bylineLabel = UILabel().with {
+        stackView.addArrangedSubview($0)
+        $0.textAlignment = .justified
+        $0.font = UIFont.preferredFont(forTextStyle: .footnote)
+        $0.numberOfLines = 0
+    }
 
-    lazy var abstractLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(view)
-        view.textAlignment = .justified
-        view.font = UIFont.preferredFont(forTextStyle: .body)
-        view.numberOfLines = 0
-
-        return view
-    }()
-
-    lazy var bylineLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(view)
-        view.textAlignment = .justified
-        view.font = UIFont.preferredFont(forTextStyle: .footnote)
-        view.numberOfLines = 0
-
-        return view
-    }()
-
-    lazy var urlButton: UIButton = {
-        let view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(view)
-        view.setTitleColor(tintColor, for: .normal)
-        view.contentHorizontalAlignment = .right
-        view.setTitle("Read more...", for: .normal)
-
-        return view
-    }()
+    lazy var urlButton = UIButton().with {
+        stackView.addArrangedSubview($0)
+        $0.setTitleColor(tintColor, for: .normal)
+        $0.contentHorizontalAlignment = .right
+        $0.setTitle("Read more...", for: .normal)
+    }
 }

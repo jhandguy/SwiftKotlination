@@ -1,3 +1,5 @@
+import UIKit
+
 protocol Identifiable {
     static var identifier: String { get }
 }
@@ -7,3 +9,5 @@ extension Identifiable {
         return String(describing: self)
     }
 }
+
+extension UITableViewCell: Identifiable {}

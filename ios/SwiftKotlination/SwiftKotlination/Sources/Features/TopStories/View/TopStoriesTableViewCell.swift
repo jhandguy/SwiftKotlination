@@ -20,67 +20,47 @@ final class TopStoriesTableViewCell: UITableViewCell {
 
     // MARK: - Private Attributes
 
-    private lazy var contentStackView: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(view)
-        NSLayoutConstraint.activate([
-            view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8)
+    private lazy var contentStackView = UIStackView().with {
+        contentView.addSubview($0)
+        $0.activate(constraints: [
+            $0.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            $0.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8)
         ])
-        view.axis = .horizontal
-        view.alignment = .fill
-        view.distribution = .fill
-        view.spacing = 8
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fill
+        $0.spacing = 8
+    }
 
-        return view
-    }()
-
-    private lazy var descriptionStackView: UIStackView = {
-        let view = UIStackView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.addArrangedSubview(view)
-        view.axis = .vertical
-        view.alignment = .fill
-        view.distribution = .fillProportionally
-        view.spacing = 0
-
-        return view
-    }()
+    private lazy var descriptionStackView = UIStackView().with {
+        contentStackView.addArrangedSubview($0)
+        $0.axis = .vertical
+        $0.alignment = .fill
+        $0.distribution = .fillProportionally
+        $0.spacing = 0
+    }
 
     // MARK: - Internal Attributes
 
-    private(set) lazy var multimediaImageView: UIImageView = {
-        let view = UIImageView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.addArrangedSubview(view)
-        NSLayoutConstraint.activate([
-            view.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/1)
+    private(set) lazy var multimediaImageView = UIImageView().with {
+        contentStackView.addArrangedSubview($0)
+        $0.activate(constraints: [
+            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 1/1)
         ])
-        view.isHidden = true
+        $0.isHidden = true
+    }
 
-        return view
-    }()
+    private(set) lazy var titleLabel = UILabel().with {
+        descriptionStackView.addArrangedSubview($0)
+        $0.font = UIFont.preferredFont(forTextStyle: .headline)
+        $0.numberOfLines = 0
+    }
 
-    private(set) lazy var titleLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        descriptionStackView.addArrangedSubview(view)
-        view.font = UIFont.preferredFont(forTextStyle: .headline)
-        view.numberOfLines = 0
-
-        return view
-    }()
-
-    private(set) lazy var bylineLabel: UILabel = {
-        let view = UILabel()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        descriptionStackView.addArrangedSubview(view)
-        view.font = UIFont.preferredFont(forTextStyle: .footnote)
-        view.numberOfLines = 0
-
-        return view
-    }()
+    private(set) lazy var bylineLabel = UILabel().with {
+        descriptionStackView.addArrangedSubview($0)
+        $0.font = UIFont.preferredFont(forTextStyle: .footnote)
+        $0.numberOfLines = 0
+    }
 }
