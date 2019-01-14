@@ -15,7 +15,7 @@ final class NetworkManager {
 
     // MARK: - Initializer
 
-    init(session: URLSessionProtocol, observables: [Request: [UUID: Observer<Data>]] = [:]) {
+    init(session: URLSessionProtocol = URLSession(configuration: .default), observables: [Request: [UUID: Observer<Data>]] = [:]) {
         self.session = session
         self.observables = observables
     }

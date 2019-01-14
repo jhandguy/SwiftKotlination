@@ -43,6 +43,22 @@ final class ImageManagerTest: XCTestCase {
         }
     }
 
+    func testImageManagerFetchesInvalidImageUnsuccessfully() {
+        let data = Data()
+        let networkManager = NetworkManagerMock(result: .success(data))
+        sut = ImageManager(networkManager: networkManager)
+        sut
+            .image(with: "url") { result in
+                switch result {
+                case .success(let image):
+                    XCTFail("Fetch Image should fail, found image \(image)")
+
+                case .failure(let error):
+                    XCTAssertEqual(error as? NetworkError, .invalidData)
+                }
+        }
+    }
+
     func testImageManagerFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() {
         guard
             let data = File("27arizpolitics7-thumbLarge", .jpg).data,

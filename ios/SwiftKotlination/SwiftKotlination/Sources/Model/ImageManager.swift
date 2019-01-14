@@ -19,7 +19,7 @@ extension ImageManager: ImageManagerProtocol {
                 switch result {
                 case .success(let data):
                     guard let image = UIImage(data: data) else {
-                        observer(.failure(NetworkError.invalidResponse))
+                        observer(.failure(NetworkError.invalidData))
                         return
                     }
 

@@ -1,4 +1,5 @@
 enum NetworkError: String, ErrorStringConvertible, Codable {
+    case invalidData
     case invalidResponse
     case invalidRequest
 
@@ -8,6 +9,8 @@ enum NetworkError: String, ErrorStringConvertible, Codable {
             return "Invalid request, please try again later."
         case .invalidResponse:
             return "Invalid response, please try again later."
+        case .invalidData:
+            return "Invalid data, please try again later."
         }
     }
 }

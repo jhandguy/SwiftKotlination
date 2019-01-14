@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIView.setAnimationsEnabled(animationStub.areAnimationsEnabled)
         }
 
-        let session: URLSessionProtocol = decode(URLSessionMock.self) ?? URLSession(configuration: URLSessionConfiguration.default)
+        let session: URLSessionProtocol = decode(URLSessionMock.self) ?? URLSession(configuration: .default)
         let networkManager = NetworkManager(session: session)
         let factory = DependencyManager(networkManager: networkManager)
         let window = UIWindow(frame: UIScreen.main.bounds)
