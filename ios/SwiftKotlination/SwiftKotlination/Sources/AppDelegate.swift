@@ -10,15 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Lifecycle Methods
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        let session: URLSessionProtocol
-        if
-            let encodedSessionMock = ProcessInfo.processInfo.environment[URLSessionMock.identifier],
-            let sessionMock = URLSessionMock.decode(from: encodedSessionMock) {
-
-            session = sessionMock
-        } else {
-            session = URLSession(configuration: URLSessionConfiguration.default)
+        if let animationStub = decode(AnimationStub.self) {
+            UIView.setAnimationsEnabled(animationStub.areAnimationsEnabled)
         }
+
+        let session: URLSessionProtocol = decode(URLSessionMock.self) ?? URLSession(configuration: URLSessionConfiguration.default)
         let networkManager = NetworkManager(session: session)
         let factory = DependencyManager(networkManager: networkManager)
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -29,12 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        guard
-            let encodedCoordinatorStub = ProcessInfo.processInfo.environment[CoordinatorStub.identifier],
-            let coordinatorStub = CoordinatorStub.decode(from: encodedCoordinatorStub) else {
-
-                coordinator.start()
-                return true
+        guard let coordinatorStub = decode(CoordinatorStub.self) else {
+            coordinator.start()
+            return true
         }
 
         switch coordinatorStub {
@@ -47,5 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
+    }
+
+    // Private Methods
+
+    private func decode<T: Identifiable & Decodable>(_: T.Type) -> T? {
+        guard
+            let processInfo = ProcessInfo.processInfo.environment[T.identifier],
+            let codable = T.decode(from: processInfo) else {
+                return nil
+        }
+
+        return codable
     }
 }

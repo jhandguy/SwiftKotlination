@@ -48,11 +48,13 @@ final class StoryViewController: UIViewController {
             .filter { !$0.isEmpty }
             .joined(separator: " - ")
 
-        storyView.titleLabel.text = story.title
-        storyView.abstractLabel.text = story.abstract
-        storyView.bylineLabel.text = story.byline
-        storyView.urlButton.on(.touchUpInside) { [weak self] in
-            self?.coordinator?.open(story.url)
+        storyView.apply {
+            $0.titleLabel.text = story.title
+            $0.abstractLabel.text = story.abstract
+            $0.bylineLabel.text = story.byline
+            $0.urlButton.on(.touchUpInside) { [weak self] in
+                self?.coordinator?.open(story.url)
+            }
         }
 
         guard let url = story.imageUrl(.large) else {
@@ -64,13 +66,13 @@ final class StoryViewController: UIViewController {
             .image(with: url) { [weak self] result in
                 switch result {
                 case .success(let image):
-                    self?.runOnMainThread {
+                    self?.apply(onMainThread: true) {
                         $0.storyView.multimediaImageView.image = image
                         $0.storyView.multimediaImageView.isHidden = false
                     }
 
                 case .failure:
-                    self?.runOnMainThread {
+                    self?.apply(onMainThread: true) {
                         $0.storyView.multimediaImageView.isHidden = true
                     }
                 }

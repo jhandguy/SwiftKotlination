@@ -36,6 +36,10 @@
 		0F26DD732136B3D900E50417 /* 28trump-endorsements1-superJumbo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */; };
 		0F29A34121ECA141000A7D7A /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34021ECA141000A7D7A /* UIView+Constraints.swift */; };
 		0F29A34221ECAABE000A7D7A /* Scopable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA0B8CC21EC949D000DE23F /* Scopable.swift */; };
+		0F29A34821ECD261000A7D7A /* AnimationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34721ECD261000A7D7A /* AnimationStub.swift */; };
+		0F29A34921ECD388000A7D7A /* AnimationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34721ECD261000A7D7A /* AnimationStub.swift */; };
+		0F29A34F21ECD67B000A7D7A /* AnimationStub+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */; };
+		0F29A35021ECD875000A7D7A /* AnimationStub+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34C21ECD670000A7D7A /* AnimationStub+Decodable.swift */; };
 		0F2BA4EA2139902400920537 /* DisposeBagTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2BA4E92139902400920537 /* DisposeBagTest.swift */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
@@ -160,6 +164,9 @@
 		0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "27arizpolitics7-superJumbo-v2.jpg"; sourceTree = "<group>"; };
 		0F26DD722136B3D800E50417 /* 28trump-endorsements1-superJumbo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "28trump-endorsements1-superJumbo.jpg"; sourceTree = "<group>"; };
 		0F29A34021ECA141000A7D7A /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		0F29A34721ECD261000A7D7A /* AnimationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStub.swift; sourceTree = "<group>"; };
+		0F29A34C21ECD670000A7D7A /* AnimationStub+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationStub+Decodable.swift"; sourceTree = "<group>"; };
+		0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationStub+Encodable.swift"; sourceTree = "<group>"; };
 		0F2BA4E92139902400920537 /* DisposeBagTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBagTest.swift; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
@@ -359,6 +366,7 @@
 		0F2026F6213345D9009B80CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0F29A34B21ECD635000A7D7A /* AnimationStub */,
 				0F3EA4D9212DC5F80090A69A /* Codable */,
 				0F2026F7213345F5009B80CE /* CoordinatorStub */,
 				0FA5F79C20A8774F009C30B4 /* XCUIApplication */,
@@ -479,6 +487,31 @@
 				0F29A34021ECA141000A7D7A /* UIView+Constraints.swift */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		0F29A34621ECD205000A7D7A /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				0F29A34A21ECD5FF000A7D7A /* Stubs */,
+			);
+			path = Animation;
+			sourceTree = "<group>";
+		};
+		0F29A34A21ECD5FF000A7D7A /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				0F29A34721ECD261000A7D7A /* AnimationStub.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		0F29A34B21ECD635000A7D7A /* AnimationStub */ = {
+			isa = PBXGroup;
+			children = (
+				0F29A34C21ECD670000A7D7A /* AnimationStub+Decodable.swift */,
+				0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */,
+			);
+			path = AnimationStub;
 			sourceTree = "<group>";
 		};
 		0F2BA4E82139900800920537 /* Observer */ = {
@@ -663,6 +696,7 @@
 		0FA5F79A20A87740009C30B4 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0F29A34621ECD205000A7D7A /* Animation */,
 				0F22CA7D21AED11B00914927 /* Robot */,
 				0F3EA4A6212D8EF10090A69A /* Coordinator */,
 				0F2026F6213345D9009B80CE /* Extensions */,
@@ -1138,12 +1172,14 @@
 				0F2027002133DE17009B80CE /* ImageManager.swift in Sources */,
 				0FBB65C320A393C20090B77F /* StoryViewModel.swift in Sources */,
 				0FA0B8CD21EC949D000DE23F /* Scopable.swift in Sources */,
+				0F29A35021ECD875000A7D7A /* AnimationStub+Decodable.swift in Sources */,
 				0F3EA4AE212D99CD0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F0E8A592148FF94000B7268 /* DependencyManager+StoryFactory.swift in Sources */,
 				0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */,
 				0FA5F7A220A877CE009C30B4 /* Decodable+JSON.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
 				0F4A204D213030F5002543B8 /* Response.swift in Sources */,
+				0F29A34921ECD388000A7D7A /* AnimationStub.swift in Sources */,
 				0F0E8A572148FF5F000B7268 /* DependencyManager+ImageFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1209,9 +1245,11 @@
 				0F22CA8321AED1D800914927 /* StoryRobot.swift in Sources */,
 				0F3EA4E0212DF1DD0090A69A /* Identifiable.swift in Sources */,
 				0FA5F79920A8770C009C30B4 /* StoryUITest.swift in Sources */,
+				0F29A34F21ECD67B000A7D7A /* AnimationStub+Encodable.swift in Sources */,
 				0FA5F7A720A87894009C30B4 /* Story.swift in Sources */,
 				0F22CA8721AEED9800914927 /* Predicate.swift in Sources */,
 				0F202707213469A9009B80CE /* Mutlimedia.swift in Sources */,
+				0F29A34821ECD261000A7D7A /* AnimationStub.swift in Sources */,
 				0F3EA4E6212DF3D90090A69A /* CoordinatorStub+Encodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

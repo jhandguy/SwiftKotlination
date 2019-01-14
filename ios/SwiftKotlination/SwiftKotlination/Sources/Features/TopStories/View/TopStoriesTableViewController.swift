@@ -17,9 +17,10 @@ final class TopStoriesTableViewController: UITableViewController {
 
         tableView.register(TopStoriesTableViewCell.self)
 
-        refreshControl = UIRefreshControl()
-        refreshControl?.on(.valueChanged) { [weak self] in
-            self?.viewModel.refresh()
+        refreshControl = UIRefreshControl().with {
+            $0.on(.valueChanged) { [weak self] in
+                self?.viewModel.refresh()
+            }
         }
     }
 
@@ -30,7 +31,7 @@ final class TopStoriesTableViewController: UITableViewController {
             .stories { [weak self] result in
                 switch result {
                 case .success:
-                    self?.runOnMainThread {
+                    self?.apply(onMainThread: true) {
                         $0.tableView.reloadData()
                         $0.refreshControl?.endRefreshing()
                     }
@@ -77,8 +78,10 @@ final class TopStoriesTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func bind(_ story: Story, with cell: TopStoriesTableViewCell) -> TopStoriesTableViewCell {
-        cell.titleLabel.text = story.title
-        cell.bylineLabel.text = story.byline
+        cell.apply {
+            $0.titleLabel.text = story.title
+            $0.bylineLabel.text = story.byline
+        }
 
         guard let url = story.imageUrl(.small) else {
             cell.multimediaImageView.isHidden = true
@@ -89,13 +92,13 @@ final class TopStoriesTableViewController: UITableViewController {
             .image(with: url) { result in
                 switch result {
                 case .success(let image):
-                    cell.runOnMainThread {
+                    cell.apply(onMainThread: true) {
                         $0.multimediaImageView.image = image
                         $0.multimediaImageView.isHidden = false
                     }
 
                 case .failure:
-                    cell.runOnMainThread {
+                    cell.apply(onMainThread: true) {
                         $0.multimediaImageView.isHidden = true
                     }
                 }
@@ -107,7 +110,7 @@ final class TopStoriesTableViewController: UITableViewController {
     private func present(_ error: Error) {
         let presenter = ErrorPresenter(error: error)
         presenter.present(in: self, animated: true) { [weak self] in
-            self?.runOnMainThread {
+            self?.apply(onMainThread: true) {
                 $0.refreshControl?.endRefreshing()
             }
         }
