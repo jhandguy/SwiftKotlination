@@ -58,6 +58,30 @@ final class TopStoriesManagerTest: XCTestCase {
         }
     }
 
+    func testTopStoriesManagerFetchesInvalidDataUnsuccessfully() {
+        let networkManager = NetworkManagerMock(result: .success(Data()))
+        sut = TopStoriesManager(networkManager: networkManager)
+        sut
+            .stories { result in
+                switch result {
+                case .success(let stories):
+                    XCTFail("Fetch TopStories should fail, found stories \(stories)")
+
+                case .failure(let error):
+                    guard let error = error as? DecodingError else {
+                        XCTFail("Expected error to be a DecodingError")
+                        return
+                    }
+                    switch error {
+                    case .dataCorrupted:
+                        break
+                    default:
+                        XCTFail("Expected decoding error to be dataCorrupted, found \(error)")
+                    }
+                }
+        }
+    }
+
     func testTopStoriesManagerFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() {
         let topStories = TopStories(
             results: [

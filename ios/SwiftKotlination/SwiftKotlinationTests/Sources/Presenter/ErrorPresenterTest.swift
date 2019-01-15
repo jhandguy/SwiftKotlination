@@ -6,7 +6,7 @@ final class ErrorPresenterTest: XCTestCase {
     var sut: ErrorPresenter!
 
     func testErrorPresenterPresentsAlertControllerSuccessfully() {
-        let error: NetworkError = .invalidResponse
+        let error: NetworkError = .invalidData
         sut = ErrorPresenter(error: error)
 
         let viewController = UIViewController()
