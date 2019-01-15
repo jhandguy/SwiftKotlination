@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    // Private Methods
+    // MARK: - Private Methods
 
     private func decode<T: Identifiable & Decodable>(_: T.Type) -> T? {
         guard
