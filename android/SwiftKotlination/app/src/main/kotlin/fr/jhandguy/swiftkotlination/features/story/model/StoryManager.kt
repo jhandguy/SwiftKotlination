@@ -7,6 +7,6 @@ interface StoryManagerInterface {
     suspend fun story(observer: Observer<Story>)
 }
 
-class StoryManager(private val story: Story): StoryManagerInterface {
+class StoryManager(private val story: Story) : StoryManagerInterface {
     override suspend fun story(observer: Observer<Story>) = observer(Result.Success(story))
 }

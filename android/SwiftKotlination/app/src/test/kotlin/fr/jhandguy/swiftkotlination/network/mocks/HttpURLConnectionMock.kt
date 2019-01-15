@@ -5,7 +5,7 @@ import fr.jhandguy.swiftkotlination.network.NetworkError
 import java.io.InputStream
 import java.net.HttpURLConnection
 
-class HttpURLConnectionMock(val file: File?, val error: NetworkError?): HttpURLConnection(null) {
+class HttpURLConnectionMock(val file: File?, val error: NetworkError?) : HttpURLConnection(null) {
     var isConnected: Boolean = false
 
     override fun usingProxy(): Boolean = false

@@ -11,12 +11,12 @@ import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.serialization.json.JSON
 import org.jetbrains.anko.setContentView
 
-class StoryActivity: AppCompatActivity() {
+class StoryActivity : AppCompatActivity() {
 
-    private val factory: StoryFactory   by lazy {  (application as App).factory }
-    private val coordinator             by lazy {  factory.makeCoordinator(this) }
-    private val viewModel               by lazy {  factory.makeStoryViewModel(JSON.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
-    private val view                    by lazy {  StoryView(this, viewModel, coordinator, disposeBag) }
+    private val factory: StoryFactory by lazy { (application as App).factory }
+    private val coordinator by lazy { factory.makeCoordinator(this) }
+    private val viewModel by lazy { factory.makeStoryViewModel(JSON.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
+    private val view by lazy { StoryView(this, viewModel, coordinator, disposeBag) }
     private val disposeBag = DisposeBag()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class StoryActivity: AppCompatActivity() {
         launch {
             viewModel.story { result ->
                 runOnUiThread {
-                    when(result) {
+                    when (result) {
                         is Result.Success -> {
                             title = arrayOf(result.data.section, result.data.subsection)
                                     .filter { it.isNotEmpty() }

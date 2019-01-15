@@ -25,7 +25,7 @@ class TopStoriesManagerUnitTest {
 
         runBlocking {
             sut.topStories { result ->
-                when(result) {
+                when (result) {
                     is Result.Success -> assertEquals(result.data, topStories)
                     is Result.Failure -> fail(result.error.message)
                 }
@@ -48,7 +48,7 @@ class TopStoriesManagerUnitTest {
             var times = 0
 
             sut.topStories { result ->
-                when(result) {
+                when (result) {
                     is Result.Success -> assertEquals(result.data, topStories)
                     is Result.Failure -> fail(result.error.message)
                 }
@@ -71,7 +71,7 @@ class TopStoriesManagerUnitTest {
 
         runBlocking {
             sut.topStories { result ->
-                when(result) {
+                when (result) {
                     is Result.Success -> fail("Coroutine should throw error")
                     is Result.Failure -> assertEquals(result.error.message, error.message)
                 }

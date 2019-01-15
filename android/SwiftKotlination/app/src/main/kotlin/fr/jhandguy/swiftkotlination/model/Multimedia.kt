@@ -1,6 +1,10 @@
 package fr.jhandguy.swiftkotlination.model
 
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
@@ -8,11 +12,11 @@ import kotlinx.serialization.json.JsonObject
 @Serializable
 data class Multimedia(val url: String = "", val format: Format = Format.Small) {
     sealed class Format(val name: String) {
-        object Icon:    Format("Standard Thumbnail")
-        object Small:   Format("thumbLarge")
-        object Normal:  Format("Normal")
-        object Medium:  Format("mediumThreeByTwo210")
-        object Large:   Format("superJumbo")
+        object Icon : Format("Standard Thumbnail")
+        object Small : Format("thumbLarge")
+        object Normal : Format("Normal")
+        object Medium : Format("mediumThreeByTwo210")
+        object Large : Format("superJumbo")
     }
 
     @Serializer(forClass = Multimedia::class)
@@ -22,8 +26,8 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
                     ?: throw SerializationException("Expected JSON output")
 
             val jsonObject = JsonObject(mapOf(
-                    "url"       to JsonLiteral(obj.url),
-                    "format"    to JsonLiteral(obj.format.name)
+                    "url" to JsonLiteral(obj.url),
+                    "format" to JsonLiteral(obj.format.name)
             ))
 
             jsonOutput.writeTree(jsonObject)
@@ -35,10 +39,10 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
             val jsonObject = jsonInput.readAsTree() as? JsonObject
                     ?: throw SerializationException("Expected JSON object")
 
-            val url =           jsonObject.getPrimitive("url").content
-            val formatName =    jsonObject.getPrimitive("format").content
+            val url = jsonObject.getPrimitive("url").content
+            val formatName = jsonObject.getPrimitive("format").content
 
-            val format = when(formatName) {
+            val format = when (formatName) {
                 Format.Icon.name -> Format.Icon
                 Format.Small.name -> Format.Small
                 Format.Normal.name -> Format.Normal

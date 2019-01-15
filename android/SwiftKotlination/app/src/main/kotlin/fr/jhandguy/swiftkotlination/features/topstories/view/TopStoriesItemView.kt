@@ -5,8 +5,17 @@ import android.graphics.Typeface.DEFAULT_BOLD
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintSet
 import fr.jhandguy.swiftkotlination.R
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.constraint.layout.constraintLayout
+import org.jetbrains.anko.dip
+import org.jetbrains.anko.imageView
+import org.jetbrains.anko.matchParent
+import org.jetbrains.anko.padding
+import org.jetbrains.anko.sp
+import org.jetbrains.anko.textColorResource
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.wrapContent
 
 class TopStoriesItemView : AnkoComponent<Context> {
 

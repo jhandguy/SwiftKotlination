@@ -9,13 +9,13 @@ import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import org.jetbrains.anko.setContentView
 
-class TopStoriesActivity: AppCompatActivity() {
+class TopStoriesActivity : AppCompatActivity() {
 
-    private val factory: TopStoriesFactory  by lazy { (application as App).factory }
-    private val coordinator                 by lazy {  factory.makeCoordinator(this) }
-    private val viewModel                   by lazy {  factory.makeTopStoriesViewModel() }
-    private val adapter                     by lazy {  TopStoriesAdapter(this, viewModel, coordinator) }
-    private val view                        by lazy {  TopStoriesView(adapter, viewModel) }
+    private val factory: TopStoriesFactory by lazy { (application as App).factory }
+    private val coordinator by lazy { factory.makeCoordinator(this) }
+    private val viewModel by lazy { factory.makeTopStoriesViewModel() }
+    private val adapter by lazy { TopStoriesAdapter(this, viewModel, coordinator) }
+    private val view by lazy { TopStoriesView(adapter, viewModel) }
     private val disposeBag = DisposeBag()
 
     override fun onCreate(savedInstanceState: Bundle?) {

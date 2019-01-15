@@ -14,10 +14,26 @@ import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.model.Multimedia
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoComponent
+import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.allCaps
+import org.jetbrains.anko.backgroundColor
+import org.jetbrains.anko.button
 import org.jetbrains.anko.constraint.layout.constraintLayout
+import org.jetbrains.anko.dip
+import org.jetbrains.anko.imageBitmap
+import org.jetbrains.anko.imageView
+import org.jetbrains.anko.matchParent
+import org.jetbrains.anko.padding
+import org.jetbrains.anko.scrollView
+import org.jetbrains.anko.sp
+import org.jetbrains.anko.textColorResource
+import org.jetbrains.anko.textResource
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.wrapContent
 
-class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, val disposeBag: DisposeBag, var story: Story = Story()): AnkoComponent<Context> {
+class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, val disposeBag: DisposeBag, var story: Story = Story()) :
+    AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return scrollView {

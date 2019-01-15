@@ -4,7 +4,7 @@ import fr.jhandguy.swiftkotlination.network.Response
 import java.net.URL
 import java.net.URLConnection
 import java.net.URLStreamHandler
-import java.util.*
+import java.util.Stack
 
 class URLStreamHandlerMock(val responses: Stack<Response>) : URLStreamHandler() {
     init {

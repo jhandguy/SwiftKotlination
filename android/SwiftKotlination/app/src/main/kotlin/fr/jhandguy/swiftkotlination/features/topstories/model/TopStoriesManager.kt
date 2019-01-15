@@ -12,10 +12,10 @@ interface TopStoriesManagerInterface {
     suspend fun fetchStories()
 }
 
-class TopStoriesManager(private val networkManager: NetworkManagerInterface): TopStoriesManagerInterface {
+class TopStoriesManager(private val networkManager: NetworkManagerInterface) : TopStoriesManagerInterface {
     override suspend fun topStories(observer: Observer<TopStories>) =
             networkManager.observe(Request.FetchTopStories) { result ->
-                when(result) {
+                when (result) {
                     is Result.Success -> observer(Result.Success(JSON(strictMode = false).parse(TopStories.serializer(), String(result.data))))
                     is Result.Failure -> observer(result)
                 }

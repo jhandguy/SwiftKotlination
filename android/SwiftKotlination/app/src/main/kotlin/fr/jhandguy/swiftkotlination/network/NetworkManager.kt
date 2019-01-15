@@ -6,7 +6,7 @@ import fr.jhandguy.swiftkotlination.observer.Result
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLStreamHandler
-import java.util.*
+import java.util.UUID
 import kotlin.collections.HashMap
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -16,7 +16,7 @@ interface NetworkManagerInterface {
     suspend fun execute(request: Request)
 }
 
-class NetworkManager(val handler: URLStreamHandler? = null, var observables: MutableMap<Request, MutableMap<UUID, Observer<ByteArray>>> = HashMap()): NetworkManagerInterface {
+class NetworkManager(val handler: URLStreamHandler? = null, var observables: MutableMap<Request, MutableMap<UUID, Observer<ByteArray>>> = HashMap()) : NetworkManagerInterface {
 
     private suspend fun execute(request: Request, observers: List<Observer<ByteArray>>) {
         if (observers.isEmpty()) { return }
@@ -35,7 +35,7 @@ class NetworkManager(val handler: URLStreamHandler? = null, var observables: Mut
 
     private suspend fun build(request: Request): HttpURLConnection? = suspendCoroutine { continuation ->
         try {
-            val urlWithParameters = request.url + when(request.parameters) {
+            val urlWithParameters = request.url + when (request.parameters) {
                 is Parameters.Url -> "?${(request.parameters as Parameters.Url).url.joinToString("&") { (key, value) -> "$key=$value" }}"
                 else -> ""
             }
@@ -43,14 +43,13 @@ class NetworkManager(val handler: URLStreamHandler? = null, var observables: Mut
             val connection = url.openConnection() as HttpURLConnection
             connection.apply {
                 requestMethod = request.method.name
-                when(request.parameters) {
+                when (request.parameters) {
                     is Parameters.Body -> outputStream.write((request.parameters as Parameters.Body).body.toString().toByteArray())
                     else -> {}
                 }
             }
             continuation.resume(connection)
-
-        } catch(e: Exception) {
+        } catch (e: Exception) {
             continuation.resume(null)
         }
     }

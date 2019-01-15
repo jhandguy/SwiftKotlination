@@ -7,7 +7,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-open class App: Application() {
+open class App : Application() {
     lateinit var factory: DependencyManager
 
     override fun onCreate() {

@@ -23,7 +23,7 @@ class StoryManagerUnitTest {
         runBlocking {
             sut
                     .story { result ->
-                        when(result) {
+                        when (result) {
                             is Result.Success -> assertEquals(result.data, story)
                             is Result.Failure -> fail(result.error.message)
                         }

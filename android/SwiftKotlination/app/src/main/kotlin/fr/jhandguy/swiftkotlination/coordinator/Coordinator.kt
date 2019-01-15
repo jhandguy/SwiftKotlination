@@ -15,7 +15,7 @@ interface CoordinatorInterface {
     fun finish()
 }
 
-class Coordinator(val activity: Activity): CoordinatorInterface {
+class Coordinator(val activity: Activity) : CoordinatorInterface {
 
     override fun start(): Intent {
         val intent = Intent(activity, TopStoriesActivity::class.java)

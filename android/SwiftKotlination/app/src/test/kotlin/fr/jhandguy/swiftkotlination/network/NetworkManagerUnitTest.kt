@@ -7,10 +7,10 @@ import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JSON
+import java.util.Stack
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import kotlin.test.Test
-import java.util.*
 
 class NetworkManagerUnitTest {
 

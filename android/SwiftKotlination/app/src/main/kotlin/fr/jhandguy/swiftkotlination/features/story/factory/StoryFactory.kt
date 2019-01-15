@@ -6,7 +6,7 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
 import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 
-interface StoryFactory: CoordinatorFactory, ImageFactory {
+interface StoryFactory : CoordinatorFactory, ImageFactory {
     fun makeStoryManager(story: Story): StoryManagerInterface
     fun makeStoryViewModel(story: Story): StoryViewModel
 }

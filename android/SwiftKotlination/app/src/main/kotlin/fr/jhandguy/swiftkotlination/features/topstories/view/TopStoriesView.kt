@@ -14,7 +14,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 import org.jetbrains.anko.support.v4.onRefresh
 import org.jetbrains.anko.support.v4.swipeRefreshLayout
 
-class TopStoriesView(var adapter: TopStoriesAdapter, var viewModel: TopStoriesViewModel): AnkoComponent<Context> {
+class TopStoriesView(var adapter: TopStoriesAdapter, var viewModel: TopStoriesViewModel) : AnkoComponent<Context> {
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {

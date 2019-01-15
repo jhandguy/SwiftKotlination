@@ -12,17 +12,16 @@ import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
 import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
-import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesAdapter
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.model.ImageManager
 import fr.jhandguy.swiftkotlination.model.ImageManagerInterface
 import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
 
-data class DependencyManager(val networkManager: NetworkManagerInterface): CoordinatorFactory, TopStoriesFactory, StoryFactory {
-    override fun makeCoordinator(activity: Activity): CoordinatorInterface  = Coordinator(activity)
-    override fun makeTopStoriesViewModel(): TopStoriesViewModel             = TopStoriesViewModel(this)
-    override fun makeStoryViewModel(story: Story): StoryViewModel           = StoryViewModel(this, story)
-    override fun makeTopStoriesManager(): TopStoriesManagerInterface        = TopStoriesManager(networkManager)
-    override fun makeImageManager(): ImageManagerInterface                  = ImageManager(networkManager)
-    override fun makeStoryManager(story: Story): StoryManagerInterface      = StoryManager(story)
+data class DependencyManager(val networkManager: NetworkManagerInterface) : CoordinatorFactory, TopStoriesFactory, StoryFactory {
+    override fun makeCoordinator(activity: Activity): CoordinatorInterface = Coordinator(activity)
+    override fun makeTopStoriesViewModel(): TopStoriesViewModel = TopStoriesViewModel(this)
+    override fun makeStoryViewModel(story: Story): StoryViewModel = StoryViewModel(this, story)
+    override fun makeTopStoriesManager(): TopStoriesManagerInterface = TopStoriesManager(networkManager)
+    override fun makeImageManager(): ImageManagerInterface = ImageManager(networkManager)
+    override fun makeStoryManager(story: Story): StoryManagerInterface = StoryManager(story)
 }

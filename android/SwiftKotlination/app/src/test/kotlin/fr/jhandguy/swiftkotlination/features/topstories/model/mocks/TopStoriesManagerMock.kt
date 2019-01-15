@@ -6,7 +6,7 @@ import fr.jhandguy.swiftkotlination.observer.Disposable
 import fr.jhandguy.swiftkotlination.observer.Observer
 import fr.jhandguy.swiftkotlination.observer.Result
 
-class TopStoriesManagerMock(var result: Result<TopStories>, var observer: Observer<TopStories> = {}): TopStoriesManagerInterface {
+class TopStoriesManagerMock(var result: Result<TopStories>, var observer: Observer<TopStories> = {}) : TopStoriesManagerInterface {
     override suspend fun topStories(observer: Observer<TopStories>): Disposable {
         this.observer = observer
         observer(result)
