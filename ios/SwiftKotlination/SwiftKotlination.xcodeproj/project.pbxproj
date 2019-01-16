@@ -40,6 +40,7 @@
 		0F29A34921ECD388000A7D7A /* AnimationStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34721ECD261000A7D7A /* AnimationStub.swift */; };
 		0F29A34F21ECD67B000A7D7A /* AnimationStub+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */; };
 		0F29A35021ECD875000A7D7A /* AnimationStub+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A34C21ECD670000A7D7A /* AnimationStub+Decodable.swift */; };
+		0F29A36421EF5F71000A7D7A /* ProcessInfo+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F29A36321EF5F71000A7D7A /* ProcessInfo+Decodable.swift */; };
 		0F2BA4EA2139902400920537 /* DisposeBagTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2BA4E92139902400920537 /* DisposeBagTest.swift */; };
 		0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */; };
 		0F3EA4A9212D8F700090A69A /* RequestTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3EA4A8212D8F700090A69A /* RequestTest.swift */; };
@@ -167,6 +168,7 @@
 		0F29A34721ECD261000A7D7A /* AnimationStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationStub.swift; sourceTree = "<group>"; };
 		0F29A34C21ECD670000A7D7A /* AnimationStub+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationStub+Decodable.swift"; sourceTree = "<group>"; };
 		0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationStub+Encodable.swift"; sourceTree = "<group>"; };
+		0F29A36321EF5F71000A7D7A /* ProcessInfo+Decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Decodable.swift"; sourceTree = "<group>"; };
 		0F2BA4E92139902400920537 /* DisposeBagTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBagTest.swift; sourceTree = "<group>"; };
 		0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariUITest.swift; sourceTree = "<group>"; };
 		0F3EA4A8212D8F700090A69A /* RequestTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTest.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		0F2026F021334515009B80CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				0F29A36221EF5F62000A7D7A /* ProcessInfo */,
 				0F2026F12133452C009B80CE /* UIControl */,
 				0F2026F22133453A009B80CE /* UITableView */,
 				0F29A33F21ECA10A000A7D7A /* UIView */,
@@ -512,6 +515,14 @@
 				0F29A34E21ECD67B000A7D7A /* AnimationStub+Encodable.swift */,
 			);
 			path = AnimationStub;
+			sourceTree = "<group>";
+		};
+		0F29A36221EF5F62000A7D7A /* ProcessInfo */ = {
+			isa = PBXGroup;
+			children = (
+				0F29A36321EF5F71000A7D7A /* ProcessInfo+Decodable.swift */,
+			);
+			path = ProcessInfo;
 			sourceTree = "<group>";
 		};
 		0F2BA4E82139900800920537 /* Observer */ = {
@@ -1156,6 +1167,7 @@
 				0FC64A3D2095EC5000339755 /* TopStoriesTableViewController.swift in Sources */,
 				0F3EA4C7212DBC570090A69A /* URLSessionMock.swift in Sources */,
 				0F3EA4DF212DF1590090A69A /* Identifiable.swift in Sources */,
+				0F29A36421EF5F71000A7D7A /* ProcessInfo+Decodable.swift in Sources */,
 				0FC64A3F2095F5E400339755 /* TopStoriesViewModel.swift in Sources */,
 				0FC64A472096543D00339755 /* Story.swift in Sources */,
 				0FA5F78D20A5E996009C30B4 /* NetworkManager.swift in Sources */,

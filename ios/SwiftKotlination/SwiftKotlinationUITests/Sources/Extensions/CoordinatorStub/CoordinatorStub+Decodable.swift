@@ -1,6 +1,9 @@
 import Foundation
 
 extension CoordinatorStub: Decodable {
+
+    // MARK: - Initializer
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 

@@ -10,11 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Lifecycle Methods
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        if let animationStub = decode(AnimationStub.self) {
+        if let animationStub = ProcessInfo.processInfo.decode(AnimationStub.self) {
             UIView.setAnimationsEnabled(animationStub.areAnimationsEnabled)
         }
 
-        let session: URLSessionProtocol = decode(URLSessionMock.self) ?? URLSession(configuration: .default)
+        let session: URLSessionProtocol = ProcessInfo.processInfo.decode(URLSessionMock.self) ?? URLSession(configuration: .default)
         let networkManager = NetworkManager(session: session)
         let factory = DependencyManager(networkManager: networkManager)
         let window = UIWindow(frame: UIScreen.main.bounds)
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        guard let coordinatorStub = decode(CoordinatorStub.self) else {
+        guard let coordinatorStub = ProcessInfo.processInfo.decode(CoordinatorStub.self) else {
             coordinator.start()
             return true
         }
@@ -40,17 +40,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         return true
-    }
-
-    // MARK: - Private Methods
-
-    private func decode<T: Identifiable & Decodable>(_: T.Type) -> T? {
-        guard
-            let processInfo = ProcessInfo.processInfo.environment[T.identifier],
-            let codable = T.decode(from: processInfo) else {
-                return nil
-        }
-
-        return codable
     }
 }

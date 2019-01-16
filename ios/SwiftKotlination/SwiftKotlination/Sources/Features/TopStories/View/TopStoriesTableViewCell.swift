@@ -18,7 +18,7 @@ final class TopStoriesTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    // MARK: - Private Attributes
+    // MARK: - Private Properties
 
     private lazy var contentStackView = UIStackView().with {
         contentView.addSubview($0)
@@ -42,7 +42,7 @@ final class TopStoriesTableViewCell: UITableViewCell {
         $0.spacing = 0
     }
 
-    // MARK: - Internal Attributes
+    // MARK: - Internal Properties
 
     private(set) lazy var multimediaImageView = UIImageView().with {
         contentStackView.addArrangedSubview($0)
