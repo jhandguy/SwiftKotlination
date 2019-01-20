@@ -7,8 +7,8 @@ final class TopStoriesViewModel {
     typealias Factory = ImageFactory & TopStoriesFactory
     private let factory: Factory
 
-    private lazy var topStoriesManager: TopStoriesManagerProtocol = factory.makeTopStoriesManager()
-    private lazy var imageManager: ImageManagerProtocol = factory.makeImageManager()
+    private lazy var topStoriesManager = factory.makeTopStoriesManager()
+    private lazy var imageManager = factory.makeImageManager()
 
     // MARK: - Initializer
 

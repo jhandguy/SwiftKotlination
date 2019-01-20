@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftKotlination
 
 final class TopStoriesUITest: XCTestCase {
-    private lazy var app: XCUIApplication = XCUIApplication()
+    private lazy var app = XCUIApplication()
 
     override func setUp() {
         super.setUp()

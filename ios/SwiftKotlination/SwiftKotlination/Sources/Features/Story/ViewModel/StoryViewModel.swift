@@ -8,8 +8,8 @@ final class StoryViewModel {
     private let factory: Factory
     private let story: Story
 
-    private lazy var storyManager: StoryManagerProtocol = factory.makeStoryManager(for: story)
-    private lazy var imageManager: ImageManagerProtocol = factory.makeImageManager()
+    private lazy var storyManager = factory.makeStoryManager(for: story)
+    private lazy var imageManager = factory.makeImageManager()
 
     // MARK: - Initializer
 
