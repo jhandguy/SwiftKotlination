@@ -1,5 +1,3 @@
-import Foundation
-
 enum CoordinatorStub: Identifiable {
     case openStory(Story)
     case openUrl(String)

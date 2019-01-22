@@ -1,5 +1,3 @@
-import Foundation
-
 extension AnimationStub: Encodable {
 
     // MARK: - Internal Methods

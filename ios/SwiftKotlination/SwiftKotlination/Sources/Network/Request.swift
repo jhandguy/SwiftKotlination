@@ -1,5 +1,3 @@
-import Foundation
-
 enum Request: Hashable {
     case fetchImage(String)
     case fetchTopStories

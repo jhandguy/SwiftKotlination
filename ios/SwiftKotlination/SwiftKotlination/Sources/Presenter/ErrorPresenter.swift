@@ -1,7 +1,12 @@
 import UIKit
 
 struct ErrorPresenter {
+
+    // MARK: - Internal Properties
+
     let error: Error
+
+    // MARK: - Internal Methods
 
     func present(in viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
         let description = (error as? ErrorStringConvertible)?.description ?? "Something went wrong."

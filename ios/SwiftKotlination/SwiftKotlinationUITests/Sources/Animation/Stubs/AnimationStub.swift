@@ -1,5 +1,3 @@
-import Foundation
-
 enum AnimationStub: Identifiable {
     case enableAnimations, disableAnimations
 

@@ -1,5 +1,4 @@
 import XCTest
-@testable import SwiftKotlination
 
 final class TopStoriesUITest: XCTestCase {
     private lazy var app = XCUIApplication()

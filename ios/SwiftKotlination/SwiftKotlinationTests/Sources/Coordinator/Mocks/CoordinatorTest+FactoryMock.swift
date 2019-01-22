@@ -1,5 +1,4 @@
 @testable import SwiftKotlination
-import Foundation
 
 extension CoordinatorTest {
     struct FactoryMock {

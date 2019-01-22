@@ -1,5 +1,3 @@
-import Foundation
-
 extension CoordinatorStub: Decodable {
 
     // MARK: - Initializer
