@@ -891,9 +891,9 @@
 		0FCE5CD3208A85C1001C8FFC /* SwiftKotlination */ = {
 			isa = PBXGroup;
 			children = (
-				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
 				0FC64A392095D44F00339755 /* Resources */,
 				0FC64A382095D44600339755 /* Sources */,
+				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlination;
 			sourceTree = "<group>";
