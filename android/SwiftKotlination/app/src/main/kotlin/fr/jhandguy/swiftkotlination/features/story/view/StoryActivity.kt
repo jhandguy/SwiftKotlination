@@ -8,14 +8,14 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import org.jetbrains.anko.setContentView
 
 class StoryActivity : AppCompatActivity() {
 
     private val factory: StoryFactory by lazy { (application as App).factory }
     private val coordinator by lazy { factory.makeCoordinator(this) }
-    private val viewModel by lazy { factory.makeStoryViewModel(JSON.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
+    private val viewModel by lazy { factory.makeStoryViewModel(Json.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
     private val view by lazy { StoryView(this, viewModel, coordinator, disposeBag) }
     private val disposeBag = DisposeBag()
 
