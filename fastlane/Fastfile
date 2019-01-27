@@ -13,7 +13,7 @@ end
 
 platform :android do
   lane :tests do
-
+    gradle(task: "jacocoTestReport", project_dir: "android/SwiftKotlination")
   end
 
   lane :screenshots do
