@@ -34,7 +34,6 @@ android {
     testOptions {
 //        execution 'ANDROID_TEST_ORCHESTRATOR'
         animationsDisabled true
-
         unitTests {
             includeAndroidResources = true
         }
@@ -44,11 +43,9 @@ android {
             java.srcDirs = ['src/main/kotlin']
             manifest.srcFile 'src/main/AndroidManifest.xml'
         }
-
         test {
             java.srcDirs = ['src/test/kotlin']
         }
-
         androidTest {
             java.srcDirs = ['src/androidTest/kotlin']
             manifest.srcFile 'src/androidTest/AndroidManifest.xml'
@@ -57,16 +54,16 @@ android {
 }
 
 dependencies {
-    implementation              'androidx.appcompat:appcompat:1.0.2'
-    implementation              'androidx.recyclerview:recyclerview:1.0.0'
-    implementation              'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation              "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation              "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+    implementation              "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-    implementation              'org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.10.0'
-    implementation              'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
-    implementation              'org.jetbrains.anko:anko:0.10.8'
-    implementation              'org.jetbrains.anko:anko-recyclerview-v7:0.10.8'
-    implementation              'org.jetbrains.anko:anko-constraint-layout:0.10.8'
-    testImplementation          'org.jetbrains.kotlin:kotlin-test-junit:1.3.20'
+    implementation              "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
+    implementation              "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation              "org.jetbrains.anko:anko:$ankoVersion"
+    implementation              "org.jetbrains.anko:anko-recyclerview-v7:$ankoVersion"
+    implementation              "org.jetbrains.anko:anko-constraint-layout:$ankoVersion"
+    testImplementation          "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest'/*, 'createDebugCoverageReport'*/]) {
