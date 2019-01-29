@@ -5,15 +5,17 @@ final class NetworkManagerTest: XCTestCase {
 
     var sut: NetworkManager!
 
-    func testObserveRequestSuccessfully() {
+    func testObserveRequestSuccessfully() throws {
+        let request = Request.fetchTopStories
         let file = File("top_stories", .json)
         let responses = [
-            Response(file)
+            request: [
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
-        let request = Request.fetchTopStories
         let disposeBag = DisposeBag()
         var times = 0
 
@@ -29,30 +31,33 @@ final class NetworkManagerTest: XCTestCase {
             }.disposed(by: disposeBag)
 
         XCTAssertEqual(times, 1)
-        XCTAssertTrue(session.responses.isEmpty)
-        responses.forEach { response in
+
+        let sessionResponses = try require(session.responses[request.absoluteUrl])
+        XCTAssertTrue(sessionResponses.isEmpty)
+
+        let mockResponses = try require(responses[request])
+        mockResponses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
         disposeBag.dispose()
 
-        guard let observers = sut.observables[request] else {
-            XCTFail("Expected observables to not be nil")
-            return
-        }
+        let observers = try require(sut.observables[request])
         XCTAssertTrue(observers.isEmpty)
     }
 
-    func testExecuteRequestSuccessfully() {
+    func testExecuteRequestSuccessfully() throws {
+        let request = Request.fetchTopStories
         let file = File("top_stories", .json)
         let responses = [
-            Response(file),
-            Response(file)
+            request: [
+                Response(file),
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
-        let request = Request.fetchTopStories
         let disposeBag = DisposeBag()
         var times = 0
 
@@ -70,31 +75,34 @@ final class NetworkManagerTest: XCTestCase {
         sut.execute(.fetchTopStories)
 
         XCTAssertEqual(times, 2)
-        XCTAssertTrue(session.responses.isEmpty)
-        responses.forEach { response in
+
+        let sessionResponses = try require(session.responses[request.absoluteUrl])
+        XCTAssertTrue(sessionResponses.isEmpty)
+
+        let mockResponses = try require(responses[request])
+        mockResponses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
         disposeBag.dispose()
 
-        guard let observers = sut.observables[request] else {
-            XCTFail("Expected observables to not be nil")
-            return
-        }
+        let observers = try require(sut.observables[request])
         XCTAssertTrue(observers.isEmpty)
     }
 
-    func testObserveRequestSeveralTimesAndExecuteSuccessfully() {
+    func testObserveRequestSeveralTimesAndExecuteSuccessfully() throws {
+        let request = Request.fetchTopStories
         let file = File("top_stories", .json)
         let responses = [
-            Response(file),
-            Response(error: .invalidResponse),
-            Response(file)
+            request: [
+                Response(file),
+                Response(error: .invalidResponse),
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
-        let request = Request.fetchTopStories
         let disposeBag = DisposeBag()
         var times = 0
 
@@ -123,28 +131,31 @@ final class NetworkManagerTest: XCTestCase {
         sut.execute(request)
 
         XCTAssertEqual(times, 4)
-        XCTAssertTrue(session.responses.isEmpty)
-        responses.forEach { response in
+
+        let sessionResponses = try require(session.responses[request.absoluteUrl])
+        XCTAssertTrue(sessionResponses.isEmpty)
+
+        let mockResponses = try require(responses[request])
+        mockResponses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
         disposeBag.dispose()
 
-        guard let observers = sut.observables[request] else {
-            XCTFail("Expected observables to not be nil")
-            return
-        }
+        let observers = try require(sut.observables[request])
         XCTAssertTrue(observers.isEmpty)
     }
 
-    func testObserveInvalidRequestUnsuccessfully() {
+    func testObserveInvalidRequestUnsuccessfully() throws {
+        let request = Request.fetchImage("")
         let responses = [
-            Response()
+            request: [
+                Response()
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
-        let request = Request.fetchImage("")
         let disposeBag = DisposeBag()
         var times = 0
 
@@ -160,28 +171,31 @@ final class NetworkManagerTest: XCTestCase {
             }.disposed(by: disposeBag)
 
         XCTAssertEqual(times, 1)
-        XCTAssertFalse(session.responses.isEmpty)
-        responses.forEach { response in
+
+        let sessionResponses = try require(session.responses[request.absoluteUrl])
+        XCTAssertFalse(sessionResponses.isEmpty)
+
+        let mockResponses = try require(responses[request])
+        mockResponses.forEach { response in
             XCTAssertFalse(response.dataTask.isResumed)
         }
 
         disposeBag.dispose()
 
-        guard let observers = sut.observables[request] else {
-            XCTFail("Expected observables to not be nil")
-            return
-        }
+        let observers = try require(sut.observables[request])
         XCTAssertTrue(observers.isEmpty)
     }
 
-    func testObserveInvalidResponseUnsuccessfully() {
+    func testObserveInvalidResponseUnsuccessfully() throws {
+        let request = Request.fetchImage("url")
         let responses = [
-            Response()
+            request: [
+                Response()
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
 
-        let request = Request.fetchImage("url")
         let disposeBag = DisposeBag()
         var times = 0
 
@@ -197,17 +211,18 @@ final class NetworkManagerTest: XCTestCase {
             }.disposed(by: disposeBag)
 
         XCTAssertEqual(times, 1)
-        XCTAssertTrue(session.responses.isEmpty)
-        responses.forEach { response in
+
+        let sessionResponses = try require(session.responses[request.absoluteUrl])
+        XCTAssertTrue(sessionResponses.isEmpty)
+
+        let mockResponses = try require(responses[request])
+        mockResponses.forEach { response in
             XCTAssertTrue(response.dataTask.isResumed)
         }
 
         disposeBag.dispose()
 
-        guard let observers = sut.observables[request] else {
-            XCTFail("Expected observables to not be nil")
-            return
-        }
+        let observers = try require(sut.observables[request])
         XCTAssertTrue(observers.isEmpty)
     }
 }

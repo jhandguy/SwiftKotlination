@@ -41,15 +41,9 @@ final class TopStoriesViewModelTest: XCTestCase {
             }
     }
 
-    func testTopStoriesViewModelFetchesTopStoryImageSuccessfully() {
-        guard
-            let data = File("28DC-nafta-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-            XCTFail("Invalid image")
-            return
-        }
-
+    func testTopStoriesViewModelFetchesTopStoryImageSuccessfully() throws {
+        let data = try require(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
         let factory = TopStoriesFactoryMock(
             imageManager: ImageManagerMock(result: .success(expectedImage))
         )

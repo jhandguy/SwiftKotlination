@@ -42,14 +42,9 @@ final class StoryViewModelTest: XCTestCase {
         }
     }
 
-    func testStoryViewModelFetchesStoryImageSuccessfully() {
-        guard
-            let data = File("28DC-nafta-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-            XCTFail("Invalid image")
-            return
-        }
+    func testStoryViewModelFetchesStoryImageSuccessfully() throws {
+        let data = try require(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [])
         let factory = StoryFactoryMock(

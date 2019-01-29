@@ -39,14 +39,9 @@ final class StoryViewControllerTest: XCTestCase {
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
 
-    func testStoryViewControllerFetchesStoryImageSuccessfully() {
-        guard
-            let data = File("28DC-nafta-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-                XCTFail("Invalid image")
-                return
-        }
+    func testStoryViewControllerFetchesStoryImageSuccessfully() throws {
+        let data = try require(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
 
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "", format: .large)])
         let factory = StoryFactoryMock(
@@ -62,10 +57,7 @@ final class StoryViewControllerTest: XCTestCase {
         XCTAssertFalse(sut.disposeBag.disposables.isEmpty)
         XCTAssertFalse(sut.storyView.multimediaImageView.isHidden)
 
-        guard let image = sut.storyView.multimediaImageView.image else {
-            XCTFail("Invalid image view")
-            return
-        }
+        let image = try require(sut.storyView.multimediaImageView.image)
 
         XCTAssertEqual(image.pngData(), expectedImage.pngData())
 

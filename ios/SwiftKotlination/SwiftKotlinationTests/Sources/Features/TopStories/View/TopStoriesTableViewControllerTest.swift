@@ -48,14 +48,9 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         XCTAssertTrue(sut.presentedViewController is UIAlertController)
     }
 
-    func testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully() {
-        guard
-            let data = File("28DC-nafta-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-                XCTFail("Invalid image")
-                return
-        }
+    func testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully() throws {
+        let data = try require(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
         let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story])),
@@ -70,14 +65,8 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         XCTAssertFalse(sut.disposeBag.disposables.isEmpty)
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        guard
-            let cell = sut.tableView.visibleCells.first as? TopStoriesTableViewCell,
-            let image = cell.multimediaImageView.image else {
-
-                XCTFail("Invalid cell")
-                return
-        }
-
+        let cell = try require(sut.tableView.visibleCells.first as? TopStoriesTableViewCell)
+        let image = try require(cell.multimediaImageView.image)
         XCTAssertEqual(expectedImage.pngData(), image.pngData())
         XCTAssertFalse(cell.multimediaImageView.isHidden)
 
@@ -86,7 +75,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         XCTAssertTrue(sut.disposeBag.disposables.isEmpty)
     }
 
-    func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() {
+    func testTopStoriesTableViewControllerFetchesTopStoryImageUnsuccessfully() throws {
         let story = Story(section: "section", subsection: "subsection", title: "title", abstract: "abstract", byline: "byline", url: "url", multimedia: [Multimedia(url: "url", format: .small)])
         let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story]))
@@ -99,11 +88,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
         XCTAssertFalse(sut.tableView.visibleCells.isEmpty)
 
-        guard let cell = sut.tableView.visibleCells.first as? TopStoriesTableViewCell else {
-            XCTFail("Invalid cell")
-            return
-        }
-
+        let cell = try require(sut.tableView.visibleCells.first as? TopStoriesTableViewCell)
         XCTAssertTrue(cell.multimediaImageView.isHidden)
     }
 

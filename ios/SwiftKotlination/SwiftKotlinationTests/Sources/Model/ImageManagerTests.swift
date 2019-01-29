@@ -5,15 +5,9 @@ final class ImageManagerTest: XCTestCase {
 
     var sut: ImageManager!
 
-    func testImageManagerFetchesImageSuccessfully() {
-        guard
-            let data = File("27arizpolitics7-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-            XCTFail("Invalid image")
-            return
-        }
-
+    func testImageManagerFetchesImageSuccessfully() throws {
+        let data = try require(File("27arizpolitics7-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
         let networkManager = NetworkManagerMock(result: .success(data))
         sut = ImageManager(networkManager: networkManager)
         sut
@@ -59,15 +53,9 @@ final class ImageManagerTest: XCTestCase {
         }
     }
 
-    func testImageManagerFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() {
-        guard
-            let data = File("27arizpolitics7-thumbLarge", .jpg).data,
-            let expectedImage = UIImage(data: data) else {
-
-                XCTFail("Invalid image")
-                return
-        }
-
+    func testImageManagerFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() throws {
+        let data = try require(File("27arizpolitics7-thumbLarge", .jpg).data)
+        let expectedImage = try require(UIImage(data: data))
         let networkManager = NetworkManagerMock(result: .success(data))
         sut = ImageManager(networkManager: networkManager)
 

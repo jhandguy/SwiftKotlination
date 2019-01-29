@@ -5,7 +5,7 @@ final class ErrorPresenterTest: XCTestCase {
 
     var sut: ErrorPresenter!
 
-    func testErrorPresenterPresentsAlertControllerSuccessfully() {
+    func testErrorPresenterPresentsAlertControllerSuccessfully() throws {
         let error: NetworkError = .invalidData
         sut = ErrorPresenter(error: error)
 
@@ -19,11 +19,7 @@ final class ErrorPresenterTest: XCTestCase {
 
         sut.present(in: viewController, animated: false)
 
-        guard let alertController = viewController.presentedViewController as? UIAlertController else {
-            XCTFail("Expected UIAlertController to be presented")
-            return
-        }
-
+        let alertController = try require(viewController.presentedViewController as? UIAlertController)
         XCTAssertEqual(alertController.title, "Error")
         XCTAssertEqual(alertController.message, error.description)
         XCTAssertEqual(alertController.actions.count, 1)

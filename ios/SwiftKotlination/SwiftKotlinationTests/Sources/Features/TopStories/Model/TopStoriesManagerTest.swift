@@ -5,7 +5,7 @@ final class TopStoriesManagerTest: XCTestCase {
 
     var sut: TopStoriesManager!
 
-    func testTopStoriesManagerFetchesTopStoriesSuccessfully() {
+    func testTopStoriesManagerFetchesTopStoriesSuccessfully() throws {
         let topStories = TopStories(
             results: [
                 Story(
@@ -24,12 +24,9 @@ final class TopStoriesManagerTest: XCTestCase {
                 )
             ]
         )
-        guard let data = topStories.data else {
-            XCTFail("Invalid data")
-            return
-        }
-
+        let data = try require(topStories.data)
         let networkManager = NetworkManagerMock(result: .success(data))
+
         sut = TopStoriesManager(networkManager: networkManager)
         sut
             .stories { result in
@@ -82,7 +79,7 @@ final class TopStoriesManagerTest: XCTestCase {
         }
     }
 
-    func testTopStoriesManagerFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() {
+    func testTopStoriesManagerFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() throws {
         let topStories = TopStories(
             results: [
                 Story(
@@ -101,12 +98,9 @@ final class TopStoriesManagerTest: XCTestCase {
                 )
             ]
         )
-        guard let data = topStories.data else {
-            XCTFail("Invalid data")
-            return
-        }
-
+        let data = try require(topStories.data)
         let networkManager = NetworkManagerMock(result: .success(data))
+
         sut = TopStoriesManager(networkManager: networkManager)
 
         var times = 0
