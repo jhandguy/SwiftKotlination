@@ -4,10 +4,10 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import kotlin.test.Test
 
 class TopStoriesManagerUnitTest {
 
@@ -19,7 +19,7 @@ class TopStoriesManagerUnitTest {
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
-        val data = JSON.stringify(TopStories.serializer(), topStories).toByteArray()
+        val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
         sut = TopStoriesManager(networkManager)
 
@@ -39,7 +39,7 @@ class TopStoriesManagerUnitTest {
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
         ))
-        val data = JSON.stringify(TopStories.serializer(), topStories).toByteArray()
+        val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
 
         sut = TopStoriesManager(networkManager)

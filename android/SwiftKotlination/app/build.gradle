@@ -6,7 +6,7 @@ apply plugin: 'kotlinx-serialization'
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.0'
+    toolVersion = '0.8.2'
 }
 
 tasks.withType(Test) {
@@ -57,6 +57,7 @@ dependencies {
     implementation              "androidx.appcompat:appcompat:$appCompatVersion"
     implementation              "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation              "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    testImplementation          "androidx.test:core:$testVersion"
 
     implementation              "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
     implementation              "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -64,6 +65,9 @@ dependencies {
     implementation              "org.jetbrains.anko:anko-recyclerview-v7:$ankoVersion"
     implementation              "org.jetbrains.anko:anko-constraint-layout:$ankoVersion"
     testImplementation          "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
+
+    testImplementation          "junit:junit:$junitVersion"
+    testImplementation          "org.robolectric:robolectric:$robolectricVersion"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest'/*, 'createDebugCoverageReport'*/]) {
