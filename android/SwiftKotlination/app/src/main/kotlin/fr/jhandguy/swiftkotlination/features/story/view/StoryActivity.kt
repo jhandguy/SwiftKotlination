@@ -15,7 +15,12 @@ class StoryActivity : AppCompatActivity() {
 
     private val factory: StoryFactory by lazy { (application as App).factory }
     private val coordinator by lazy { factory.makeCoordinator(this) }
-    private val viewModel by lazy { factory.makeStoryViewModel(Json.parse(Story.serializer(), intent?.extras?.get(Story::class.java.simpleName) as String)) }
+    private val viewModel by lazy {
+        val story = intent?.extras?.getString(Story::class.java.simpleName)?.let {
+            Json.parse(Story.serializer(), it)
+        } ?: Story()
+        factory.makeStoryViewModel(story)
+    }
     private val view by lazy { StoryView(this, viewModel, coordinator, disposeBag) }
     private val disposeBag = DisposeBag()
 
