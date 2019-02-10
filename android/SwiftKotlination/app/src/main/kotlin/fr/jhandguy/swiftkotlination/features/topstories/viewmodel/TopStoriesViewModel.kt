@@ -28,7 +28,7 @@ class TopStoriesViewModel(factory: TopStoriesFactory) {
 
     suspend fun image(url: String, observer: Observer<Bitmap>): Disposable? = images[url]?.let { image ->
             observer(Result.Success(image))
-            null
+            return null
         } ?: imageManager.image(url) { result ->
             when (result) {
                 is Result.Success -> {

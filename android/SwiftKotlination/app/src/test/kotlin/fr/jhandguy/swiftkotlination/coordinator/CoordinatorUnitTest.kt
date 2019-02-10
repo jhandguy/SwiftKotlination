@@ -39,10 +39,16 @@ class CoordinatorUnitTest {
     }
 
     @Test
-    fun `is started correctly`() {
+    fun `url is opened correctly`() {
         val url = "https://url.com"
         val intent = sut.open(url)
         assertEquals(intent.action, Intent.ACTION_VIEW)
         assertEquals(intent.dataString, url)
+    }
+
+    @Test
+    fun `activity is finished correctly`() {
+        sut.finish()
+        assert(sut.activity.isFinishing)
     }
 }
