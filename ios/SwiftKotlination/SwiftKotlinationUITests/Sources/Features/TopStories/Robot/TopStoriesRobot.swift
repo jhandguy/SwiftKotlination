@@ -37,7 +37,7 @@ final class TopStoriesRobot: Robot {
     }
 
     @discardableResult
-    func refreshTopStories() -> TopStoriesRobot {
+    func refreshTopStories() -> Self {
         return refresh(inside: app.tables.firstMatch)
     }
 }
