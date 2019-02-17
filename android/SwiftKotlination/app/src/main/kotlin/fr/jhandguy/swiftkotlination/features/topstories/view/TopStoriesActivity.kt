@@ -3,6 +3,7 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.App
+import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
 import fr.jhandguy.swiftkotlination.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
@@ -21,7 +22,7 @@ class TopStoriesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        title = "Top Stories"
+        title = getString(R.string.top_stories_title)
 
         view.setContentView(this)
     }

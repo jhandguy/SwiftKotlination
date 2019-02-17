@@ -37,6 +37,7 @@ class TopStoriesView(var adapter: TopStoriesAdapter, var viewModel: TopStoriesVi
 
     var isRefreshing: Boolean = false
         set(value) {
+            field = value
             swipeRefreshLayout.isRefreshing = value
         }
 }

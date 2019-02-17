@@ -4,7 +4,7 @@ import android.content.Intent
 import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 
-class CoordinatorMock: CoordinatorInterface {
+class CoordinatorMock : CoordinatorInterface {
     var isStarted = false
     var isStoryOpen = false
     var isUrlOpen = false

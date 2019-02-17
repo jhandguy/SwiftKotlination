@@ -18,10 +18,10 @@ import fr.jhandguy.swiftkotlination.model.ImageManagerInterface
 import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
 
 open class DependencyManager(val networkManager: NetworkManagerInterface) : CoordinatorFactory, TopStoriesFactory, StoryFactory {
-    override fun makeCoordinator(activity: Activity): CoordinatorInterface  = Coordinator(activity)
-    override fun makeTopStoriesViewModel(): TopStoriesViewModel             = TopStoriesViewModel(this)
-    override fun makeStoryViewModel(story: Story): StoryViewModel           = StoryViewModel(this, story)
-    override fun makeTopStoriesManager(): TopStoriesManagerInterface        = TopStoriesManager(networkManager)
-    override fun makeImageManager(): ImageManagerInterface                  = ImageManager(networkManager)
-    override fun makeStoryManager(story: Story): StoryManagerInterface      = StoryManager(story)
+    override fun makeCoordinator(activity: Activity): CoordinatorInterface = Coordinator(activity)
+    override fun makeTopStoriesViewModel(): TopStoriesViewModel = TopStoriesViewModel(this)
+    override fun makeStoryViewModel(story: Story): StoryViewModel = StoryViewModel(this, story)
+    override fun makeTopStoriesManager(): TopStoriesManagerInterface = TopStoriesManager(networkManager)
+    override fun makeImageManager(): ImageManagerInterface = ImageManager(networkManager)
+    override fun makeStoryManager(story: Story): StoryManagerInterface = StoryManager(story)
 }

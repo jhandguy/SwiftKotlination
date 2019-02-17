@@ -17,12 +17,13 @@ class DependencyManagerMock(
     val coordinator: CoordinatorInterface? = null,
     val topStoriesManager: TopStoriesManagerInterface? = null,
     val imageManager: ImageManagerInterface? = null,
-    val storyManager: StoryManagerInterface? = null): DependencyManager(networkManager) {
+    val storyManager: StoryManagerInterface? = null
+) : DependencyManager(networkManager) {
 
-    override fun makeCoordinator(activity: Activity): CoordinatorInterface  = coordinator ?: super.makeCoordinator(activity)
-    override fun makeTopStoriesViewModel(): TopStoriesViewModel             = TopStoriesViewModel(this)
-    override fun makeStoryViewModel(story: Story): StoryViewModel           = StoryViewModel(this, story)
-    override fun makeTopStoriesManager(): TopStoriesManagerInterface        = topStoriesManager ?: super.makeTopStoriesManager()
-    override fun makeImageManager(): ImageManagerInterface                  = imageManager ?: super.makeImageManager()
-    override fun makeStoryManager(story: Story): StoryManagerInterface      = storyManager ?: super.makeStoryManager(story)
+    override fun makeCoordinator(activity: Activity): CoordinatorInterface = coordinator ?: super.makeCoordinator(activity)
+    override fun makeTopStoriesViewModel(): TopStoriesViewModel = TopStoriesViewModel(this)
+    override fun makeStoryViewModel(story: Story): StoryViewModel = StoryViewModel(this, story)
+    override fun makeTopStoriesManager(): TopStoriesManagerInterface = topStoriesManager ?: super.makeTopStoriesManager()
+    override fun makeImageManager(): ImageManagerInterface = imageManager ?: super.makeImageManager()
+    override fun makeStoryManager(story: Story): StoryManagerInterface = storyManager ?: super.makeStoryManager(story)
 }
