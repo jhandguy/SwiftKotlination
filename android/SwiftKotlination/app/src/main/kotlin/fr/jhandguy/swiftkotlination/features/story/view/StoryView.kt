@@ -32,7 +32,7 @@ import org.jetbrains.anko.textResource
 import org.jetbrains.anko.textView
 import org.jetbrains.anko.wrapContent
 
-class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, val disposeBag: DisposeBag, var story: Story = Story()) :
+class StoryView(val activity: Activity, val viewModel: StoryViewModel, val coordinator: CoordinatorInterface, val disposeBag: DisposeBag = DisposeBag(), var story: Story = Story()) :
     AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
