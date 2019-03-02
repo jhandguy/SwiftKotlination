@@ -1,12 +1,12 @@
 package fr.jhandguy.swiftkotlination.features.topstories.view
 
-import android.app.Activity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.coordinator.mocks.CoordinatorMock
+import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.features.topstories.factory.mocks.TopStoriesFactoryMock
 import fr.jhandguy.swiftkotlination.features.topstories.model.mocks.TopStoriesManagerMock
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
@@ -27,7 +27,7 @@ class TopStoriesViewUnitTest {
 
     @Test
     fun `views are created correctly`() {
-        val scenario = ActivityScenario.launch(Activity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             val topStoriesManager = TopStoriesManagerMock(Result.Failure(NetworkError.InvalidResponse()))
             val imageManager = ImageManagerMock(Result.Failure(NetworkError.InvalidResponse()))

@@ -1,8 +1,8 @@
 package fr.jhandguy.swiftkotlination.factory
 
-import android.app.Activity
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.coordinator.Coordinator
+import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.StoryManager
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
@@ -25,7 +25,7 @@ class DependencyManagerUnitTest {
 
     @Test
     fun `coordinator is made correctly`() {
-        val scenario = ActivityScenario.launch(Activity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             val coordinator = sut.makeCoordinator(it)
             assert(coordinator is Coordinator)

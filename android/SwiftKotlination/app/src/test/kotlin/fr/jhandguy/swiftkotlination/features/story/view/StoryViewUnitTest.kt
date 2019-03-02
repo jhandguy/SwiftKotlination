@@ -1,6 +1,5 @@
 package fr.jhandguy.swiftkotlination.features.story.view
 
-import android.app.Activity
 import android.graphics.BitmapFactory
 import android.view.View
 import android.widget.Button
@@ -9,6 +8,7 @@ import android.widget.TextView
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.coordinator.mocks.CoordinatorMock
+import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.features.story.factory.mocks.StoryFactoryMock
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.mocks.StoryManagerMock
@@ -36,7 +36,7 @@ class StoryViewUnitTest {
 
     @Test
     fun `views are created correctly`() {
-        val scenario = ActivityScenario.launch(Activity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             val storyManager = StoryManagerMock(Result.Failure(NetworkError.InvalidResponse()))
             val imageManager = ImageManagerMock(Result.Failure(NetworkError.InvalidResponse()))
@@ -85,7 +85,7 @@ class StoryViewUnitTest {
 
     @Test
     fun `image is displayed correctly`() {
-        val scenario = ActivityScenario.launch(Activity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             val storyManager = StoryManagerMock(Result.Failure(NetworkError.InvalidResponse()))
             val stream = File("27arizpolitics7-thumbLarge", File.Extension.JPG).data

@@ -1,8 +1,8 @@
 package fr.jhandguy.swiftkotlination.coordinator
 
-import android.app.Activity
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
+import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
@@ -19,7 +19,7 @@ class CoordinatorUnitTest {
 
     @BeforeTest
     fun setup() {
-        val scenario = ActivityScenario.launch(Activity::class.java)
+        val scenario = ActivityScenario.launch(MainActivity::class.java)
         scenario.onActivity {
             sut = Coordinator(it)
         }
