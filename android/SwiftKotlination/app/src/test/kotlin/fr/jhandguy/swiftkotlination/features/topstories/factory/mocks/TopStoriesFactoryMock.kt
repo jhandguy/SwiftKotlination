@@ -8,7 +8,10 @@ import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerI
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
 import fr.jhandguy.swiftkotlination.model.ImageManagerInterface
 
-class TopStoriesFactoryMock(val topStoriesManager: TopStoriesManagerInterface, val imageManager: ImageManagerInterface) : TopStoriesFactory {
+class TopStoriesFactoryMock(
+    val topStoriesManager: TopStoriesManagerInterface,
+    val imageManager: ImageManagerInterface
+) : TopStoriesFactory {
     override fun makeTopStoriesManager(): TopStoriesManagerInterface = topStoriesManager
     override fun makeTopStoriesViewModel(): TopStoriesViewModel = TopStoriesViewModel(this)
     override fun makeCoordinator(activity: Activity): CoordinatorInterface = Coordinator(activity)

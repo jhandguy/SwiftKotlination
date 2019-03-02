@@ -20,7 +20,11 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.imageBitmap
 
-class TopStoriesAdapter(val activity: Activity, val viewModel: TopStoriesViewModel, val coordinator: CoordinatorInterface) : RecyclerView.Adapter<TopStoriesAdapter.ViewHolder>() {
+class TopStoriesAdapter(
+    val activity: Activity,
+    val viewModel: TopStoriesViewModel,
+    val coordinator: CoordinatorInterface
+) : RecyclerView.Adapter<TopStoriesAdapter.ViewHolder>() {
 
     private val disposeBag = DisposeBag()
 
