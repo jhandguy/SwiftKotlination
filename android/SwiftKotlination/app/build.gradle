@@ -21,7 +21,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName '1.0'
-        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        testInstrumentationRunner 'fr.jhandguy.swiftkotlination.AndroidTestRunner'
     }
     buildTypes {
         debug {
@@ -32,7 +32,7 @@ android {
         }
     }
     testOptions {
-//        execution 'ANDROID_TEST_ORCHESTRATOR'
+        //TODO: execution 'ANDROID_TEST_ORCHESTRATOR'
         animationsDisabled true
         unitTests {
             includeAndroidResources = true
@@ -48,7 +48,6 @@ android {
         }
         androidTest {
             java.srcDirs = ['src/androidTest/kotlin']
-            manifest.srcFile 'src/androidTest/AndroidManifest.xml'
         }
     }
 }
@@ -58,6 +57,8 @@ dependencies {
     implementation              "androidx.recyclerview:recyclerview:$recyclerViewVersion"
     implementation              "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     testImplementation          "androidx.test:core:$testVersion"
+    androidTestImplementation   "androidx.test:core:$testVersion"
+    androidTestImplementation   "androidx.test:runner:$testVersion"
 
     implementation              "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
     implementation              "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -70,7 +71,7 @@ dependencies {
     testImplementation          "org.robolectric:robolectric:$robolectricVersion"
 }
 
-task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest'/*, 'createDebugCoverageReport'*/]) {
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
     reports {
         xml.enabled = true
@@ -84,6 +85,6 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest'/*, 'cr
     sourceDirectories = files([mainSrc])
     classDirectories = files([debugTree])
     executionData = fileTree(dir: project.buildDir, includes: [
-            'jacoco/testDebugUnitTest.exec'//, 'outputs/code-coverage/connected/*coverage.ec'
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
     ])
 }
