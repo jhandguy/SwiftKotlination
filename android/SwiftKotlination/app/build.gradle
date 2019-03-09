@@ -6,7 +6,7 @@ apply plugin: 'kotlinx-serialization'
 apply plugin: 'jacoco'
 
 jacoco {
-    toolVersion = '0.8.2'
+    toolVersion = jacocoVersion
 }
 
 tasks.withType(Test) {
