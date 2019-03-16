@@ -59,6 +59,8 @@ dependencies {
     testImplementation          "androidx.test:core:$testVersion"
     androidTestImplementation   "androidx.test:core:$testVersion"
     androidTestImplementation   "androidx.test:runner:$testVersion"
+    androidTestImplementation   "androidx.test:rules:$testVersion"
+    androidTestImplementation   "androidx.test.espresso:espresso-core:$espressoVersion"
 
     implementation              "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationVersion"
     implementation              "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
