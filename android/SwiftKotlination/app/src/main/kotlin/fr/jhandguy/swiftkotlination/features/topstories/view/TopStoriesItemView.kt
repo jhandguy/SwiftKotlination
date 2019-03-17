@@ -1,7 +1,7 @@
 package fr.jhandguy.swiftkotlination.features.topstories.view
 
 import android.content.Context
-import android.graphics.Typeface.DEFAULT_BOLD
+import android.graphics.Typeface
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintSet
 import fr.jhandguy.swiftkotlination.R
@@ -10,6 +10,7 @@ import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.constraint.layout.constraintLayout
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.imageView
+import org.jetbrains.anko.lines
 import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.padding
 import org.jetbrains.anko.sp
@@ -20,7 +21,7 @@ import org.jetbrains.anko.wrapContent
 class TopStoriesItemView : AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
-        return constraintLayout {
+        return constraintLayout() {
             padding = dip(8)
             lparams(width = matchParent, height = dip(150))
 
@@ -35,7 +36,8 @@ class TopStoriesItemView : AnkoComponent<Context> {
             textView {
                 textColorResource = R.color.primary_text
                 textSize = sp(7).toFloat()
-                typeface = DEFAULT_BOLD
+                typeface = Typeface.DEFAULT_BOLD
+                lines = 3
                 id = R.id.top_stories_item_title
             }.lparams(width = 0, height = wrapContent) {
                 leftToRight = R.id.top_stories_item_image
@@ -51,6 +53,7 @@ class TopStoriesItemView : AnkoComponent<Context> {
                 textColorResource = R.color.secondary_text
                 textSize = sp(5).toFloat()
                 id = R.id.top_stories_item_byline
+                lines = 1
             }.lparams(width = 0, height = wrapContent) {
                 leftToRight = R.id.top_stories_item_image
                 bottomToBottom = ConstraintSet.PARENT_ID
