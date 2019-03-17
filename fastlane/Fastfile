@@ -3,6 +3,7 @@ $devices_android = ""
 
 platform :ios do
   lane :tests do
+    swiftlint(path: "ios/SwiftKotlination")
     run_tests(devices: $devices_ios, clean: true, code_coverage: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
   end
 
@@ -13,6 +14,7 @@ end
 
 platform :android do
   lane :tests do
+    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.31.0/ktlint && chmod a+x ktlint && ./ktlint \"android/SwiftKotlination\"")
     gradle(task: "clean jacocoTestReport", project_dir: "android/SwiftKotlination")
   end
 
