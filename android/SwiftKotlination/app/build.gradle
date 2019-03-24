@@ -44,10 +44,10 @@ android {
             manifest.srcFile 'src/main/AndroidManifest.xml'
         }
         test {
-            java.srcDirs = ['src/test/kotlin']
+            java.srcDirs = ['src/test/kotlin', 'src/sharedTest/kotlin']
         }
         androidTest {
-            java.srcDirs = ['src/androidTest/kotlin']
+            java.srcDirs = ['src/androidTest/kotlin', 'src/sharedTest/kotlin']
         }
     }
 }
