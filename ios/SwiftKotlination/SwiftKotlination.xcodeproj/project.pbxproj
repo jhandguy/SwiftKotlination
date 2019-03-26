@@ -14,7 +14,6 @@
 		0F0E8A672149120D000B7268 /* StoryFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A662149120D000B7268 /* StoryFactoryMock.swift */; };
 		0F0E8A6C2149147C000B7268 /* TopStoriesFactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0E8A6B2149147C000B7268 /* TopStoriesFactoryMock.swift */; };
 		0F16552D212C266F005137B0 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16552C212C266F005137B0 /* Request.swift */; };
-		0F16552F212C2680005137B0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16552E212C2680005137B0 /* Result.swift */; };
 		0F165533212C5383005137B0 /* UITableView+ReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F165532212C5383005137B0 /* UITableView+ReusableCell.swift */; };
 		0F170542212F575300F87958 /* ErrorStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F170541212F575300F87958 /* ErrorStringConvertible.swift */; };
 		0F170543212F577900F87958 /* ErrorStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F170541212F575300F87958 /* ErrorStringConvertible.swift */; };
@@ -73,7 +72,6 @@
 		0F828050220095E50056C85D /* Request+Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F82804E220095AA0056C85D /* Request+Url.swift */; };
 		0F8280562200BA4E0056C85D /* XCTestCase+Require.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8280552200BA4E0056C85D /* XCTestCase+Require.swift */; };
 		0F967079216CEB030030DBB8 /* DependencyManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F967078216CEB030030DBB8 /* DependencyManagerTest.swift */; };
-		0F9EEE63212F4893006056E5 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F16552E212C2680005137B0 /* Result.swift */; };
 		0F9EEE65212F4AAA006056E5 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9EEE64212F4AAA006056E5 /* Observer.swift */; };
 		0F9EEE66212F4F21006056E5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8666F212F471E0033CD13 /* NetworkError.swift */; };
 		0FA074F8219B2BDD00476621 /* CoordinatorTest+FactoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA074F7219B2BDD00476621 /* CoordinatorTest+FactoryMock.swift */; };
@@ -152,7 +150,6 @@
 		0F0E8A662149120D000B7268 /* StoryFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryFactoryMock.swift; sourceTree = "<group>"; };
 		0F0E8A6B2149147C000B7268 /* TopStoriesFactoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesFactoryMock.swift; sourceTree = "<group>"; };
 		0F16552C212C266F005137B0 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		0F16552E212C2680005137B0 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		0F165532212C5383005137B0 /* UITableView+ReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+ReusableCell.swift"; sourceTree = "<group>"; };
 		0F16553C212C98A7005137B0 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		0F16553E212C98C7005137B0 /* Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parameters.swift; sourceTree = "<group>"; };
@@ -1021,7 +1018,6 @@
 			isa = PBXGroup;
 			children = (
 				0F9EEE64212F4AAA006056E5 /* Observer.swift */,
-				0F16552E212C2680005137B0 /* Result.swift */,
 				0FC74197213938CF00E0F254 /* Disposable.swift */,
 				0FC74199213938DA00E0F254 /* DisposeBag.swift */,
 			);
@@ -1202,7 +1198,6 @@
 				0F170542212F575300F87958 /* ErrorStringConvertible.swift in Sources */,
 				0FC74198213938CF00E0F254 /* Disposable.swift in Sources */,
 				0FBB65C520A394E10090B77F /* StoryManager.swift in Sources */,
-				0F16552F212C2680005137B0 /* Result.swift in Sources */,
 				0F3EA4D0212DC1610090A69A /* Parameters.swift in Sources */,
 				0FBB65C120A393920090B77F /* StoryViewController.swift in Sources */,
 				0F29A34121ECA141000A7D7A /* UIView+Constraints.swift in Sources */,
@@ -1297,7 +1292,6 @@
 				0F22CA7F21AED13000914927 /* Robot.swift in Sources */,
 				0F22CA8A21AEF06600914927 /* SafariRobot.swift in Sources */,
 				0FA5F7AB20A8D6AD009C30B4 /* TopStoriesUITest.swift in Sources */,
-				0F9EEE63212F4893006056E5 /* Result.swift in Sources */,
 				0F4A204321302360002543B8 /* File.swift in Sources */,
 				0F22CA8521AED1E300914927 /* TopStoriesRobot.swift in Sources */,
 				0F3EA4BF212DB9500090A69A /* URLSessionDataTaskMock.swift in Sources */,
@@ -1404,6 +1398,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1457,6 +1452,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1474,7 +1470,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlination;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1492,7 +1488,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlination;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1514,7 +1510,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftKotlination.app/SwiftKotlination";
 			};
@@ -1536,7 +1532,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftKotlination.app/SwiftKotlination";
 			};
@@ -1558,7 +1554,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SwiftKotlination;
 			};
@@ -1579,7 +1575,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.jhandguy.SwiftKotlinationUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SwiftKotlination;
 			};

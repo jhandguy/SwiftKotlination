@@ -2,10 +2,10 @@ import XCTest
 @testable import SwiftKotlination
 
 final class TopStoriesManagerMock {
-    var result: Result<[Story]>
+    var result: Result<[Story], Error>
     var observer: Observer<[Story]>
 
-    init(result: Result<[Story]> = .failure(NetworkError.invalidResponse)) {
+    init(result: Result<[Story], Error> = .failure(NetworkError.invalidResponse)) {
         self.result = result
         self.observer = { _ in }
     }

@@ -2,10 +2,10 @@ import Foundation
 @testable import SwiftKotlination
 
 final class NetworkManagerMock: NetworkManagerProtocol {
-    var result: Result<Data>
+    var result: Result<Data, Error>
     var observers: [Observer<Data>] = []
 
-    init(result: Result<Data>) {
+    init(result: Result<Data, Error>) {
         self.result = result
     }
 

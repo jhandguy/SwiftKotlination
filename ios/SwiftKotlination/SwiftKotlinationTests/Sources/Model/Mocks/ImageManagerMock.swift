@@ -2,9 +2,9 @@ import XCTest
 @testable import SwiftKotlination
 
 struct ImageManagerMock {
-    var result: Result<UIImage>
+    var result: Result<UIImage, Error>
 
-    init(result: Result<UIImage> = .failure(NetworkError.invalidResponse)) {
+    init(result: Result<UIImage, Error> = .failure(NetworkError.invalidResponse)) {
         self.result = result
     }
 }

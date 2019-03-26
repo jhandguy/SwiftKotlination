@@ -2,9 +2,9 @@ import XCTest
 @testable import SwiftKotlination
 
 struct StoryManagerMock {
-    var result: Result<Story>
+    var result: Result<Story, Error>
 
-    init(result: Result<Story> = .failure(NetworkError.invalidResponse)) {
+    init(result: Result<Story, Error> = .failure(NetworkError.invalidResponse)) {
         self.result = result
     }
 }
