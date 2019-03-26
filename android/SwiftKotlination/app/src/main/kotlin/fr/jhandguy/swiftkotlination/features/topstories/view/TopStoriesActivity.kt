@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.App
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactory
-import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.global.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import org.jetbrains.anko.setContentView

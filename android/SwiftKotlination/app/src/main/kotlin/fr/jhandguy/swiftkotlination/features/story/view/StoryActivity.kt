@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import fr.jhandguy.swiftkotlination.App
 import fr.jhandguy.swiftkotlination.features.story.factory.StoryFactory
 import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.global.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
 import kotlinx.serialization.json.Json

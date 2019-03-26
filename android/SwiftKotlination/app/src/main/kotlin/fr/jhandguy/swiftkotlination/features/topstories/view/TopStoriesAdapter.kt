@@ -12,7 +12,7 @@ import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.imageUrl
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.global.launch
 import fr.jhandguy.swiftkotlination.model.Multimedia
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.launch
+import fr.jhandguy.swiftkotlination.global.launch
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.matchParent

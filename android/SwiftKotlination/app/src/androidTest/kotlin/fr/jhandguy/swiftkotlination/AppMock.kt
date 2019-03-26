@@ -1,23 +1,31 @@
 package fr.jhandguy.swiftkotlination
 
+import fr.jhandguy.swiftkotlination.extensions.absoluteUrl
 import fr.jhandguy.swiftkotlination.factory.DependencyManager
 import fr.jhandguy.swiftkotlination.network.NetworkManager
+import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
 import java.net.URL
 import java.net.URLConnection
 import java.net.URLStreamHandler
-import java.util.Stack
+import java.util.LinkedList
 import kotlin.properties.Delegates
 
 open class AppMock : App() {
-    var responses: Stack<Response> by Delegates.observable(Stack()) { _, _, _ ->
+    var responses: HashMap<Request, LinkedList<Response>> by Delegates.observable(HashMap()) { _, _, _ ->
+        val responses = responses.map {
+            Pair(it.key.absoluteUrl(), it.value)
+        }.toMap()
+
         val handler = object : URLStreamHandler() {
             override fun openConnection(url: URL): URLConnection? {
-                if (responses.isEmpty()) {
-                    return null
-                }
+                return responses[url.toString()]?.let { responses ->
+                    if (responses.isEmpty()) {
+                        return null
+                    }
 
-                return responses.pop().urlConnection
+                    return responses.pop()?.urlConnection
+                }
             }
         }
 

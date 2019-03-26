@@ -14,7 +14,9 @@ end
 
 platform :android do
   lane :tests do
-    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.31.0/ktlint && chmod a+x ktlint && ./ktlint \"android/SwiftKotlination\"")
+    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.31.0/ktlint")
+    sh("chmod a+x ktlint")
+    sh("./ktlint ../android/SwiftKotlination/app/src/**/*.kt")
     gradle(task: "clean jacocoTestReport", project_dir: "android/SwiftKotlination")
   end
 
