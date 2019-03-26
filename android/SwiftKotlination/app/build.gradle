@@ -45,9 +45,11 @@ android {
         }
         test {
             java.srcDirs = ['src/test/kotlin', 'src/sharedTest/kotlin']
+            resources.srcDirs = ['src/test/resources', 'src/sharedTest/resources']
         }
         androidTest {
             java.srcDirs = ['src/androidTest/kotlin', 'src/sharedTest/kotlin']
+            resources.srcDirs = ['src/androidTest/resources', 'src/sharedTest/resources']
         }
     }
 }
