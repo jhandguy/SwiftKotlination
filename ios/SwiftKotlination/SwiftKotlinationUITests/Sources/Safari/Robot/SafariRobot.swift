@@ -5,6 +5,11 @@ final class SafariRobot: Robot {
     // MARK: - Internal Methods
 
     @discardableResult
+    func start(with url: String, sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
+        return start(.openUrl(url), with: sessionMock, and: animationStub)
+    }
+
+    @discardableResult
     func checkURL(contains string: String) -> Self {
         guard let url = URL(string: string) else {
             XCTFail("[\(self)] Invalid URL \(string)")
@@ -17,7 +22,7 @@ final class SafariRobot: Robot {
         }
 
         let button = app.buttons["URL"]
-        assert(button, .isHittable)
+        assert(button, [.isHittable])
 
         guard let value = button.value as? String else {
             XCTFail("[\(self)] Invalid value of button \(button.description)")

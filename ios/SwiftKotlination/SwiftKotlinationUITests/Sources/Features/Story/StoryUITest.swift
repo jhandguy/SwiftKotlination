@@ -3,11 +3,6 @@ import XCTest
 final class StoryUITest: XCTestCase {
     private lazy var app = XCUIApplication()
 
-    override func setUp() {
-        super.setUp()
-        setupSnapshot(app)
-    }
-
     func testFeatureStorySuccessfully() {
         let story = Story(
             section: "U.S.",
@@ -48,9 +43,8 @@ final class StoryUITest: XCTestCase {
             ]
         )
 
-        app.launch(.openStory(story), with: sessionMock)
-
         StoryRobot(app)
+            .start(with: story, and: sessionMock)
             .checkTitle(contains: "\(story.section) - \(story.subsection)")
             .checkStoryImage()
             .checkStoryTitle(contains: story.title)

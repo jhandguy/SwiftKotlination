@@ -1,4 +1,4 @@
-$devices_ios = ["iPhone XS Max"]
+$devices_ios = ["iPhone Xs Max"]
 $devices_android = ""
 
 platform :ios do

@@ -98,7 +98,6 @@
 		0FA5F7A520A87827009C30B4 /* CoordinatorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7A420A87827009C30B4 /* CoordinatorStub.swift */; };
 		0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7A420A87827009C30B4 /* CoordinatorStub.swift */; };
 		0FA5F7A720A87894009C30B4 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC64A462096543D00339755 /* Story.swift */; };
-		0FA5F7A920A8CBD2009C30B4 /* XCUIApplication+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7A820A8CBD2009C30B4 /* XCUIApplication+Launch.swift */; };
 		0FA5F7AB20A8D6AD009C30B4 /* TopStoriesUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */; };
 		0FA5F7AC20A8DBA8009C30B4 /* TopStories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBB65B820A23FF80090B77F /* TopStories.swift */; };
 		0FB7A20F213C6FCB00A2A777 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */; };
@@ -215,7 +214,6 @@
 		0FA5F79F20A87780009C30B4 /* Encodable+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+JSON.swift"; sourceTree = "<group>"; };
 		0FA5F7A120A877CE009C30B4 /* Decodable+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+JSON.swift"; sourceTree = "<group>"; };
 		0FA5F7A420A87827009C30B4 /* CoordinatorStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorStub.swift; sourceTree = "<group>"; };
-		0FA5F7A820A8CBD2009C30B4 /* XCUIApplication+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Launch.swift"; sourceTree = "<group>"; };
 		0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStoriesUITest.swift; sourceTree = "<group>"; };
 		0FB7A20E213C6FCB00A2A777 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		0FBB65B820A23FF80090B77F /* TopStories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStories.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 				0F2026F7213345F5009B80CE /* CoordinatorStub */,
 				0F8280492200955D0056C85D /* Parameters */,
 				0F82804D220095930056C85D /* Request */,
-				0FA5F79C20A8774F009C30B4 /* XCUIApplication */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -769,14 +766,6 @@
 				0FA5F79D20A87757009C30B4 /* TopStories */,
 			);
 			path = Features;
-			sourceTree = "<group>";
-		};
-		0FA5F79C20A8774F009C30B4 /* XCUIApplication */ = {
-			isa = PBXGroup;
-			children = (
-				0FA5F7A820A8CBD2009C30B4 /* XCUIApplication+Launch.swift */,
-			);
-			path = XCUIApplication;
 			sourceTree = "<group>";
 		};
 		0FA5F79D20A87757009C30B4 /* TopStories */ = {
@@ -1299,7 +1288,6 @@
 				0F3EA4CB212DBF8C0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F170543212F577900F87958 /* ErrorStringConvertible.swift in Sources */,
 				0FA5F7A020A87780009C30B4 /* Encodable+JSON.swift in Sources */,
-				0FA5F7A920A8CBD2009C30B4 /* XCUIApplication+Launch.swift in Sources */,
 				0F22CA8321AED1D800914927 /* StoryRobot.swift in Sources */,
 				0F3EA4E0212DF1DD0090A69A /* Identifiable.swift in Sources */,
 				0FA5F79920A8770C009C30B4 /* StoryUITest.swift in Sources */,

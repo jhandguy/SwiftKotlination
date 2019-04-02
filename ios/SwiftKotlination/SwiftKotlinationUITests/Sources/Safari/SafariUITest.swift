@@ -6,9 +6,8 @@ final class SafariUITest: XCTestCase {
     func testSafariSuccessfully() {
         let url = "https://url.com"
 
-        app.launch(.openUrl(url))
-
         SafariRobot(app)
+            .start(with: url)
             .checkURL(contains: url)
             .closeSafari()
     }

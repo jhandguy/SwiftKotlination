@@ -3,11 +3,6 @@ import XCTest
 final class TopStoriesUITest: XCTestCase {
     private lazy var app = XCUIApplication()
 
-    override func setUp() {
-        super.setUp()
-        setupSnapshot(app)
-    }
-
     func testFeatureTopStoriesSuccessfully() {
         let topStories = [
             (
@@ -45,9 +40,8 @@ final class TopStoriesUITest: XCTestCase {
             ]
         )
 
-        app.launch(.start, with: sessionMock)
-
         TopStoriesRobot(app)
+            .start(with: sessionMock)
             .checkTitle(contains: "Top Stories")
             .takeScreenshot(named: "Top Stories")
             .checkTopStoriesCount(is: topStories.count)
