@@ -86,7 +86,7 @@ class StoryView(
                 textView {
                     text = story.abstract
                     textColorResource = R.color.primary_text
-                    textSize = sp(7).toFloat()
+                    textSize = sp(6).toFloat()
                     id = R.id.story_abstract
                 }.lparams(width = matchParent, height = wrapContent) {
                     topToBottom = R.id.story_title
@@ -98,7 +98,7 @@ class StoryView(
                 textView {
                     text = story.byline
                     textColorResource = R.color.secondary_text
-                    textSize = sp(6).toFloat()
+                    textSize = sp(4).toFloat()
                     id = R.id.story_byline
                 }.lparams(width = matchParent, height = wrapContent) {
                     topToBottom = R.id.story_abstract
