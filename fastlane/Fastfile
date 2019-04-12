@@ -17,6 +17,7 @@ platform :android do
     sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.31.0/ktlint")
     sh("chmod a+x ktlint")
     sh("./ktlint ../android/SwiftKotlination/app/src/**/*.kt")
+    sh("rm ./ktlint")
     gradle(task: "clean jacocoTestReport", project_dir: "android/SwiftKotlination")
   end
 

@@ -63,13 +63,13 @@ class StoryViewUnitTest {
             view.find<TextView>(R.id.story_abstract).run {
                 assertEquals(text, story.abstract)
                 assertEquals(currentTextColor, it.getColor(R.color.primary_text))
-                assertEquals(textSize, sp(7).toFloat())
+                assertEquals(textSize, sp(6).toFloat())
             }
 
             view.find<TextView>(R.id.story_byline).run {
                 assertEquals(text, story.byline)
                 assertEquals(currentTextColor, it.getColor(R.color.secondary_text))
-                assertEquals(textSize, sp(6).toFloat())
+                assertEquals(textSize, sp(4).toFloat())
             }
 
             view.find<Button>(R.id.story_button).run {

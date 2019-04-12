@@ -34,7 +34,7 @@ class TopStoriesItemViewUnitTest {
             }
 
             view.find<TextView>(R.id.top_stories_item_title).run {
-                assertEquals(textSize, sp(7).toFloat())
+                assertEquals(textSize, sp(6).toFloat())
                 assertEquals(typeface, Typeface.DEFAULT_BOLD)
             }
 
