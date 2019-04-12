@@ -22,7 +22,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
 class MainActivityTest {
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
