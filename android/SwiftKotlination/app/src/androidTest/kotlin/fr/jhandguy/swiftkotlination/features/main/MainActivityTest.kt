@@ -5,20 +5,15 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import fr.jhandguy.swiftkotlination.AppMock
-import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.global.linkedListOf
-import fr.jhandguy.swiftkotlination.matchers.RecyclerViewMatcher.Companion.withItemCount
 import fr.jhandguy.swiftkotlination.network.File
-import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
 import org.hamcrest.CoreMatchers.instanceOf
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -26,39 +21,18 @@ class MainActivityTest {
     @get:Rule
     val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
 
-    @Before
-    fun setup() {
+    @Test
+    fun `test`() {
         val application = ApplicationProvider.getApplicationContext<AppMock>()
         application.responses = hashMapOf(
                 Pair(Request.FetchTopStories, linkedListOf(
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(error = NetworkError.InvalidResponse())
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbLarge.jpg"), linkedListOf(
-                        Response(File("28DC-nafta-thumbLarge", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-superJumbo-v2.jpg"), linkedListOf(
-                        Response(File("28DC-nafta-superJumbo-v2", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbLarge.jpg"), linkedListOf(
-                        Response(File("27arizpolitics7-thumbLarge", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-superJumbo-v2.jpg"), linkedListOf(
-                        Response(File("27arizpolitics7-superJumbo-v2", File.Extension.JPG))
+                        Response(File("top_stories_empty", File.Extension.JSON))
                 ))
         )
-    }
 
-    @Test
-    fun `test`() {
         activityRule.launchActivity(Intent())
 
         onView(instanceOf(AppCompatTextView::class.java))
                 .check(matches(withText("Top Stories")))
-
-        onView(withId(R.id.top_stories_list))
-                .check(matches(withItemCount(2)))
     }
 }
