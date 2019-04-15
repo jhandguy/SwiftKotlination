@@ -1,6 +1,6 @@
 import UIKit
 
-final class StoryView: UIView {
+final class StoryView: UIView, Accessible {
 
     // MARK: - Initializer
 
@@ -14,6 +14,8 @@ final class StoryView: UIView {
         _ = abstractLabel
         _ = bylineLabel
         _ = urlButton
+
+        generateAccessibilityIdentifiers()
     }
 
     required init?(coder aDecoder: NSCoder) {

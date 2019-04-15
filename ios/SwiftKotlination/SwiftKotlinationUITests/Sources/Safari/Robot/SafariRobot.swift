@@ -6,7 +6,9 @@ final class SafariRobot: Robot {
 
     @discardableResult
     func start(with url: String, sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
-        return start(.openUrl(url), with: sessionMock, and: animationStub)
+        start(.openUrl(url), with: sessionMock, and: animationStub)
+
+        return self
     }
 
     @discardableResult
@@ -36,6 +38,8 @@ final class SafariRobot: Robot {
 
     @discardableResult
     func closeSafari() -> Self {
-        return tap(app.buttons["Done"])
+        tap(app.buttons["Done"])
+
+        return self
     }
 }

@@ -10,6 +10,12 @@ class Robot {
 
     var app: XCUIApplication
 
+    lazy var navigationBar          = app.navigationBars.firstMatch
+    lazy var navigationBarButton    = navigationBar.buttons.firstMatch
+    lazy var navigationBarTitle     = navigationBar.otherElements.firstMatch
+    lazy var alert                  = app.alerts.firstMatch
+    lazy var alertButton            = alert.buttons.firstMatch
+
     // MARK: - Initializer
 
     init(_ app: XCUIApplication) {
@@ -32,20 +38,24 @@ class Robot {
 
         app.launch()
 
-        return assert(app, [.exists], timeout: timeout)
+        assert(app, [.exists], timeout: timeout)
+
+        return self
     }
 
     @discardableResult
     func finish(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         app.terminate()
+        assert(app, [.doesNotExist], timeout: timeout)
 
-        return assert(app, [.doesNotExist], timeout: timeout)
+        return self
     }
 
     @discardableResult
     func tap(_ element: XCUIElement, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         assert(element, [.isHittable], timeout: timeout)
         element.tap()
+
         return self
     }
 
@@ -56,6 +66,7 @@ class Robot {
             XCTFail("[\(self)] Element \(element.description) did not fulfill expectation: \(predicates.map { $0.format })")
             return self
         }
+
         return self
     }
 
@@ -78,19 +89,42 @@ class Robot {
 
     @discardableResult
     func checkTitle(contains title: String, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
-        return assert(app.navigationBars[title], [.isHittable], timeout: timeout)
+        assert(navigationBar, [.isHittable], timeout: timeout)
+        assert(navigationBarTitle, [.contains(title)], timeout: timeout)
+
+        return self
     }
 
     @discardableResult
     func takeScreenshot(named name: String, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
         snapshot(name, timeWaitingForIdle: timeout)
+
         return self
     }
 
     @discardableResult
-    func closeErrorAlert(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
-        let alert = app.alerts["Error"]
-        assert(alert, [.exists], timeout: timeout)
-        return tap(alert.buttons["Ok"])
+    func checkAlert(contains error: ErrorStringConvertible, timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+        let title = alert.staticTexts.element(boundBy: 0)
+        let description = alert.staticTexts.element(boundBy: 1)
+        assert(title, [.contains("Error")], timeout: timeout)
+        assert(description, [.contains(error.description)], timeout: timeout)
+
+        return self
+    }
+
+    @discardableResult
+    func closeAlert(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+        assert(alert, [.exists])
+        tap(alertButton)
+        assert(alert, [.doesNotExist])
+
+        return self
+    }
+
+    @discardableResult
+    func back() -> Self {
+        tap(navigationBarButton)
+
+        return self
     }
 }

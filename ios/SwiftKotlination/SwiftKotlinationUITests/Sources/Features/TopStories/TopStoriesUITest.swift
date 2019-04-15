@@ -48,15 +48,16 @@ final class TopStoriesUITest: XCTestCase {
             .forEach(topStories: [0, 1]) { robot, index in
                 let story = topStories[index]
                 robot
-                    .checkTopStoryTitle(contains: story.title)
-                    .checkTopStoryByline(contains: story.byline)
+                    .checkTopStoryTitle(contains: story.title, at: index)
+                    .checkTopStoryByline(contains: story.byline, at: index)
                     .openStory(at: index)
                     .checkTitle(contains: story.category)
-                    .closeStory()
+                    .back()
             }
             .checkTitle(contains: "Top Stories")
             .checkTopStoriesCount(is: topStories.count)
             .refreshTopStories()
-            .closeErrorAlert()
+            .checkAlert(contains: NetworkError.invalidResponse)
+            .closeAlert()
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-final class TopStoriesTableViewCell: UITableViewCell {
+final class TopStoriesTableViewCell: UITableViewCell, Accessible {
 
     // MARK: - Initializer
 
@@ -12,6 +12,8 @@ final class TopStoriesTableViewCell: UITableViewCell {
         _ = multimediaImageView
         _ = titleLabel
         _ = bylineLabel
+
+        generateAccessibilityIdentifiers()
     }
 
     required init?(coder aDecoder: NSCoder) {

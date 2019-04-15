@@ -2,29 +2,25 @@ import XCTest
 
 final class TopStoriesRobot: Robot {
 
+    // MARK: - Private Properties
+
+    private lazy var table = app.tables.firstMatch
+
     // MARK: - Internal Methods
 
     @discardableResult
     func start(with sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
-        return start(.start, with: sessionMock, and: animationStub)
-    }
+        start(.start, with: sessionMock, and: animationStub)
 
-    @discardableResult
-    func checkTopStoriesCount(is count: Int) -> Self {
-        XCTAssertEqual(app.tables.count, 1)
-        assert(app.tables.firstMatch, [.isHittable])
-        XCTAssertEqual(app.tables.firstMatch.cells.count, count)
         return self
     }
 
     @discardableResult
-    func checkTopStoryTitle(contains title: String) -> Self {
-        return assert(app.staticTexts[title], [.isHittable])
-    }
+    func checkTopStoriesCount(is count: Int) -> Self {
+        assert(table, [.isHittable])
+        assert(table, [.has(count, .cell)])
 
-    @discardableResult
-    func checkTopStoryByline(contains byline: String) -> Self {
-        return assert(app.staticTexts[byline], [.isHittable])
+        return self
     }
 
     @discardableResult
@@ -32,17 +28,42 @@ final class TopStoriesRobot: Robot {
         indexes.forEach { index in
             completion(self, index)
         }
+
+        return self
+    }
+
+    @discardableResult
+    func checkTopStoryTitle(contains title: String, at index: Int) -> Self {
+        let cell = table.cells.element(boundBy: index)
+        let label = cell.staticTexts["TopStoriesTableViewCell.titleLabel"]
+        assert(label, [.isHittable])
+        assert(label, [.contains(title)])
+
+        return self
+    }
+
+    @discardableResult
+    func checkTopStoryByline(contains byline: String, at index: Int) -> Self {
+        let cell = table.cells.element(boundBy: index)
+        let label = cell.staticTexts["TopStoriesTableViewCell.bylineLabel"]
+        assert(label, [.isHittable])
+        assert(label, [.contains(byline)])
+
         return self
     }
 
     @discardableResult
     func openStory(at index: Int) -> StoryRobot {
-        tap(app.tables.firstMatch.cells.element(boundBy: index))
+        let cell = table.cells.element(boundBy: index)
+        tap(cell)
+
         return StoryRobot(app)
     }
 
     @discardableResult
     func refreshTopStories() -> Self {
-        return refresh(inside: app.tables.firstMatch)
+        refresh(inside: table)
+
+        return self
     }
 }

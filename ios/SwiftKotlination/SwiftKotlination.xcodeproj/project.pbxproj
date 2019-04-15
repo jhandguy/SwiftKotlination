@@ -122,6 +122,8 @@
 		0FD86668212F0C3B0033CD13 /* AppDelegateTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */; };
 		0FD86670212F471E0033CD13 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD8666F212F471E0033CD13 /* NetworkError.swift */; };
 		0FF77C9F212DF6D80072267A /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA5F79F20A87780009C30B4 /* Encodable+JSON.swift */; };
+		9502843E226475C5002B4A15 /* Accessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9502843D226475C5002B4A15 /* Accessible.swift */; };
+		9502844122648358002B4A15 /* XCUIElement.ElementType+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9502844022648358002B4A15 /* XCUIElement.ElementType+Name.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +244,8 @@
 		0FCFF04C2147F780009CFE93 /* ErrorPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPresenter.swift; sourceTree = "<group>"; };
 		0FD86667212F0C3B0033CD13 /* AppDelegateTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateTest.swift; sourceTree = "<group>"; };
 		0FD8666F212F471E0033CD13 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		9502843D226475C5002B4A15 /* Accessible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessible.swift; sourceTree = "<group>"; };
+		9502844022648358002B4A15 /* XCUIElement.ElementType+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIElement.ElementType+Name.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +384,7 @@
 				0F2026F7213345F5009B80CE /* CoordinatorStub */,
 				0F8280492200955D0056C85D /* Parameters */,
 				0F82804D220095930056C85D /* Request */,
+				9502843F2264832B002B4A15 /* XCUIElement.ElementType */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -425,6 +430,7 @@
 		0F2026FD21334816009B80CE /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				9502843D226475C5002B4A15 /* Accessible.swift */,
 				0F170541212F575300F87958 /* ErrorStringConvertible.swift */,
 				0F3EA4DE212DF1590090A69A /* Identifiable.swift */,
 				0FA0B8CC21EC949D000DE23F /* Scopable.swift */,
@@ -1039,6 +1045,14 @@
 			path = Safari;
 			sourceTree = "<group>";
 		};
+		9502843F2264832B002B4A15 /* XCUIElement.ElementType */ = {
+			isa = PBXGroup;
+			children = (
+				9502844022648358002B4A15 /* XCUIElement.ElementType+Name.swift */,
+			);
+			path = XCUIElement.ElementType;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1219,6 +1233,7 @@
 				0F29A35021ECD875000A7D7A /* AnimationStub+Decodable.swift in Sources */,
 				0F3EA4AE212D99CD0090A69A /* URLSessionProtocol.swift in Sources */,
 				0F0E8A592148FF94000B7268 /* DependencyManager+StoryFactory.swift in Sources */,
+				9502843E226475C5002B4A15 /* Accessible.swift in Sources */,
 				0FA5F7A620A87831009C30B4 /* CoordinatorStub.swift in Sources */,
 				0FA5F7A220A877CE009C30B4 /* Decodable+JSON.swift in Sources */,
 				0FBB65B920A23FF80090B77F /* TopStories.swift in Sources */,
@@ -1269,6 +1284,7 @@
 			files = (
 				0FB7A20F213C6FCB00A2A777 /* SnapshotHelper.swift in Sources */,
 				0F9EEE66212F4F21006056E5 /* NetworkError.swift in Sources */,
+				9502844122648358002B4A15 /* XCUIElement.ElementType+Name.swift in Sources */,
 				0F3EA4C4212DBA0C0090A69A /* URLSessionMock.swift in Sources */,
 				0FA5F7A520A87827009C30B4 /* CoordinatorStub.swift in Sources */,
 				0F3EA4A4212D7CD60090A69A /* SafariUITest.swift in Sources */,
