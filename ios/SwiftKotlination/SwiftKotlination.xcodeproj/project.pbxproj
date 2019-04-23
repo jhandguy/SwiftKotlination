@@ -332,11 +332,11 @@
 		0F16552A212C2641005137B0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0FA5F78C20A5E996009C30B4 /* NetworkManager.swift */,
-				0F16552C212C266F005137B0 /* Request.swift */,
 				0F16553C212C98A7005137B0 /* HTTPMethod.swift */,
-				0F16553E212C98C7005137B0 /* Parameters.swift */,
 				0FD8666F212F471E0033CD13 /* NetworkError.swift */,
+				0FA5F78C20A5E996009C30B4 /* NetworkManager.swift */,
+				0F16553E212C98C7005137B0 /* Parameters.swift */,
+				0F16552C212C266F005137B0 /* Request.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1012,9 +1012,9 @@
 		0FD8666E212F46EF0033CD13 /* Observer */ = {
 			isa = PBXGroup;
 			children = (
-				0F9EEE64212F4AAA006056E5 /* Observer.swift */,
 				0FC74197213938CF00E0F254 /* Disposable.swift */,
 				0FC74199213938DA00E0F254 /* DisposeBag.swift */,
+				0F9EEE64212F4AAA006056E5 /* Observer.swift */,
 			);
 			path = Observer;
 			sourceTree = "<group>";
