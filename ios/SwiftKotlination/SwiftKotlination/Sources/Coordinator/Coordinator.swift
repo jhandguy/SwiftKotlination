@@ -11,16 +11,10 @@ final class Coordinator {
 
     typealias Factory = TopStoriesFactory & StoryFactory
 
-    // MARK: - Private Properties
-
     private let factory: Factory
     private let window: UIWindow
 
-    // MARK: - Internal Properties
-
     let navigationController = UINavigationController()
-
-    // MARK: - Initializer
 
     init(factory: Factory, window: UIWindow) {
         self.factory = factory
@@ -29,8 +23,6 @@ final class Coordinator {
         self.window.makeKeyAndVisible()
     }
 }
-
-// MARK: - Protocol Methods
 
 extension Coordinator: CoordinatorProtocol {
     func start() {

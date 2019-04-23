@@ -3,8 +3,6 @@ protocol StoryFactory {
     func makeStoryViewController(for story: Story) -> StoryViewController
 }
 
-// MARK: - Protocol Methods
-
 extension DependencyManager: StoryFactory {
     func makeStoryManager(for story: Story) -> StoryManagerProtocol {
         return StoryManager(story: story)

@@ -1,6 +1,7 @@
 import XCTest
 
 extension XCTestCase {
+    
     private struct RequireError<T>: LocalizedError {
         let file: StaticString
         let line: UInt
@@ -9,8 +10,6 @@ extension XCTestCase {
             return "Required value of type \(T.self) was nil at line \(line) in file \(file)"
         }
     }
-
-    // MARK: - Internal Methods
 
     func require<T>(_ expression: @autoclosure () -> T?, file: StaticString = #file, line: UInt = #line) throws -> T {
         guard let value = expression() else {

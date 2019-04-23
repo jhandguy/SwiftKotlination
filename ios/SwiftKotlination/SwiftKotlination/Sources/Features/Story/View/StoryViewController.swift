@@ -2,17 +2,11 @@ import UIKit
 
 final class StoryViewController: UIViewController {
 
-    // MARK: - Private Properties
-
     private(set) lazy var storyView = StoryView()
-
-    // MARK: - Internal Properties
 
     weak var coordinator: CoordinatorProtocol?
     var viewModel: StoryViewModel!
     let disposeBag = DisposeBag()
-
-    // MARK: - Lifecycle Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +34,6 @@ final class StoryViewController: UIViewController {
 
         disposeBag.dispose()
     }
-
-    // MARK: - Private Methods
 
     private func bind(_ story: Story) {
         title = [story.section, story.subsection]

@@ -2,8 +2,6 @@ import XCTest
 
 final class SafariRobot: Robot {
 
-    // MARK: - Internal Methods
-
     @discardableResult
     func start(with url: String, sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
         start(.openUrl(url), with: sessionMock, and: animationStub)

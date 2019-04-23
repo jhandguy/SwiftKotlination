@@ -2,26 +2,18 @@ import UIKit.UIImage
 
 final class TopStoriesViewModel {
 
-    // MARK: - Private Properties
-
     typealias Factory = ImageFactory & TopStoriesFactory
     private let factory: Factory
 
     private lazy var topStoriesManager = factory.makeTopStoriesManager()
     private lazy var imageManager = factory.makeImageManager()
 
-    // MARK: - Initializer
-
     init(factory: Factory) {
         self.factory = factory
     }
 
-    // MARK: - Internal Properties
-
     var stories: [Story] = []
     var images: [String: UIImage] = [:]
-
-    // MARK: - Internal Methods
 
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {

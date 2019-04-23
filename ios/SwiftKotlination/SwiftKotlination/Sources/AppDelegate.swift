@@ -3,11 +3,7 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // MARK: - Internal Properties
-
     var coordinator: CoordinatorProtocol!
-
-    // MARK: - Lifecycle Methods
 
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         if let animationStub = ProcessInfo.processInfo.decode(AnimationStub.self) {

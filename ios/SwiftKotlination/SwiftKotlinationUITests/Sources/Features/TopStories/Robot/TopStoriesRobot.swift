@@ -2,11 +2,7 @@ import XCTest
 
 final class TopStoriesRobot: Robot {
 
-    // MARK: - Private Properties
-
     private lazy var table = app.tables.firstMatch
-
-    // MARK: - Internal Methods
 
     @discardableResult
     func start(with sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {

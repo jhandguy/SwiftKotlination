@@ -2,8 +2,6 @@ import UIKit
 
 final class TopStoriesTableViewCell: UITableViewCell, Accessible {
 
-    // MARK: - Initializer
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -19,8 +17,6 @@ final class TopStoriesTableViewCell: UITableViewCell, Accessible {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    // MARK: - Private Properties
 
     private lazy var contentStackView = UIStackView().with {
         contentView.addSubview($0)
@@ -43,8 +39,6 @@ final class TopStoriesTableViewCell: UITableViewCell, Accessible {
         $0.distribution = .fillProportionally
         $0.spacing = 0
     }
-
-    // MARK: - Internal Properties
 
     private(set) lazy var multimediaImageView = UIImageView().with {
         contentStackView.addArrangedSubview($0)

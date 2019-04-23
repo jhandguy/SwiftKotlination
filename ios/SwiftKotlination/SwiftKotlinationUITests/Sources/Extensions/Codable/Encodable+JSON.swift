@@ -2,8 +2,6 @@ import Foundation
 
 extension Encodable {
 
-    // MARK: - Internal Properties
-
     var json: String? {
         guard let data = data else {
             return nil

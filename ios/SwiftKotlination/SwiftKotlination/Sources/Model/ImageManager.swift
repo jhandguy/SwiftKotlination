@@ -9,8 +9,6 @@ struct ImageManager {
     let networkManager: NetworkManagerProtocol
 }
 
-// MARK: - Protocol Methods
-
 extension ImageManager: ImageManagerProtocol {
     @discardableResult
     func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {

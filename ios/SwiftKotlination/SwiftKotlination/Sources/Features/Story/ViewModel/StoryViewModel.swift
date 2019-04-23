@@ -2,8 +2,6 @@ import UIKit.UIImage
 
 final class StoryViewModel {
 
-    // MARK: - Private Properties
-
     typealias Factory = ImageFactory & StoryFactory
     private let factory: Factory
     private let story: Story
@@ -11,18 +9,12 @@ final class StoryViewModel {
     private lazy var storyManager = factory.makeStoryManager(for: story)
     private lazy var imageManager = factory.makeImageManager()
 
-    // MARK: - Initializer
-
     init(factory: Factory, story: Story) {
         self.factory = factory
         self.story = story
     }
 
-    // MARK: - Internal Properties
-
     var image: UIImage?
-
-    // MARK: - Internal Methods
 
     func story(_ observer: @escaping Observer<Story>) {
         storyManager.story(observer)

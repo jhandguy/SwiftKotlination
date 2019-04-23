@@ -2,13 +2,9 @@ import UIKit
 
 final class TopStoriesTableViewController: UITableViewController {
 
-    // MARK: - Internal Properties
-
     weak var coordinator: CoordinatorProtocol?
     var viewModel: TopStoriesViewModel!
     let disposeBag = DisposeBag()
-
-    // MARK: - Lifecycle Methods
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +43,6 @@ final class TopStoriesTableViewController: UITableViewController {
         disposeBag.dispose()
     }
 
-    // MARK: - UITableView Methods
-
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
@@ -74,8 +68,6 @@ final class TopStoriesTableViewController: UITableViewController {
         let story = viewModel.stories[indexPath.row]
         return bind(story, with: cell)
     }
-
-    // MARK: - Private Methods
 
     private func bind(_ story: Story, with cell: TopStoriesTableViewCell) -> TopStoriesTableViewCell {
         cell.apply {

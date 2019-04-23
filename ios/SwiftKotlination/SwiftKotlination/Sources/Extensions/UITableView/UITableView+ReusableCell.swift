@@ -2,8 +2,6 @@ import UIKit
 
 extension UITableView {
 
-    // MARK: - Internal Methods
-
     func register<T: UITableViewCell>(_ cellClass: T.Type) {
         register(cellClass.self, forCellReuseIdentifier: T.identifier)
     }

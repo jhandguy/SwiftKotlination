@@ -2,16 +2,12 @@ import XCTest
 
 final class StoryRobot: Robot {
 
-    // MARK: - Private Properties
-
     private lazy var stackView          = app.otherElements["StoryView.stackView"]
     private lazy var multimediaImage    = stackView.images["StoryView.multimediaImageView"]
     private lazy var titleLabel         = stackView.staticTexts["StoryView.titleLabel"]
     private lazy var abstractLabel      = stackView.staticTexts["StoryView.abstractLabel"]
     private lazy var bylineLabel        = stackView.staticTexts["StoryView.bylineLabel"]
     private lazy var urlButton          = stackView.buttons["StoryView.urlButton"]
-
-    // MARK: - Internal Methods
 
     @discardableResult
     func start(with story: Story, and sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {

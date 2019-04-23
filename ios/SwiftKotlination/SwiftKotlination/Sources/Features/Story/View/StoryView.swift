@@ -2,8 +2,6 @@ import UIKit
 
 final class StoryView: UIView, Accessible {
 
-    // MARK: - Initializer
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -21,8 +19,6 @@ final class StoryView: UIView, Accessible {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    // MARK: - Private Properties
 
     private lazy var scrollView = UIScrollView().with {
         addSubview($0)
@@ -49,8 +45,6 @@ final class StoryView: UIView, Accessible {
         $0.distribution = .fill
         $0.spacing = 28
     }
-
-    // MARK: - Internal Properties
 
     lazy var multimediaImageView = UIImageView().with {
         stackView.addArrangedSubview($0)

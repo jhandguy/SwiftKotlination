@@ -3,8 +3,6 @@ protocol TopStoriesFactory {
     func makeTopStoriesTableViewController() -> TopStoriesTableViewController
 }
 
-// MARK: - Protocol Methods
-
 extension DependencyManager: TopStoriesFactory {
     func makeTopStoriesManager() -> TopStoriesManagerProtocol {
         return TopStoriesManager(networkManager: networkManager)

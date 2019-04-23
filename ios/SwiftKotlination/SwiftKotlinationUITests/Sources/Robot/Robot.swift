@@ -2,11 +2,7 @@ import XCTest
 
 class Robot {
 
-    // MARK: Private Constants
-
     private static let defaultTimeout: Double = 30
-
-    // MARK: - Internal Properties
 
     var app: XCUIApplication
 
@@ -16,14 +12,10 @@ class Robot {
     lazy var alert                  = app.alerts.firstMatch
     lazy var alertButton            = alert.buttons.firstMatch
 
-    // MARK: - Initializer
-
     init(_ app: XCUIApplication) {
         self.app = app
         setupSnapshot(app)
     }
-
-    // MARK: - Internal Methods
 
     @discardableResult
     func start(

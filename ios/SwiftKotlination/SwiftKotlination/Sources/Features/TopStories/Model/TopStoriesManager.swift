@@ -10,8 +10,6 @@ struct TopStoriesManager {
     let networkManager: NetworkManagerProtocol
 }
 
-// MARK: - Protocol Methods
-
 extension TopStoriesManager: TopStoriesManagerProtocol {
     @discardableResult
     func stories(_ observer: @escaping Observer<[Story]>) -> Disposable {

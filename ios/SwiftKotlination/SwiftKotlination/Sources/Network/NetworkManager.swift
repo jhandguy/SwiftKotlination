@@ -8,19 +8,13 @@ protocol NetworkManagerProtocol {
 
 final class NetworkManager {
 
-    // MARK: - Private Properties
-
     private var session: URLSessionProtocol
     private(set) var observables: [Request: [UUID: Observer<Data>]]
-
-    // MARK: - Initializer
 
     init(session: URLSessionProtocol = URLSession(configuration: .default), observables: [Request: [UUID: Observer<Data>]] = [:]) {
         self.session = session
         self.observables = observables
     }
-
-    // MARK: - Private Methods
 
     private func execute(_ request: Request, with observers: [Observer<Data>]) {
         guard
@@ -73,8 +67,6 @@ final class NetworkManager {
         return urlRequest
     }
 }
-
-// MARK: - Protocol Methods
 
 extension NetworkManager: NetworkManagerProtocol {
     @discardableResult
