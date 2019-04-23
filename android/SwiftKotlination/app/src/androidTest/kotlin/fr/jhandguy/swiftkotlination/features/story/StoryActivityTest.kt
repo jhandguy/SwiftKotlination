@@ -10,5 +10,5 @@ class StoryActivityTest {
     val activityRule = ActivityTestRule(StoryActivity::class.java, false, false)
 
     @Test
-    fun `test`() {}
+    fun testStoryActivity() {}
 }

@@ -22,7 +22,7 @@ class MainActivityTest {
     val activityRule = ActivityTestRule(MainActivity::class.java, false, false)
 
     @Test
-    fun `test`() {
+    fun testMainActivity() {
         val application = ApplicationProvider.getApplicationContext<AppMock>()
         application.responses = hashMapOf(
                 Pair(Request.FetchTopStories, linkedListOf(

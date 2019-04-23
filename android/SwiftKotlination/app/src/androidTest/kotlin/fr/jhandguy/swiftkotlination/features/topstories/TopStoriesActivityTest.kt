@@ -26,7 +26,7 @@ class TopStoriesActivityTest {
     val activityRule = ActivityTestRule(TopStoriesActivity::class.java, false, false)
 
     @Test
-    fun `test`() {
+    fun testTopStoriesActivity() {
         val application = ApplicationProvider.getApplicationContext<AppMock>()
         application.responses = hashMapOf(
                 Pair(Request.FetchTopStories, linkedListOf(
