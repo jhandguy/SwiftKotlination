@@ -1,6 +1,7 @@
 import XCTest
 
 final class StoryUITest: XCTestCase {
+    
     private lazy var app = XCUIApplication()
 
     func testFeatureStorySuccessfully() {
