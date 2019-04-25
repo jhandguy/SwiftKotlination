@@ -114,8 +114,8 @@ class Robot {
     }
 
     @discardableResult
-    func back() -> Self {
-        tap(navigationBarButton)
+    func back(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+        tap(navigationBarButton, timeout: timeout)
 
         return self
     }
