@@ -5,18 +5,19 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
 import fr.jhandguy.swiftkotlination.AppMock
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
 import fr.jhandguy.swiftkotlination.global.linkedListOf
+import fr.jhandguy.swiftkotlination.matchers.RecyclerViewMatcher.Companion.childOfParent
 import fr.jhandguy.swiftkotlination.matchers.RecyclerViewMatcher.Companion.withItemCount
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
+import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.Rule
 import org.junit.Test
@@ -56,5 +57,17 @@ class TopStoriesActivityTest {
 
         onView(withId(R.id.top_stories_list))
                 .check(matches(withItemCount(2)))
+
+        onView(allOf(
+                withParent(childOfParent(withId(R.id.top_stories_list), 0)),
+                withId(R.id.top_stories_item_title)
+        ))
+                .check(matches(withText("Preliminary Nafta Deal Reached Between U.S. and Mexico")))
+
+        onView(allOf(
+                withParent(childOfParent(withId(R.id.top_stories_list), 0)),
+                withId(R.id.top_stories_item_byline)
+        ))
+                .check(matches(withText("By ANA SWANSON and KATIE ROGERS")))
     }
 }

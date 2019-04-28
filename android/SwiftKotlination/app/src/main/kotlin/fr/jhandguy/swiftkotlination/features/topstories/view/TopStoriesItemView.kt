@@ -21,7 +21,7 @@ import org.jetbrains.anko.wrapContent
 class TopStoriesItemView : AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
-        return constraintLayout() {
+        return constraintLayout {
             padding = dip(8)
             lparams(width = matchParent, height = dip(125))
 
