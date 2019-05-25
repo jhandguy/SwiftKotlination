@@ -30,7 +30,8 @@ class MainActivityTest {
                 ))
         )
 
-        activityRule.launchActivity(Intent())
+        val intent = Intent()
+        activityRule.launchActivity(intent)
 
         onView(instanceOf(AppCompatTextView::class.java))
                 .check(matches(withText("Top Stories")))
