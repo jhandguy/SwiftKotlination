@@ -18,7 +18,8 @@ interface NetworkManagerInterface {
 
 class NetworkManager(
     val handler: URLStreamHandler? = null,
-    var observables: MutableMap<Request, MutableMap<UUID, Observer<ByteArray>>> = HashMap()) : NetworkManagerInterface {
+    var observables: MutableMap<Request, MutableMap<UUID, Observer<ByteArray>>> = HashMap()
+) : NetworkManagerInterface {
 
     private suspend fun execute(request: Request, observers: List<Observer<ByteArray>>) {
         if (observers.isEmpty()) { return }

@@ -8,7 +8,9 @@ import fr.jhandguy.swiftkotlination.observer.Result
 
 class NetworkManagerMock(
     val result: Result<ByteArray>,
-    var observers: MutableList<Observer<ByteArray>> = ArrayList()) : NetworkManagerInterface {
+    var observers: MutableList<Observer<ByteArray>> = ArrayList()
+) : NetworkManagerInterface {
+
     override suspend fun observe(request: Request, observer: Observer<ByteArray>): Disposable {
         observers.add(observer)
         execute(request)

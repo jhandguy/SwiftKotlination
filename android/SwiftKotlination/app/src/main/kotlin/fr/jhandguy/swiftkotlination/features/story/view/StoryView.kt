@@ -37,8 +37,8 @@ class StoryView(
     val viewModel: StoryViewModel,
     val coordinator: CoordinatorInterface,
     val disposeBag: DisposeBag = DisposeBag(),
-    var story: Story = Story()) :
-    AnkoComponent<Context> {
+    var story: Story = Story()
+) : AnkoComponent<Context> {
 
     override fun createView(ui: AnkoContext<Context>): View = with(ui) {
         return scrollView {
