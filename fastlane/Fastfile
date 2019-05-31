@@ -1,24 +1,30 @@
-$devices_ios = ["iPhone Xs Max"]
-$devices_android = ""
+$path_ios = "ios/SwiftKotlination"
+$path_android = "android/SwiftKotlination"
+
+$project_ios = "#{$path_ios}/SwiftKotlination.xcodeproj"
+$project_android = "fr.jhandguy.swiftkotlination"
+
+$device_ios = "iPhone Xs Max"
+$device_android = "emulator-5554"
 
 platform :ios do
   lane :tests do
     swiftlint(
-      path: "ios/SwiftKotlination"
+      path: $path_ios
     )
     run_tests(
-      devices: $devices_ios, 
-      clean: true, 
-      code_coverage: true, 
-      project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj"
+      device: $device_ios,
+      clean: true,
+      code_coverage: true,
+      project: $project_ios
     )
   end
 
   lane :screenshots do
     capture_ios_screenshots(
-      devices: $devices_ios, 
-      clear_previous_screenshots: true, 
-      project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj"
+      devices: $device_ios,
+      clear_previous_screenshots: true,
+      project: $project_ios
     )
   end
 end
@@ -27,35 +33,37 @@ platform :android do
   lane :tests do
     sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.33.0/ktlint")
     sh("chmod a+x ktlint")
-    sh("./ktlint ../android/SwiftKotlination/app/src/**/*.kt")
+    sh("./ktlint ../#{$path_android}/app/src/**/*.kt")
     sh("rm ./ktlint")
     build_android_app(
-      task: "clean jacocoTestReport", 
-      project_dir: "android/SwiftKotlination"
+      task: "clean jacocoTestReport",
+      project_dir: $path_android,
+      serial: $device_android
     )
   end
 
   lane :screenshots do
     build_android_app(
-      task: 'clean', 
-      project_dir: "android/SwiftKotlination"
+      task: 'clean',
+      project_dir: $path_android
     )
     build_android_app(
       task: 'assemble',
-      build_type: 'Debug', 
-      project_dir: "android/SwiftKotlination"
+      build_type: 'Debug',
+      project_dir: $path_android
     )
     build_android_app(
       task: 'assemble',
-      build_type: 'AndroidTest', 
-      project_dir: "android/SwiftKotlination"
+      build_type: 'AndroidTest',
+      project_dir: $path_android
     )
     capture_android_screenshots(
       clear_previous_screenshots: true,
-      app_package_name: "fr.jhandguy.swiftkotlination", 
-      app_apk_path: "android/SwiftKotlination/app/build/outputs/apk/debug/app-debug.apk", 
-      tests_apk_path: "android/SwiftKotlination/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
-      test_instrumentation_runner: "fr.jhandguy.swiftkotlination.runner.AndroidTestRunner"
+      app_package_name: $project_android,
+      app_apk_path: "#{$path_android}/app/build/outputs/apk/debug/app-debug.apk",
+      tests_apk_path: "#{$path_android}/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      test_instrumentation_runner: "#{$project_android}.runner.AndroidTestRunner",
+      specific_device: $device_android
     )
   end
 end
