@@ -11,8 +11,11 @@ import java.net.URLStreamHandler
 import java.util.LinkedList
 import kotlin.properties.Delegates
 
+typealias Responses = HashMap<Request, LinkedList<Response>>
+
 open class AppMock : App() {
-    var responses: HashMap<Request, LinkedList<Response>> by Delegates.observable(HashMap()) { _, _, _ ->
+
+    var responses: Responses by Delegates.observable(HashMap()) { _, _, _ ->
         val responses = responses.map {
             Pair(it.key.absoluteUrl(), it.value)
         }.toMap()

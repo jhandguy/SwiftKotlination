@@ -1,57 +1,38 @@
 package fr.jhandguy.swiftkotlination.features.story
 
-import android.content.Intent
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.intent.Intents
-import androidx.test.espresso.intent.Intents.intended
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
-import androidx.test.espresso.intent.matcher.IntentMatchers.hasData
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.rule.ActivityTestRule
-import fr.jhandguy.swiftkotlination.AppMock
-import fr.jhandguy.swiftkotlination.R
+import android.os.Bundle
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import fr.jhandguy.swiftkotlination.Responses
 import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.swiftkotlination.features.story.robot.StoryRobot
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.global.linkedListOf
 import fr.jhandguy.swiftkotlination.model.Multimedia
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
+import fr.jhandguy.swiftkotlination.robot.checkTitle
+import fr.jhandguy.swiftkotlination.robot.start
+import fr.jhandguy.swiftkotlination.robot.takeScreenshot
 import kotlinx.serialization.json.Json
-import org.hamcrest.CoreMatchers.instanceOf
-import org.hamcrest.Matchers.allOf
-import org.junit.Before
 import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
-import tools.fastlane.screengrab.Screengrab
 import tools.fastlane.screengrab.locale.LocaleTestRule
-import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 
 class StoryActivityTest {
+
     companion object {
         @get:ClassRule
         val localeTestRule = LocaleTestRule()
     }
 
     @get:Rule
-    val activityRule = ActivityTestRule(StoryActivity::class.java, false, false)
-
-    @Before
-    fun setUp() {
-        Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
-    }
+    val activityRule = IntentsTestRule(StoryActivity::class.java, false, false)
 
     @Test
     fun testStoryActivity() {
-        val application = ApplicationProvider.getApplicationContext<AppMock>()
-        application.responses = hashMapOf(
+        val responses: Responses = hashMapOf(
                 Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-superJumbo.jpg"), linkedListOf(
                         Response(File("28trump-endorsements1-superJumbo", File.Extension.JPG))
                 ))
@@ -88,34 +69,18 @@ class StoryActivityTest {
                 )
         )
 
-        val intent = Intent()
-        intent.putExtra(Story::class.java.simpleName, Json.stringify(Story.serializer(), story))
-        activityRule.launchActivity(intent)
+        val extras = Bundle()
+        extras.putString(Story::class.java.simpleName, Json.stringify(Story.serializer(), story))
 
-        onView(instanceOf(AppCompatTextView::class.java))
-                .check(matches(withText("${story.section} - ${story.subsection}")))
-
-        onView(withId(R.id.story_image))
-                .check(matches(isDisplayed()))
-
-        onView(withId(R.id.story_title))
-                .check(matches(withText(story.title)))
-
-        onView(withId(R.id.story_abstract))
-                .check(matches(withText(story.abstract)))
-
-        onView(withId(R.id.story_byline))
-                .check(matches(withText(story.byline)))
-
-        Screengrab.screenshot("story")
-
-        Intents.init()
-        val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(story.url))
-
-        onView(withId(R.id.story_button))
-                .perform(click())
-
-        intended(expectedIntent)
-        Intents.release()
+        StoryRobot(activityRule)
+                .start(responses, extras)
+                .checkTitle("${story.section} - ${story.subsection}")
+                .takeScreenshot("story")
+                .checkStoryImage()
+                .checkStoryTitle(story.title)
+                .checkStoryAbstract(story.abstract)
+                .checkStoryByline(story.byline)
+                .openChrome()
+                .checkURL(story.url)
     }
 }

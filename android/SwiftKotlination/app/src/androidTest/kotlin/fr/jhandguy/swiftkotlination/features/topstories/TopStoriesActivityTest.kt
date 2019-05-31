@@ -1,38 +1,25 @@
 package fr.jhandguy.swiftkotlination.features.topstories
 
-import android.content.Intent
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.Espresso.pressBack
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.swipeDown
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withParent
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.rule.ActivityTestRule
-import fr.jhandguy.swiftkotlination.AppMock
-import fr.jhandguy.swiftkotlination.R
+import fr.jhandguy.swiftkotlination.Responses
+import fr.jhandguy.swiftkotlination.features.topstories.robot.TopStoriesRobot
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
 import fr.jhandguy.swiftkotlination.global.linkedListOf
-import fr.jhandguy.swiftkotlination.matchers.RecyclerViewMatcher.Companion.childOfParent
-import fr.jhandguy.swiftkotlination.matchers.RecyclerViewMatcher.Companion.withItemCount
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
-import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.instanceOf
-import org.junit.Before
+import fr.jhandguy.swiftkotlination.robot.back
+import fr.jhandguy.swiftkotlination.robot.checkTitle
+import fr.jhandguy.swiftkotlination.robot.start
+import fr.jhandguy.swiftkotlination.robot.takeScreenshot
 import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
-import tools.fastlane.screengrab.Screengrab
-import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 import tools.fastlane.screengrab.locale.LocaleTestRule
 
 class TopStoriesActivityTest {
+
     companion object {
         @get:ClassRule
         val localeTestRule = LocaleTestRule()
@@ -40,11 +27,6 @@ class TopStoriesActivityTest {
 
     @get:Rule
     val activityRule = ActivityTestRule(TopStoriesActivity::class.java, false, false)
-
-    @Before
-    fun setUp() {
-        Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
-    }
 
     @Test
     fun testTopStoriesActivity() {
@@ -61,8 +43,7 @@ class TopStoriesActivityTest {
                 )
         )
 
-        val application = ApplicationProvider.getApplicationContext<AppMock>()
-        application.responses = hashMapOf(
+        val responses: Responses = hashMapOf(
                 Pair(Request.FetchTopStories, linkedListOf(
                         Response(File("top_stories", File.Extension.JSON)),
                         Response(File("top_stories", File.Extension.JSON)),
@@ -83,45 +64,22 @@ class TopStoriesActivityTest {
                 ))
         )
 
-        activityRule.launchActivity(Intent())
-
-        onView(instanceOf(AppCompatTextView::class.java))
-                .check(matches(withText("Top Stories")))
-
-        Screengrab.screenshot("top-stories")
-
-        onView(withId(R.id.top_stories_list))
-                .check(matches(withItemCount(2)))
-
-        topStories.forEachIndexed { index, story ->
-            onView(allOf(
-                    withParent(childOfParent(withId(R.id.top_stories_list), index)),
-                    withId(R.id.top_stories_item_title)
-            ))
-                    .check(matches(withText(story.first)))
-
-            onView(allOf(
-                    withParent(childOfParent(withId(R.id.top_stories_list), index)),
-                    withId(R.id.top_stories_item_byline)
-            ))
-                    .check(matches(withText(story.second)))
-
-            onView(childOfParent(withId(R.id.top_stories_list), index))
-                    .perform(click())
-
-            onView(instanceOf(AppCompatTextView::class.java))
-                    .check(matches(withText(story.third)))
-
-            pressBack()
-        }
-
-        onView(instanceOf(AppCompatTextView::class.java))
-                .check(matches(withText("Top Stories")))
-
-        onView(withId(R.id.top_stories_list))
-                .check(matches(withItemCount(2)))
-
-        onView(withId(R.id.top_stories_list))
-                .perform(swipeDown())
+        TopStoriesRobot(activityRule)
+                .start(responses)
+                .checkTitle("Top Stories")
+                .takeScreenshot("top-stories")
+                .checkTopStoriesCount(topStories.count())
+                .forEachTopStories(listOf(0, 1)) { robot, index ->
+                    val story = topStories[index]
+                    robot
+                            .checkTopStoryTitle(story.first, index)
+                            .checkTopStoryByline(story.second, index)
+                            .openStory(index)
+                            .checkTitle(story.third)
+                            .back()
+                }
+                .checkTitle("Top Stories")
+                .checkTopStoriesCount(topStories.count())
+                .refreshTopStories()
     }
 }
