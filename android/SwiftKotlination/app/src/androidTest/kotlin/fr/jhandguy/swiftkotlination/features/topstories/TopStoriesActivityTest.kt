@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.Espresso.pressBack
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -30,6 +33,19 @@ class TopStoriesActivityTest {
 
     @Test
     fun testTopStoriesActivity() {
+        val topStories = arrayListOf(
+                Triple(
+                    "Preliminary Nafta Deal Reached Between U.S. and Mexico",
+                    "By ANA SWANSON and KATIE ROGERS",
+                    "U.S. - Politics"
+                ),
+                Triple(
+                        "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
+                        "By JONATHAN MARTIN",
+                        "U.S."
+                )
+        )
+
         val application = ApplicationProvider.getApplicationContext<AppMock>()
         application.responses = hashMapOf(
                 Pair(Request.FetchTopStories, linkedListOf(
@@ -57,19 +73,40 @@ class TopStoriesActivityTest {
         onView(instanceOf(AppCompatTextView::class.java))
                 .check(matches(withText("Top Stories")))
 
+        // TODO: Take Screenshot
+
         onView(withId(R.id.top_stories_list))
                 .check(matches(withItemCount(2)))
 
-        onView(allOf(
-                withParent(childOfParent(withId(R.id.top_stories_list), 0)),
-                withId(R.id.top_stories_item_title)
-        ))
-                .check(matches(withText("Preliminary Nafta Deal Reached Between U.S. and Mexico")))
+        topStories.forEachIndexed { index, story ->
+            onView(allOf(
+                    withParent(childOfParent(withId(R.id.top_stories_list), index)),
+                    withId(R.id.top_stories_item_title)
+            ))
+                    .check(matches(withText(story.first)))
 
-        onView(allOf(
-                withParent(childOfParent(withId(R.id.top_stories_list), 0)),
-                withId(R.id.top_stories_item_byline)
-        ))
-                .check(matches(withText("By ANA SWANSON and KATIE ROGERS")))
+            onView(allOf(
+                    withParent(childOfParent(withId(R.id.top_stories_list), index)),
+                    withId(R.id.top_stories_item_byline)
+            ))
+                    .check(matches(withText(story.second)))
+
+            onView(childOfParent(withId(R.id.top_stories_list), index))
+                    .perform(click())
+
+            onView(instanceOf(AppCompatTextView::class.java))
+                    .check(matches(withText(story.third)))
+
+            pressBack()
+        }
+
+        onView(instanceOf(AppCompatTextView::class.java))
+                .check(matches(withText("Top Stories")))
+
+        onView(withId(R.id.top_stories_list))
+                .check(matches(withItemCount(2)))
+
+        onView(withId(R.id.top_stories_list))
+                .perform(swipeDown())
     }
 }

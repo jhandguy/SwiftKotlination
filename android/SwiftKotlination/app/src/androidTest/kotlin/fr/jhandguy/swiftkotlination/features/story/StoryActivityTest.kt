@@ -10,7 +10,9 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasData
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.rule.ActivityTestRule
 import fr.jhandguy.swiftkotlination.AppMock
 import fr.jhandguy.swiftkotlination.R
@@ -22,7 +24,7 @@ import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
 import kotlinx.serialization.json.Json
-import org.hamcrest.CoreMatchers
+import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -75,11 +77,11 @@ class StoryActivityTest {
         intent.putExtra(Story::class.java.simpleName, Json.stringify(Story.serializer(), story))
         activityRule.launchActivity(intent)
 
-        onView(CoreMatchers.instanceOf(AppCompatTextView::class.java))
+        onView(instanceOf(AppCompatTextView::class.java))
                 .check(matches(withText("${story.section} - ${story.subsection}")))
 
         onView(withId(R.id.story_image))
-                .check(matches(isCompletelyDisplayed()))
+                .check(matches(isDisplayed()))
 
         onView(withId(R.id.story_title))
                 .check(matches(withText(story.title)))
@@ -90,7 +92,7 @@ class StoryActivityTest {
         onView(withId(R.id.story_byline))
                 .check(matches(withText(story.byline)))
 
-        //TODO: Take Screenshot
+        // TODO: Take Screenshot
 
         Intents.init()
         val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(story.url))

@@ -754,12 +754,12 @@
 			isa = PBXGroup;
 			children = (
 				0F29A34621ECD205000A7D7A /* Animation */,
-				0F22CA7D21AED11B00914927 /* Robot */,
 				0F3EA4A6212D8EF10090A69A /* Coordinator */,
 				0F2026F6213345D9009B80CE /* Extensions */,
 				0FA5F79B20A87747009C30B4 /* Features */,
 				0FB7A210213C6FD600A2A777 /* Fastlane */,
 				0F3EA4D6212DC5910090A69A /* Network */,
+				0F22CA7D21AED11B00914927 /* Robot */,
 				0FF77CA2212DF92D0072267A /* Safari */,
 			);
 			path = Sources;
