@@ -24,12 +24,27 @@ import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.CoreMatchers.instanceOf
+import org.junit.Before
+import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
+import tools.fastlane.screengrab.Screengrab
+import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
+import tools.fastlane.screengrab.locale.LocaleTestRule
 
 class TopStoriesActivityTest {
+    companion object {
+        @get:ClassRule
+        val localeTestRule = LocaleTestRule()
+    }
+
     @get:Rule
     val activityRule = ActivityTestRule(TopStoriesActivity::class.java, false, false)
+
+    @Before
+    fun setUp() {
+        Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
+    }
 
     @Test
     fun testTopStoriesActivity() {
@@ -73,7 +88,7 @@ class TopStoriesActivityTest {
         onView(instanceOf(AppCompatTextView::class.java))
                 .check(matches(withText("Top Stories")))
 
-        // TODO: Take Screenshot
+        Screengrab.screenshot("top-stories")
 
         onView(withId(R.id.top_stories_list))
                 .check(matches(withItemCount(2)))

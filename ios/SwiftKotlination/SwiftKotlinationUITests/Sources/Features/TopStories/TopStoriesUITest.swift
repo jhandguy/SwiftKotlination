@@ -44,7 +44,7 @@ final class TopStoriesUITest: XCTestCase {
         TopStoriesRobot(app)
             .start(with: sessionMock)
             .checkTitle(contains: "Top Stories")
-            .takeScreenshot(named: "Top Stories")
+            .takeScreenshot(named: "top-stories")
             .checkTopStoriesCount(is: topStories.count)
             .forEach(topStories: [0, 1]) { robot, index in
                 let story = topStories[index]

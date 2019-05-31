@@ -3,12 +3,23 @@ $devices_android = ""
 
 platform :ios do
   lane :tests do
-    swiftlint(path: "ios/SwiftKotlination")
-    run_tests(devices: $devices_ios, clean: true, code_coverage: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
+    swiftlint(
+      path: "ios/SwiftKotlination"
+    )
+    run_tests(
+      devices: $devices_ios, 
+      clean: true, 
+      code_coverage: true, 
+      project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj"
+    )
   end
 
   lane :screenshots do
-    capture_ios_screenshots(devices: $devices_ios, clear_previous_screenshots: true, project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj")
+    capture_ios_screenshots(
+      devices: $devices_ios, 
+      clear_previous_screenshots: true, 
+      project: "ios/SwiftKotlination/SwiftKotlination.xcodeproj"
+    )
   end
 end
 
@@ -18,10 +29,33 @@ platform :android do
     sh("chmod a+x ktlint")
     sh("./ktlint ../android/SwiftKotlination/app/src/**/*.kt")
     sh("rm ./ktlint")
-    gradle(task: "clean jacocoTestReport", project_dir: "android/SwiftKotlination")
+    build_android_app(
+      task: "clean jacocoTestReport", 
+      project_dir: "android/SwiftKotlination"
+    )
   end
 
   lane :screenshots do
-
+    build_android_app(
+      task: 'clean', 
+      project_dir: "android/SwiftKotlination"
+    )
+    build_android_app(
+      task: 'assemble',
+      build_type: 'Debug', 
+      project_dir: "android/SwiftKotlination"
+    )
+    build_android_app(
+      task: 'assemble',
+      build_type: 'AndroidTest', 
+      project_dir: "android/SwiftKotlination"
+    )
+    capture_android_screenshots(
+      clear_previous_screenshots: true,
+      app_package_name: "fr.jhandguy.swiftkotlination", 
+      app_apk_path: "android/SwiftKotlination/app/build/outputs/apk/debug/app-debug.apk", 
+      tests_apk_path: "android/SwiftKotlination/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+      test_instrumentation_runner: "fr.jhandguy.swiftkotlination.runner.AndroidTestRunner"
+    )
   end
 end

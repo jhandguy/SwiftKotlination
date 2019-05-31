@@ -26,12 +26,27 @@ import fr.jhandguy.swiftkotlination.network.Response
 import kotlinx.serialization.json.Json
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.Matchers.allOf
+import org.junit.Before
+import org.junit.ClassRule
 import org.junit.Rule
 import org.junit.Test
+import tools.fastlane.screengrab.Screengrab
+import tools.fastlane.screengrab.locale.LocaleTestRule
+import tools.fastlane.screengrab.UiAutomatorScreenshotStrategy
 
 class StoryActivityTest {
+    companion object {
+        @get:ClassRule
+        val localeTestRule = LocaleTestRule()
+    }
+
     @get:Rule
     val activityRule = ActivityTestRule(StoryActivity::class.java, false, false)
+
+    @Before
+    fun setUp() {
+        Screengrab.setDefaultScreenshotStrategy(UiAutomatorScreenshotStrategy())
+    }
 
     @Test
     fun testStoryActivity() {
@@ -92,7 +107,7 @@ class StoryActivityTest {
         onView(withId(R.id.story_byline))
                 .check(matches(withText(story.byline)))
 
-        // TODO: Take Screenshot
+        Screengrab.screenshot("story")
 
         Intents.init()
         val expectedIntent = allOf(hasAction(Intent.ACTION_VIEW), hasData(story.url))

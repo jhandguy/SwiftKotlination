@@ -51,7 +51,7 @@ final class StoryUITest: XCTestCase {
             .checkStoryTitle(contains: story.title)
             .checkStoryAbstract(contains: story.abstract)
             .checkStoryByline(contains: story.byline)
-            .takeScreenshot(named: "Story")
+            .takeScreenshot(named: "story")
             .openSafari()
             .checkURL(contains: story.url)
             .closeSafari()

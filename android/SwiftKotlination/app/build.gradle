@@ -51,6 +51,10 @@ android {
             java.srcDirs = ['src/androidTest/kotlin', 'src/sharedTest/kotlin']
             resources.srcDirs = ['src/androidTest/resources', 'src/sharedTest/resources']
         }
+        debug {
+            java.srcDirs = ['src/main/kotlin']
+            manifest.srcFile 'src/debug/AndroidManifest.xml'
+        }
     }
 }
 
@@ -74,6 +78,8 @@ dependencies {
 
     testImplementation          "junit:junit:$junitVersion"
     testImplementation          "org.robolectric:robolectric:$robolectricVersion"
+
+    androidTestImplementation   "tools.fastlane:screengrab:$screengrabVersion"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
@@ -83,7 +89,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
         html.enabled = true
     }
 
-    def fileFilter = [ '**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/*$*.*']
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*', '**/*$*.*']
     def debugTree = fileTree(dir: "$project.buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
     def mainSrc = "$project.projectDir/src/main/kotlin"
 

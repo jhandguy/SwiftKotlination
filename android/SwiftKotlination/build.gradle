@@ -17,6 +17,7 @@ buildscript {
         robolectricVersion      = '4.2'
         serializationVersion    = '0.10.0'
         testVersion             = '1.1.0'
+        screengrabVersion       = '1.0.0'
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
