@@ -1,7 +1,7 @@
 import XCTest
 
 extension XCTestCase {
-    
+
     private struct RequireError<T>: LocalizedError {
         let file: StaticString
         let line: UInt

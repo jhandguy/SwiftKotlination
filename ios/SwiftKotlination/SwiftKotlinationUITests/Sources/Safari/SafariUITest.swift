@@ -1,7 +1,7 @@
 import XCTest
 
 final class SafariUITest: XCTestCase {
-    
+
     private lazy var app = XCUIApplication()
 
     func testSafariSuccessfully() {

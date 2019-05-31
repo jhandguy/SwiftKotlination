@@ -1,7 +1,7 @@
 import XCTest
 
 final class TopStoriesUITest: XCTestCase {
-    
+
     private lazy var app = XCUIApplication()
 
     func testFeatureTopStoriesSuccessfully() {
