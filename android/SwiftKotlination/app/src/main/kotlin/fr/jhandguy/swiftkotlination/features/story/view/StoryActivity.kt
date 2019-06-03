@@ -8,6 +8,7 @@ import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.global.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
+import fr.jhandguy.swiftkotlination.presenter.ErrorPresenter
 import kotlinx.serialization.json.Json
 import org.jetbrains.anko.setContentView
 
@@ -45,7 +46,10 @@ class StoryActivity : AppCompatActivity() {
                             view.story = result.data
                             view.setContentView(this@StoryActivity)
                         }
-                        is Result.Failure -> print(result.error)
+                        is Result.Failure -> {
+                            val presenter = ErrorPresenter(result.error)
+                            presenter.presentIn(this@StoryActivity)
+                        }
                     }
                 }
             }

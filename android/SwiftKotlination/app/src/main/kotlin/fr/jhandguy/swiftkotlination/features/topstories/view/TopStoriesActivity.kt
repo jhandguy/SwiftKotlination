@@ -8,6 +8,7 @@ import fr.jhandguy.swiftkotlination.features.topstories.factory.TopStoriesFactor
 import fr.jhandguy.swiftkotlination.global.launch
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
+import fr.jhandguy.swiftkotlination.presenter.ErrorPresenter
 import org.jetbrains.anko.setContentView
 
 class TopStoriesActivity : AppCompatActivity() {
@@ -38,7 +39,10 @@ class TopStoriesActivity : AppCompatActivity() {
                         is Result.Success -> {
                             adapter.notifyDataSetChanged()
                         }
-                        is Result.Failure -> print(result.error)
+                        is Result.Failure -> {
+                            val presenter = ErrorPresenter(result.error)
+                            presenter.presentIn(this@TopStoriesActivity)
+                        }
                     }
                     view.isRefreshing = false
                 }

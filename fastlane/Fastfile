@@ -33,7 +33,13 @@ platform :android do
   lane :tests do
     sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.33.0/ktlint")
     sh("chmod a+x ktlint")
-    sh("./ktlint ../#{$path_android}/app/src/**/*.kt")
+    sh(
+      "./ktlint ../#{$path_android}/app/src/**/*.kt",
+      error_callback: ->(error) { 
+        sh("rm ./ktlint") 
+        UI.user_error!(error)
+      }
+    )
     sh("rm ./ktlint")
     build_android_app(
       task: "clean jacocoTestReport",

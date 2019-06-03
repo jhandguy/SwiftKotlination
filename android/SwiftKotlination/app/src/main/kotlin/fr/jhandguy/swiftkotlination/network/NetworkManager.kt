@@ -25,14 +25,19 @@ class NetworkManager(
         if (observers.isEmpty()) { return }
 
         build(request)?.let { connection ->
-            connection.inputStream?.let { data ->
-                val bytes = data.readBytes()
-                observers.forEach { it(Result.Success(bytes)) }
-            } ?: connection.errorStream?.let { error ->
-                val bytes = error.readBytes()
-                observers.forEach { it(Result.Failure(Error(String(bytes)))) }
+            try {
+                connection.inputStream?.let { data ->
+                    val bytes = data.readBytes()
+                    observers.forEach { it(Result.Success(bytes)) }
+                } ?: connection.errorStream?.let { error ->
+                    val bytes = error.readBytes()
+                    observers.forEach { it(Result.Failure(Error(String(bytes)))) }
+                } ?: observers.forEach { it(Result.Failure(NetworkError.InvalidResponse())) }
+            } catch (exception: Exception) {
+                observers.forEach { it(Result.Failure(Error(exception.message))) }
+            } finally {
+                connection.disconnect()
             }
-            connection.disconnect()
         } ?: observers.forEach { it(Result.Failure(NetworkError.InvalidRequest())) }
     }
 
@@ -52,7 +57,7 @@ class NetworkManager(
                 }
             }
             continuation.resume(connection)
-        } catch (e: Exception) {
+        } catch (exception: Exception) {
             continuation.resume(null)
         }
     }
