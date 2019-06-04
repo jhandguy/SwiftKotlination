@@ -22,5 +22,5 @@ class HttpURLConnectionMock(val file: File?, val error: NetworkError?) : HttpURL
 
     override fun getResponseCode(): Int = -1
 
-    override fun getErrorStream(): InputStream? = error?.description?.byteInputStream()
+    override fun getErrorStream(): InputStream? = error?.message?.byteInputStream()
 }

@@ -135,7 +135,7 @@ class NetworkManagerUnitTest {
                         val topStories = Json(strictMode = false).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
-                    is Result.Failure -> assertEquals(result.error.message, NetworkError.InvalidResponse().description)
+                    is Result.Failure -> assertEquals(result.error.message, NetworkError.InvalidResponse().message)
                 }
                 times += 1
             }.disposedBy(disposeBag)

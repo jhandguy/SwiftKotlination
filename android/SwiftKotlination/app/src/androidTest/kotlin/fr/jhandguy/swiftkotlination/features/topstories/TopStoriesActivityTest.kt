@@ -10,7 +10,9 @@ import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.network.Response
 import fr.jhandguy.swiftkotlination.robot.back
+import fr.jhandguy.swiftkotlination.robot.checkAlert
 import fr.jhandguy.swiftkotlination.robot.checkTitle
+import fr.jhandguy.swiftkotlination.robot.closeAlert
 import fr.jhandguy.swiftkotlination.robot.start
 import fr.jhandguy.swiftkotlination.robot.takeScreenshot
 import org.junit.ClassRule
@@ -81,5 +83,7 @@ class TopStoriesActivityTest {
                 .checkTitle("Top Stories")
                 .checkTopStoriesCount(topStories.count())
                 .refreshTopStories()
+                .checkAlert(NetworkError.InvalidResponse())
+                .closeAlert()
     }
 }
