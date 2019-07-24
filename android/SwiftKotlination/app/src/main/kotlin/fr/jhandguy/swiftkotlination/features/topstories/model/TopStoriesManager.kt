@@ -5,7 +5,9 @@ import fr.jhandguy.swiftkotlination.network.Request
 import fr.jhandguy.swiftkotlination.observer.Disposable
 import fr.jhandguy.swiftkotlination.observer.Observer
 import fr.jhandguy.swiftkotlination.observer.Result
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 
 interface TopStoriesManagerInterface {
     suspend fun topStories(observer: Observer<TopStories>): Disposable
@@ -13,10 +15,11 @@ interface TopStoriesManagerInterface {
 }
 
 class TopStoriesManager(private val networkManager: NetworkManagerInterface) : TopStoriesManagerInterface {
+    @UnstableDefault
     override suspend fun topStories(observer: Observer<TopStories>) =
             networkManager.observe(Request.FetchTopStories) { result ->
                 when (result) {
-                    is Result.Success -> observer(Result.Success(Json(strictMode = false).parse(TopStories.serializer(), String(result.data))))
+                    is Result.Success -> observer(Result.Success(Json(JsonConfiguration(strictMode = false)).parse(TopStories.serializer(), String(result.data))))
                     is Result.Failure -> observer(result)
                 }
             }
