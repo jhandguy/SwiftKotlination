@@ -8,6 +8,10 @@ $device_ios = "iPhone Xs Max"
 $device_android = "emulator-5554"
 
 platform :ios do
+  before_all do
+    clear_derived_data
+  end
+
   lane :tests do
     swiftlint(
       path: $path_ios
