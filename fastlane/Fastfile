@@ -10,6 +10,7 @@ $device_android = "emulator-5554"
 platform :ios do
   before_all do
     clear_derived_data
+    reset_simulator_contents
   end
 
   lane :tests do
