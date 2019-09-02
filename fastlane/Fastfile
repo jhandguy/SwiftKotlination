@@ -46,6 +46,11 @@ platform :android do
       }
     )
     sh("rm ./ktlint")
+
+    sh("adb shell settings put global window_animation_scale 0")
+    sh("adb shell settings put global transition_animation_scale 0")
+    sh("adb shell settings put global animator_duration_scale 0")
+
     build_android_app(
       task: "clean jacocoTestReport",
       project_dir: $path_android,
@@ -58,16 +63,19 @@ platform :android do
       task: 'clean',
       project_dir: $path_android
     )
+
     build_android_app(
       task: 'assemble',
       build_type: 'Debug',
       project_dir: $path_android
     )
+
     build_android_app(
       task: 'assemble',
       build_type: 'AndroidTest',
       project_dir: $path_android
     )
+    
     capture_android_screenshots(
       clear_previous_screenshots: true,
       app_package_name: $project_android,
