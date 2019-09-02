@@ -5,13 +5,13 @@ import fr.jhandguy.swiftkotlination.network.Request.FetchTopStories
 import fr.jhandguy.swiftkotlination.network.mocks.URLStreamHandlerMock
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
-import java.util.Stack
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration.Companion.Stable
+import java.util.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 
 class NetworkManagerUnitTest {
 
@@ -33,7 +33,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(JsonConfiguration(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -76,7 +76,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(JsonConfiguration(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -122,7 +122,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(JsonConfiguration(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -133,7 +133,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(JsonConfiguration(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> assertEquals(result.error.message, NetworkError.InvalidResponse().message)
