@@ -7,15 +7,18 @@ import android.widget.TextView
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.R
 import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sp
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class TopStoriesItemViewUnitTest {
 
     lateinit var sut: TopStoriesItemView

@@ -36,7 +36,7 @@ end
 
 platform :android do
   lane :tests do
-    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.33.0/ktlint")
+    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.34.2/ktlint")
     sh("chmod a+x ktlint")
     sh(
       "./ktlint ../#{$path_android}/app/src/**/*.kt",
@@ -47,9 +47,9 @@ platform :android do
     )
     sh("rm ./ktlint")
 
-    sh("adb shell settings put global window_animation_scale 0")
-    sh("adb shell settings put global transition_animation_scale 0")
-    sh("adb shell settings put global animator_duration_scale 0")
+    sh("adb -s #{$device_android} shell settings put global window_animation_scale 0")
+    sh("adb -s #{$device_android} shell settings put global transition_animation_scale 0")
+    sh("adb -s #{$device_android} shell settings put global animator_duration_scale 0")
 
     build_android_app(
       task: "clean jacocoTestReport",

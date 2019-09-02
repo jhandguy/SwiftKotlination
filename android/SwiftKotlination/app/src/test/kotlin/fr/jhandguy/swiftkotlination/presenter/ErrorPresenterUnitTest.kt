@@ -4,14 +4,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.network.NetworkError
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.shadows.ShadowAlertDialog
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
+import org.robolectric.shadows.ShadowAlertDialog
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class ErrorPresenterUnitTest {
 
     lateinit var sut: ErrorPresenter

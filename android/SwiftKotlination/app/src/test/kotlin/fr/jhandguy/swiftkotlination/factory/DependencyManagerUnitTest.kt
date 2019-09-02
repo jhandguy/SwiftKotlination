@@ -8,12 +8,15 @@ import fr.jhandguy.swiftkotlination.features.story.model.StoryManager
 import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
 import fr.jhandguy.swiftkotlination.model.ImageManager
 import fr.jhandguy.swiftkotlination.network.NetworkManager
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import kotlin.test.BeforeTest
 import kotlin.test.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class DependencyManagerUnitTest {
 
     lateinit var sut: DependencyManager

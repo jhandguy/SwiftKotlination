@@ -3,11 +3,11 @@ package fr.jhandguy.swiftkotlination.features.topstories.model
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 
 class TopStoriesManagerUnitTest {
 

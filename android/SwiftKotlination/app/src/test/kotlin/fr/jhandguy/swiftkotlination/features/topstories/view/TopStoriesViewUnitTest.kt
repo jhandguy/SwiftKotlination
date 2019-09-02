@@ -13,14 +13,17 @@ import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesView
 import fr.jhandguy.swiftkotlination.model.mocks.ImageManagerMock
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.observer.Result
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import org.jetbrains.anko.AnkoContext
 import org.jetbrains.anko.find
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.Test
-import kotlin.test.assertEquals
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class TopStoriesViewUnitTest {
 
     lateinit var sut: TopStoriesView

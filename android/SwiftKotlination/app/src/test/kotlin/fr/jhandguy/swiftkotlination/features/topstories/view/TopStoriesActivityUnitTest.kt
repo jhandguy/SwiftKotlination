@@ -3,12 +3,15 @@ package fr.jhandguy.swiftkotlination.features.topstories.view
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import fr.jhandguy.swiftkotlination.R
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class TopStoriesActivityUnitTest {
 
     @Test

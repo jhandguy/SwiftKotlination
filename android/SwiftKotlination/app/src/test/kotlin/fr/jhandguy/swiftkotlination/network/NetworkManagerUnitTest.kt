@@ -5,13 +5,13 @@ import fr.jhandguy.swiftkotlination.network.Request.FetchTopStories
 import fr.jhandguy.swiftkotlination.network.mocks.URLStreamHandlerMock
 import fr.jhandguy.swiftkotlination.observer.DisposeBag
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import java.util.Stack
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 
 class NetworkManagerUnitTest {
 

@@ -6,13 +6,16 @@ import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class CoordinatorUnitTest {
 
     lateinit var sut: Coordinator

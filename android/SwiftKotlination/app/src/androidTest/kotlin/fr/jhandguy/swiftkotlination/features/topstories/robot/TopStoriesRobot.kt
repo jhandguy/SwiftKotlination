@@ -1,12 +1,10 @@
 package fr.jhandguy.swiftkotlination.features.topstories.robot
 
 import android.app.Activity
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeDown
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -21,7 +19,7 @@ import org.hamcrest.CoreMatchers.allOf
 class TopStoriesRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Robot<T>(activityTestRule) {
 
     fun checkTopStoriesCount(count: Int): TopStoriesRobot<T> {
-        Espresso.onView(withId(R.id.top_stories_list))
+        onView(withId(R.id.top_stories_list))
                 .check(matches(RecyclerViewMatcher.withItemCount(count)))
 
         return this
@@ -37,10 +35,10 @@ class TopStoriesRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Rob
 
     fun checkTopStoryTitle(title: String, index: Int): TopStoriesRobot<T> {
         onView(allOf(
-                withParent(RecyclerViewMatcher.childOfParent(withId(R.id.top_stories_list), index)),
+                withParent(childOfParent(withId(R.id.top_stories_list), index)),
                 withId(R.id.top_stories_item_title)
         ))
-                .check(matches(ViewMatchers.withText(title)))
+                .check(matches(withText(title)))
 
         return this
     }

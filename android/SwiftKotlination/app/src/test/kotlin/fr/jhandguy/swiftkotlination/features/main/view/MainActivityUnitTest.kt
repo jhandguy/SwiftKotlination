@@ -6,11 +6,14 @@ import androidx.test.core.app.ApplicationProvider
 import fr.jhandguy.swiftkotlination.App
 import fr.jhandguy.swiftkotlination.coordinator.mocks.CoordinatorMock
 import fr.jhandguy.swiftkotlination.factory.mocks.DependencyManagerMock
+import kotlin.test.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.Test
+import org.robolectric.annotation.LooperMode
+import org.robolectric.annotation.LooperMode.Mode.PAUSED
 
 @RunWith(RobolectricTestRunner::class)
+@LooperMode(PAUSED)
 class MainActivityUnitTest {
 
     @Test

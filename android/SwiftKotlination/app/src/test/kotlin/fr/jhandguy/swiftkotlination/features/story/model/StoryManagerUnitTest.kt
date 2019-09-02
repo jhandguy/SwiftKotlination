@@ -1,10 +1,10 @@
 package fr.jhandguy.swiftkotlination.features.story.model
 
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
+import kotlinx.coroutines.runBlocking
 
 class StoryManagerUnitTest {
 
