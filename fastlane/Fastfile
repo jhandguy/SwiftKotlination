@@ -10,13 +10,17 @@ $device_android = "emulator-5554"
 platform :ios do
   before_all do
     clear_derived_data
-    reset_simulator_contents
+    
+    reset_simulator_contents(
+      os_versions: ["12.4"]
+    )
   end
 
   lane :tests do
     swiftlint(
       path: $path_ios
     )
+
     run_tests(
       device: $device_ios,
       clean: true,
