@@ -8,7 +8,7 @@ class Robot {
 
     lazy var navigationBar          = app.navigationBars.firstMatch
     lazy var navigationBarButton    = navigationBar.buttons.firstMatch
-    lazy var navigationBarTitle     = navigationBar.otherElements.firstMatch
+    lazy var navigationBarTitle     = navigationBar.staticTexts.firstMatch
     lazy var alert                  = app.alerts.firstMatch
     lazy var alertButton            = alert.buttons.firstMatch
 
