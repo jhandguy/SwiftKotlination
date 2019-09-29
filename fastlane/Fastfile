@@ -1,7 +1,7 @@
-$path_ios = "ios/SwiftKotlination"
+$path_ios = "ios"
 $path_android = "android/SwiftKotlination"
 
-$project_ios = "#{$path_ios}/SwiftKotlination.xcodeproj"
+$project_ios = "#{$path_ios}/SwiftKotlination.xcworkspace"
 $project_android = "fr.jhandguy.swiftkotlination"
 
 $device_ios = "iPhone 11"
@@ -25,7 +25,7 @@ platform :ios do
       device: $device_ios,
       clean: true,
       code_coverage: true,
-      project: $project_ios
+      workspace: $project_ios
     )
   end
 
@@ -33,7 +33,7 @@ platform :ios do
     capture_ios_screenshots(
       devices: $device_ios,
       clear_previous_screenshots: true,
-      project: $project_ios
+      workspace: $project_ios
     )
   end
 end

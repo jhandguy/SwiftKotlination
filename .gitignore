@@ -1,7 +1,6 @@
-ios/SwiftKotlination/SwiftKotlination.xcodeproj/xcuserdata
-ios/SwiftKotlination/SwiftKotlination.xcodeproj/project.xcworkspace/xcuserdata
+xcuserdata
 
-android/SwiftKotlination/.idea
+.idea
 
 fastlane/test_output
 fastlane/report.xml
@@ -11,3 +10,4 @@ fastlane/metadata
 .bundle
 vendor
 .gradle
+.DS_Store
