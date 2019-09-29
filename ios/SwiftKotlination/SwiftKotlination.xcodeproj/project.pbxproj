@@ -418,11 +418,11 @@
 		0F2026FB21334672009B80CE /* TopStories */ = {
 			isa = PBXGroup;
 			children = (
-				0F4A204621302503002543B8 /* top_stories.json */,
-				0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */,
 				0F26DD702136B31F00E50417 /* 27arizpolitics7-superJumbo-v2.jpg */,
-				0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */,
+				0F26DD6421354B0500E50417 /* 27arizpolitics7-thumbLarge.jpg */,
 				0F26DD6D2136B2BC00E50417 /* 28DC-nafta-superJumbo-v2.jpg */,
+				0F26DD6521354B0500E50417 /* 28DC-nafta-thumbLarge.jpg */,
+				0F4A204621302503002543B8 /* top_stories.json */,
 			);
 			path = TopStories;
 			sourceTree = "<group>";
@@ -566,8 +566,8 @@
 		0F3EA4A7212D8F5F0090A69A /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				0F3EA4AA212D95750090A69A /* NetworkManagerTest.swift */,
 				0F170544212F57E300F87958 /* NetworkErrorTest.swift */,
+				0F3EA4AA212D95750090A69A /* NetworkManagerTest.swift */,
 				0F3EA4A8212D8F700090A69A /* RequestTest.swift */,
 				0FA5F77720A5BB30009C30B4 /* Mocks */,
 			);
@@ -695,8 +695,8 @@
 		0FA5F77020A5B9F5009C30B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FA5F79220A5F3AB009C30B4 /* TopStoriesTableViewControllerTest.swift */,
 				0FA3264A21D684140093507F /* TopStoriesTableViewCellTest.swift */,
+				0FA5F79220A5F3AB009C30B4 /* TopStoriesTableViewControllerTest.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -756,8 +756,8 @@
 				0F29A34621ECD205000A7D7A /* Animation */,
 				0F3EA4A6212D8EF10090A69A /* Coordinator */,
 				0F2026F6213345D9009B80CE /* Extensions */,
-				0FA5F79B20A87747009C30B4 /* Features */,
 				0FB7A210213C6FD600A2A777 /* Fastlane */,
+				0FA5F79B20A87747009C30B4 /* Features */,
 				0F3EA4D6212DC5910090A69A /* Network */,
 				0F22CA7D21AED11B00914927 /* Robot */,
 				0FF77CA2212DF92D0072267A /* Safari */,
@@ -777,8 +777,8 @@
 		0FA5F79D20A87757009C30B4 /* TopStories */ = {
 			isa = PBXGroup;
 			children = (
-				0F22CA8121AED1CB00914927 /* Robot */,
 				0FA5F7AA20A8D6AD009C30B4 /* TopStoriesUITest.swift */,
+				0F22CA8121AED1CB00914927 /* Robot */,
 			);
 			path = TopStories;
 			sourceTree = "<group>";
@@ -786,8 +786,8 @@
 		0FA5F79E20A8775E009C30B4 /* Story */ = {
 			isa = PBXGroup;
 			children = (
-				0F22CA8021AED1C300914927 /* Robot */,
 				0FA5F79820A8770C009C30B4 /* StoryUITest.swift */,
+				0F22CA8021AED1C300914927 /* Robot */,
 			);
 			path = Story;
 			sourceTree = "<group>";
@@ -831,8 +831,8 @@
 		0FBB65BD20A392F60090B77F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FBB65C020A393920090B77F /* StoryViewController.swift */,
 				0FA3264421CB94A00093507F /* StoryView.swift */,
+				0FBB65C020A393920090B77F /* StoryViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -857,8 +857,8 @@
 		0FBE92AC209D8FFD00A32D01 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0FC64A3C2095EC5000339755 /* TopStoriesTableViewController.swift */,
 				0FA3264621D0F6660093507F /* TopStoriesTableViewCell.swift */,
+				0FC64A3C2095EC5000339755 /* TopStoriesTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -883,8 +883,8 @@
 		0FC64A392095D44F00339755 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
 				0FCE5CDB208A85C2001C8FFC /* Assets.xcassets */,
+				0FCE5CDD208A85C2001C8FFC /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -909,10 +909,10 @@
 		0FCE5CC8208A85C1001C8FFC = {
 			isa = PBXGroup;
 			children = (
+				0FCE5CD2208A85C1001C8FFC /* Products */,
 				0FCE5CD3208A85C1001C8FFC /* SwiftKotlination */,
 				0FCE5CE8208A85C2001C8FFC /* SwiftKotlinationTests */,
 				0FCE5CF3208A85C3001C8FFC /* SwiftKotlinationUITests */,
-				0FCE5CD2208A85C1001C8FFC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -929,9 +929,9 @@
 		0FCE5CD3208A85C1001C8FFC /* SwiftKotlination */ = {
 			isa = PBXGroup;
 			children = (
+				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
 				0FC64A392095D44F00339755 /* Resources */,
 				0FC64A382095D44600339755 /* Sources */,
-				0FCE5CE0208A85C2001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlination;
 			sourceTree = "<group>";
@@ -939,8 +939,8 @@
 		0FCE5CE8208A85C2001C8FFC /* SwiftKotlinationTests */ = {
 			isa = PBXGroup;
 			children = (
-				0FA5F77220A5BA16009C30B4 /* Sources */,
 				0FCE5CEB208A85C3001C8FFC /* Info.plist */,
+				0FA5F77220A5BA16009C30B4 /* Sources */,
 			);
 			path = SwiftKotlinationTests;
 			sourceTree = "<group>";
@@ -948,9 +948,9 @@
 		0FCE5CF3208A85C3001C8FFC /* SwiftKotlinationUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0FCE5CF6208A85C3001C8FFC /* Info.plist */,
 				0F2026F821334655009B80CE /* Resources */,
 				0FA5F79A20A87740009C30B4 /* Sources */,
-				0FCE5CF6208A85C3001C8FFC /* Info.plist */,
 			);
 			path = SwiftKotlinationUITests;
 			sourceTree = "<group>";
@@ -1039,8 +1039,8 @@
 		0FF77CA2212DF92D0072267A /* Safari */ = {
 			isa = PBXGroup;
 			children = (
-				0F22CA8821AEF05A00914927 /* Robot */,
 				0F3EA4A3212D7CD60090A69A /* SafariUITest.swift */,
+				0F22CA8821AEF05A00914927 /* Robot */,
 			);
 			path = Safari;
 			sourceTree = "<group>";
