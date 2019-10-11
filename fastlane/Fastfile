@@ -12,7 +12,7 @@ platform :ios do
     clear_derived_data
     
     reset_simulator_contents(
-      os_versions: ["13.0"]
+      os_versions: ["13.1"]
     )
   end
 
