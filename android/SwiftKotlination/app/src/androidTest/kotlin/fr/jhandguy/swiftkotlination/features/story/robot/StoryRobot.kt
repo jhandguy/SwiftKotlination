@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent.ACTION_VIEW
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents.intended
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
@@ -48,7 +49,7 @@ class StoryRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Robot<T>
 
     fun openChrome(): StoryRobot<T> {
         onView(withId(R.id.story_button))
-                .perform(click())
+                .perform(scrollTo(), click())
 
         return this
     }
