@@ -3,7 +3,7 @@
    LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "YES"
+      parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -20,15 +20,37 @@
                ReferencedContainer = "container:SwiftKotlination.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FDD21023AE42C6004E3DED"
+               BuildableName = "ExtensionKitTests.xctest"
+               BlueprintName = "ExtensionKitTests"
+               ReferencedContainer = "container:../ExtensionKit/ExtensionKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      codeCoverageEnabled = "YES"
-      onlyGenerateCoverageForSpecifiedTargets = "YES"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0FCE5CD0208A85C1001C8FFC"
+            BuildableName = "SwiftKotlination.app"
+            BlueprintName = "SwiftKotlination"
+            ReferencedContainer = "container:SwiftKotlination.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -39,6 +61,50 @@
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FDD21023AE42C6004E3DED"
+               BuildableName = "ExtensionKitTests.xctest"
+               BlueprintName = "ExtensionKitTests"
+               ReferencedContainer = "container:../ExtensionKit/ExtensionKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FA4F6623ABEF2F0086D7AD"
+               BuildableName = "ImageKitTests.xctest"
+               BlueprintName = "ImageKitTests"
+               ReferencedContainer = "container:../ImageKit/ImageKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95262DE02355A960002FE48F"
+               BuildableName = "NetworkKitTests.xctest"
+               BlueprintName = "NetworkKitTests"
+               ReferencedContainer = "container:../NetworkKit/NetworkKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FA4FB623AC0C0F0086D7AD"
+               BuildableName = "StoryKitTests.xctest"
+               BlueprintName = "StoryKitTests"
+               ReferencedContainer = "container:../StoryKit/StoryKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
          <TestableReference
             skipped = "NO"
             testExecutionOrdering = "random">
@@ -61,18 +127,18 @@
                ReferencedContainer = "container:SwiftKotlination.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FA4F2723ABE75B0086D7AD"
+               BuildableName = "TopStoriesKitTests.xctest"
+               BlueprintName = "TopStoriesKitTests"
+               ReferencedContainer = "container:../TopStoriesKit/TopStoriesKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0FCE5CD0208A85C1001C8FFC"
-            BuildableName = "SwiftKotlination.app"
-            BlueprintName = "SwiftKotlination"
-            ReferencedContainer = "container:SwiftKotlination.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -94,8 +160,6 @@
             ReferencedContainer = "container:SwiftKotlination.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

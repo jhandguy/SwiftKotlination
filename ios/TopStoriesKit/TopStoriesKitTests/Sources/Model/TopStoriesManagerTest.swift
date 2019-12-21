@@ -1,0 +1,136 @@
+import NetworkKit
+import StoryKit
+import TestKit
+@testable import TopStoriesKit
+import XCTest
+
+final class TopStoriesManagerTest: XCTestCase {
+    private var sut: TopStoriesManager!
+
+    func testTopStoriesManagerFetchesTopStoriesSuccessfully() throws {
+        let multimedia = Multimedia(
+            url: "https://static01.nyt.com/images/2018/05/11/world/11us-ambriefing-israel-sub/merlin_137938851_81051c92-3244-40b6-8034-99ca55739e43-superJumbo.jpg",
+            format: .large
+        )
+        let story = Story(
+            section: "Briefing",
+            subsection: "",
+            title: "Kirstjen Nielsen, Spotify, Cannes Film Festival: Your Friday Briefing",
+            abstract: "Here’s what you need to know to start your day.",
+            byline: "By CHRIS STANFORD",
+            url: "https://www.nytimes.com/2018/05/11/briefing/kirstjen-nielsen-spotify-cannes-film-festival.html",
+            multimedia: [multimedia]
+        )
+        let topStories = TopStories(results: [story])
+        let data = try XCTUnwrap(topStories.data)
+        let networkManager = NetworkManagerMock(result: .success(data))
+
+        sut = TopStoriesManager(networkManager: networkManager)
+        sut
+            .stories { result in
+                switch result {
+                case let .success(stories):
+                    XCTAssertEqual(stories, topStories.results)
+
+                case let .failure(error):
+                    XCTFail("Fetch TopStories should succeed, found error \(error)")
+                }
+            }
+    }
+
+    func testTopStoriesManagerFetchesTopStoriesUnsuccessfully() {
+        let networkManager = NetworkManagerMock(result: .failure(NetworkError.invalidResponse))
+        sut = TopStoriesManager(networkManager: networkManager)
+        sut
+            .stories { result in
+                switch result {
+                case let .success(stories):
+                    XCTFail("Fetch TopStories should fail, found stories \(stories)")
+
+                case let .failure(error):
+                    XCTAssertEqual(error as? NetworkError, .invalidResponse)
+                }
+            }
+    }
+
+    func testTopStoriesManagerFetchesInvalidDataUnsuccessfully() {
+        let networkManager = NetworkManagerMock(result: .success(Data()))
+        sut = TopStoriesManager(networkManager: networkManager)
+        sut
+            .stories { result in
+                switch result {
+                case let .success(stories):
+                    XCTFail("Fetch TopStories should fail, found stories \(stories)")
+
+                case let .failure(error):
+                    guard let error = error as? DecodingError else {
+                        XCTFail("Expected error to be a DecodingError")
+                        return
+                    }
+                    switch error {
+                    case .dataCorrupted:
+                        break
+                    default:
+                        XCTFail("Expected decoding error to be dataCorrupted, found \(error)")
+                    }
+                }
+            }
+    }
+
+    func testTopStoriesManagerFetchesTopStoriesOnceSuccessfullyAndTwiceUnsuccessfully() throws {
+        let multimedia = Multimedia(
+            url: "https://static01.nyt.com/images/2018/05/11/world/11us-ambriefing-israel-sub/merlin_137938851_81051c92-3244-40b6-8034-99ca55739e43-superJumbo.jpg",
+            format: .large
+        )
+        let story = Story(
+            section: "Briefing",
+            subsection: "",
+            title: "Kirstjen Nielsen, Spotify, Cannes Film Festival: Your Friday Briefing",
+            abstract: "Here’s what you need to know to start your day.",
+            byline: "By CHRIS STANFORD",
+            url: "https://www.nytimes.com/2018/05/11/briefing/kirstjen-nielsen-spotify-cannes-film-festival.html",
+            multimedia: [multimedia]
+        )
+        let topStories = TopStories(results: [story])
+        let data = try XCTUnwrap(topStories.data)
+        let networkManager = NetworkManagerMock(result: .success(data))
+
+        sut = TopStoriesManager(networkManager: networkManager)
+
+        var times = 0
+
+        sut
+            .stories { result in
+                switch result {
+                case let .success(stories):
+                    XCTAssertEqual(stories, topStories.results)
+
+                case let .failure(error):
+                    XCTAssertEqual(error as? NetworkError, .invalidRequest)
+                }
+                times += 1
+            }
+
+        XCTAssertEqual(times, 1)
+
+        networkManager.result = .failure(NetworkError.invalidRequest)
+
+        sut
+            .stories { result in
+                switch result {
+                case let .success(stories):
+                    XCTFail("Fetch TopStories for the second time should fail, found stories \(stories)")
+
+                case let .failure(error):
+                    XCTAssertEqual(error as? NetworkError, .invalidRequest)
+                }
+                times += 1
+            }
+
+        XCTAssertEqual(times, 3)
+
+        sut.fetchStories()
+
+        XCTAssertEqual(times, 5)
+    }
+}

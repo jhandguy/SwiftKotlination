@@ -4,4 +4,30 @@
    <FileRef
       location = "container:SwiftKotlination/SwiftKotlination.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Features">
+      <FileRef
+         location = "group:StoryKit/StoryKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:TopStoriesKit/TopStoriesKit.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Modules">
+      <FileRef
+         location = "group:ExtensionKit/ExtensionKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:ImageKit/ImageKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:NetworkKit/NetworkKit.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:TestKit/TestKit.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

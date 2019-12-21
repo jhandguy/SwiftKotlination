@@ -18,7 +18,7 @@ android {
     compileSdkVersion 29
     defaultConfig {
         applicationId 'fr.jhandguy.swiftkotlination'
-        minSdkVersion 19
+        minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
         versionName '1.0'

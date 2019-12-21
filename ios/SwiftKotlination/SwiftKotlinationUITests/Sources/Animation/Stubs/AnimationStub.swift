@@ -1,4 +1,6 @@
-enum AnimationStub: Identifiable {
+import ExtensionKit
+
+enum AnimationStub: Taggable {
     case enableAnimations, disableAnimations
 
     var areAnimationsEnabled: Bool {

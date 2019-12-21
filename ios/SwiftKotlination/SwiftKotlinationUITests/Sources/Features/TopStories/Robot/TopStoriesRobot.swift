@@ -1,7 +1,7 @@
+import NetworkKit
 import XCTest
 
 final class TopStoriesRobot: Robot {
-
     private lazy var table = app.tables.firstMatch
 
     @discardableResult

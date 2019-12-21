@@ -1,11 +1,15 @@
+import ExtensionKit
+import NetworkKit
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var coordinator: CoordinatorProtocol!
 
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+    func application(
+        _: UIApplication,
+        willFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil
+    ) -> Bool {
         if let animationStub = ProcessInfo.processInfo.decode(AnimationStub.self) {
             UIView.setAnimationsEnabled(animationStub.areAnimationsEnabled)
         }
@@ -20,7 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _: UIApplication,
+        didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
         guard let coordinatorStub = ProcessInfo.processInfo.decode(CoordinatorStub.self) else {
             coordinator.start()
             return true
@@ -29,9 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         switch coordinatorStub {
         case .start:
             coordinator.start()
-        case .openStory(let story):
+        case let .openStory(story):
             coordinator.open(story)
-        case .openUrl(let url):
+        case let .openUrl(url):
             coordinator.open(url)
         }
 

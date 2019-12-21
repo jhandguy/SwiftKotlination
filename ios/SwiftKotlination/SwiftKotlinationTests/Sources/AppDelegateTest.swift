@@ -1,12 +1,12 @@
-import XCTest
 @testable import SwiftKotlination
+import XCTest
 
 final class AppDelegateTest: XCTestCase {
-
-    var sut: AppDelegate!
+    private var sut: AppDelegate!
 
     override func setUp() {
         super.setUp()
+
         sut = AppDelegate()
     }
 
@@ -18,5 +18,4 @@ final class AppDelegateTest: XCTestCase {
 
         XCTAssertTrue(coordinator.isStarted)
     }
-
 }

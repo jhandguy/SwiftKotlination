@@ -1,7 +1,6 @@
 import XCTest
 
 extension XCUIElement.ElementType {
-
     var name: String {
         switch self {
         case .any:

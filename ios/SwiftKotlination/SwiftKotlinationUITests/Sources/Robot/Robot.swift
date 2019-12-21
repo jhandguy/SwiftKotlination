@@ -1,16 +1,18 @@
+import ExtensionKit
+import NetworkKit
+import TestKit
 import XCTest
 
 class Robot {
-
     private static let defaultTimeout: Double = 30
 
     var app: XCUIApplication
 
-    lazy var navigationBar          = app.navigationBars.firstMatch
-    lazy var navigationBarButton    = navigationBar.buttons.firstMatch
-    lazy var navigationBarTitle     = navigationBar.staticTexts.firstMatch
-    lazy var alert                  = app.alerts.firstMatch
-    lazy var alertButton            = alert.buttons.firstMatch
+    lazy var navigationBar = app.navigationBars.firstMatch
+    lazy var navigationBarButton = navigationBar.buttons.firstMatch
+    lazy var navigationBarTitle = navigationBar.staticTexts.firstMatch
+    lazy var alert = app.alerts.firstMatch
+    lazy var alertButton = alert.buttons.firstMatch
 
     init(_ app: XCUIApplication) {
         self.app = app
@@ -22,11 +24,11 @@ class Robot {
         _ coordinatorStub: CoordinatorStub,
         with sessionMock: URLSessionMock = URLSessionMock(),
         and animationStub: AnimationStub = .disableAnimations,
-        timeout: TimeInterval = Robot.defaultTimeout) -> Self {
-
-        app.launchEnvironment[CoordinatorStub.identifier] = coordinatorStub.json
-        app.launchEnvironment[URLSessionMock.identifier] = sessionMock.json
-        app.launchEnvironment[AnimationStub.identifier] = animationStub.json
+        timeout: TimeInterval = Robot.defaultTimeout
+    ) -> Self {
+        app.launchEnvironment[CoordinatorStub.tag] = coordinatorStub.json
+        app.launchEnvironment[URLSessionMock.tag] = sessionMock.json
+        app.launchEnvironment[AnimationStub.tag] = animationStub.json
 
         app.launch()
 
@@ -105,7 +107,7 @@ class Robot {
     }
 
     @discardableResult
-    func closeAlert(timeout: TimeInterval = Robot.defaultTimeout) -> Self {
+    func closeAlert(timeout _: TimeInterval = Robot.defaultTimeout) -> Self {
         assert(alert, [.exists])
         tap(alertButton)
         assert(alert, [.doesNotExist])

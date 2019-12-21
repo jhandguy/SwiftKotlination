@@ -8,9 +8,9 @@ enum Predicate {
 
     var format: String {
         switch self {
-        case .contains(let label):
+        case let .contains(label):
             return "label == '\(label)'"
-        case .doesNotContain(let label):
+        case let .doesNotContain(label):
             return "label != '\(label)'"
         case .exists:
             return "exists == true"

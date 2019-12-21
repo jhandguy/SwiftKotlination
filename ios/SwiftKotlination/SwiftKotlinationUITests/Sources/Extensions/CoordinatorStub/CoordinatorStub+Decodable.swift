@@ -1,5 +1,6 @@
-extension CoordinatorStub: Decodable {
+import StoryKit
 
+extension CoordinatorStub: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 

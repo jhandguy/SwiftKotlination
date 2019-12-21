@@ -1,39 +1,54 @@
-import UIKit
 import SafariServices
+import StoryKit
+import TopStoriesKit
+import UIKit
 
-protocol CoordinatorProtocol: class {
+protocol CoordinatorProtocol: AnyObject {
     func start()
     func open(_ story: Story)
     func open(_ url: String)
 }
 
-final class Coordinator {
-
+final class Coordinator: CoordinatorProtocol {
     typealias Factory = TopStoriesFactory & StoryFactory
 
-    private let factory: Factory
-    private let window: UIWindow
+    var topStoriesCoordinator: TopStoriesCoordinatorProtocol {
+        didSet {
+            topStoriesCoordinator.delegate = self
+        }
+    }
+
+    var storyCoordinator: StoryCoordinatorProtocol {
+        didSet {
+            storyCoordinator.delegate = self
+        }
+    }
 
     let navigationController = UINavigationController()
 
+    private let window: UIWindow
+
     init(factory: Factory, window: UIWindow) {
-        self.factory = factory
+        topStoriesCoordinator = TopStoriesCoordinator(factory: factory)
+        storyCoordinator = StoryCoordinator(factory: factory)
+
         self.window = window
         self.window.rootViewController = navigationController
         self.window.makeKeyAndVisible()
+
+        topStoriesCoordinator.delegate = self
+        storyCoordinator.delegate = self
     }
 }
 
-extension Coordinator: CoordinatorProtocol {
+extension Coordinator {
     func start() {
-        let viewController = factory.makeTopStoriesTableViewController()
-        viewController.coordinator = self
+        let viewController = topStoriesCoordinator.start()
         navigationController.pushViewController(viewController, animated: true)
     }
 
     func open(_ story: Story) {
-        let viewController = factory.makeStoryViewController(for: story)
-        viewController.coordinator = self
+        let viewController = storyCoordinator.start(with: story)
         navigationController.pushViewController(viewController, animated: true)
     }
 
@@ -41,9 +56,22 @@ extension Coordinator: CoordinatorProtocol {
         guard
             let url = URL(string: url),
             UIApplication.shared.canOpenURL(url) else {
-                return
+            return
         }
+
         let viewController = SFSafariViewController(url: url)
         navigationController.present(viewController, animated: true)
+    }
+}
+
+extension Coordinator: TopStoriesCoordinatorDelegate {
+    func topStoriesCoordinator(_: TopStoriesCoordinator, didOpenStory story: Story) {
+        open(story)
+    }
+}
+
+extension Coordinator: StoryCoordinatorDelegate {
+    func storyCoordinator(_: StoryCoordinator, didOpenUrl url: String) {
+        open(url)
     }
 }
