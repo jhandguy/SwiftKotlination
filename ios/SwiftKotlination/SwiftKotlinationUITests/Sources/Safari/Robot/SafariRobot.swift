@@ -2,6 +2,9 @@ import NetworkKit
 import XCTest
 
 final class SafariRobot: Robot {
+    private lazy var urlButton  = app.buttons["URL"]
+    private lazy var doneButton = app.buttons["Done"]
+    
     @discardableResult
     func start(with url: String, sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
         start(.openUrl(url), with: sessionMock, and: animationStub)
@@ -21,22 +24,14 @@ final class SafariRobot: Robot {
             return self
         }
 
-        let button = app.buttons["URL"]
-        assert(button, [.isHittable])
-
-        guard let value = button.value as? String else {
-            XCTFail("[\(self)] Invalid value of button \(button.description)")
-            return self
-        }
-
-        XCTAssertTrue(value.contains(host))
+        assert(urlButton, [.isHittable, .isLike("*\(host)*")])
 
         return self
     }
 
     @discardableResult
     func closeSafari() -> Self {
-        tap(app.buttons["Done"])
+        tap(doneButton)
 
         return self
     }
