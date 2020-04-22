@@ -12,7 +12,7 @@ platform :ios do
     clear_derived_data
     
     reset_simulator_contents(
-      os_versions: ["13.2"]
+      os_versions: ["13.4.1"]
     )
   end
 
@@ -47,16 +47,7 @@ platform :android do
   end
 
   lane :tests do
-    sh("curl -sSLO https://github.com/shyiko/ktlint/releases/download/0.36.0/ktlint")
-    sh("chmod a+x ktlint")
-    sh(
-      "./ktlint ../#{$path_android}/app/src/**/*.kt",
-      error_callback: ->(error) { 
-        sh("rm ./ktlint") 
-        UI.user_error!(error)
-      }
-    )
-    sh("rm ./ktlint")
+    sh("ktlint ../#{$path_android}/app/src/**/*.kt")
 
     build_android_app(
       task: "clean jacocoTestReport",

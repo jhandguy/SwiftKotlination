@@ -33,7 +33,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(ignoreUnknownKeys = true)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -76,7 +76,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(ignoreUnknownKeys = true)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -122,7 +122,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(ignoreUnknownKeys = true)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> fail(result.error.message)
@@ -133,7 +133,7 @@ class NetworkManagerUnitTest {
             sut.observe(FetchTopStories) { result ->
                 when (result) {
                     is Result.Success -> {
-                        val topStories = Json(Stable.copy(strictMode = false)).parse(TopStories.serializer(), String(result.data))
+                        val topStories = Json(Stable.copy(ignoreUnknownKeys = true)).parse(TopStories.serializer(), String(result.data))
                         assertEquals(topStories.results.count(), 2)
                     }
                     is Result.Failure -> assertEquals(result.error.message, NetworkError.InvalidResponse().message)
