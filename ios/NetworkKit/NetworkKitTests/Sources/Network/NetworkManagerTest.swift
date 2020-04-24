@@ -10,8 +10,8 @@ final class NetworkManagerTest: XCTestCase {
         let file = File("top_stories", .json)
         let responses = [
             request: [
-                Response(file),
-            ],
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
@@ -52,8 +52,8 @@ final class NetworkManagerTest: XCTestCase {
         let responses = [
             request: [
                 Response(file),
-                Response(file),
-            ],
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
@@ -97,8 +97,8 @@ final class NetworkManagerTest: XCTestCase {
             request: [
                 Response(file),
                 Response(error: .invalidResponse),
-                Response(file),
-            ],
+                Response(file)
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
@@ -150,8 +150,8 @@ final class NetworkManagerTest: XCTestCase {
         let request = Request.fetchImage("")
         let responses = [
             request: [
-                Response(),
-            ],
+                Response()
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)
@@ -190,8 +190,8 @@ final class NetworkManagerTest: XCTestCase {
         let request = Request.fetchImage("url")
         let responses = [
             request: [
-                Response(),
-            ],
+                Response()
+            ]
         ]
         let session = URLSessionMock(responses: responses)
         sut = NetworkManager(session: session)

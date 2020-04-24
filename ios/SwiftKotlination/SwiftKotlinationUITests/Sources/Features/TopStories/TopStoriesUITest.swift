@@ -15,7 +15,7 @@ final class TopStoriesUITest: XCTestCase {
                 title: "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
                 byline: "By JONATHAN MARTIN",
                 category: "U.S."
-            ),
+            )
         ]
 
         let sessionMock = URLSessionMock(
@@ -24,20 +24,20 @@ final class TopStoriesUITest: XCTestCase {
                     Response(File("top_stories", .json)),
                     Response(File("top_stories", .json)),
                     Response(File("top_stories", .json)),
-                    Response(error: .invalidResponse),
+                    Response(error: .invalidResponse)
                 ],
                 .fetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbLarge.jpg"): [
-                    Response(File("28DC-nafta-thumbLarge", .jpg)),
+                    Response(File("28DC-nafta-thumbLarge", .jpg))
                 ],
                 .fetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-superJumbo-v2.jpg"): [
-                    Response(File("28DC-nafta-superJumbo-v2", .jpg)),
+                    Response(File("28DC-nafta-superJumbo-v2", .jpg))
                 ],
                 .fetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbLarge.jpg"): [
-                    Response(File("27arizpolitics7-thumbLarge", .jpg)),
+                    Response(File("27arizpolitics7-thumbLarge", .jpg))
                 ],
                 .fetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-superJumbo-v2.jpg"): [
-                    Response(File("27arizpolitics7-superJumbo-v2", .jpg)),
-                ],
+                    Response(File("27arizpolitics7-superJumbo-v2", .jpg))
+                ]
             ]
         )
 

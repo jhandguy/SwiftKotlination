@@ -15,7 +15,7 @@ final class StoryManagerTest: XCTestCase {
             multimedia: []
         )
         sut = StoryManager(story: expectedStory)
-        
+
         sut
             .story { result in
                 switch result {

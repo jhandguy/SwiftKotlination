@@ -33,15 +33,15 @@ final class StoryUITest: XCTestCase {
                 Multimedia(
                     url: "https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-superJumbo.jpg",
                     format: .large
-                ),
+                )
             ]
         )
 
         let sessionMock = URLSessionMock(
             responses: [
                 .fetchImage("https://static01.nyt.com/images/2018/08/28/us/politics/28trump-endorsements1/28trump-endorsements1-superJumbo.jpg"): [
-                    Response(File("28trump-endorsements1-superJumbo", .jpg)),
-                ],
+                    Response(File("28trump-endorsements1-superJumbo", .jpg))
+                ]
             ]
         )
 

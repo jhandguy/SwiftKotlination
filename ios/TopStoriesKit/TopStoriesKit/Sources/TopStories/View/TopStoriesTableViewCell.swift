@@ -24,7 +24,7 @@ final class TopStoriesTableViewCell: UITableViewCell, Accessible {
             $0.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             $0.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             $0.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            $0.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8)
         ])
         $0.axis = .horizontal
         $0.alignment = .fill
@@ -43,7 +43,7 @@ final class TopStoriesTableViewCell: UITableViewCell, Accessible {
     private(set) lazy var multimediaImageView = UIImageView().with {
         contentStackView.addArrangedSubview($0)
         $0.activate(constraints: [
-            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 1 / 1),
+            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 1 / 1)
         ])
         $0.isHidden = true
     }

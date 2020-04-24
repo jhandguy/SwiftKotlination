@@ -4,7 +4,7 @@ import XCTest
 final class SafariRobot: Robot {
     private lazy var urlButton  = app.buttons["URL"]
     private lazy var doneButton = app.buttons["Done"]
-    
+
     @discardableResult
     func start(with url: String, sessionMock: URLSessionMock = URLSessionMock(), and animationStub: AnimationStub = .disableAnimations) -> Self {
         start(.openUrl(url), with: sessionMock, and: animationStub)

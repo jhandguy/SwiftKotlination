@@ -26,7 +26,7 @@ final class StoryView: UIView, Accessible {
             $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             $0.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
-            $0.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
+            $0.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor)
         ])
         $0.showsVerticalScrollIndicator = true
     }
@@ -38,7 +38,7 @@ final class StoryView: UIView, Accessible {
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -8),
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
             $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 8),
-            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16),
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -16)
         ])
         $0.axis = .vertical
         $0.alignment = .fill
@@ -49,7 +49,7 @@ final class StoryView: UIView, Accessible {
     lazy var multimediaImageView = UIImageView().with {
         stackView.addArrangedSubview($0)
         $0.activate(constraints: [
-            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 2 / 3),
+            $0.heightAnchor.constraint(equalTo: $0.widthAnchor, multiplier: 2 / 3)
         ])
         $0.isHidden = true
     }
