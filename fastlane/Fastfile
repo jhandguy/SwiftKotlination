@@ -5,14 +5,19 @@ $project_ios = "#{$path_ios}/SwiftKotlination.xcworkspace"
 $project_android = "fr.jhandguy.swiftkotlination"
 
 $device_ios = "iPhone 11"
-$device_android = "emulator-5554"
+$device_android = "Nexus 5X"
+$serial_android = "emulator-5554"
+
+$version_ios = "13.4.1"
+$version_android = "29"
+$version_build_tools = "29.0.3"
 
 platform :ios do
   before_all do
     clear_derived_data
     
     reset_simulator_contents(
-      os_versions: ["13.4.1"]
+      os_versions: [$version_ios]
     )
   end
 
@@ -41,9 +46,15 @@ end
 
 platform :android do
   before_all do 
-    sh("adb -s #{$device_android} shell settings put global window_animation_scale 0")
-    sh("adb -s #{$device_android} shell settings put global transition_animation_scale 0")
-    sh("adb -s #{$device_android} shell settings put global animator_duration_scale 0")
+    sh("sdkmanager \"system-images;android-#{$version_android};google_apis;x86\"")
+    sh("sdkmanager \"build-tools;#{$version_build_tools}\"")
+    sh("echo yes | sdkmanager --update")
+    sh("echo no | avdmanager create avd --force --name \"api-#{$version_android}\" --abi \"google_apis/x86\" --package \"system-images;android-#{$version_android};google_apis;x86\" --device \"#{$device_android}\"")
+    sh("emulator -avd \"api-#{$version_android}\" -gpu swiftshader_indirect -no-window -no-snapshot -no-audio -no-boot-anim -camera-back none -camera-front none @#{$serial_android} > /dev/null 2>&1 &")
+    sh("adb -s #{$serial_android} wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'")
+    sh("adb -s #{$serial_android} shell settings put global window_animation_scale 0")
+    sh("adb -s #{$serial_android} shell settings put global transition_animation_scale 0")
+    sh("adb -s #{$serial_android} shell settings put global animator_duration_scale 0")
   end
 
   lane :tests do
@@ -52,7 +63,7 @@ platform :android do
     build_android_app(
       task: "clean jacocoTestReport",
       project_dir: $path_android,
-      serial: $device_android
+      serial: $serial_android
     )
   end
 
@@ -80,7 +91,11 @@ platform :android do
       app_apk_path: "#{$path_android}/app/build/outputs/apk/debug/app-debug.apk",
       tests_apk_path: "#{$path_android}/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
       test_instrumentation_runner: "#{$project_android}.runner.AndroidTestRunner",
-      specific_device: $device_android
+      specific_device: $serial_android
     )
+  end
+
+  after_all do
+    sh("adb -s #{$serial_android} emu kill")
   end
 end
