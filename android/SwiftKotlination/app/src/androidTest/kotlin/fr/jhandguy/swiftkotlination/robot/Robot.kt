@@ -46,7 +46,7 @@ fun <T : Activity, R : Robot<T>> R.takeScreenshot(name: String): R {
 
 fun <T : Activity, R : Robot<T>> R.checkTitle(title: String): R {
     onView(instanceOf(AppCompatTextView::class.java))
-            .check(matches(withText(title)))
+        .check(matches(withText(title)))
 
     return this
 }
@@ -71,16 +71,16 @@ fun <T : Activity, R : Robot<T>> R.back(): R {
 
 fun <T : Activity, R : Robot<T>> R.checkAlert(error: Error): R {
     onView(withText(error.message))
-            .inRoot(isDialog())
-            .check(matches(isDisplayed()))
+        .inRoot(isDialog())
+        .check(matches(isDisplayed()))
 
     return this
 }
 
 fun <T : Activity, R : Robot<T>> R.closeAlert(): R {
     onView(withText(android.R.string.ok))
-            .inRoot(isDialog())
-            .perform(click())
+        .inRoot(isDialog())
+        .perform(click())
 
     return this
 }

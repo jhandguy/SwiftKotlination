@@ -15,4 +15,4 @@ data class Story(
 )
 
 fun Story.imageUrl(format: Multimedia.Format): String? =
-        multimedia.firstOrNull { it.format == format }?.url
+    multimedia.firstOrNull { it.format == format }?.url

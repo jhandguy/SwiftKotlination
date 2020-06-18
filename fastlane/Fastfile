@@ -50,7 +50,7 @@ platform :android do
     sh("sdkmanager \"build-tools;#{$version_build_tools}\"")
     sh("echo yes | sdkmanager --update")
     sh("echo no | avdmanager create avd --force --name \"api-#{$version_android}\" --abi \"google_apis/x86\" --package \"system-images;android-#{$version_android};google_apis;x86\" --device \"#{$device_android}\"")
-    sh("emulator -avd \"api-#{$version_android}\" -gpu swiftshader_indirect -no-window -no-snapshot -no-audio -no-boot-anim -camera-back none -camera-front none @#{$serial_android} > /dev/null 2>&1 &")
+    sh("emulator -avd \"api-#{$version_android}\" -gpu swiftshader_indirect -no-window -no-snapshot -no-audio -no-boot-anim -camera-back none -camera-front none > /dev/null 2>&1 &")
     sh("adb -s #{$serial_android} wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'")
     sh("adb -s #{$serial_android} shell settings put global window_animation_scale 0")
     sh("adb -s #{$serial_android} shell settings put global transition_animation_scale 0")

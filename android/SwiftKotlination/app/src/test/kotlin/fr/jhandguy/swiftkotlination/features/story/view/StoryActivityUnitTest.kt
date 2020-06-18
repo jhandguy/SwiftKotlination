@@ -10,12 +10,12 @@ import fr.jhandguy.swiftkotlination.factory.mocks.DependencyManagerMock
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.features.story.model.mocks.StoryManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(PAUSED)

@@ -3,11 +3,11 @@ package fr.jhandguy.swiftkotlination.features.topstories.model
 import fr.jhandguy.swiftkotlination.features.story.model.Story
 import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.fail
-import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 
 class TopStoriesManagerUnitTest {
 
@@ -15,10 +15,12 @@ class TopStoriesManagerUnitTest {
 
     @Test
     fun `top stories are observed correctly`() {
-        val topStories = TopStories(listOf(
+        val topStories = TopStories(
+            listOf(
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
-        ))
+            )
+        )
         val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
         sut = TopStoriesManager(networkManager)
@@ -35,10 +37,12 @@ class TopStoriesManagerUnitTest {
 
     @Test
     fun `top stories are observed and fetched correctly`() {
-        val topStories = TopStories(listOf(
+        val topStories = TopStories(
+            listOf(
                 Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
-        ))
+            )
+        )
         val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
 

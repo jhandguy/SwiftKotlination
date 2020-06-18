@@ -24,7 +24,7 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
     companion object {
         override fun serialize(encoder: Encoder, obj: Multimedia) {
             val jsonOutput = encoder as? JsonOutput
-                    ?: throw SerializationException("Expected JSON output")
+                ?: throw SerializationException("Expected JSON output")
 
             val jsonObject = JsonObject(
                 mapOf(
@@ -38,9 +38,9 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
 
         override fun deserialize(decoder: Decoder): Multimedia {
             val jsonInput = decoder as? JsonInput
-                    ?: throw SerializationException("Expected JSON input")
+                ?: throw SerializationException("Expected JSON input")
             val jsonObject = jsonInput.decodeJson() as? JsonObject
-                    ?: throw SerializationException("Expected JSON object")
+                ?: throw SerializationException("Expected JSON object")
 
             val url = jsonObject.getPrimitive("url").content
             val formatName = jsonObject.getPrimitive("format").content

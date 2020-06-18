@@ -21,35 +21,35 @@ class StoryRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Robot<T>
 
     fun checkStoryImage(): StoryRobot<T> {
         onView(withId(R.id.story_image))
-                .check(matches(isDisplayed()))
+            .check(matches(isDisplayed()))
 
         return this
     }
 
     fun checkStoryTitle(storyTitle: String): StoryRobot<T> {
         onView(withId(R.id.story_title))
-                .check(matches(withText(storyTitle)))
+            .check(matches(withText(storyTitle)))
 
         return this
     }
 
     fun checkStoryAbstract(storyAbstract: String): StoryRobot<T> {
         onView(withId(R.id.story_abstract))
-                .check(matches(withText(storyAbstract)))
+            .check(matches(withText(storyAbstract)))
 
         return this
     }
 
     fun checkStoryByline(storyByline: String): StoryRobot<T> {
         onView(withId(R.id.story_byline))
-                .check(matches(withText(storyByline)))
+            .check(matches(withText(storyByline)))
 
         return this
     }
 
     fun openChrome(): StoryRobot<T> {
         onView(withId(R.id.story_button))
-                .perform(scrollTo(), click())
+            .perform(scrollTo(), click())
 
         return this
     }

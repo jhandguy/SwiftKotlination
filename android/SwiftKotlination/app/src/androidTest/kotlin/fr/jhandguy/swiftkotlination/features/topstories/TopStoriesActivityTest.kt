@@ -33,57 +33,72 @@ class TopStoriesActivityTest {
     @Test
     fun testTopStoriesActivity() {
         val topStories = arrayListOf(
-                Triple(
-                    "Preliminary Nafta Deal Reached Between U.S. and Mexico",
-                    "By ANA SWANSON and KATIE ROGERS",
-                    "U.S. - Politics"
-                ),
-                Triple(
-                        "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
-                        "By JONATHAN MARTIN",
-                        "U.S."
-                )
+            Triple(
+                "Preliminary Nafta Deal Reached Between U.S. and Mexico",
+                "By ANA SWANSON and KATIE ROGERS",
+                "U.S. - Politics"
+            ),
+            Triple(
+                "Arizona Governor Faces a Tough Choice: A Senator Made From McCain’s Mold or Trump’s",
+                "By JONATHAN MARTIN",
+                "U.S."
+            )
         )
 
         val responses: Responses = hashMapOf(
-                Pair(Request.FetchTopStories, linkedListOf(
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(File("top_stories", File.Extension.JSON)),
-                        Response(error = NetworkError.InvalidResponse())
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbLarge.jpg"), linkedListOf(
-                        Response(File("28DC-nafta-thumbLarge", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-superJumbo-v2.jpg"), linkedListOf(
-                        Response(File("28DC-nafta-superJumbo-v2", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbLarge.jpg"), linkedListOf(
-                        Response(File("27arizpolitics7-thumbLarge", File.Extension.JPG))
-                )),
-                Pair(Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-superJumbo-v2.jpg"), linkedListOf(
-                        Response(File("27arizpolitics7-superJumbo-v2", File.Extension.JPG))
-                ))
+            Pair(
+                Request.FetchTopStories,
+                linkedListOf(
+                    Response(File("top_stories", File.Extension.JSON)),
+                    Response(File("top_stories", File.Extension.JSON)),
+                    Response(File("top_stories", File.Extension.JSON)),
+                    Response(error = NetworkError.InvalidResponse())
+                )
+            ),
+            Pair(
+                Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-thumbLarge.jpg"),
+                linkedListOf(
+                    Response(File("28DC-nafta-thumbLarge", File.Extension.JPG))
+                )
+            ),
+            Pair(
+                Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/28DC-nafta/28DC-nafta-superJumbo-v2.jpg"),
+                linkedListOf(
+                    Response(File("28DC-nafta-superJumbo-v2", File.Extension.JPG))
+                )
+            ),
+            Pair(
+                Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-thumbLarge.jpg"),
+                linkedListOf(
+                    Response(File("27arizpolitics7-thumbLarge", File.Extension.JPG))
+                )
+            ),
+            Pair(
+                Request.FetchImage("https://static01.nyt.com/images/2018/08/27/us/27arizpolitics7/27arizpolitics7-superJumbo-v2.jpg"),
+                linkedListOf(
+                    Response(File("27arizpolitics7-superJumbo-v2", File.Extension.JPG))
+                )
+            )
         )
 
         TopStoriesRobot(activityRule)
-                .start(responses)
-                .checkTitle("Top Stories")
-                .takeScreenshot("top-stories")
-                .checkTopStoriesCount(topStories.count())
-                .forEachTopStories(listOf(0, 1)) { robot, index ->
-                    val story = topStories[index]
-                    robot
-                            .checkTopStoryTitle(story.first, index)
-                            .checkTopStoryByline(story.second, index)
-                            .openStory(index)
-                            .checkTitle(story.third)
-                            .back()
-                }
-                .checkTitle("Top Stories")
-                .checkTopStoriesCount(topStories.count())
-                .refreshTopStories()
-                .checkAlert(NetworkError.InvalidResponse())
-                .closeAlert()
+            .start(responses)
+            .checkTitle("Top Stories")
+            .takeScreenshot("top-stories")
+            .checkTopStoriesCount(topStories.count())
+            .forEachTopStories(listOf(0, 1)) { robot, index ->
+                val story = topStories[index]
+                robot
+                    .checkTopStoryTitle(story.first, index)
+                    .checkTopStoryByline(story.second, index)
+                    .openStory(index)
+                    .checkTitle(story.third)
+                    .back()
+            }
+            .checkTitle("Top Stories")
+            .checkTopStoriesCount(topStories.count())
+            .refreshTopStories()
+            .checkAlert(NetworkError.InvalidResponse())
+            .closeAlert()
     }
 }

@@ -14,10 +14,10 @@ interface ImageManagerInterface {
 
 class ImageManager(private val networkManager: NetworkManagerInterface) : ImageManagerInterface {
     override suspend fun image(url: String, observer: Observer<Bitmap>): Disposable =
-            networkManager.observe(Request.FetchImage(url)) { result ->
-                when (result) {
-                    is Result.Success -> observer(Result.Success(BitmapFactory.decodeByteArray(result.data, 0, result.data.size)))
-                    is Result.Failure -> observer(result)
-                }
+        networkManager.observe(Request.FetchImage(url)) { result ->
+            when (result) {
+                is Result.Success -> observer(Result.Success(BitmapFactory.decodeByteArray(result.data, 0, result.data.size)))
+                is Result.Failure -> observer(result)
             }
+        }
 }

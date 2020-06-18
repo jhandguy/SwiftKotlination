@@ -20,7 +20,7 @@ class TopStoriesRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Rob
 
     fun checkTopStoriesCount(count: Int): TopStoriesRobot<T> {
         onView(withId(R.id.top_stories_list))
-                .check(matches(RecyclerViewMatcher.withItemCount(count)))
+            .check(matches(RecyclerViewMatcher.withItemCount(count)))
 
         return this
     }
@@ -34,35 +34,39 @@ class TopStoriesRobot<T : Activity>(activityTestRule: ActivityTestRule<T>) : Rob
     }
 
     fun checkTopStoryTitle(title: String, index: Int): TopStoriesRobot<T> {
-        onView(allOf(
+        onView(
+            allOf(
                 withParent(childOfParent(withId(R.id.top_stories_list), index)),
                 withId(R.id.top_stories_item_title)
-        ))
-                .check(matches(withText(title)))
+            )
+        )
+            .check(matches(withText(title)))
 
         return this
     }
 
     fun checkTopStoryByline(byline: String, index: Int): TopStoriesRobot<T> {
-        onView(allOf(
+        onView(
+            allOf(
                 withParent(childOfParent(withId(R.id.top_stories_list), index)),
                 withId(R.id.top_stories_item_byline)
-        ))
-                .check(matches(withText(byline)))
+            )
+        )
+            .check(matches(withText(byline)))
 
         return this
     }
 
     fun openStory(index: Int): StoryRobot<T> {
         onView(childOfParent(withId(R.id.top_stories_list), index))
-                .perform(click())
+            .perform(click())
 
         return StoryRobot(activityRule)
     }
 
     fun refreshTopStories(): TopStoriesRobot<T> {
         onView(withId(R.id.top_stories_list))
-                .perform(swipeDown())
+            .perform(swipeDown())
 
         return this
     }

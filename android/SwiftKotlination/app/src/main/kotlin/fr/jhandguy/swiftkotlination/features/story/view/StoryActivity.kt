@@ -41,8 +41,8 @@ class StoryActivity : AppCompatActivity() {
                     when (result) {
                         is Result.Success -> {
                             title = arrayOf(result.data.section, result.data.subsection)
-                                    .filter { it.isNotEmpty() }
-                                    .joinToString(separator = " - ")
+                                .filter { it.isNotEmpty() }
+                                .joinToString(separator = " - ")
                             view.story = result.data
                             view.setContentView(this@StoryActivity)
                         }

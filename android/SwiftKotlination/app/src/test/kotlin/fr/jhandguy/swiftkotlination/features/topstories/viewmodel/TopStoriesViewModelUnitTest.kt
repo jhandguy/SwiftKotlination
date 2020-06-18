@@ -9,15 +9,15 @@ import fr.jhandguy.swiftkotlination.model.mocks.ImageManagerMock
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.fail
 import kotlinx.coroutines.runBlocking
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.fail
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(PAUSED)
@@ -28,16 +28,16 @@ class TopStoriesViewModelUnitTest {
     @Test
     fun `top stories are fetched correctly`() {
         val topStories = TopStories(
-                results = listOf(
-                    Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
-                    Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
-                )
+            results = listOf(
+                Story("section1", "subsection1", "title1", "abstract1", "url1", "byline1"),
+                Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
+            )
         )
         val topStoriesManager = TopStoriesManagerMock(
-                Result.Success(topStories)
+            Result.Success(topStories)
         )
         val imageManager = ImageManagerMock(
-                Result.Failure(NetworkError.InvalidResponse())
+            Result.Failure(NetworkError.InvalidResponse())
         )
         val factory = TopStoriesFactoryMock(topStoriesManager, imageManager)
         sut = TopStoriesViewModel(factory)
@@ -138,10 +138,10 @@ class TopStoriesViewModelUnitTest {
     fun `error fetching top stories is thrown correctly`() {
         val error = Error("Error fetching top stories: 404 - Response.error()")
         val topStoriesManager = TopStoriesManagerMock(
-                Result.Failure(error)
+            Result.Failure(error)
         )
         val imageManager = ImageManagerMock(
-                Result.Failure(NetworkError.InvalidResponse())
+            Result.Failure(NetworkError.InvalidResponse())
         )
         val factory = TopStoriesFactoryMock(topStoriesManager, imageManager)
         sut = TopStoriesViewModel(factory)

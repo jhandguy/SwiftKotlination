@@ -14,15 +14,15 @@ class StoryViewModel(factory: StoryFactory, story: Story = Story(), var image: B
     suspend fun story(observer: Observer<Story>) = storyManager.story(observer)
 
     suspend fun image(url: String, observer: Observer<Bitmap>): Disposable? = image?.let { image ->
-            observer(Result.Success(image))
-            return null
-        } ?: imageManager.image(url) { result ->
-            when (result) {
-                is Result.Success -> {
-                    image = result.data
-                    observer(result)
-                }
-                is Result.Failure -> observer(result)
+        observer(Result.Success(image))
+        return null
+    } ?: imageManager.image(url) { result ->
+        when (result) {
+            is Result.Success -> {
+                image = result.data
+                observer(result)
             }
+            is Result.Failure -> observer(result)
         }
+    }
 }

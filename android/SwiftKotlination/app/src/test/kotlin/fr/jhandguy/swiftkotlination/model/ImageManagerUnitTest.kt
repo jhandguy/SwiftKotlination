@@ -4,14 +4,14 @@ import android.graphics.BitmapFactory
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.mocks.NetworkManagerMock
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.fail
 import kotlinx.coroutines.runBlocking
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(PAUSED)

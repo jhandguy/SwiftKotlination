@@ -9,15 +9,15 @@ import fr.jhandguy.swiftkotlination.model.mocks.ImageManagerMock
 import fr.jhandguy.swiftkotlination.network.File
 import fr.jhandguy.swiftkotlination.network.NetworkError
 import fr.jhandguy.swiftkotlination.observer.Result
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
-import kotlin.test.fail
 import kotlinx.coroutines.runBlocking
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.fail
 
 @RunWith(RobolectricTestRunner::class)
 @LooperMode(PAUSED)
@@ -29,10 +29,10 @@ class StoryViewModelUnitTest {
     fun `story is fetched correctly`() {
         val story = Story("section", "subsection", "title", "abstract", "url", "byline")
         val storyManager = StoryManagerMock(
-                Result.Success(story)
+            Result.Success(story)
         )
         val imageManager = ImageManagerMock(
-                Result.Failure(NetworkError.InvalidResponse())
+            Result.Failure(NetworkError.InvalidResponse())
         )
         val factory = StoryFactoryMock(storyManager, imageManager)
         sut = StoryViewModel(factory)
@@ -106,10 +106,10 @@ class StoryViewModelUnitTest {
     fun `error fetching story is thrown correctly`() {
         val error = Error("Error fetching story: 404 - Response.error()")
         val storyManager = StoryManagerMock(
-                Result.Failure(error)
+            Result.Failure(error)
         )
         val imageManager = ImageManagerMock(
-                Result.Failure(NetworkError.InvalidResponse())
+            Result.Failure(NetworkError.InvalidResponse())
         )
         val factory = StoryFactoryMock(storyManager, imageManager)
         sut = StoryViewModel(factory)

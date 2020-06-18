@@ -21,13 +21,16 @@ class MainActivityTest {
     @Test
     fun testMainActivity() {
         val responses: Responses = hashMapOf(
-                Pair(Request.FetchTopStories, linkedListOf(
-                        Response(File("top_stories_empty", File.Extension.JSON))
-                ))
+            Pair(
+                Request.FetchTopStories,
+                linkedListOf(
+                    Response(File("top_stories_empty", File.Extension.JSON))
+                )
+            )
         )
 
         TopStoriesRobot(activityRule)
-                .start(responses)
-                .checkTitle("Top Stories")
+            .start(responses)
+            .checkTitle("Top Stories")
     }
 }

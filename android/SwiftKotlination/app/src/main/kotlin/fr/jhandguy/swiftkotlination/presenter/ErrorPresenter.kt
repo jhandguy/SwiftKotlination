@@ -7,10 +7,10 @@ data class ErrorPresenter(val error: Error) {
 
     fun presentIn(activity: Activity) {
         AlertDialog
-                .Builder(activity)
-                .setTitle("Error")
-                .setMessage(error.message)
-                .setNegativeButton(android.R.string.ok, null)
-                .show()
+            .Builder(activity)
+            .setTitle("Error")
+            .setMessage(error.message)
+            .setNegativeButton(android.R.string.ok, null)
+            .show()
     }
 }

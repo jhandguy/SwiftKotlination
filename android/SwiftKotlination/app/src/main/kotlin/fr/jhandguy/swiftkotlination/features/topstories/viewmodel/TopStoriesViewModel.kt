@@ -27,15 +27,15 @@ class TopStoriesViewModel(factory: TopStoriesFactory) {
     suspend fun refresh() = topStoriesManager.fetchStories()
 
     suspend fun image(url: String, observer: Observer<Bitmap>): Disposable? = images[url]?.let { image ->
-            observer(Result.Success(image))
-            return null
-        } ?: imageManager.image(url) { result ->
-            when (result) {
-                is Result.Success -> {
-                    images[url] = result.data
-                    observer(result)
-                }
-                is Result.Failure -> observer(result)
+        observer(Result.Success(image))
+        return null
+    } ?: imageManager.image(url) { result ->
+        when (result) {
+            is Result.Success -> {
+                images[url] = result.data
+                observer(result)
             }
+            is Result.Failure -> observer(result)
         }
+    }
 }
