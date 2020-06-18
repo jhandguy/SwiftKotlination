@@ -15,12 +15,12 @@ tasks.withType(Test) {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId 'fr.jhandguy.swiftkotlination'
-        // TODO: minSdkVersion 29
+        // TODO: minSdkVersion 30
         minSdkVersion 28
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName '1.0'
         testInstrumentationRunner 'fr.jhandguy.swiftkotlination.runner.AndroidTestRunner'

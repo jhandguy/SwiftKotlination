@@ -9,8 +9,8 @@ $device_android = "Nexus 5X"
 $serial_android = "emulator-5554"
 
 $version_ios = "13.4.1"
-$version_android = "29"
-$version_build_tools = "29.0.3"
+$version_android = "30"
+$version_build_tools = "30.0.0"
 
 platform :ios do
   before_all do
