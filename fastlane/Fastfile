@@ -8,7 +8,7 @@ $device_ios = "iPhone 11"
 $device_android = "Nexus 5X"
 $serial_android = "emulator-5554"
 
-$version_ios = "13.4.1"
+$version_ios = "13.5"
 $version_android = "30"
 $version_build_tools = "30.0.0"
 
