@@ -61,51 +61,27 @@ android {
 }
 
 dependencies {
-    val ankoVersion: String by System.getProperties()
-    val appCompatVersion: String by System.getProperties()
-    val constraintLayoutVersion: String by System.getProperties()
-    val espressoVersion: String by System.getProperties()
-    val coroutinesVersion: String by System.getProperties()
-    val junitVersion: String by System.getProperties()
-    val kotlinVersion: String by System.getProperties()
-    val recyclerViewVersion: String by System.getProperties()
-    val robolectricVersion: String by System.getProperties()
-    val screengrabVersion: String by System.getProperties()
-    val serializationVersion: String by System.getProperties()
-    val testVersion: String by System.getProperties()
-
-    fun anko(module: String? = null, version: String) = "org.jetbrains.anko:anko${module?.let { "-$module" } ?: ""}:$version"
-    fun appCompat(version: String) = "androidx.appcompat:appcompat:$version"
-    fun constraintLayout(version: String) = "androidx.constraintlayout:constraintlayout:$version"
-    fun espresso(module: String, version: String) = "androidx.test.espresso:espresso-$module:$version"
-    fun fastlane(module: String, version: String) = "tools.fastlane:$module:$version"
-    fun junit(version: String) = "junit:junit:$version"
-    fun kotlinx(module: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$module:$version"
-    fun recyclerView(version: String) = "androidx.recyclerview:recyclerview:$version"
-    fun robolectric(version: String) = "org.robolectric:robolectric:$version"
-    fun test(module: String, version: String) = "androidx.test:$module:$version"
-
     // TODO: Replace Anko with Jetpack Compose
-    implementation(anko(version = ankoVersion))
-    implementation(anko("recyclerview-v7", ankoVersion))
-    implementation(anko("constraint-layout", ankoVersion))
-    implementation(appCompat(appCompatVersion))
-    implementation(constraintLayout(constraintLayoutVersion))
-    implementation(kotlinx("serialization-runtime", serializationVersion))
-    implementation(kotlinx("coroutines-android", coroutinesVersion))
-    implementation(recyclerView(recyclerViewVersion))
+    implementation(Dependencies.anko(version = Versions.ankoVersion))
+    implementation(Dependencies.anko("recyclerview-v7", Versions.ankoVersion))
+    implementation(Dependencies.anko("constraint-layout", Versions.ankoVersion))
+    implementation(Dependencies.appCompat(Versions.appCompatVersion))
+    implementation(Dependencies.constraintLayout(Versions.constraintLayoutVersion))
+    implementation(Dependencies.kotlinx("serialization-runtime", Versions.serializationVersion))
+    implementation(Dependencies.kotlinx("coroutines-android", Versions.coroutinesVersion))
+    implementation(Dependencies.recyclerView(Versions.recyclerViewVersion))
 
-    testImplementation(junit(junitVersion))
-    testImplementation(kotlin("test-junit", kotlinVersion))
-    testImplementation(robolectric(robolectricVersion))
-    testImplementation(test("core", testVersion))
+    testImplementation(Dependencies.junit(Versions.junitVersion))
+    testImplementation(kotlin("test-junit", Versions.kotlinVersion))
+    testImplementation(Dependencies.robolectric(Versions.robolectricVersion))
+    testImplementation(Dependencies.test("core", Versions.testVersion))
 
-    androidTestImplementation(espresso("core", espressoVersion))
-    androidTestImplementation(espresso("intents", espressoVersion))
-    androidTestImplementation(fastlane("screengrab", screengrabVersion))
-    androidTestImplementation(test("core", testVersion))
-    androidTestImplementation(test("runner", testVersion))
-    androidTestImplementation(test("rules", testVersion))
+    androidTestImplementation(Dependencies.espresso("core", Versions.espressoVersion))
+    androidTestImplementation(Dependencies.espresso("intents", Versions.espressoVersion))
+    androidTestImplementation(Dependencies.fastlane("screengrab", Versions.screengrabVersion))
+    androidTestImplementation(Dependencies.test("core", Versions.testVersion))
+    androidTestImplementation(Dependencies.test("runner", Versions.testVersion))
+    androidTestImplementation(Dependencies.test("rules", Versions.testVersion))
 }
 
 tasks.register("jacocoTestReport", JacocoReport::class) {

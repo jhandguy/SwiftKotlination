@@ -5,17 +5,10 @@ buildscript {
     }
 
     dependencies {
-        val gradleVersion: String by System.getProperties()
-        val jacocoVersion: String by System.getProperties()
-        val kotlinVersion: String by System.getProperties()
-
-        fun buildTools(module: String, version: String) = "com.android.tools.build:$module:$version"
-        fun jacoco(version: String) = "org.jacoco:org.jacoco.core:$version"
-
-        classpath(buildTools("gradle", gradleVersion))
-        classpath(kotlin("gradle-plugin", kotlinVersion))
-        classpath(kotlin("serialization", kotlinVersion))
-        classpath(jacoco(jacocoVersion))
+        classpath(Dependencies.buildTools("gradle", Versions.gradleVersion))
+        classpath(Dependencies.jacoco(Versions.jacocoVersion))
+        classpath(kotlin("gradle-plugin", Versions.kotlinVersion))
+        classpath(kotlin("serialization", Versions.kotlinVersion))
     }
 }
 

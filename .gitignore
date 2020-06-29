@@ -1,13 +1,4 @@
-xcuserdata
-
-.idea
-
-fastlane/test_output
-fastlane/report.xml
-fastlane/screenshots
-fastlane/metadata
-
 .bundle
-vendor
-.gradle
 .DS_Store
+
+/vendor
