@@ -1,6 +1,6 @@
 package fr.jhandguy.swiftkotlination.extensions
 
-import fr.jhandguy.swiftkotlination.network.Parameters
+import fr.jhandguy.network.model.network.Parameters
 
 fun Parameters.query(): String? =
     when (this) {

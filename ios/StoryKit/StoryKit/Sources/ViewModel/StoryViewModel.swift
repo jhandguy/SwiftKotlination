@@ -29,13 +29,17 @@ extension StoryViewModel {
             return imageManager
                 .image(with: url) { [weak self] result in
                     switch result {
-                    case let .success(image):
+                    case let .success(data):
+                        guard let image = UIImage(data: data) else {
+                            observer(.failure(NetworkError.invalidData))
+                            return
+                        }
                         self?.image = image
+                        observer(.success(image))
 
-                    case .failure:
-                        break
+                    case let .failure(error):
+                        observer(.failure(error))
                     }
-                    observer(result)
                 }
         }
 

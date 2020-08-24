@@ -55,8 +55,8 @@ final class StoryViewControllerTest: XCTestCase {
     }
 
     func testStoryViewControllerFetchesStoryImageSuccessfully() throws {
-        let data = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
+        let imageData = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try XCTUnwrap(UIImage(data: imageData))
         let multimedia = Multimedia(url: "", format: .large)
         let story = Story(
             section: "section",
@@ -68,7 +68,7 @@ final class StoryViewControllerTest: XCTestCase {
             multimedia: [multimedia]
         )
         let storyManager = StoryManagerMock(result: .success(story))
-        let imageManager = ImageManagerMock(result: .success(expectedImage))
+        let imageManager = ImageManagerMock(result: .success(imageData))
         let factory = StoryFactoryMock(storyManager: storyManager, imageManager: imageManager)
 
         sut = factory.makeStoryViewController(for: story)

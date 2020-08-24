@@ -60,8 +60,8 @@ final class StoryViewModelTest: XCTestCase {
     }
 
     func testStoryViewModelFetchesStoryImageSuccessfully() throws {
-        let data = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
+        let imageData = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try XCTUnwrap(UIImage(data: imageData))
 
         let story = Story(
             section: "section",
@@ -73,7 +73,7 @@ final class StoryViewModelTest: XCTestCase {
             multimedia: []
         )
         let factory = StoryFactoryMock(
-            imageManager: ImageManagerMock(result: .success(expectedImage))
+            imageManager: ImageManagerMock(result: .success(imageData))
         )
         sut = StoryViewModel(factory: factory, story: story)
 
@@ -110,6 +110,34 @@ final class StoryViewModelTest: XCTestCase {
 
                 case let .failure(error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
+                }
+            }
+    }
+
+    func testStoryViewModelFetchesInvalidStoryImageUnsuccessfully() {
+        let story = Story(
+            section: "section",
+            subsection: "subsection",
+            title: "title",
+            abstract: "abstract",
+            byline: "byline",
+            url: "url",
+            multimedia: []
+        )
+        let data = Data()
+        let factory = StoryFactoryMock(
+            imageManager: ImageManagerMock(result: .success(data))
+        )
+        sut = StoryViewModel(factory: factory, story: story)
+
+        sut
+            .image(with: "") { result in
+                switch result {
+                case let .success(image):
+                    XCTFail("Fetch Story Image should fail, found image \(image)")
+
+                case let .failure(error):
+                    XCTAssertEqual(error as? NetworkError, .invalidData)
                 }
             }
     }

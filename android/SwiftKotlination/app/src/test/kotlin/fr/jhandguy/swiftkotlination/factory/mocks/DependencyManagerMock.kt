@@ -1,16 +1,16 @@
 package fr.jhandguy.swiftkotlination.factory.mocks
 
 import android.app.Activity
+import fr.jhandguy.image.model.ImageManagerInterface
+import fr.jhandguy.network.model.network.NetworkManager
+import fr.jhandguy.network.model.network.NetworkManagerInterface
+import fr.jhandguy.story.model.Story
+import fr.jhandguy.story.model.StoryManagerInterface
+import fr.jhandguy.story.viewmodel.StoryViewModel
 import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
 import fr.jhandguy.swiftkotlination.factory.DependencyManager
-import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryManagerInterface
-import fr.jhandguy.swiftkotlination.features.story.viewModel.StoryViewModel
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManagerInterface
-import fr.jhandguy.swiftkotlination.features.topstories.viewmodel.TopStoriesViewModel
-import fr.jhandguy.swiftkotlination.model.ImageManagerInterface
-import fr.jhandguy.swiftkotlination.network.NetworkManager
-import fr.jhandguy.swiftkotlination.network.NetworkManagerInterface
+import fr.jhandguy.topstories.model.TopStoriesManagerInterface
+import fr.jhandguy.topstories.viewmodel.TopStoriesViewModel
 
 class DependencyManagerMock(
     networkManager: NetworkManagerInterface = NetworkManager(),

@@ -1,0 +1,48 @@
+package fr.jhandguy.image.model
+
+import fr.jhandguy.network.model.observer.Result
+import fr.jhandguy.test.network.File
+import fr.jhandguy.test.network.mocks.NetworkManagerMock
+import kotlinx.coroutines.runBlocking
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.fail
+
+class ImageManagerUnitTest {
+
+    lateinit var sut: ImageManager
+
+    @Test
+    fun `image is observed correctly`() {
+        val stream = File("27arizpolitics7-thumbLarge", File.Extension.JPG).data
+            ?: fail("Expected ClassLoader to not be null")
+        val byteArray = stream.readBytes()
+        val networkManager = NetworkManagerMock(Result.Success(byteArray))
+        sut = ImageManager(networkManager)
+
+        runBlocking {
+            sut.image("") { result ->
+                when (result) {
+                    is Result.Success -> assertEquals(byteArray, result.data)
+                    is Result.Failure -> fail(result.error.message)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `error is thrown correctly`() {
+        val error = Error("Error fetching image: 404 - Response.error()")
+        val networkManager = NetworkManagerMock(Result.Failure(error))
+        sut = ImageManager(networkManager)
+
+        runBlocking {
+            sut.image("") { result ->
+                when (result) {
+                    is Result.Success -> fail("Coroutine should throw error")
+                    is Result.Failure -> assertEquals(result.error.message, error.message)
+                }
+            }
+        }
+    }
+}

@@ -2,12 +2,13 @@ package fr.jhandguy.swiftkotlination.coordinator
 
 import android.content.Intent
 import androidx.test.core.app.ActivityScenario
-import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
-import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
-import fr.jhandguy.swiftkotlination.features.topstories.view.TopStoriesActivity
+import fr.jhandguy.story.model.Story
+import fr.jhandguy.story.view.StoryActivity
+import fr.jhandguy.swiftkotlination.view.MainActivity
+import fr.jhandguy.topstories.view.TopStoriesActivity
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
 import kotlin.test.BeforeTest
@@ -15,6 +16,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 @LooperMode(PAUSED)
 class CoordinatorUnitTest {
 

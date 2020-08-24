@@ -52,10 +52,10 @@ final class TopStoriesViewModelTest: XCTestCase {
     }
 
     func testTopStoriesViewModelFetchesTopStoryImageSuccessfully() throws {
-        let data = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
+        let imageData = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try XCTUnwrap(UIImage(data: imageData))
         let factory = TopStoriesFactoryMock(
-            imageManager: ImageManagerMock(result: .success(expectedImage))
+            imageManager: ImageManagerMock(result: .success(imageData))
         )
         sut = TopStoriesViewModel(factory: factory)
 
@@ -83,6 +83,25 @@ final class TopStoriesViewModelTest: XCTestCase {
 
                 case let .failure(error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
+                }
+            }
+    }
+
+    func testTopStoriesViewModelFetchesInvalidTopStoryImageUnsuccessfully() {
+        let data = Data()
+        let factory = TopStoriesFactoryMock(
+            imageManager: ImageManagerMock(result: .success(data))
+        )
+        sut = TopStoriesViewModel(factory: factory)
+
+        sut
+            .image(with: "") { result in
+                switch result {
+                case let .success(image):
+                    XCTFail("Fetch TopStory Image should fail, found image \(image)")
+
+                case let .failure(error):
+                    XCTAssertEqual(error as? NetworkError, .invalidData)
                 }
             }
     }

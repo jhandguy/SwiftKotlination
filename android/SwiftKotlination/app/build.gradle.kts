@@ -1,21 +1,21 @@
 plugins {
     id("com.android.application")
-    id("jacoco")
     id("kotlinx-serialization")
+    jacoco
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdkVersion(Versions.androidVersion)
 
     defaultConfig {
         applicationId = "fr.jhandguy.swiftkotlination"
-        // TODO: minSdkVersion(30)
+        // TODO: minSdkVersion(Versions.androidVersion)
         minSdkVersion(28)
-        targetSdkVersion(30)
-        buildToolsVersion("30.0.0")
+        targetSdkVersion(Versions.androidVersion)
+        buildToolsVersion(Versions.buildToolsVersion)
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "fr.jhandguy.swiftkotlination.runner.AndroidTestRunner"
@@ -32,7 +32,7 @@ android {
     }
 
     testOptions {
-        // TODO: execution "ANDROID_TEST_ORCHESTRATOR"
+        // TODO: execution = "ANDROID_TEST_ORCHESTRATOR"
         animationsDisabled = true
         unitTests.isIncludeAndroidResources = true
     }
@@ -44,13 +44,11 @@ android {
         }
 
         getByName("test") {
-            java.srcDirs("src/test/kotlin", "src/sharedTest/kotlin")
-            resources.srcDirs("src/test/resources", "src/sharedTest/resources")
+            java.srcDirs("src/test/kotlin")
         }
 
         getByName("androidTest") {
-            java.srcDirs("src/androidTest/kotlin", "src/sharedTest/kotlin")
-            resources.srcDirs("src/androidTest/resources", "src/sharedTest/resources")
+            java.srcDirs("src/androidTest/kotlin")
         }
 
         getByName("debug") {
@@ -61,14 +59,16 @@ android {
 }
 
 dependencies {
-    // TODO: Replace Anko with Jetpack Compose
-    implementation(Dependencies.anko(version = Versions.ankoVersion))
-    implementation(Dependencies.anko("recyclerview-v7", Versions.ankoVersion))
-    implementation(Dependencies.anko("constraint-layout", Versions.ankoVersion))
+    implementation(project(":features:story"))
+    implementation(project(":features:topstories"))
+    implementation(project(":modules:extension"))
+    implementation(project(":modules:image"))
+    implementation(project(":modules:network"))
+    testImplementation(project(":modules:test"))
+    androidTestImplementation(project(":modules:test"))
+
     implementation(Dependencies.appCompat(Versions.appCompatVersion))
-    implementation(Dependencies.constraintLayout(Versions.constraintLayoutVersion))
     implementation(Dependencies.kotlinx("serialization-runtime", Versions.serializationVersion))
-    implementation(Dependencies.kotlinx("coroutines-android", Versions.coroutinesVersion))
     implementation(Dependencies.recyclerView(Versions.recyclerViewVersion))
 
     testImplementation(Dependencies.junit(Versions.junitVersion))
@@ -84,7 +84,7 @@ dependencies {
     androidTestImplementation(Dependencies.test("rules", Versions.testVersion))
 }
 
-tasks.register("jacocoTestReport", JacocoReport::class) {
+task("jacocoTestReport", JacocoReport::class) {
     dependsOn("testDebugUnitTest", "createDebugCoverageReport")
 
     reports {
@@ -93,18 +93,16 @@ tasks.register("jacocoTestReport", JacocoReport::class) {
     }
 
     sourceDirectories.setFrom(
-            files("$projectDir/src/main/kotlin")
+        files("$projectDir/src/main/kotlin")
     )
 
     classDirectories.setFrom(
-            fileTree("$buildDir/tmp/kotlin-classes/debug") {
-                setExcludes(setOf("**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*", "**/*Test*.*", "android/**/*.*", "**/*$*.*"))
-            }
+        files("$buildDir/tmp/kotlin-classes/debug")
     )
 
     executionData.setFrom(
-            fileTree(buildDir) {
-                setIncludes(setOf("jacoco/testDebugUnitTest.exec", "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"))
-            }
+        fileTree(buildDir) {
+            setIncludes(setOf("jacoco/testDebugUnitTest.exec", "outputs/code_coverage/debugAndroidTest/connected/*coverage.ec"))
+        }
     )
 }

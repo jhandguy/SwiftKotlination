@@ -7,15 +7,14 @@ final class ImageManagerTest: XCTestCase {
     private var sut: ImageManager!
 
     func testImageManagerFetchesImageSuccessfully() throws {
-        let data = try XCTUnwrap(File("27arizpolitics7-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
-        let networkManager = NetworkManagerMock(result: .success(data))
+        let imageData = try XCTUnwrap(File("27arizpolitics7-thumbLarge", .jpg).data)
+        let networkManager = NetworkManagerMock(result: .success(imageData))
         sut = ImageManager(networkManager: networkManager)
         sut
             .image(with: "url") { result in
                 switch result {
-                case let .success(image):
-                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
+                case let .success(data):
+                    XCTAssertEqual(data, imageData)
 
                 case let .failure(error):
                     XCTFail("Fetch Image should succeed, found error \(error)")
@@ -29,8 +28,8 @@ final class ImageManagerTest: XCTestCase {
         sut
             .image(with: "url") { result in
                 switch result {
-                case let .success(image):
-                    XCTFail("Fetch Image should fail, found image \(image)")
+                case let .success(data):
+                    XCTFail("Fetch Image should fail, found data \(data)")
 
                 case let .failure(error):
                     XCTAssertEqual(error as? NetworkError, .invalidResponse)
@@ -38,26 +37,9 @@ final class ImageManagerTest: XCTestCase {
             }
     }
 
-    func testImageManagerFetchesInvalidImageUnsuccessfully() {
-        let data = Data()
-        let networkManager = NetworkManagerMock(result: .success(data))
-        sut = ImageManager(networkManager: networkManager)
-        sut
-            .image(with: "url") { result in
-                switch result {
-                case let .success(image):
-                    XCTFail("Fetch Image should fail, found image \(image)")
-
-                case let .failure(error):
-                    XCTAssertEqual(error as? NetworkError, .invalidData)
-                }
-            }
-    }
-
     func testImageManagerFetchesImageOnceSuccessfullyAndOnceUnsuccessfully() throws {
-        let data = try XCTUnwrap(File("27arizpolitics7-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
-        let networkManager = NetworkManagerMock(result: .success(data))
+        let imageData = try XCTUnwrap(File("27arizpolitics7-thumbLarge", .jpg).data)
+        let networkManager = NetworkManagerMock(result: .success(imageData))
         sut = ImageManager(networkManager: networkManager)
 
         var times = 0
@@ -65,8 +47,8 @@ final class ImageManagerTest: XCTestCase {
         sut
             .image(with: "url") { result in
                 switch result {
-                case let .success(image):
-                    XCTAssertEqual(image.pngData(), expectedImage.pngData())
+                case let .success(data):
+                    XCTAssertEqual(data, imageData)
 
                 case let .failure(error):
                     XCTAssertEqual(error as? NetworkError, .invalidRequest)
@@ -79,8 +61,8 @@ final class ImageManagerTest: XCTestCase {
         sut
             .image(with: "url") { result in
                 switch result {
-                case let .success(image):
-                    XCTFail("Fetch Image should fail, found image \(image)")
+                case let .success(data):
+                    XCTFail("Fetch Image should fail, found data \(data)")
 
                 case let .failure(error):
                     XCTAssertEqual(error as? NetworkError, .invalidRequest)

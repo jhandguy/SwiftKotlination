@@ -1,21 +1,22 @@
 package fr.jhandguy.swiftkotlination.factory
 
 import androidx.test.core.app.ActivityScenario
+import fr.jhandguy.network.model.network.NetworkManager
+import fr.jhandguy.story.model.Story
+import fr.jhandguy.story.model.StoryManager
 import fr.jhandguy.swiftkotlination.coordinator.Coordinator
-import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
-import fr.jhandguy.swiftkotlination.features.story.model.Story
-import fr.jhandguy.swiftkotlination.features.story.model.StoryManager
-import fr.jhandguy.swiftkotlination.features.topstories.model.TopStoriesManager
-import fr.jhandguy.swiftkotlination.model.ImageManager
-import fr.jhandguy.swiftkotlination.network.NetworkManager
+import fr.jhandguy.swiftkotlination.view.MainActivity
+import fr.jhandguy.topstories.model.TopStoriesManager
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.LooperMode.Mode.PAUSED
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 @RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 @LooperMode(PAUSED)
 class DependencyManagerUnitTest {
 
@@ -44,7 +45,7 @@ class DependencyManagerUnitTest {
     @Test
     fun `image manager is made correctly`() {
         val manager = sut.makeImageManager()
-        assert(manager is ImageManager)
+        assert(manager is fr.jhandguy.image.model.ImageManager)
     }
 
     @Test

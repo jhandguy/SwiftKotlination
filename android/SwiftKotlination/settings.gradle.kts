@@ -1,1 +1,7 @@
 include(":app")
+include(":features:story")
+include(":features:topstories")
+include(":modules:extension")
+include(":modules:image")
+include(":modules:test")
+include(":modules:network")

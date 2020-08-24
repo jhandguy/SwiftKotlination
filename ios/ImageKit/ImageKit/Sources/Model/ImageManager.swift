@@ -1,9 +1,8 @@
 import NetworkKit
-import UIKit.UIImage
 
 public protocol ImageManagerProtocol {
     @discardableResult
-    func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable
+    func image(with url: String, _ observer: @escaping Observer<Data>) -> Disposable
 }
 
 public struct ImageManager {
@@ -16,21 +15,7 @@ public struct ImageManager {
 
 extension ImageManager: ImageManagerProtocol {
     @discardableResult
-    public func image(with url: String, _ observer: @escaping Observer<UIImage>) -> Disposable {
-        networkManager
-            .observe(.fetchImage(url)) { result in
-                switch result {
-                case let .success(data):
-                    guard let image = UIImage(data: data) else {
-                        observer(.failure(NetworkError.invalidData))
-                        return
-                    }
-
-                    observer(.success(image))
-
-                case let .failure(error):
-                    observer(.failure(error))
-                }
-            }
+    public func image(with url: String, _ observer: @escaping Observer<Data>) -> Disposable {
+        networkManager.observe(.fetchImage(url), observer)
     }
 }

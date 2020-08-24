@@ -2,18 +2,18 @@ package fr.jhandguy.swiftkotlination.features.story
 
 import android.os.Bundle
 import androidx.test.espresso.intent.rule.IntentsTestRule
-import fr.jhandguy.swiftkotlination.Responses
-import fr.jhandguy.swiftkotlination.features.story.model.Story
+import fr.jhandguy.network.model.network.Request
+import fr.jhandguy.story.model.Multimedia
+import fr.jhandguy.story.model.Story
+import fr.jhandguy.story.view.StoryActivity
+import fr.jhandguy.swiftkotlination.application.Responses
 import fr.jhandguy.swiftkotlination.features.story.robot.StoryRobot
-import fr.jhandguy.swiftkotlination.features.story.view.StoryActivity
 import fr.jhandguy.swiftkotlination.global.linkedListOf
-import fr.jhandguy.swiftkotlination.model.Multimedia
-import fr.jhandguy.swiftkotlination.network.File
-import fr.jhandguy.swiftkotlination.network.Request
-import fr.jhandguy.swiftkotlination.network.Response
 import fr.jhandguy.swiftkotlination.robot.checkTitle
 import fr.jhandguy.swiftkotlination.robot.start
 import fr.jhandguy.swiftkotlination.robot.takeScreenshot
+import fr.jhandguy.test.network.File
+import fr.jhandguy.test.network.Response
 import kotlinx.serialization.json.Json
 import org.junit.ClassRule
 import org.junit.Rule

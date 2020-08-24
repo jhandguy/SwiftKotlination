@@ -1,8 +1,8 @@
 package fr.jhandguy.swiftkotlination.coordinator.mocks
 
 import android.content.Intent
+import fr.jhandguy.story.model.Story
 import fr.jhandguy.swiftkotlination.coordinator.CoordinatorInterface
-import fr.jhandguy.swiftkotlination.features.story.model.Story
 
 class CoordinatorMock : CoordinatorInterface {
     var isStarted = false

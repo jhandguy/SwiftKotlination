@@ -13,8 +13,8 @@ import androidx.test.espresso.matcher.RootMatchers.isDialog
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
-import fr.jhandguy.swiftkotlination.AppMock
-import fr.jhandguy.swiftkotlination.Responses
+import fr.jhandguy.swiftkotlination.application.AppMock
+import fr.jhandguy.swiftkotlination.application.Responses
 import org.hamcrest.CoreMatchers.instanceOf
 import org.junit.ClassRule
 import tools.fastlane.screengrab.Screengrab.screenshot

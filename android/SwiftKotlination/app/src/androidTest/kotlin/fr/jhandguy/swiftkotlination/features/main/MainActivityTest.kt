@@ -1,15 +1,15 @@
 package fr.jhandguy.swiftkotlination.features.main
 
 import androidx.test.rule.ActivityTestRule
-import fr.jhandguy.swiftkotlination.Responses
-import fr.jhandguy.swiftkotlination.features.main.view.MainActivity
+import fr.jhandguy.network.model.network.Request
+import fr.jhandguy.swiftkotlination.application.Responses
 import fr.jhandguy.swiftkotlination.features.topstories.robot.TopStoriesRobot
 import fr.jhandguy.swiftkotlination.global.linkedListOf
-import fr.jhandguy.swiftkotlination.network.File
-import fr.jhandguy.swiftkotlination.network.Request
-import fr.jhandguy.swiftkotlination.network.Response
 import fr.jhandguy.swiftkotlination.robot.checkTitle
 import fr.jhandguy.swiftkotlination.robot.start
+import fr.jhandguy.swiftkotlination.view.MainActivity
+import fr.jhandguy.test.network.File
+import fr.jhandguy.test.network.Response
 import org.junit.Rule
 import org.junit.Test
 

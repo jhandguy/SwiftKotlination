@@ -48,8 +48,8 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
     }
 
     func testTopStoriesTableViewControllerFetchesTopStoryImageSuccessfully() throws {
-        let data = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
-        let expectedImage = try XCTUnwrap(UIImage(data: data))
+        let imageData = try XCTUnwrap(File("28DC-nafta-thumbLarge", .jpg).data)
+        let expectedImage = try XCTUnwrap(UIImage(data: imageData))
         let multimedia = Multimedia(url: "url", format: .small)
         let story = Story(
             section: "section",
@@ -62,7 +62,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
         )
         let factory = TopStoriesFactoryMock(
             topStoriesManager: TopStoriesManagerMock(result: .success([story])),
-            imageManager: ImageManagerMock(result: .success(expectedImage))
+            imageManager: ImageManagerMock(result: .success(imageData))
         )
 
         sut = factory.makeTopStoriesTableViewController()
@@ -75,7 +75,7 @@ final class TopStoriesTableViewControllerTest: XCTestCase {
 
         let cell = try XCTUnwrap(sut.tableView.visibleCells.first as? TopStoriesTableViewCell)
         let image = try XCTUnwrap(cell.multimediaImageView.image)
-        XCTAssertEqual(expectedImage.pngData(), image.pngData())
+        XCTAssertEqual(image.pngData(), expectedImage.pngData())
         XCTAssertFalse(cell.multimediaImageView.isHidden)
 
         sut.viewWillDisappear(false)

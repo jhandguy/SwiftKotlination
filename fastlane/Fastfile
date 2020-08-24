@@ -7,9 +7,9 @@ $project_android = "fr.jhandguy.swiftkotlination"
 $device_ios = "iPhone 11"
 $device_android = "Nexus 5X"
 
-$version_ios = "13.5"
+$version_ios = "13.6"
 $version_android = "30"
-$version_build_tools = "30.0.0"
+$version_build_tools = "30.0.1"
 
 platform :ios do
   before_all do
@@ -49,7 +49,7 @@ platform :android do
     sh("echo yes | sdkmanager \"build-tools;#{$version_build_tools}\"")
     sh("echo yes | sdkmanager --update")
     sh("echo no | avdmanager create avd --force --name \"api-#{$version_android}\" --abi \"google_apis/x86\" --package \"system-images;android-#{$version_android};google_apis;x86\" --device \"#{$device_android}\"")
-    sh("emulator -avd \"api-#{$version_android}\" -gpu swiftshader_indirect -no-window -no-snapshot -no-audio -no-boot-anim -camera-back none -camera-front none > /dev/null 2>&1 &")
+    sh("emulator -avd \"api-#{$version_android}\" -gpu swiftshader_indirect -no-skin -no-window -no-snapshot -no-audio -no-boot-anim -camera-back none -camera-front none > /dev/null 2>&1 &")
     sh("adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'")
     sh("adb shell settings put global window_animation_scale 0")
     sh("adb shell settings put global transition_animation_scale 0")
@@ -57,7 +57,7 @@ platform :android do
   end
 
   lane :tests do
-    sh("ktlint ../#{$path_android}/app/src/**/*.kt")
+    sh("ktlint ../#{$path_android}/**/*.kt ../#{$path_android}/**/*.kts")
 
     build_android_app(
       task: "clean jacocoTestReport",
