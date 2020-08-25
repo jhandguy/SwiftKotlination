@@ -22,14 +22,14 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
 
     @Serializer(forClass = Multimedia::class)
     companion object {
-        override fun serialize(encoder: Encoder, obj: Multimedia) {
+        override fun serialize(encoder: Encoder, value: Multimedia) {
             val jsonOutput = encoder as? JsonOutput
                 ?: throw SerializationException("Expected JSON output")
 
             val jsonObject = JsonObject(
                 mapOf(
-                    "url" to JsonLiteral(obj.url),
-                    "format" to JsonLiteral(obj.format.name)
+                    "url" to JsonLiteral(value.url),
+                    "format" to JsonLiteral(value.format.name)
                 )
             )
 
