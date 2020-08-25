@@ -9,7 +9,6 @@ import fr.jhandguy.story.view.StoryActivity
 import fr.jhandguy.topstories.coordinator.TopStoriesCoordinatorInterface
 import fr.jhandguy.topstories.view.TopStoriesActivity
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration.Companion.Stable
 
 interface CoordinatorInterface : TopStoriesCoordinatorInterface, StoryCoordinatorInterface {
     fun start(): Intent
@@ -27,7 +26,7 @@ class Coordinator(val activity: Activity) : CoordinatorInterface {
 
     override fun open(story: Story): Intent {
         val intent = Intent(activity, StoryActivity::class.java)
-        intent.putExtra(story.javaClass.simpleName, Json(Stable).stringify(Story.serializer(), story))
+        intent.putExtra(story.javaClass.simpleName, Json.encodeToString(Story.serializer(), story))
         activity.startActivity(intent)
 
         return intent

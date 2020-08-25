@@ -73,7 +73,7 @@ class StoryActivityTest {
         )
 
         val extras = Bundle()
-        extras.putString(Story::class.java.simpleName, Json.stringify(Story.serializer(), story))
+        extras.putString(Story::class.java.simpleName, Json.encodeToString(Story.serializer(), story))
 
         StoryRobot(activityRule)
             .start(responses, extras)

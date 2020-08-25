@@ -10,14 +10,11 @@ import fr.jhandguy.topstories.model.TopStoriesManager
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.robolectric.annotation.LooperMode
-import org.robolectric.annotation.LooperMode.Mode.PAUSED
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [28])
-@LooperMode(PAUSED)
 class DependencyManagerUnitTest {
 
     lateinit var sut: DependencyManager

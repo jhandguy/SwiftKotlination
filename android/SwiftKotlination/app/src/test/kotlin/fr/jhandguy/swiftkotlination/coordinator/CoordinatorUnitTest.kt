@@ -9,15 +9,12 @@ import fr.jhandguy.topstories.view.TopStoriesActivity
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.robolectric.annotation.LooperMode
-import org.robolectric.annotation.LooperMode.Mode.PAUSED
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [28])
-@LooperMode(PAUSED)
 class CoordinatorUnitTest {
 
     lateinit var sut: Coordinator

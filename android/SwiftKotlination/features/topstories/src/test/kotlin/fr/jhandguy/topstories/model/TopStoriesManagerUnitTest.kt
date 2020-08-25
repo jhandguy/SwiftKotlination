@@ -21,7 +21,7 @@ class TopStoriesManagerUnitTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
             )
         )
-        val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
+        val data = Json.encodeToString(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
         sut = TopStoriesManager(networkManager)
 
@@ -43,7 +43,7 @@ class TopStoriesManagerUnitTest {
                 Story("section2", "subsection2", "title2", "abstract2", "url2", "byline2")
             )
         )
-        val data = Json.stringify(TopStories.serializer(), topStories).toByteArray()
+        val data = Json.encodeToString(TopStories.serializer(), topStories).toByteArray()
         val networkManager = NetworkManagerMock(Result.Success(data))
 
         sut = TopStoriesManager(networkManager)

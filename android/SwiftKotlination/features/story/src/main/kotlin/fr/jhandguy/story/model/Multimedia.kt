@@ -1,14 +1,15 @@
 package fr.jhandguy.story.model
 
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JsonInput
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonOutput
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable
 data class Multimedia(val url: String = "", val format: Format = Format.Small) {
@@ -23,27 +24,27 @@ data class Multimedia(val url: String = "", val format: Format = Format.Small) {
     @Serializer(forClass = Multimedia::class)
     companion object {
         override fun serialize(encoder: Encoder, value: Multimedia) {
-            val jsonOutput = encoder as? JsonOutput
-                ?: throw SerializationException("Expected JSON output")
+            val jsonEncoder = encoder as? JsonEncoder
+                ?: throw SerializationException("Expected JSON encoder")
 
             val jsonObject = JsonObject(
                 mapOf(
-                    "url" to JsonLiteral(value.url),
-                    "format" to JsonLiteral(value.format.name)
+                    "url" to JsonPrimitive(value.url),
+                    "format" to JsonPrimitive(value.format.name)
                 )
             )
 
-            jsonOutput.encodeJson(jsonObject)
+            jsonEncoder.encodeJsonElement(jsonObject)
         }
 
         override fun deserialize(decoder: Decoder): Multimedia {
-            val jsonInput = decoder as? JsonInput
-                ?: throw SerializationException("Expected JSON input")
-            val jsonObject = jsonInput.decodeJson() as? JsonObject
+            val jsonDecoder = decoder as? JsonDecoder
+                ?: throw SerializationException("Expected JSON decoder")
+            val jsonObject = jsonDecoder.decodeJsonElement() as? JsonObject
                 ?: throw SerializationException("Expected JSON object")
 
-            val url = jsonObject.getPrimitive("url").content
-            val formatName = jsonObject.getPrimitive("format").content
+            val url = jsonObject.getValue("url").jsonPrimitive.content
+            val formatName = jsonObject.getValue("format").jsonPrimitive.content
 
             val format = when (formatName) {
                 Format.Icon.name -> Format.Icon

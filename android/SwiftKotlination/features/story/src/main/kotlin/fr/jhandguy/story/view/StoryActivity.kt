@@ -9,7 +9,6 @@ import fr.jhandguy.network.model.observer.Result
 import fr.jhandguy.story.feature.StoryFeature
 import fr.jhandguy.story.model.Story
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration.Companion.Stable
 import org.jetbrains.anko.setContentView
 
 class StoryActivity : AppCompatActivity() {
@@ -18,7 +17,7 @@ class StoryActivity : AppCompatActivity() {
     private val coordinator by lazy { factory.makeStoryCoordinator(this) }
     private val viewModel by lazy {
         val story = intent?.extras?.getString(Story::class.java.simpleName)?.let {
-            Json(Stable).parse(Story.serializer(), it)
+            Json { allowStructuredMapKeys = true }.decodeFromString(Story.serializer(), it)
         } ?: Story()
         factory.makeStoryViewModel(story)
     }
