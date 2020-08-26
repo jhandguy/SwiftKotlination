@@ -27,7 +27,8 @@ platform :ios do
   lane :screenshots do
     capture_ios_screenshots(
       clear_previous_screenshots: true,
-      workspace: $project_ios
+      workspace: $project_ios,
+      scheme: "SwiftKotlination"
     )
   end
 end
