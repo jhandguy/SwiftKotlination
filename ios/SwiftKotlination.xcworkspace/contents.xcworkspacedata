@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "container:SwiftKotlination/SwiftKotlination.xcodeproj">
-   </FileRef>
    <Group
-      location = "container:"
+      location = "group:App"
+      name = "App">
+      <FileRef
+         location = "group:SwiftKotlination/SwiftKotlination.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "group:Features"
       name = "Features">
       <FileRef
          location = "group:StoryKit/StoryKit.xcodeproj">
@@ -15,7 +19,7 @@
       </FileRef>
    </Group>
    <Group
-      location = "container:"
+      location = "group:Modules"
       name = "Modules">
       <FileRef
          location = "group:ExtensionKit/ExtensionKit.xcodeproj">
