@@ -69,7 +69,7 @@
                BlueprintIdentifier = "95FDD21023AE42C6004E3DED"
                BuildableName = "ExtensionKitTests.xctest"
                BlueprintName = "ExtensionKitTests"
-               ReferencedContainer = "container:../ExtensionKit/ExtensionKit.xcodeproj">
+               ReferencedContainer = "container:../../Modules/ExtensionKit/ExtensionKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -80,7 +80,7 @@
                BlueprintIdentifier = "95FA4F6623ABEF2F0086D7AD"
                BuildableName = "ImageKitTests.xctest"
                BlueprintName = "ImageKitTests"
-               ReferencedContainer = "container:../ImageKit/ImageKit.xcodeproj">
+               ReferencedContainer = "container:../../Modules/ImageKit/ImageKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -91,7 +91,7 @@
                BlueprintIdentifier = "95262DE02355A960002FE48F"
                BuildableName = "NetworkKitTests.xctest"
                BlueprintName = "NetworkKitTests"
-               ReferencedContainer = "container:../NetworkKit/NetworkKit.xcodeproj">
+               ReferencedContainer = "container:../../Modules/NetworkKit/NetworkKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -102,7 +102,18 @@
                BlueprintIdentifier = "95FA4FB623AC0C0F0086D7AD"
                BuildableName = "StoryKitTests.xctest"
                BlueprintName = "StoryKitTests"
-               ReferencedContainer = "container:../StoryKit/StoryKit.xcodeproj">
+               ReferencedContainer = "container:../../Features/StoryKit/StoryKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "95FA4F2723ABE75B0086D7AD"
+               BuildableName = "TopStoriesKitTests.xctest"
+               BlueprintName = "TopStoriesKitTests"
+               ReferencedContainer = "container:../../Features/TopStoriesKit/TopStoriesKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -125,17 +136,6 @@
                BuildableName = "SwiftKotlinationUITests.xctest"
                BlueprintName = "SwiftKotlinationUITests"
                ReferencedContainer = "container:SwiftKotlination.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95FA4F2723ABE75B0086D7AD"
-               BuildableName = "TopStoriesKitTests.xctest"
-               BlueprintName = "TopStoriesKitTests"
-               ReferencedContainer = "container:../TopStoriesKit/TopStoriesKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
